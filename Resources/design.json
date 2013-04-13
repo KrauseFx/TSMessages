@@ -1,0 +1,50 @@
+{
+    "success": {
+        "contentFontSize": 12,
+        "backgroundImageName": "NotificationBackgroundSuccess.png",
+        "shadowColor": "#67B759",
+        "borderHeight": 1,
+        "borderColor": "#005700",
+        "titleFontSize": 14,
+        "shadowOffsetX": 0,
+        "imageName": "NotificationBackgroundSuccessIcon.png",
+        "textColor": "#FFFFFF",
+        "shadowOffsetY": -1
+    },
+    "message": {
+        "contentFontSize": 12,
+        "backgroundImageName": "NotificationBackgroundMessage.png",
+        "shadowColor": "#EBEEF1",
+        "borderHeight": 1,
+        "borderColor": "#727C83",
+        "titleFontSize": 14,
+        "shadowOffsetX": 0,
+        "imageName": "",
+        "textColor": "#727C83",
+        "shadowOffsetY": 1
+    },
+    "warning": {
+        "contentFontSize": 12,
+        "backgroundImageName": "NotificationBackgroundWarning.png",
+        "shadowColor": "#E5D87C",
+        "borderHeight": 1,
+        "borderColor": "#A28918",
+        "titleFontSize": 14,
+        "shadowOffsetX": 0,
+        "imageName": "NotificationBackgroundWarningIcon.png",
+        "textColor": "#484638",
+        "shadowOffsetY": 1
+    },
+    "error": {
+        "contentFontSize": 12,
+        "backgroundImageName": "NotificationBackgroundError.png",
+        "shadowColor": "#812929",
+        "borderHeight": 1,
+        "borderColor": "#700000",
+        "titleFontSize": 14,
+        "shadowOffsetX": 0,
+        "imageName": "NotificationBackgroundErrorIcon.png",
+        "textColor": "#FFFFFF",
+        "shadowOffsetY": -1
+    }
+}
