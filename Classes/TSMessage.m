@@ -14,6 +14,8 @@
 
 @interface TSMessage ()
 
+@property (assign, nonatomic) NSTimeInterval duration;
+
 - (void)fadeInCurrentNotification;
 - (void)fadeOutCurrentNotification;
 - (void)startFadingOutWithDelay:(NSNumber *)delay;
@@ -31,6 +33,7 @@ static BOOL notificationActive;
     if (!sharedNotification)
     {
         sharedNotification = [[[self class] alloc] init];
+        
     }
     return sharedNotification;
 }
@@ -48,6 +51,17 @@ static BOOL notificationActive;
                              withMessage:(NSString *)message
                                 withType:(notificationType)type
 {
+    [[self sharedNotification] setViewController:viewController];
+    [self showNotificationWithTitle:title withMessage:message withType:type];
+}
+
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                               withTitle:(NSString *)title
+                             withMessage:(NSString *)message
+                                withType:(notificationType)type
+                            withDuration:(NSTimeInterval)duration
+{
+    [[self sharedNotification] setDuration:duration];
     [[self sharedNotification] setViewController:viewController];
     [self showNotificationWithTitle:title withMessage:message withType:type];
 }
@@ -149,8 +163,14 @@ static BOOL notificationActive;
         currentView.alpha = TSMessageViewAlpha;
     }];
     
+    NSTimeInterval duration = self.duration;
+    
+    if (duration == 0.0) {
+        duration = TSMessageAnimationDuration + TSMessageDisplayTime + currentView.frame.size.height * TSMessageExtraDisplayTimePerPixel;
+    }
+    
     [self performSelectorOnMainThread:@selector(startFadingOutWithDelay:)
-                           withObject:[NSNumber numberWithFloat:TSMessageAnimationDuration + TSMessageDisplayTime + currentView.frame.size.height * TSMessageExtraDisplayTimePerPixel]
+                           withObject:[NSNumber numberWithDouble:duration]
                         waitUntilDone:NO];
 }
 
@@ -158,7 +178,7 @@ static BOOL notificationActive;
 {
     [self performSelector:@selector(fadeOutCurrentNotification)
                withObject:nil
-               afterDelay:[delay floatValue]];
+               afterDelay:[delay doubleValue]];
 }
 
 - (void)fadeOutCurrentNotification
