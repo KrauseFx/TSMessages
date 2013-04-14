@@ -114,12 +114,36 @@ static BOOL notificationActive;
     {
         _viewController = [[self class] getViewController];
     }
-    [self.viewController.view addSubview:currentView];
+    
+    CGFloat verticalOffset = 0.0f;
+    
+    if ([self.viewController isKindOfClass:[UINavigationController class]])
+    {
+        if (![(UINavigationController *)self.viewController isNavigationBarHidden])
+        {
+            [self.viewController.view insertSubview:currentView belowSubview:[(UINavigationController *)self.viewController navigationBar]];
+            verticalOffset = [(UINavigationController *)self.viewController navigationBar].bounds.size.height;
+            
+            if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+                verticalOffset += [UIApplication sharedApplication].statusBarFrame.size.height;
+            }
+            else {
+                verticalOffset += [UIApplication sharedApplication].statusBarFrame.size.width;
+            }
+        }
+        else {
+            [self.viewController.view addSubview:currentView];
+        }
+    }
+    else
+    {
+        [self.viewController.view addSubview:currentView];
+    }
     
     [UIView animateWithDuration:TSMessageAnimationDuration animations:^
     {
         currentView.frame = CGRectMake(currentView.frame.origin.x,
-                                       [[self class] navigationbarBottomOfViewController:self.viewController],
+                                       [[self class] navigationbarBottomOfViewController:self.viewController] + verticalOffset,
                                        currentView.frame.size.width,
                                        currentView.frame.size.height);
         currentView.alpha = TSMessageViewAlpha;
