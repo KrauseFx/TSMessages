@@ -22,6 +22,7 @@ typedef enum {
 
 @property (nonatomic, strong) NSMutableArray *messages;
 
+@property (strong, nonatomic) UIViewController *viewController;
 
 + (TSMessage *)sharedNotification;
 

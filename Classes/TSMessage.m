@@ -14,8 +14,6 @@
 
 @interface TSMessage ()
 
-@property (strong, nonatomic) UIViewController *viewController;
-
 - (void)fadeInCurrentNotification;
 - (void)fadeOutCurrentNotification;
 - (void)startFadingOutWithDelay:(NSNumber *)delay;
