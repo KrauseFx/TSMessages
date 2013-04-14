@@ -183,14 +183,9 @@ static NSDictionary *notificationDesign;
 
 - (void)fadeMeOut
 {
-    [UIView animateWithDuration:TSMessageAnimationDuration animations:^
-     {
-         self.frame = CGRectMake(self.frame.origin.x,
-                                 -self.frame.size.height,
-                                 self.frame.size.width,
-                                 self.frame.size.height);
-         self.alpha = 0.0;
-     }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[TSMessage sharedNotification] performSelector:@selector(fadeOutNotification:) withObject:self];
+    });
 }
 
 @end
