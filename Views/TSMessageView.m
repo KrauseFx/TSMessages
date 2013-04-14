@@ -28,10 +28,7 @@ static NSDictionary *notificationDesign;
                                                                error:nil];
     }
     
-    if (!screenWidth)
-    {
-        screenWidth = [UIScreen mainScreen].bounds.size.width;
-    }
+    screenWidth = [[[TSMessage sharedNotification] viewController] view].frame.size.width;
     
     if ((self = [self init]))
     {
