@@ -17,8 +17,7 @@
 @property (assign, nonatomic) NSTimeInterval duration;
 
 - (void)fadeInCurrentNotification;
-- (void)fadeOutCurrentNotification;
-- (void)startFadingOutWithDelay:(NSNumber *)delay;
+- (void)fadeOutNotification:(TSMessageView *)currentView;
 
 @end
 
@@ -169,22 +168,15 @@ static BOOL notificationActive;
         duration = TSMessageAnimationDuration + TSMessageDisplayTime + currentView.frame.size.height * TSMessageExtraDisplayTimePerPixel;
     }
     
-    [self performSelectorOnMainThread:@selector(startFadingOutWithDelay:)
-                           withObject:[NSNumber numberWithDouble:duration]
-                        waitUntilDone:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self performSelector:@selector(fadeOutNotification:) withObject:currentView afterDelay:duration];
+    });
 }
 
-- (void)startFadingOutWithDelay:(NSNumber *)delay
+- (void)fadeOutNotification:(TSMessageView *)currentView
 {
-    [self performSelector:@selector(fadeOutCurrentNotification)
-               withObject:nil
-               afterDelay:[delay doubleValue]];
-}
-
-- (void)fadeOutCurrentNotification
-{
-    TSMessageView *currentView = [self.messages objectAtIndex:0];
-    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutNotification:) object:currentView];
+        
     [UIView animateWithDuration:TSMessageAnimationDuration animations:^
     {
         currentView.frame = CGRectMake(currentView.frame.origin.x,
