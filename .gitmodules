@@ -1,0 +1,3 @@
+[submodule "Classes/UIColorAdditions"]
+	path = Classes/UIColorAdditions
+	url = https://github.com/mRs-/MLUIColorAdditions
