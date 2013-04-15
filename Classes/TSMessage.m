@@ -14,9 +14,10 @@
 
 @interface TSMessage ()
 
+@property (assign, nonatomic) NSTimeInterval duration;
+
 - (void)fadeInCurrentNotification;
-- (void)fadeOutCurrentNotification;
-- (void)startFadingOutWithDelay:(NSNumber *)delay;
+- (void)fadeOutNotification:(TSMessageView *)currentView;
 
 @end
 
@@ -31,6 +32,7 @@ static BOOL notificationActive;
     if (!sharedNotification)
     {
         sharedNotification = [[[self class] alloc] init];
+        
     }
     return sharedNotification;
 }
@@ -48,6 +50,17 @@ static BOOL notificationActive;
                              withMessage:(NSString *)message
                                 withType:(notificationType)type
 {
+    [[self sharedNotification] setViewController:viewController];
+    [self showNotificationWithTitle:title withMessage:message withType:type];
+}
+
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                               withTitle:(NSString *)title
+                             withMessage:(NSString *)message
+                                withType:(notificationType)type
+                            withDuration:(NSTimeInterval)duration
+{
+    [[self sharedNotification] setDuration:duration];
     [[self sharedNotification] setViewController:viewController];
     [self showNotificationWithTitle:title withMessage:message withType:type];
 }
@@ -114,33 +127,56 @@ static BOOL notificationActive;
     {
         _viewController = [[self class] getViewController];
     }
-    [self.viewController.view addSubview:currentView];
+    
+    CGFloat verticalOffset = 0.0f;
+    
+    if ([self.viewController isKindOfClass:[UINavigationController class]])
+    {
+        if (![(UINavigationController *)self.viewController isNavigationBarHidden])
+        {
+            [self.viewController.view insertSubview:currentView belowSubview:[(UINavigationController *)self.viewController navigationBar]];
+            verticalOffset = [(UINavigationController *)self.viewController navigationBar].bounds.size.height;
+            
+            if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+                verticalOffset += [UIApplication sharedApplication].statusBarFrame.size.height;
+            }
+            else {
+                verticalOffset += [UIApplication sharedApplication].statusBarFrame.size.width;
+            }
+        }
+        else {
+            [self.viewController.view addSubview:currentView];
+        }
+    }
+    else
+    {
+        [self.viewController.view addSubview:currentView];
+    }
     
     [UIView animateWithDuration:TSMessageAnimationDuration animations:^
     {
         currentView.frame = CGRectMake(currentView.frame.origin.x,
-                                       [[self class] navigationbarBottomOfViewController:self.viewController],
+                                       [[self class] navigationbarBottomOfViewController:self.viewController] + verticalOffset,
                                        currentView.frame.size.width,
                                        currentView.frame.size.height);
         currentView.alpha = TSMessageViewAlpha;
     }];
     
-    [self performSelectorOnMainThread:@selector(startFadingOutWithDelay:)
-                           withObject:[NSNumber numberWithFloat:TSMessageAnimationDuration + TSMessageDisplayTime + currentView.frame.size.height * TSMessageExtraDisplayTimePerPixel]
-                        waitUntilDone:NO];
-}
-
-- (void)startFadingOutWithDelay:(NSNumber *)delay
-{
-    [self performSelector:@selector(fadeOutCurrentNotification)
-               withObject:nil
-               afterDelay:[delay floatValue]];
-}
-
-- (void)fadeOutCurrentNotification
-{
-    TSMessageView *currentView = [self.messages objectAtIndex:0];
+    NSTimeInterval duration = self.duration;
     
+    if (duration == 0.0) {
+        duration = TSMessageAnimationDuration + TSMessageDisplayTime + currentView.frame.size.height * TSMessageExtraDisplayTimePerPixel;
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self performSelector:@selector(fadeOutNotification:) withObject:currentView afterDelay:duration];
+    });
+}
+
+- (void)fadeOutNotification:(TSMessageView *)currentView
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutNotification:) object:currentView];
+        
     [UIView animateWithDuration:TSMessageAnimationDuration animations:^
     {
         currentView.frame = CGRectMake(currentView.frame.origin.x,
