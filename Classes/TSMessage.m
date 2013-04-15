@@ -14,7 +14,12 @@
 
 @interface TSMessage ()
 
+/** The duration the notification should be displayed */
 @property (assign, nonatomic) NSTimeInterval duration;
+
+/** The queued messages (TSMessageView objects) */
+@property (nonatomic, strong) NSMutableArray *messages;
+
 
 - (void)fadeInCurrentNotification;
 - (void)fadeOutNotification:(TSMessageView *)currentView;
@@ -23,18 +28,18 @@
 
 @implementation TSMessage
 
-static TSMessage *sharedNotification;
+static TSMessage *sharedMessages;
 static BOOL notificationActive;
 
 
-+ (TSMessage *)sharedNotification
++ (TSMessage *)sharedMessage
 {
-    if (!sharedNotification)
+    if (!sharedMessages)
     {
-        sharedNotification = [[[self class] alloc] init];
+        sharedMessages = [[[self class] alloc] init];
         
     }
-    return sharedNotification;
+    return sharedMessages;
 }
 
 #pragma mark Methods to call from outside
@@ -50,7 +55,7 @@ static BOOL notificationActive;
                              withMessage:(NSString *)message
                                 withType:(notificationType)type
 {
-    [[self sharedNotification] setViewController:viewController];
+    [[self sharedMessage] setViewController:viewController];
     [self showNotificationWithTitle:title withMessage:message withType:type];
 }
 
@@ -60,8 +65,8 @@ static BOOL notificationActive;
                                 withType:(notificationType)type
                             withDuration:(NSTimeInterval)duration
 {
-    [[self sharedNotification] setDuration:duration];
-    [[self sharedNotification] setViewController:viewController];
+    [[self sharedMessage] setDuration:duration];
+    [[self sharedMessage] setViewController:viewController];
     [self showNotificationWithTitle:title withMessage:message withType:type];
 }
 
@@ -69,7 +74,7 @@ static BOOL notificationActive;
                       withMessage:(NSString *)message
                          withType:(notificationType)type
 {
-    for (TSMessageView *n in [TSMessage sharedNotification].messages)
+    for (TSMessageView *n in [TSMessage sharedMessage].messages)
     {
         if ([n.title isEqualToString:title] && [n.content isEqualToString:message])
         {
@@ -81,11 +86,11 @@ static BOOL notificationActive;
     TSMessageView *v = [[TSMessageView alloc] initWithTitle:title
                                                           withContent:message
                                                              withType:type];
-    [[TSMessage sharedNotification].messages addObject:v];
+    [[TSMessage sharedMessage].messages addObject:v];
 
     if (!notificationActive)
     {
-        [[TSMessage sharedNotification] fadeInCurrentNotification];
+        [[TSMessage sharedMessage] fadeInCurrentNotification];
     }
 }
 
@@ -137,14 +142,17 @@ static BOOL notificationActive;
             [self.viewController.view insertSubview:currentView belowSubview:[(UINavigationController *)self.viewController navigationBar]];
             verticalOffset = [(UINavigationController *)self.viewController navigationBar].bounds.size.height;
             
-            if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+            if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
+            {
                 verticalOffset += [UIApplication sharedApplication].statusBarFrame.size.height;
             }
-            else {
+            else
+            {
                 verticalOffset += [UIApplication sharedApplication].statusBarFrame.size.width;
             }
         }
-        else {
+        else
+        {
             [self.viewController.view addSubview:currentView];
         }
     }
@@ -164,11 +172,13 @@ static BOOL notificationActive;
     
     NSTimeInterval duration = self.duration;
     
-    if (duration == 0.0) {
+    if (duration == 0.0)
+    {
         duration = TSMessageAnimationDuration + TSMessageDisplayTime + currentView.frame.size.height * TSMessageExtraDisplayTimePerPixel;
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
         [self performSelector:@selector(fadeOutNotification:) withObject:currentView afterDelay:duration];
     });
 }
@@ -215,6 +225,7 @@ static BOOL notificationActive;
 + (CGFloat)navigationbarBottomOfViewController:(UIViewController *)viewController
 {
     return 0;
+    // Implement this in subclass
 }
 
 @end

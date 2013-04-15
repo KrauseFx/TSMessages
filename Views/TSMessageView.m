@@ -28,7 +28,7 @@ static NSDictionary *notificationDesign;
                                                                error:nil];
     }
     
-    screenWidth = [[[TSMessage sharedNotification] viewController] view].frame.size.width;
+    screenWidth = [[[TSMessage sharedMessage] viewController] view].frame.size.width;
     
     if ((self = [self init]))
     {
@@ -183,8 +183,9 @@ static NSDictionary *notificationDesign;
 
 - (void)fadeMeOut
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[TSMessage sharedNotification] performSelector:@selector(fadeOutNotification:) withObject:self];
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        [[TSMessage sharedMessage] performSelector:@selector(fadeOutNotification:) withObject:self];
     });
 }
 

@@ -18,7 +18,11 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *content;
 
-/** Inits the notification view */
+/** Inits the notification view. Do not call this from outisde this library.
+ @param title The title of the notification view
+ @param content The subtitle/content of the notification view (optional)
+ @param notificationType The type (color) of the notification view
+ */
 - (id)initWithTitle:(NSString *)title withContent:(NSString *)content withType:(notificationType)notificationType;
 
 /** Fades out this notification view */

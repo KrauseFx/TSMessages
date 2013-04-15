@@ -19,12 +19,10 @@ typedef enum {
 
 @interface TSMessage : NSObject
 
-
-@property (nonatomic, strong) NSMutableArray *messages;
-
+/** The view controller the messages should be displayed in */
 @property (strong, nonatomic) UIViewController *viewController;
 
-+ (TSMessage *)sharedNotification;
++ (TSMessage *)sharedMessage;
 
 /** Shows a notification message 
  @param message The title of the notification view

@@ -35,3 +35,7 @@ If you don't want a detailed description (text underneath the title) you don't n
 This project requires ARC.
 
 If you have ideas how to improve this library please let me know or send a pull request.
+
+TODOs
+-----
+- Update width when screen orientation changes while notification is being displayed
