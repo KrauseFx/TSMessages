@@ -163,10 +163,8 @@ static BOOL notificationActive;
     
     [UIView animateWithDuration:TSMessageAnimationDuration animations:^
     {
-        currentView.frame = CGRectMake(currentView.frame.origin.x,
-                                       [[self class] navigationbarBottomOfViewController:self.viewController] + verticalOffset,
-                                       currentView.frame.size.width,
-                                       currentView.frame.size.height);
+        currentView.center = CGPointMake(currentView.center.x,
+                                         [[self class] navigationbarBottomOfViewController:self.viewController] + verticalOffset + CGRectGetHeight(currentView.frame) / 2.);
         currentView.alpha = TSMessageViewAlpha;
     }];
     
@@ -189,10 +187,7 @@ static BOOL notificationActive;
         
     [UIView animateWithDuration:TSMessageAnimationDuration animations:^
     {
-        currentView.frame = CGRectMake(currentView.frame.origin.x,
-                                       -currentView.frame.size.height,
-                                       currentView.frame.size.width,
-                                       currentView.frame.size.height);
+        currentView.center = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame) / 2.);
         currentView.alpha = 0.0;
     }
                      completion:^(BOOL finished)
