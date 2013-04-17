@@ -11,7 +11,16 @@ It is very easy to add new notification types with a different design. Add the n
 
 **Take a look at the Example project to see how to use this library.** You have to open the workspace, not the project file, since the Example project uses cocoapods.
 
-Currently installation can just be done by dragging in all folders besides the example project. In the future we'll provide a regular cocoapod for easier integration.
+
+## Installation
+
+### From CocoaPods
+
+Add `pod 'TSMessages'` to your Podfile.
+
+### Manually
+
+Drag the whole folder into your project and remove the example project. This library required ARC.
 
 To show notifications use the following code:
 --------
