@@ -8,28 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
-#define TSMessageAnimationDuration 0.3
-
 typedef enum {
-    kNotificationMessage = 0,
-    kNotificationWarning,
-    kNotificationError,
-    kNotificationSuccessful
-} notificationType;
+    TSMessageNotificationTypeMessage = 0,
+    TSMessageNotificationTypeWarning,
+    TSMessageNotificationTypeError,
+    TSMessageNotificationTypeSuccessful
+} TSMessageNotificationType;
 
 @interface TSMessage : NSObject
 
 /** The view controller the messages should be displayed in */
 @property (strong, nonatomic) UIViewController *viewController;
 
-+ (TSMessage *)sharedMessage;
++ (instancetype)sharedMessage;
 
 /** Shows a notification message 
  @param message The title of the notification view
  @param type The notification type (Message, Warning, Error, Successful)
  */
 + (void)showNotificationWithMessage:(NSString *)message
-                           withType:(notificationType)type;
+                           withType:(TSMessageNotificationType)type;
 
 /** Shows a notification message
  @param title The title of the notification view
@@ -38,7 +36,7 @@ typedef enum {
  */
 + (void)showNotificationWithTitle:(NSString *)title
                       withMessage:(NSString *)message
-                         withType:(notificationType)type;
+                         withType:(TSMessageNotificationType)type;
 
 /** Shows a notification message in a specific view controller
  @param viewController The view controller to show the notification in.
@@ -49,7 +47,7 @@ typedef enum {
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                withTitle:(NSString *)title
                              withMessage:(NSString *)message
-                                withType:(notificationType)type;
+                                withType:(TSMessageNotificationType)type;
 
 /** Shows a notification message in a specific view controller
  @param viewController The view controller to show the notification in.
@@ -61,7 +59,7 @@ typedef enum {
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                withTitle:(NSString *)title
                              withMessage:(NSString *)message
-                                withType:(notificationType)type
+                                withType:(TSMessageNotificationType)type
                             withDuration:(NSTimeInterval)duration;
 
 
