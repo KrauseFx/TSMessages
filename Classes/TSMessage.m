@@ -14,12 +14,8 @@
 
 @interface TSMessage ()
 
-/** The duration the notification should be displayed */
-@property (assign, nonatomic) NSTimeInterval duration;
-
 /** The queued messages (TSMessageView objects) */
 @property (nonatomic, strong) NSMutableArray *messages;
-
 
 - (void)fadeInCurrentNotification;
 - (void)fadeOutNotification:(TSMessageView *)currentView;
@@ -50,13 +46,26 @@ static BOOL notificationActive;
     [self showNotificationWithTitle:message withMessage:nil withType:type];
 }
 
++ (void)showNotificationWithTitle:(NSString *)title
+                      withMessage:(NSString *)message
+                         withType:(notificationType)type
+{
+    [self showNotificationInViewController:[self getViewController]
+                                 withTitle:title
+                               withMessage:message
+                                  withType:type];
+}
+
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                withTitle:(NSString *)title
                              withMessage:(NSString *)message
                                 withType:(notificationType)type
 {
-    [[self sharedMessage] setViewController:viewController];
-    [self showNotificationWithTitle:title withMessage:message withType:type];
+    [self showNotificationInViewController:viewController
+                                 withTitle:title
+                               withMessage:message
+                                  withType:type
+                              withDuration:0.0];
 }
 
 + (void)showNotificationInViewController:(UIViewController *)viewController
@@ -65,15 +74,6 @@ static BOOL notificationActive;
                                 withType:(notificationType)type
                             withDuration:(NSTimeInterval)duration
 {
-    [[self sharedMessage] setDuration:duration];
-    [[self sharedMessage] setViewController:viewController];
-    [self showNotificationWithTitle:title withMessage:message withType:type];
-}
-
-+ (void)showNotificationWithTitle:(NSString *)title
-                      withMessage:(NSString *)message
-                         withType:(notificationType)type
-{
     for (TSMessageView *n in [TSMessage sharedMessage].messages)
     {
         if ([n.title isEqualToString:title] && [n.content isEqualToString:message])
@@ -81,13 +81,16 @@ static BOOL notificationActive;
             return; // avoid showing the same messages twice in a row
         }
     }
-
+    
     // Create the TSMessageView
     TSMessageView *v = [[TSMessageView alloc] initWithTitle:title
-                                                          withContent:message
-                                                             withType:type];
+                                                withContent:message
+                                                   withType:type
+                                               withDuration:duration
+                                           inViewController:viewController];
+    
     [[TSMessage sharedMessage].messages addObject:v];
-
+    
     if (!notificationActive)
     {
         [[TSMessage sharedMessage] fadeInCurrentNotification];
@@ -99,15 +102,15 @@ static BOOL notificationActive;
 + (void)showInternetError
 {
     [TSMessage showNotificationWithTitle:NSLocalizedString(@"Network error", nil)
-                                  withMessage:NSLocalizedString(@"Couldn't connect to the server. Check your network connection.", nil)
-                                     withType:kNotificationError];
+                             withMessage:NSLocalizedString(@"Couldn't connect to the server. Check your network connection.", nil)
+                                withType:kNotificationError];
 }
 
 + (void)showLocationError
 {
     [TSMessage showNotificationWithTitle:NSLocalizedString(@"Location error", nil)
-                                  withMessage:NSLocalizedString(@"Couldn't detect your current location.", nil)
-                                     withType:kNotificationError];
+                             withMessage:NSLocalizedString(@"Couldn't detect your current location.", nil)
+                                withType:kNotificationError];
 }
 
 
@@ -128,19 +131,14 @@ static BOOL notificationActive;
     
     TSMessageView *currentView = [self.messages objectAtIndex:0];
     
-    if (!self.viewController)
-    {
-        _viewController = [[self class] getViewController];
-    }
-    
     CGFloat verticalOffset = 0.0f;
     
-    if ([self.viewController isKindOfClass:[UINavigationController class]])
+    if ([currentView.viewController isKindOfClass:[UINavigationController class]])
     {
-        if (![(UINavigationController *)self.viewController isNavigationBarHidden])
+        if (![(UINavigationController *)currentView.viewController isNavigationBarHidden])
         {
-            [self.viewController.view insertSubview:currentView belowSubview:[(UINavigationController *)self.viewController navigationBar]];
-            verticalOffset = [(UINavigationController *)self.viewController navigationBar].bounds.size.height;
+            [currentView.viewController.view insertSubview:currentView belowSubview:[(UINavigationController *)currentView.viewController navigationBar]];
+            verticalOffset = [(UINavigationController *)currentView.viewController navigationBar].bounds.size.height;
             
             if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
             {
@@ -153,59 +151,54 @@ static BOOL notificationActive;
         }
         else
         {
-            [self.viewController.view addSubview:currentView];
+            [currentView.viewController.view addSubview:currentView];
         }
     }
     else
     {
-        [self.viewController.view addSubview:currentView];
+        [currentView.viewController.view addSubview:currentView];
     }
     
     [UIView animateWithDuration:TSMessageAnimationDuration animations:^
-    {
-        currentView.center = CGPointMake(currentView.center.x,
-                                         [[self class] navigationbarBottomOfViewController:self.viewController] + verticalOffset + CGRectGetHeight(currentView.frame) / 2.);
-        currentView.alpha = TSMessageViewAlpha;
-    }];
+     {
+         currentView.center = CGPointMake(currentView.center.x,
+                                          [[self class] navigationbarBottomOfViewController:currentView.viewController] + verticalOffset + CGRectGetHeight(currentView.frame) / 2.);
+         currentView.alpha = TSMessageViewAlpha;
+     }];
     
-    NSTimeInterval duration = self.duration;
     
-    if (duration == 0.0)
+    if (currentView.duration == 0.0)
     {
-        duration = TSMessageAnimationDuration + TSMessageDisplayTime + currentView.frame.size.height * TSMessageExtraDisplayTimePerPixel;
+        currentView.duration = TSMessageAnimationDuration + TSMessageDisplayTime + currentView.frame.size.height * TSMessageExtraDisplayTimePerPixel;
     }
     
     dispatch_async(dispatch_get_main_queue(), ^
     {
-        [self performSelector:@selector(fadeOutNotification:) withObject:currentView afterDelay:duration];
+        [self performSelector:@selector(fadeOutNotification:) withObject:currentView afterDelay:currentView.duration];
     });
 }
 
 - (void)fadeOutNotification:(TSMessageView *)currentView
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutNotification:) object:currentView];
-        
+    
     [UIView animateWithDuration:TSMessageAnimationDuration animations:^
-    {
-        currentView.center = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame) / 2.);
-        currentView.alpha = 0.0;
-    }
+     {
+         currentView.center = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame) / 2.);
+         currentView.alpha = 0.0;
+     }
                      completion:^(BOOL finished)
-    {
-        [currentView removeFromSuperview];
-        
-        [self.messages removeObjectAtIndex:0];
-        notificationActive = NO;
-        
-        if ([self.messages count] > 0)
-        {
-            [self fadeInCurrentNotification];
-        }
-        else
-        {
-            _viewController = nil;
-        }
-    }];
+     {
+         [currentView removeFromSuperview];
+         
+         [self.messages removeObjectAtIndex:0];
+         notificationActive = NO;
+         
+         if ([self.messages count] > 0)
+         {
+             [self fadeInCurrentNotification];
+         }
+     }];
 }
 
 #pragma mark class Methods to subclass

@@ -19,9 +19,6 @@ typedef enum {
 
 @interface TSMessage : NSObject
 
-/** The view controller the messages should be displayed in */
-@property (strong, nonatomic) UIViewController *viewController;
-
 + (TSMessage *)sharedMessage;
 
 /** Shows a notification message 
@@ -74,7 +71,7 @@ typedef enum {
 
 
 
-/** Implement this in subclass to set the correct view controller */
+/** Implement this in subclass to set a default view controller */
 + (UIViewController *)getViewController;
 
 /** Can be implemented differently in subclass. Is used to define the top position from which the notification flies in from */
