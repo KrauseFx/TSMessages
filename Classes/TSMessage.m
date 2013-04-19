@@ -118,6 +118,10 @@ static BOOL notificationActive;
     if ((self = [super init]))
     {
         _messages = [[NSMutableArray alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(orientationChanged:)
+                                                     name:@"UIDeviceOrientationDidChangeNotification"
+                                                   object:nil];
     }
     return self;
 }
@@ -206,6 +210,15 @@ static BOOL notificationActive;
             _viewController = nil;
         }
     }];
+}
+
+- (void)orientationChanged:(NSNotification *)notification
+{
+    for (TSMessageView *n in self.messages)
+    {
+        [n setNeedsLayout];
+        [n layoutIfNeeded];
+    }
 }
 
 #pragma mark class Methods to subclass

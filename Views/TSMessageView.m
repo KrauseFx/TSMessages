@@ -14,7 +14,14 @@
 #define TSDesignFileName @"design.json"
 
 static CGFloat screenWidth;
+static CGFloat leftSpace;
 static NSDictionary *notificationDesign;
+
+@interface TSMessageView ()
+@property (nonatomic, strong) UIImageView *backgroundImageView;
+@property (nonatomic, strong) UIView *borderView;
+@property (nonatomic, strong) UIImageView *imageView;
+@end
 
 @implementation TSMessageView
 
@@ -29,6 +36,7 @@ static NSDictionary *notificationDesign;
     }
     
     screenWidth = [[[TSMessage sharedMessage] viewController] view].frame.size.width;
+    leftSpace = 2 * TSMessageViewPadding;
     
     if ((self = [self init]))
     {
@@ -76,14 +84,13 @@ static NSDictionary *notificationDesign;
         
         // add background image here
         UIImage *backgroundImage = [[UIImage imageNamed:[current valueForKey:@"backgroundImageName"]] stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0];
-        UIImageView *backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
-        [self addSubview:backgroundImageView];
+        self.backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
+        [self addSubview:self.backgroundImageView];
         
         UIColor *fontColor = [UIColor colorWithHexString:[current valueForKey:@"textColor"]
                                                    alpha:1.0];
         
         
-        CGFloat leftSpace = 2 * TSMessageViewPadding;
         if (image) leftSpace += image.size.width + 2 * TSMessageViewPadding;
         
         // Set up title label
@@ -133,39 +140,39 @@ static NSDictionary *notificationDesign;
         
         if (image)
         {
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-            imageView.frame = CGRectMake(TSMessageViewPadding * 2,
+            self.imageView = [[UIImageView alloc] initWithImage:image];
+            self.imageView.frame = CGRectMake(TSMessageViewPadding * 2,
                                          TSMessageViewPadding,
                                          image.size.width,
                                          image.size.height);
-            [self addSubview:imageView];
+            [self addSubview:self.imageView];
             
             // Check if that makes the popup larger (height)
-            if (imageView.frame.origin.y + imageView.frame.size.height + TSMessageViewPadding > currentHeight)
+            if (self.imageView.frame.origin.y + self.imageView.frame.size.height + TSMessageViewPadding > currentHeight)
             {
-                currentHeight = imageView.frame.origin.y + imageView.frame.size.height + TSMessageViewPadding;
+                currentHeight = self.imageView.frame.origin.y + self.imageView.frame.size.height + TSMessageViewPadding;
             }
             else
             {
                 // z-align
-                imageView.center = CGPointMake([imageView center].x, round(currentHeight / 2.0));
+                self.imageView.center = CGPointMake([self.imageView center].x, round(currentHeight / 2.0));
             }
         }
         
         // Add a border on the bottom
-        UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0,
+        self.borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0,
                                                                       currentHeight,
                                                                       screenWidth,
                                                                       [[current valueForKey:@"borderHeight"] floatValue])];
-        borderView.backgroundColor = [UIColor colorWithHexString:[current valueForKey:@"borderColor"]
-                                                           alpha:1.0];
-        [self addSubview:borderView];
-        currentHeight += borderView.frame.size.height;
+        self.borderView.backgroundColor = [UIColor colorWithHexString:[current valueForKey:@"borderColor"]
+                                                                alpha:1.0];
+        [self addSubview:self.borderView];
+        currentHeight += self.borderView.frame.size.height;
         
         self.frame = CGRectMake(0.0, -currentHeight, screenWidth, currentHeight);
         
-        backgroundImageView.frame = CGRectMake(backgroundImageView.frame.origin.x,
-                                               backgroundImageView.frame.origin.y,
+        self.backgroundImageView.frame = CGRectMake(self.backgroundImageView.frame.origin.x,
+                                               self.backgroundImageView.frame.origin.y,
                                                self.frame.size.width,
                                                currentHeight);
         
@@ -187,6 +194,47 @@ static NSDictionary *notificationDesign;
     {
         [[TSMessage sharedMessage] performSelector:@selector(fadeOutNotification:) withObject:self];
     });
+}
+
+- (void)layoutSubviews {
+    screenWidth = [[[TSMessage sharedMessage] viewController] view].frame.size.width;
+    CGFloat currentHeight;
+    
+    for(UIView *v in [self subviews])
+    {
+        if ([v isKindOfClass:[UILabel class]])
+        {
+            CGRect rect = v.frame;
+            rect.size.width = screenWidth - TSMessageViewPadding - leftSpace;
+            v.frame = rect;
+            [v sizeToFit];
+            currentHeight = v.frame.origin.y + v.frame.size.height;
+        }
+    }
+    
+    currentHeight += TSMessageViewPadding;
+    
+    if(self.imageView)
+    {
+        self.imageView.center = CGPointMake([self.imageView center].x, round(currentHeight / 2.0));
+    }
+    
+    CGRect bRect = self.borderView.frame;
+    bRect.size.width = screenWidth;
+    bRect.origin.y = currentHeight;
+    self.borderView.frame = bRect;
+    
+    currentHeight += self.borderView.frame.size.height;
+    
+    CGRect selfRect = self.frame;
+    selfRect.size.width = screenWidth;
+    selfRect.size.height = currentHeight;
+    self.frame = selfRect;
+    
+    CGRect bkRect = self.backgroundImageView.frame;
+    bkRect.size.width = screenWidth;
+    bkRect.size.height = currentHeight;
+    self.backgroundImageView.frame = bkRect;
 }
 
 @end
