@@ -74,6 +74,21 @@ static BOOL notificationActive;
                                 withType:(notificationType)type
                             withDuration:(NSTimeInterval)duration
 {
+    [self showNotificationInViewController:viewController
+                                 withTitle:title
+                               withMessage:message
+                                  withType:type
+                              withDuration:duration
+                              withCallback:nil];
+}
+
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                               withTitle:(NSString *)title
+                             withMessage:(NSString *)message
+                                withType:(notificationType)type
+                            withDuration:(NSTimeInterval)duration
+                            withCallback:(void (^)())callback
+{
     for (TSMessageView *n in [TSMessage sharedMessage].messages)
     {
         if ([n.title isEqualToString:title] && [n.content isEqualToString:message])
@@ -87,7 +102,8 @@ static BOOL notificationActive;
                                                 withContent:message
                                                    withType:type
                                                withDuration:duration
-                                           inViewController:viewController];
+                                           inViewController:viewController
+                                               withCallback:callback];
     
     [[TSMessage sharedMessage].messages addObject:v];
     
@@ -174,13 +190,17 @@ static BOOL notificationActive;
     
     dispatch_async(dispatch_get_main_queue(), ^
     {
-        [self performSelector:@selector(fadeOutNotification:) withObject:currentView afterDelay:currentView.duration];
+        [self performSelector:@selector(fadeOutNotification:)
+                   withObject:currentView
+                   afterDelay:currentView.duration];
     });
 }
 
 - (void)fadeOutNotification:(TSMessageView *)currentView
 {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutNotification:) object:currentView];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(fadeOutNotification:)
+                                               object:currentView];
     
     [UIView animateWithDuration:TSMessageAnimationDuration animations:^
      {

@@ -28,11 +28,9 @@ static NSDictionary *notificationDesign;
 @property (nonatomic, strong) UIView *borderView;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 
-@property (nonatomic, strong) UISwipeGestureRecognizer *gestureRec;
-@property (nonatomic, strong) UITapGestureRecognizer *tapRec;
-
 @property (nonatomic, assign) CGFloat textSpaceLeft;
 
+@property (copy) void (^callback)();
 
 - (CGFloat)updateHeightOfMessageView;
 - (void)layoutSubviews;
@@ -47,6 +45,7 @@ static NSDictionary *notificationDesign;
            withType:(notificationType)notificationType
        withDuration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
+       withCallback:(void (^)())callback
 {
     if (!notificationDesign)
     {
@@ -62,6 +61,7 @@ static NSDictionary *notificationDesign;
         _content = content;
         _duration = duration;
         _viewController = viewController;
+        self.callback = callback;
         
         CGFloat screenWidth = self.viewController.view.frame.size.width;
         NSDictionary *current;
@@ -171,21 +171,16 @@ static NSDictionary *notificationDesign;
         self.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
         
         
-        _gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+        UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                                 action:@selector(fadeMeOut)];
-        [self.gestureRec setDirection:UISwipeGestureRecognizerDirectionUp];
-        [self addGestureRecognizer:self.gestureRec];
+        [gestureRec setDirection:UISwipeGestureRecognizerDirectionUp];
+        [self addGestureRecognizer:gestureRec];
         
-        _tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self
+        UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                           action:@selector(fadeMeOut)];
-        [self addGestureRecognizer:self.tapRec];
+        [self addGestureRecognizer:tapRec];
     }
     return self;
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    return YES;
 }
 
 
@@ -260,9 +255,16 @@ static NSDictionary *notificationDesign;
 
 - (void)fadeMeOut
 {
+    // user tapped on the message
     dispatch_async(dispatch_get_main_queue(), ^
     {
-        [[TSMessage sharedMessage] performSelector:@selector(fadeOutNotification:) withObject:self];
+        if (self.callback)
+        {
+            self.callback();
+        }
+        
+        [[TSMessage sharedMessage] performSelector:@selector(fadeOutNotification:)
+                                        withObject:self];
     });
 }
 

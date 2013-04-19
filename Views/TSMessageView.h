@@ -28,12 +28,14 @@
  @param notificationType The type (color) of the notification view
  @param duration The duration this notification should be displayed (optional)
  @param viewController The view controller this message should be displayed in
+ @param callback The block that should be executed, when the user tapped on the message
  */
 - (id)initWithTitle:(NSString *)title
         withContent:(NSString *)content
            withType:(notificationType)notificationType
        withDuration:(CGFloat)duration
-   inViewController:(UIViewController *)viewController;
+   inViewController:(UIViewController *)viewController
+       withCallback:(void (^)())callback;
 
 /** Fades out this notification view */
 - (void)fadeMeOut;

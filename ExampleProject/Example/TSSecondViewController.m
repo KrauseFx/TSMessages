@@ -26,7 +26,13 @@
                                       withTitle:notificationTitle
                                     withMessage:notificationDescription
                                        withType:kNotificationError
-                                   withDuration:duration];
+                                   withDuration:duration
+                                   withCallback:^{
+                                       [TSMessage showNotificationInViewController:self
+                                                                         withTitle:NSLocalizedString(@"You dismisses it", nil)
+                                                                       withMessage:nil
+                                                                          withType:kNotificationSuccessful];
+                                   }];
 }
 
 - (IBAction)didTapWarning:(id)sender

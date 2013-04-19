@@ -61,6 +61,21 @@ typedef enum {
                                 withType:(notificationType)type
                             withDuration:(NSTimeInterval)duration;
 
+/** Shows a notification message in a specific view controller
+ @param viewController The view controller to show the notification in.
+ @param title The title of the notification view
+ @param message The message that is displayed underneath the title
+ @param type The notification type (Message, Warning, Error, Successful)
+ @param duration The duration of the notification being displayed
+ @param callback The block that should be executed, when the user tapped on the message
+ */
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                               withTitle:(NSString *)title
+                             withMessage:(NSString *)message
+                                withType:(notificationType)type
+                            withDuration:(NSTimeInterval)duration
+                            withCallback:(void (^)())callback;
+
 
 /** Shows a predefined error message, that is displayed, when this action requires an internet connection */
 + (void)showInternetError;
