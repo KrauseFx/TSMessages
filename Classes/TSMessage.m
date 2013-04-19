@@ -9,8 +9,9 @@
 #import "TSMessage.h"
 #import "TSMessageView.h"
 
-#define TSMessageDisplayTime 1.5
-#define TSMessageExtraDisplayTimePerPixel 0.04
+#define kTSMessageDisplayTime 1.5
+#define kTSMessageExtraDisplayTimePerPixel 0.04
+#define kTSMessageAnimationDuration 0.3
 
 @interface TSMessage ()
 
@@ -45,7 +46,7 @@ static BOOL notificationActive;
 #pragma mark Methods to call from outside
 
 + (void)showNotificationWithMessage:(NSString *)message
-                           withType:(notificationType)type
+                           withType:(TSMessageNotificationType)type
 {
     [self showNotificationWithTitle:message withMessage:nil withType:type];
 }
@@ -53,7 +54,7 @@ static BOOL notificationActive;
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                withTitle:(NSString *)title
                              withMessage:(NSString *)message
-                                withType:(notificationType)type
+                                withType:(TSMessageNotificationType)type
 {
     [[self sharedMessage] setViewController:viewController];
     [self showNotificationWithTitle:title withMessage:message withType:type];
@@ -62,7 +63,7 @@ static BOOL notificationActive;
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                withTitle:(NSString *)title
                              withMessage:(NSString *)message
-                                withType:(notificationType)type
+                                withType:(TSMessageNotificationType)type
                             withDuration:(NSTimeInterval)duration
 {
     [[self sharedMessage] setDuration:duration];
@@ -72,7 +73,7 @@ static BOOL notificationActive;
 
 + (void)showNotificationWithTitle:(NSString *)title
                       withMessage:(NSString *)message
-                         withType:(notificationType)type
+                         withType:(TSMessageNotificationType)type
 {
     for (TSMessageView *n in [TSMessage sharedMessage].messages)
     {
@@ -100,14 +101,14 @@ static BOOL notificationActive;
 {
     [TSMessage showNotificationWithTitle:NSLocalizedString(@"Network error", nil)
                                   withMessage:NSLocalizedString(@"Couldn't connect to the server. Check your network connection.", nil)
-                                     withType:kNotificationError];
+                                     withType:TSMessageNotificationTypeError];
 }
 
 + (void)showLocationError
 {
     [TSMessage showNotificationWithTitle:NSLocalizedString(@"Location error", nil)
                                   withMessage:NSLocalizedString(@"Couldn't detect your current location.", nil)
-                                     withType:kNotificationError];
+                                     withType:TSMessageNotificationTypeError];
 }
 
 
@@ -161,18 +162,18 @@ static BOOL notificationActive;
         [self.viewController.view addSubview:currentView];
     }
     
-    [UIView animateWithDuration:TSMessageAnimationDuration animations:^
+    [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
     {
         currentView.center = CGPointMake(currentView.center.x,
                                          [[self class] navigationbarBottomOfViewController:self.viewController] + verticalOffset + CGRectGetHeight(currentView.frame) / 2.);
-        currentView.alpha = TSMessageViewAlpha;
+        currentView.alpha = kTSMessageViewAlpha;
     }];
     
     NSTimeInterval duration = self.duration;
     
     if (duration == 0.0)
     {
-        duration = TSMessageAnimationDuration + TSMessageDisplayTime + currentView.frame.size.height * TSMessageExtraDisplayTimePerPixel;
+        duration = kTSMessageAnimationDuration + kTSMessageDisplayTime + currentView.frame.size.height * kTSMessageExtraDisplayTimePerPixel;
     }
     
     dispatch_async(dispatch_get_main_queue(), ^
@@ -185,7 +186,7 @@ static BOOL notificationActive;
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutNotification:) object:currentView];
         
-    [UIView animateWithDuration:TSMessageAnimationDuration animations:^
+    [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
     {
         currentView.center = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame) / 2.);
         currentView.alpha = 0.0;
