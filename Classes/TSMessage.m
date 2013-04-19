@@ -221,6 +221,11 @@ static BOOL notificationActive;
     }
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark class Methods to subclass
 
 + (UIViewController *)getViewController
