@@ -126,7 +126,6 @@ static BOOL notificationActive;
 {
     notificationActive = YES;
     
-    //    TSMessageView *currentView = [self.messages objectAtIndex:0];
     TSMessageView *currentView = [[TSMessageView alloc] initWithTitle:[[self.messages objectAtIndex:0] objectForKey:@"title"]
                                                           withContent:[[self.messages objectAtIndex:0] objectForKey:@"message"]
                                                              withType:[[[self.messages objectAtIndex:0] objectForKey:@"type"] intValue]];
@@ -166,8 +165,7 @@ static BOOL notificationActive;
     
     [UIView animateWithDuration:TSMessageAnimationDuration animations:^
      {
-         currentView.center = CGPointMake(currentView.center.x,
-                                          [[self class] navigationbarBottomOfViewController:self.viewController] + verticalOffset + CGRectGetHeight(currentView.frame) / 2.);
+         currentView.center = CGPointMake(currentView.center.x, [[self class] navigationbarBottomOfViewController:self.viewController] + verticalOffset + CGRectGetHeight(currentView.frame) / 2.);
          currentView.alpha = TSMessageViewAlpha;
      }];
     
@@ -179,9 +177,9 @@ static BOOL notificationActive;
     }
     
     dispatch_async(dispatch_get_main_queue(), ^
-                   {
-                       [self performSelector:@selector(fadeOutNotification:) withObject:currentView afterDelay:duration];
-                   });
+    {
+       [self performSelector:@selector(fadeOutNotification:) withObject:currentView afterDelay:duration];
+    });
 }
 
 - (void)fadeOutNotification:(TSMessageView *)currentView

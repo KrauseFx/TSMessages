@@ -194,9 +194,9 @@ static NSDictionary *notificationDesign;
 - (void)fadeMeOut
 {
     dispatch_async(dispatch_get_main_queue(), ^
-                   {
-                       [[TSMessage sharedMessage] performSelector:@selector(fadeOutNotification:) withObject:self];
-                   });
+    {
+       [[TSMessage sharedMessage] performSelector:@selector(fadeOutNotification:) withObject:self];
+    });
 }
 
 - (void)layoutSubviews {
