@@ -10,25 +10,7 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
-		<key>00D3AD5B2A164415AA9DDD7B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>0133D5FE956740579B098FC6</string>
-				<string>928021DD2AD64F1C87E12A93</string>
-				<string>5E1BE336A8064FB9AF91CBC3</string>
-				<string>303DE5B477CF4F2D9C0986D8</string>
-				<string>1E9F96F87B814A57B84F87BF</string>
-				<string>3E4C479E705445C88D961BAE</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>TSMessages</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0133D5FE956740579B098FC6</key>
+		<key>031D96A373CC41E69DC2BC51</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -37,55 +19,369 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>TSMessage.h</string>
+			<string>UIColor+MLColorAdditions.h</string>
 			<key>path</key>
-			<string>../../Classes/TSMessage.h</string>
+			<string>../../Classes/UIColorAdditions/UIColor+MLColorAdditions.h</string>
 			<key>sourceTree</key>
 			<string>SOURCE_ROOT</string>
 		</dict>
-		<key>068E3BAC86214518A2BFD966</key>
+		<key>0643A86572464478B8A84D76</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>name</key>
-			<string>NotificationBackgroundSuccess.png</string>
+			<string>design.json</string>
 			<key>path</key>
-			<string>../../Resources/Images/NotificationBackgroundSuccess.png</string>
+			<string>../../Resources/design.json</string>
 			<key>sourceTree</key>
 			<string>SOURCE_ROOT</string>
 		</dict>
-		<key>0B6B204ED7FD4BF492BCEAC5</key>
+		<key>0D0A408EB50145BE801E0FF6</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>DE196C6652AE48E4BC87815E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Resources</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0F522104E7A041AFA2C5286B</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>7DE575CAB4F2447390C23F9A</string>
+				<string>DF97EEAB20494FC7929EDBE8</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>16BFF750CBE7426DB00C35D6</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>name</key>
-			<string>NotificationBackgroundErrorIcon@2x.png</string>
+			<string>NotificationBackgroundWarning@2x.png</string>
 			<key>path</key>
-			<string>../../Resources/Images/NotificationBackgroundErrorIcon@2x.png</string>
+			<string>../../Resources/Images/NotificationBackgroundWarning@2x.png</string>
 			<key>sourceTree</key>
 			<string>SOURCE_ROOT</string>
 		</dict>
-		<key>0BEC0932BD214949BB346284</key>
+		<key>1A68ECAA47194B768D1D0D08</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libPods.a</string>
+			<key>path</key>
+			<string>libPods.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>1B7BE5CA205543ADAB4E601A</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>C49E732F3BFF4D68904D1687</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>1FA6D2DDC42A4BC6ADA9D3A2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIColor+MLColorAdditions.m</string>
+			<key>path</key>
+			<string>MLUIColorAdditions/UIColor+MLColorAdditions.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>26254B22A6724E66A41B19B2</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>name</key>
-			<string>NotificationBackgroundError@2x.png</string>
+			<string>NotificationBackgroundMessage.png</string>
 			<key>path</key>
-			<string>../../Resources/Images/NotificationBackgroundError@2x.png</string>
+			<string>../../Resources/Images/NotificationBackgroundMessage.png</string>
 			<key>sourceTree</key>
 			<string>SOURCE_ROOT</string>
 		</dict>
-		<key>0DCA47E61B784DFE85015523</key>
+		<key>2796AB61D6264895BDAF60E4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIColor+MLColorAdditions.h</string>
+			<key>path</key>
+			<string>MLUIColorAdditions/UIColor+MLColorAdditions.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>2B47BCA0A28E4C52BF94FF0C</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>0F522104E7A041AFA2C5286B</string>
+			<key>buildPhases</key>
+			<array>
+				<string>F9BF25CE3B5C472AB93110FB</string>
+				<string>1B7BE5CA205543ADAB4E601A</string>
+				<string>A7AF14EA1A2349328371DA4F</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>productName</key>
+			<string>Pods</string>
+			<key>productReference</key>
+			<string>1A68ECAA47194B768D1D0D08</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>2C133FDAB3A74CF7AB709E90</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TSMessageView.h</string>
+			<key>path</key>
+			<string>../../Views/TSMessageView.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>313EC0F4B228428C99A3DF73</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A59EE1BB04824320B484CC63</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>33303EB0DE7B47DE8DE39A26</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NotificationBackgroundWarning.png</string>
+			<key>path</key>
+			<string>../../Resources/Images/NotificationBackgroundWarning.png</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>38204C8F0D0642DE98C95F98</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1A68ECAA47194B768D1D0D08</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3B27D1EBFB0940E8875D1887</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastUpgradeCheck</key>
+				<string>0450</string>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>F8C1D264CCAE413385E43B77</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>6C67F1DD87484884BA69A982</string>
+			<key>productRefGroup</key>
+			<string>38204C8F0D0642DE98C95F98</string>
+			<key>projectReferences</key>
+			<array/>
+			<key>targets</key>
+			<array>
+				<string>2B47BCA0A28E4C52BF94FF0C</string>
+			</array>
+		</dict>
+		<key>43A6100A997E4C52BE57E265</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>TSMessageView.m</string>
+			<key>path</key>
+			<string>../../Views/TSMessageView.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>4B34F2B8155644A2894C9C0A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>43A6100A997E4C52BE57E265</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>4BAC09D56CCD49C6B1AFDBBC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIColor+MLColorAdditions.m</string>
+			<key>path</key>
+			<string>../../Classes/UIColorAdditions/UIColor+MLColorAdditions.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>5D9E9130B0DD402EB8950D60</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NotificationBackgroundError.png</string>
+			<key>path</key>
+			<string>../../Resources/Images/NotificationBackgroundError.png</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>66C0936E6D634A54AB7426F4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods.xcconfig</string>
+			<key>path</key>
+			<string>Pods.xcconfig</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>6C67F1DD87484884BA69A982</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>D3669DE5E587424FB59C5703</string>
+				<string>8E6F987DE13A43CE8B6769F9</string>
+				<string>E2968B7714F546AEB80016F6</string>
+				<string>38204C8F0D0642DE98C95F98</string>
+				<string>0D0A408EB50145BE801E0FF6</string>
+				<string>6FF6B8E002D14DC9A9F8B003</string>
+				<string>80EEDF141D21418EB8CB5E7F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6FF6B8E002D14DC9A9F8B003</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>9668C65956574380BA9260E2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Targets Support Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>728214BC3D6E4AA898170E37</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EB464816925F473F958BCF76</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>7BEBF56D8A624B34BA1A2713</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NotificationBackgroundSuccessIcon@2x.png</string>
+			<key>path</key>
+			<string>../../Resources/Images/NotificationBackgroundSuccessIcon@2x.png</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>7DE575CAB4F2447390C23F9A</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>CB5BB666F45148E2B793DADF</string>
+			<string>66C0936E6D634A54AB7426F4</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ALWAYS_SEARCH_USER_PATHS</key>
@@ -140,204 +436,7 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>140EB64B7535420D98E33297</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libPods.a</string>
-			<key>path</key>
-			<string>libPods.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>1E9F96F87B814A57B84F87BF</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>TSMessageView.h</string>
-			<key>path</key>
-			<string>../../Views/TSMessageView.h</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>2616767AB33242EA90F507D9</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastUpgradeCheck</key>
-				<string>0450</string>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>D2A1004F9ACA48278486C18F</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-			</array>
-			<key>mainGroup</key>
-			<string>BB1F3C5A05554B0EBFDE67DE</string>
-			<key>productRefGroup</key>
-			<string>69E4E9AC2BF54958928B0A60</string>
-			<key>projectReferences</key>
-			<array/>
-			<key>targets</key>
-			<array>
-				<string>B535B8D3912945A8902574E9</string>
-			</array>
-		</dict>
-		<key>287B5C1C59A34A03B39A2886</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>Pods-dummy.m</string>
-			<key>path</key>
-			<string>Pods-dummy.m</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>29C25666A83E4A26AAB2C5F6</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>0DCA47E61B784DFE85015523</string>
-				<string>BC2B08B6C7714C20944078B9</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>303DE5B477CF4F2D9C0986D8</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UIColor+MLColorAdditions.m</string>
-			<key>path</key>
-			<string>../../Classes/UIColorAdditions/UIColor+MLColorAdditions.m</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>34D4464583C04293887760B6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>NotificationBackgroundWarningIcon.png</string>
-			<key>path</key>
-			<string>../../Resources/Images/NotificationBackgroundWarningIcon.png</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>3601BD6B924846D699780E00</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>NotificationBackgroundSuccessIcon.png</string>
-			<key>path</key>
-			<string>../../Resources/Images/NotificationBackgroundSuccessIcon.png</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>36259FBCD8AD469FA1B28BB3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>96D3918714234AEAB46E19FA</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict/>
-		</dict>
-		<key>3881A069469A420EA16479A8</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UIColor+MLColorAdditions.m</string>
-			<key>path</key>
-			<string>MLUIColorAdditions/UIColor+MLColorAdditions.m</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>3E4C479E705445C88D961BAE</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TSMessageView.m</string>
-			<key>path</key>
-			<string>../../Views/TSMessageView.m</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>483545D02F834B0AB95DF3AD</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>00D3AD5B2A164415AA9DDD7B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Local Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>495B98479B944BECB2708A9D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>NotificationBackgroundError.png</string>
-			<key>path</key>
-			<string>../../Resources/Images/NotificationBackgroundError.png</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>4C0D82EC7A5A4C7FB478EB25</key>
+		<key>80EEDF141D21418EB8CB5E7F</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -352,129 +451,28 @@
 			<key>xcLanguageSpecificationIdentifier</key>
 			<string>xcode.lang.ruby</string>
 		</dict>
-		<key>4D03DC170BE94279981ACE1E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>4D9EDE5CB1DA420EA5163613</string>
-				<string>495B98479B944BECB2708A9D</string>
-				<string>0BEC0932BD214949BB346284</string>
-				<string>B63139CEB1DF41BDBE3D0DD1</string>
-				<string>0B6B204ED7FD4BF492BCEAC5</string>
-				<string>72327065AD5343A686569CB4</string>
-				<string>99F0480466B74655A1D39C66</string>
-				<string>068E3BAC86214518A2BFD966</string>
-				<string>E6AFC0C2BE334D64BCC4D0A1</string>
-				<string>3601BD6B924846D699780E00</string>
-				<string>B4AADBE97F41430F82B4CEDB</string>
-				<string>7C7339A9192C46BCB9987E8C</string>
-				<string>688C69F8F73243AF8A0485E0</string>
-				<string>34D4464583C04293887760B6</string>
-				<string>5A3B4766352443888856E280</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>TSMessages</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4D9EDE5CB1DA420EA5163613</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>design.json</string>
-			<key>path</key>
-			<string>../../Resources/design.json</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>4DC5A1190CA241E0BD732AE6</key>
+		<key>82AC4C95376F4D1AB7E028C8</key>
 		<dict>
 			<key>fileRef</key>
-			<string>0133D5FE956740579B098FC6</string>
+			<string>4BAC09D56CCD49C6B1AFDBBC</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
+		</dict>
+		<key>82FFFECD07454965883BF9A6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2C133FDAB3A74CF7AB709E90</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
 			<dict/>
 		</dict>
-		<key>5A3B4766352443888856E280</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>NotificationBackgroundWarningIcon@2x.png</string>
-			<key>path</key>
-			<string>../../Resources/Images/NotificationBackgroundWarningIcon@2x.png</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>5CE56F63F2FF466BAED157E4</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>4D03DC170BE94279981ACE1E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5E1BE336A8064FB9AF91CBC3</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIColor+MLColorAdditions.h</string>
-			<key>path</key>
-			<string>../../Classes/UIColorAdditions/UIColor+MLColorAdditions.h</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>5FC75717FEDF47FE923F684E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Pods-acknowledgements.markdown</string>
-			<key>path</key>
-			<string>Pods-acknowledgements.markdown</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>6077056A86F3417A8F31E466</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CB5BB666F45148E2B793DADF</string>
-				<string>A16D6A21CE534D00826D2353</string>
-				<string>9D58B253512842019A114B1E</string>
-				<string>65C651763DA54764A263191C</string>
-				<string>A91531D6D90C48C3804D96D4</string>
-				<string>5FC75717FEDF47FE923F684E</string>
-				<string>287B5C1C59A34A03B39A2886</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>621F3DCF739C488783168184</key>
+		<key>8403A3A8FA114C9D8E532D95</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -489,62 +487,166 @@
 			<key>sourceTree</key>
 			<string>DEVELOPER_DIR</string>
 		</dict>
-		<key>65C651763DA54764A263191C</key>
+		<key>8449595BD5AD4FB0980BFE02</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>name</key>
-			<string>Pods-resources.sh</string>
+			<string>Pods-prefix.pch</string>
 			<key>path</key>
-			<string>Pods-resources.sh</string>
+			<string>Pods-prefix.pch</string>
 			<key>sourceTree</key>
 			<string>SOURCE_ROOT</string>
 		</dict>
-		<key>688C69F8F73243AF8A0485E0</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>NotificationBackgroundWarning@2x.png</string>
-			<key>path</key>
-			<string>../../Resources/Images/NotificationBackgroundWarning@2x.png</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>69E4E9AC2BF54958928B0A60</key>
+		<key>8E6F987DE13A43CE8B6769F9</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>140EB64B7535420D98E33297</string>
+				<string>9CEAD9124B154AACBF169B21</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>name</key>
-			<string>Products</string>
+			<string>Local Pods</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>72327065AD5343A686569CB4</key>
+		<key>91F7B2EEB2D24845A5678DDC</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>name</key>
-			<string>NotificationBackgroundMessage.png</string>
+			<string>NotificationBackgroundWarningIcon.png</string>
 			<key>path</key>
-			<string>../../Resources/Images/NotificationBackgroundMessage.png</string>
+			<string>../../Resources/Images/NotificationBackgroundWarningIcon.png</string>
 			<key>sourceTree</key>
 			<string>SOURCE_ROOT</string>
 		</dict>
-		<key>74768FE98ACB4EC38DB4E4A9</key>
+		<key>92D2ABBF63784C258C5C2D31</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>2796AB61D6264895BDAF60E4</string>
+				<string>1FA6D2DDC42A4BC6ADA9D3A2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>MLUIColorAdditions</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9425DDA6F1AD4991A768E2F8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods-acknowledgements.markdown</string>
+			<key>path</key>
+			<string>Pods-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>9668C65956574380BA9260E2</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>66C0936E6D634A54AB7426F4</string>
+				<string>FFA737C45575492A84D3F4B1</string>
+				<string>8449595BD5AD4FB0980BFE02</string>
+				<string>CBE7AAB82EB94866BD5D7D30</string>
+				<string>BEA7F279CD7D49518F61394C</string>
+				<string>9425DDA6F1AD4991A768E2F8</string>
+				<string>EB464816925F473F958BCF76</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9CEAD9124B154AACBF169B21</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A59EE1BB04824320B484CC63</string>
+				<string>E7B6AA7E40334910A0323956</string>
+				<string>031D96A373CC41E69DC2BC51</string>
+				<string>4BAC09D56CCD49C6B1AFDBBC</string>
+				<string>2C133FDAB3A74CF7AB709E90</string>
+				<string>43A6100A997E4C52BE57E265</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>TSMessages</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A281FECD4E8F4A86B3F4DD56</key>
 		<dict>
 			<key>fileRef</key>
-			<string>3881A069469A420EA16479A8</string>
+			<string>2796AB61D6264895BDAF60E4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>A2BF7B570CA64773A9E864FB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NotificationBackgroundSuccessIcon.png</string>
+			<key>path</key>
+			<string>../../Resources/Images/NotificationBackgroundSuccessIcon.png</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>A59EE1BB04824320B484CC63</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>TSMessage.h</string>
+			<key>path</key>
+			<string>../../Classes/TSMessage.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>A7AF14EA1A2349328371DA4F</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>A281FECD4E8F4A86B3F4DD56</string>
+				<string>313EC0F4B228428C99A3DF73</string>
+				<string>E2D3CDF0EBE94213A7FE90DB</string>
+				<string>82FFFECD07454965883BF9A6</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>AB042BB03EA7430896F882CD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E7B6AA7E40334910A0323956</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -553,190 +655,45 @@
 				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
-		<key>783FBA1106FE4E9785CF6C37</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>621F3DCF739C488783168184</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7C7339A9192C46BCB9987E8C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>NotificationBackgroundWarning.png</string>
-			<key>path</key>
-			<string>../../Resources/Images/NotificationBackgroundWarning.png</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>88B3F442EB4B43BB8F115204</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>6077056A86F3417A8F31E466</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Targets Support Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>928021DD2AD64F1C87E12A93</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>TSMessage.m</string>
-			<key>path</key>
-			<string>../../Classes/TSMessage.m</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>96D3918714234AEAB46E19FA</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIColor+MLColorAdditions.h</string>
-			<key>path</key>
-			<string>MLUIColorAdditions/UIColor+MLColorAdditions.h</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>99F0480466B74655A1D39C66</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>NotificationBackgroundMessage@2x.png</string>
-			<key>path</key>
-			<string>../../Resources/Images/NotificationBackgroundMessage@2x.png</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>9D58B253512842019A114B1E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Pods-prefix.pch</string>
-			<key>path</key>
-			<string>Pods-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>A10AD1C13A26454EBF9F4DCB</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>AB4BA103D6A24818AAEF99A6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>A16D6A21CE534D00826D2353</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>Pods-header.h</string>
-			<key>path</key>
-			<string>Pods-header.h</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>A91531D6D90C48C3804D96D4</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Pods-acknowledgements.plist</string>
-			<key>path</key>
-			<string>Pods-acknowledgements.plist</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>AB4BA103D6A24818AAEF99A6</key>
+		<key>B108A08610A1448AA0B4EB90</key>
 		<dict>
 			<key>fileRef</key>
-			<string>621F3DCF739C488783168184</string>
+			<string>1FA6D2DDC42A4BC6ADA9D3A2</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
-			<dict/>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
+			</dict>
 		</dict>
-		<key>B4AADBE97F41430F82B4CEDB</key>
+		<key>B24CBBC741954B66B4E835DD</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>name</key>
-			<string>NotificationBackgroundSuccessIcon@2x.png</string>
+			<string>NotificationBackgroundWarningIcon@2x.png</string>
 			<key>path</key>
-			<string>../../Resources/Images/NotificationBackgroundSuccessIcon@2x.png</string>
+			<string>../../Resources/Images/NotificationBackgroundWarningIcon@2x.png</string>
 			<key>sourceTree</key>
 			<string>SOURCE_ROOT</string>
 		</dict>
-		<key>B535B8D3912945A8902574E9</key>
+		<key>BEA7F279CD7D49518F61394C</key>
 		<dict>
-			<key>buildConfigurationList</key>
-			<string>29C25666A83E4A26AAB2C5F6</string>
-			<key>buildPhases</key>
-			<array>
-				<string>EAB6FB9AE5DD49C192302055</string>
-				<string>A10AD1C13A26454EBF9F4DCB</string>
-				<string>BA94CC84280C43F9A1122AC7</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXNativeTarget</string>
+			<string>PBXFileReference</string>
 			<key>name</key>
-			<string>Pods</string>
-			<key>productName</key>
-			<string>Pods</string>
-			<key>productReference</key>
-			<string>140EB64B7535420D98E33297</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
+			<string>Pods-acknowledgements.plist</string>
+			<key>path</key>
+			<string>Pods-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
 		</dict>
-		<key>B63139CEB1DF41BDBE3D0DD1</key>
+		<key>C24396BF04AE412BBFBDB58E</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -749,25 +706,29 @@
 			<key>sourceTree</key>
 			<string>SOURCE_ROOT</string>
 		</dict>
-		<key>B9088248599C4F1B92F6208F</key>
+		<key>C49E732F3BFF4D68904D1687</key>
 		<dict>
 			<key>fileRef</key>
-			<string>1E9F96F87B814A57B84F87BF</string>
+			<string>8403A3A8FA114C9D8E532D95</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
 			<dict/>
 		</dict>
-		<key>B909FD3F8A514BF2B37272C9</key>
+		<key>CBE7AAB82EB94866BD5D7D30</key>
 		<dict>
-			<key>buildSettings</key>
-			<dict/>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>XCBuildConfiguration</string>
+			<string>PBXFileReference</string>
 			<key>name</key>
-			<string>Release</string>
+			<string>Pods-resources.sh</string>
+			<key>path</key>
+			<string>Pods-resources.sh</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
 		</dict>
-		<key>BA2729ECF4D84853A4E65786</key>
+		<key>CBEDDBFC7477490F8F7DBE70</key>
 		<dict>
 			<key>buildSettings</key>
 			<dict/>
@@ -776,43 +737,89 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>BA94CC84280C43F9A1122AC7</key>
+		<key>CD104EF939064AE6BE4EE446</key>
 		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>36259FBCD8AD469FA1B28BB3</string>
-				<string>4DC5A1190CA241E0BD732AE6</string>
-				<string>F648096E04154722B6CC56C0</string>
-				<string>B9088248599C4F1B92F6208F</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NotificationBackgroundSuccess@2x.png</string>
+			<key>path</key>
+			<string>../../Resources/Images/NotificationBackgroundSuccess@2x.png</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
 		</dict>
-		<key>BB1F3C5A05554B0EBFDE67DE</key>
+		<key>D3669DE5E587424FB59C5703</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>783FBA1106FE4E9785CF6C37</string>
-				<string>483545D02F834B0AB95DF3AD</string>
-				<string>C35A006AF868462682F3614D</string>
-				<string>69E4E9AC2BF54958928B0A60</string>
-				<string>5CE56F63F2FF466BAED157E4</string>
-				<string>88B3F442EB4B43BB8F115204</string>
-				<string>4C0D82EC7A5A4C7FB478EB25</string>
+				<string>8403A3A8FA114C9D8E532D95</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>BC2B08B6C7714C20944078B9</key>
+		<key>D4232DAE21E148918784D052</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NotificationBackgroundError@2x.png</string>
+			<key>path</key>
+			<string>../../Resources/Images/NotificationBackgroundError@2x.png</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>D4AD11E9541B4493A300A5B1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NotificationBackgroundSuccess.png</string>
+			<key>path</key>
+			<string>../../Resources/Images/NotificationBackgroundSuccess.png</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>DE196C6652AE48E4BC87815E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0643A86572464478B8A84D76</string>
+				<string>5D9E9130B0DD402EB8950D60</string>
+				<string>D4232DAE21E148918784D052</string>
+				<string>C24396BF04AE412BBFBDB58E</string>
+				<string>EB5C156986F248968D10300B</string>
+				<string>26254B22A6724E66A41B19B2</string>
+				<string>E79F898325FF430FABD2CD69</string>
+				<string>D4AD11E9541B4493A300A5B1</string>
+				<string>CD104EF939064AE6BE4EE446</string>
+				<string>A2BF7B570CA64773A9E864FB</string>
+				<string>7BEBF56D8A624B34BA1A2713</string>
+				<string>33303EB0DE7B47DE8DE39A26</string>
+				<string>16BFF750CBE7426DB00C35D6</string>
+				<string>91F7B2EEB2D24845A5678DDC</string>
+				<string>B24CBBC741954B66B4E835DD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>TSMessages</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DF97EEAB20494FC7929EDBE8</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>CB5BB666F45148E2B793DADF</string>
+			<string>66C0936E6D634A54AB7426F4</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ALWAYS_SEARCH_USER_PATHS</key>
@@ -866,11 +873,11 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>C35A006AF868462682F3614D</key>
+		<key>E2968B7714F546AEB80016F6</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>DA5FDE01B716406C82A88C3B</string>
+				<string>92D2ABBF63784C258C5C2D31</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -879,39 +886,86 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>CB5BB666F45148E2B793DADF</key>
+		<key>E2D3CDF0EBE94213A7FE90DB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>031D96A373CC41E69DC2BC51</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict/>
+		</dict>
+		<key>E79F898325FF430FABD2CD69</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NotificationBackgroundMessage@2x.png</string>
+			<key>path</key>
+			<string>../../Resources/Images/NotificationBackgroundMessage@2x.png</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>E7B6AA7E40334910A0323956</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
+			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>Pods.xcconfig</string>
+			<string>TSMessage.m</string>
 			<key>path</key>
-			<string>Pods.xcconfig</string>
+			<string>../../Classes/TSMessage.m</string>
 			<key>sourceTree</key>
 			<string>SOURCE_ROOT</string>
 		</dict>
-		<key>D08B5724477E48E099505E54</key>
+		<key>EB464816925F473F958BCF76</key>
 		<dict>
-			<key>fileRef</key>
-			<string>3E4C479E705445C88D961BAE</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>Pods-dummy.m</string>
+			<key>path</key>
+			<string>Pods-dummy.m</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
 		</dict>
-		<key>D2A1004F9ACA48278486C18F</key>
+		<key>EB5C156986F248968D10300B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>NotificationBackgroundErrorIcon@2x.png</string>
+			<key>path</key>
+			<string>../../Resources/Images/NotificationBackgroundErrorIcon@2x.png</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>EF44786750964F6D99776208</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict/>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>F8C1D264CCAE413385E43B77</key>
 		<dict>
 			<key>buildConfigurations</key>
 			<array>
-				<string>B909FD3F8A514BF2B37272C9</string>
-				<string>BA2729ECF4D84853A4E65786</string>
+				<string>EF44786750964F6D99776208</string>
+				<string>CBEDDBFC7477490F8F7DBE70</string>
 			</array>
 			<key>defaultConfigurationIsVisible</key>
 			<string>0</string>
@@ -920,94 +974,40 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>D364E6A0FD874E9C81A51902</key>
-		<dict>
-			<key>fileRef</key>
-			<string>303DE5B477CF4F2D9C0986D8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>DA5FDE01B716406C82A88C3B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>96D3918714234AEAB46E19FA</string>
-				<string>3881A069469A420EA16479A8</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>MLUIColorAdditions</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E6AFC0C2BE334D64BCC4D0A1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>NotificationBackgroundSuccess@2x.png</string>
-			<key>path</key>
-			<string>../../Resources/Images/NotificationBackgroundSuccess@2x.png</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>EAB6FB9AE5DD49C192302055</key>
+		<key>F9BF25CE3B5C472AB93110FB</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>74768FE98ACB4EC38DB4E4A9</string>
-				<string>F93FE370CEF5440A88D50CBA</string>
-				<string>D364E6A0FD874E9C81A51902</string>
-				<string>D08B5724477E48E099505E54</string>
-				<string>EB5ECBD66A9C457D97175241</string>
+				<string>B108A08610A1448AA0B4EB90</string>
+				<string>AB042BB03EA7430896F882CD</string>
+				<string>82AC4C95376F4D1AB7E028C8</string>
+				<string>4B34F2B8155644A2894C9C0A</string>
+				<string>728214BC3D6E4AA898170E37</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>EB5ECBD66A9C457D97175241</key>
+		<key>FFA737C45575492A84D3F4B1</key>
 		<dict>
-			<key>fileRef</key>
-			<string>287B5C1C59A34A03B39A2886</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict/>
-		</dict>
-		<key>F648096E04154722B6CC56C0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5E1BE336A8064FB9AF91CBC3</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict/>
-		</dict>
-		<key>F93FE370CEF5440A88D50CBA</key>
-		<dict>
-			<key>fileRef</key>
-			<string>928021DD2AD64F1C87E12A93</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>Pods-header.h</string>
+			<key>path</key>
+			<string>Pods-header.h</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>
-	<string>2616767AB33242EA90F507D9</string>
+	<string>3B27D1EBFB0940E8875D1887</string>
 </dict>
 </plist>
