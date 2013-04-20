@@ -223,8 +223,9 @@ static BOOL notificationActive;
 
 #pragma mark class Methods to subclass
 
-+ (UIViewController *)getViewController
++ (UIViewController *)defaultViewController
 {
+    NSLog(@"No view controller was set as parameter and TSMessage was not subclassed. If you want to subclass, implement defaultViewController to set the default viewController.");
     return nil;
     // Implement this in subclass
 }
