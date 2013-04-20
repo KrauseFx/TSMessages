@@ -50,7 +50,7 @@ static BOOL notificationActive;
                       withMessage:(NSString *)message
                          withType:(TSMessageNotificationType)type
 {
-    [self showNotificationInViewController:[self getViewController]
+    [self showNotificationInViewController:[self defaultViewController]
                                  withTitle:title
                                withMessage:message
                                   withType:type];
