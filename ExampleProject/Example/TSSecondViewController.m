@@ -25,13 +25,13 @@
     [TSMessage showNotificationInViewController:self
                                       withTitle:notificationTitle
                                     withMessage:notificationDescription
-                                       withType:kNotificationError
+                                       withType:TSMessageNotificationTypeError
                                    withDuration:duration
                                    withCallback:^{
                                        [TSMessage showNotificationInViewController:self
                                                                          withTitle:NSLocalizedString(@"You dismisses it", nil)
                                                                        withMessage:nil
-                                                                          withType:kNotificationSuccessful];
+                                                                          withType:TSMessageNotificationTypeSuccess];
                                    }];
 }
 
@@ -47,7 +47,7 @@
     [TSMessage showNotificationInViewController:self
                                       withTitle:notificationTitle
                                     withMessage:notificationDescription
-                                       withType:kNotificationWarning
+                                       withType:TSMessageNotificationTypeWarning
                                    withDuration:duration];
 }
 
@@ -63,7 +63,7 @@
     [TSMessage showNotificationInViewController:self
                                       withTitle:notificationTitle
                                     withMessage:notificationDescription
-                                       withType:kNotificationMessage
+                                       withType:TSMessageNotificationTypeMessage
                                    withDuration:duration];
 }
 
@@ -79,7 +79,7 @@
     [TSMessage showNotificationInViewController:self
                                       withTitle:notificationTitle
                                     withMessage:notificationDescription
-                                       withType:kNotificationSuccessful
+                                       withType:TSMessageNotificationTypeSuccess
                                    withDuration:duration];
 }
 

@@ -42,7 +42,7 @@ static NSDictionary *notificationDesign;
 
 - (id)initWithTitle:(NSString *)title
         withContent:(NSString *)content
-           withType:(notificationType)notificationType
+           withType:(TSMessageNotificationType)notificationType
        withDuration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
        withCallback:(void (^)())callback
@@ -68,22 +68,22 @@ static NSDictionary *notificationDesign;
         NSString *currentString;
         switch (notificationType)
         {
-            case kNotificationMessage:
+            case TSMessageNotificationTypeMessage:
             {
                 currentString = @"message";
                 break;
             }
-            case kNotificationError:
+            case TSMessageNotificationTypeError:
             {
                 currentString = @"error";
                 break;
             }
-            case kNotificationSuccessful:
+            case TSMessageNotificationTypeSuccess:
             {
                 currentString = @"success";
                 break;
             }
-            case kNotificationWarning:
+            case TSMessageNotificationTypeWarning:
             {
                 currentString = @"warning";
                 break;
@@ -174,11 +174,11 @@ static NSDictionary *notificationDesign;
         UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                                 action:@selector(fadeMeOut)];
         [gestureRec setDirection:UISwipeGestureRecognizerDirectionUp];
-        [self addGestureRecognizer:gestureRec];
+        [self.backgroundImageView addGestureRecognizer:gestureRec];
         
         UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                           action:@selector(fadeMeOut)];
-        [self addGestureRecognizer:tapRec];
+        [self.backgroundImageView addGestureRecognizer:tapRec];
     }
     return self;
 }

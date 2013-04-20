@@ -32,7 +32,7 @@
  */
 - (id)initWithTitle:(NSString *)title
         withContent:(NSString *)content
-           withType:(notificationType)notificationType
+           withType:(TSMessageNotificationType)notificationType
        withDuration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
        withCallback:(void (^)())callback;
