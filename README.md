@@ -51,7 +51,7 @@ The following properties can be set:
 * **duration**: The duration the notification should be displayed
 * **callback**: The block that should be executed, when the user dismissed the message by tapping on it or swiping it to the top.
 
-Except the title and the notification type all of the lists values are optional
+Except the title and the notification type, all of the listed values are optional
 
 You don't need to do anything with TSMessageView, except you want to modify the behavior or the types of the notification itself.
 
