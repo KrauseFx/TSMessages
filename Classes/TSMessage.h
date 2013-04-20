@@ -21,7 +21,7 @@ typedef enum {
 
 /** Shows a notification message 
  @param message The title of the notification view
- @param type The notification type (Message, Warning, Error, Successful)
+ @param type The notification type (Message, Warning, Error, Success)
  */
 + (void)showNotificationWithMessage:(NSString *)message
                            withType:(TSMessageNotificationType)type;
@@ -29,7 +29,7 @@ typedef enum {
 /** Shows a notification message
  @param title The title of the notification view
  @param message The message that is displayed underneath the title
- @param type The notification type (Message, Warning, Error, Successful)
+ @param type The notification type (Message, Warning, Error, Success)
  */
 + (void)showNotificationWithTitle:(NSString *)title
                       withMessage:(NSString *)message
@@ -39,7 +39,7 @@ typedef enum {
  @param viewController The view controller to show the notification in.
  @param title The title of the notification view
  @param message The message that is displayed underneath the title
- @param type The notification type (Message, Warning, Error, Successful)
+ @param type The notification type (Message, Warning, Error, Success)
  */
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                withTitle:(NSString *)title
@@ -50,7 +50,7 @@ typedef enum {
  @param viewController The view controller to show the notification in.
  @param title The title of the notification view
  @param message The message that is displayed underneath the title
- @param type The notification type (Message, Warning, Error, Successful)
+ @param type The notification type (Message, Warning, Error, Success)
  @param duration The duration of the notification being displayed
  */
 + (void)showNotificationInViewController:(UIViewController *)viewController
@@ -63,7 +63,7 @@ typedef enum {
  @param viewController The view controller to show the notification in.
  @param title The title of the notification view
  @param message The message that is displayed underneath the title
- @param type The notification type (Message, Warning, Error, Successful)
+ @param type The notification type (Message, Warning, Error, Success)
  @param duration The duration of the notification being displayed
  @param callback The block that should be executed, when the user tapped on the message
  */

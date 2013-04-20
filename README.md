@@ -29,12 +29,33 @@ To show notifications use the following code:
     [TSMessage showNotificationInViewController:self
                                       withTitle:notificationTitle
                                     withMessage:notificationDescription
-                                       withType:kNotificationError];
+                                       withType:TSMessageNotificationTypeError];
+
+
+    [TSMessage showNotificationInViewController:self
+                                      withTitle:title
+                                    withMessage:message
+                                       withType:TSMessageNotificationTypeSuccess
+                                   withDuration:15.0
+                                   withCallback:^{
+                                       // user dismissed callback
+                                   }];
 ```
+
+The following properties can be set:
+
+* **viewController**: The view controller to show the notification in. This might be the navigation controller.
+* **title**: The title of the notification view
+* **message**: The message that is displayed underneath the title.
+* **type**: The notification type (Message, Warning, Error, Success)
+* **duration**: The duration the notification should be displayed
+* **callback**: The block that should be executed, when the user dismissed the message by tapping on it or swiping it to the top.
+
+Except the title and the notification type all of the lists values are optional
 
 You don't need to do anything with TSMessageView, except you want to modify the behavior or the types of the notification itself.
 
-If you don't want a detailed description (text underneath the title) you don't need to set one. The notification will automatically resize itself properly. There are different initializer available.
+If you don't want a detailed description (the text underneath the title) you don't need to set one. The notification will automatically resize itself properly. There are different initializer available.
 
 ![Warning](http://www.toursprung.com/wp-content/uploads/2013/04/iNotificationWarning.png)
 ![Success](http://www.toursprung.com/wp-content/uploads/2013/04/iNotificationSuccess.png)
@@ -47,4 +68,4 @@ If you have ideas how to improve this library please let me know or send a pull 
 
 TODOs
 -----
-- Update width when screen orientation changes while notification is being displayed
+Currently empty
