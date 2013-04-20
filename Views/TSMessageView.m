@@ -167,18 +167,17 @@ static NSDictionary *notificationDesign;
         
         
         CGFloat actualHeight = [self updateHeightOfMessageView]; // this call also takes care of positioning the labels
-        self.frame = CGRectMake(0.0, -actualHeight, self.frame.size.width, actualHeight);
+        self.frame = CGRectMake(0.0, -actualHeight, screenWidth, actualHeight);
         self.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
         
-        
         UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
-                                                                action:@selector(fadeMeOut)];
+                                                                                         action:@selector(fadeMeOut)];
         [gestureRec setDirection:UISwipeGestureRecognizerDirectionUp];
-        [self.backgroundImageView addGestureRecognizer:gestureRec];
+        [self addGestureRecognizer:gestureRec];
         
         UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                          action:@selector(fadeMeOut)];
-        [self.backgroundImageView addGestureRecognizer:tapRec];
+                                                                                 action:@selector(fadeMeOut)];
+        [self addGestureRecognizer:tapRec];
     }
     return self;
 }

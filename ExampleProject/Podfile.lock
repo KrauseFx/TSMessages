@@ -1,18 +1,18 @@
 
+DEPENDENCIES: 
+- TSMessages (from `..')
+
 COCOAPODS: 0.16.4
 
 SPEC CHECKSUMS: 
-  TSMessages: 56fa00a8ff21d1d2482364f38d33998c4e3e3453
+  TSMessages: b210370220233cac2a903d134e15ffd66e052b25
   MLUIColorAdditions: c128da8c87b724cdc6c9a1b4cfe8832ca62b8d2a
-
-PODS: 
-- MLUIColorAdditions (1.0.0)
-- TSMessages (1.0): 
-  - MLUIColorAdditions
 
 EXTERNAL SOURCES: 
   TSMessages: 
     :local: ..
 
-DEPENDENCIES: 
-- TSMessages (from `..')
+PODS: 
+- MLUIColorAdditions (1.0.0)
+- TSMessages (0.9): 
+  - MLUIColorAdditions
