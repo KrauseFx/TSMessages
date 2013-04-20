@@ -153,7 +153,8 @@ static BOOL notificationActive;
     {
         if (![(UINavigationController *)currentView.viewController isNavigationBarHidden])
         {
-            [currentView.viewController.view insertSubview:currentView belowSubview:[(UINavigationController *)currentView.viewController navigationBar]];
+            [currentView.viewController.view insertSubview:currentView
+                                              belowSubview:[(UINavigationController *)currentView.viewController navigationBar]];
             verticalOffset = [(UINavigationController *)currentView.viewController navigationBar].bounds.size.height;
             
             if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
