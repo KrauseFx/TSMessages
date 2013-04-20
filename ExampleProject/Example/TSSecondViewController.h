@@ -11,6 +11,7 @@
 @interface TSSecondViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UISwitch *descriptionToggle;
+@property (weak, nonatomic) IBOutlet UISwitch *longDurationToggle;
 
 
 - (IBAction)didTapError:(id)sender;

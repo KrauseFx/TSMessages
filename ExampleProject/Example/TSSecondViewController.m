@@ -9,6 +9,8 @@
 #import "TSSecondViewController.h"
 #import "TSMessage.h"
 
+#define TSSecondViewControllerLongDuration 10.0
+
 @implementation TSSecondViewController
 
 
@@ -18,11 +20,19 @@
     NSString *notificationDescription = (self.descriptionToggle.on ?
                                          NSLocalizedString(@"The internet connection seems to be down. Please check that!", nil) :
                                          nil);
+    CGFloat duration = (self.longDurationToggle.on ? TSSecondViewControllerLongDuration : 0.0);
     
     [TSMessage showNotificationInViewController:self
                                       withTitle:notificationTitle
                                     withMessage:notificationDescription
-                                       withType:kNotificationError];
+                                       withType:TSMessageNotificationTypeError
+                                   withDuration:duration
+                                   withCallback:^{
+                                       [TSMessage showNotificationInViewController:self
+                                                                         withTitle:NSLocalizedString(@"You dismisses it", nil)
+                                                                       withMessage:nil
+                                                                          withType:TSMessageNotificationTypeSuccess];
+                                   }];
 }
 
 - (IBAction)didTapWarning:(id)sender
@@ -32,10 +42,13 @@
                                          NSLocalizedString(@"Look out! Something is happening there!", nil) :
                                          nil);
     
+    CGFloat duration = (self.longDurationToggle.on ? TSSecondViewControllerLongDuration : 0.0);
+    
     [TSMessage showNotificationInViewController:self
                                       withTitle:notificationTitle
                                     withMessage:notificationDescription
-                                       withType:kNotificationWarning];
+                                       withType:TSMessageNotificationTypeWarning
+                                   withDuration:duration];
 }
 
 - (IBAction)didTapMessage:(id)sender
@@ -45,10 +58,13 @@
                                          NSLocalizedString(@"This is some neutral notification.", nil) :
                                          nil);
     
+    CGFloat duration = (self.longDurationToggle.on ? TSSecondViewControllerLongDuration : 0.0);
+    
     [TSMessage showNotificationInViewController:self
                                       withTitle:notificationTitle
                                     withMessage:notificationDescription
-                                       withType:kNotificationMessage];
+                                       withType:TSMessageNotificationTypeMessage
+                                   withDuration:duration];
 }
 
 - (IBAction)didTapSuccess:(id)sender
@@ -58,10 +74,13 @@
                                          NSLocalizedString(@"Some task was successfully completed!", nil) :
                                          nil);
     
+    CGFloat duration = (self.longDurationToggle.on ? TSSecondViewControllerLongDuration : 0.0);
+    
     [TSMessage showNotificationInViewController:self
                                       withTitle:notificationTitle
                                     withMessage:notificationDescription
-                                       withType:kNotificationSuccessful];
+                                       withType:TSMessageNotificationTypeSuccess
+                                   withDuration:duration];
 }
 
 @end
