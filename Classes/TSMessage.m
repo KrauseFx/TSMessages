@@ -117,16 +117,16 @@ static BOOL notificationActive;
 
 + (void)showInternetError
 {
-    [TSMessage showNotificationWithTitle:NSLocalizedString(@"Network error", nil)
-                             withMessage:NSLocalizedString(@"Couldn't connect to the server. Check your network connection.", nil)
-                                withType:TSMessageNotificationTypeError];
+    [[self class] showNotificationWithTitle:NSLocalizedString(@"Network error", nil)
+                                withMessage:NSLocalizedString(@"Couldn't connect to the server. Check your network connection.", nil)
+                                   withType:TSMessageNotificationTypeError];
 }
 
 + (void)showLocationError
 {
-    [TSMessage showNotificationWithTitle:NSLocalizedString(@"Location error", nil)
-                             withMessage:NSLocalizedString(@"Couldn't detect your current location.", nil)
-                                withType:TSMessageNotificationTypeError];
+    [[self class] showNotificationWithTitle:NSLocalizedString(@"Location error", nil)
+                                withMessage:NSLocalizedString(@"Couldn't detect your current location.", nil)
+                                   withType:TSMessageNotificationTypeError];
 }
 
 
