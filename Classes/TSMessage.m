@@ -89,6 +89,23 @@ static BOOL notificationActive;
                             withDuration:(NSTimeInterval)duration
                             withCallback:(void (^)())callback
 {
+    [self showNotificationInViewController:viewController
+                                 withTitle:title
+                               withMessage:message
+                                  withType:type
+                              withDuration:duration
+                              withCallback:callback
+                                atPosition:TSMessageNotificationPositionTop];
+}
+
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                               withTitle:(NSString *)title
+                             withMessage:(NSString *)message
+                                withType:(TSMessageNotificationType)type
+                            withDuration:(NSTimeInterval)duration
+                            withCallback:(void (^)())callback
+                              atPosition:(TSMessageNotificationPosition)messagePosition
+{
     for (TSMessageView *n in [TSMessage sharedMessage].messages)
     {
         if ([n.title isEqualToString:title] && [n.content isEqualToString:message])
@@ -103,7 +120,8 @@ static BOOL notificationActive;
                                                    withType:type
                                                withDuration:duration
                                            inViewController:viewController
-                                               withCallback:callback];
+                                               withCallback:callback
+                                                 atPosition:messagePosition];
     
     [[TSMessage sharedMessage].messages addObject:v];
     
@@ -117,16 +135,16 @@ static BOOL notificationActive;
 
 + (void)showInternetError
 {
-    [[self class] showNotificationWithTitle:NSLocalizedString(@"Network error", nil)
-                                withMessage:NSLocalizedString(@"Couldn't connect to the server. Check your network connection.", nil)
-                                   withType:TSMessageNotificationTypeError];
+    [TSMessage showNotificationWithTitle:NSLocalizedString(@"Network error", nil)
+                             withMessage:NSLocalizedString(@"Couldn't connect to the server. Check your network connection.", nil)
+                                withType:TSMessageNotificationTypeError];
 }
 
 + (void)showLocationError
 {
-    [[self class] showNotificationWithTitle:NSLocalizedString(@"Location error", nil)
-                                withMessage:NSLocalizedString(@"Couldn't detect your current location.", nil)
-                                   withType:TSMessageNotificationTypeError];
+    [TSMessage showNotificationWithTitle:NSLocalizedString(@"Location error", nil)
+                             withMessage:NSLocalizedString(@"Couldn't detect your current location.", nil)
+                                withType:TSMessageNotificationTypeError];
 }
 
 
@@ -176,10 +194,21 @@ static BOOL notificationActive;
         [currentView.viewController.view addSubview:currentView];
     }
     
+    CGPoint toPoint;
+    if (currentView.messsagePosition == TSMessageNotificationPositionTop)
+    {
+        toPoint = CGPointMake(currentView.center.x,
+                              [[self class] navigationbarBottomOfViewController:currentView.viewController] + verticalOffset + CGRectGetHeight(currentView.frame) / 2.0);
+    }
+    else
+    {
+        toPoint = CGPointMake(currentView.center.x,
+                              currentView.viewController.view.frame.size.height - CGRectGetHeight(currentView.frame) / 2.0);
+    }
+    
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
      {
-         currentView.center = CGPointMake(currentView.center.x,
-                                          [[self class] navigationbarBottomOfViewController:currentView.viewController] + verticalOffset + CGRectGetHeight(currentView.frame) / 2.);
+         currentView.center = toPoint;
          currentView.alpha = TSMessageViewAlpha;
      }];
     
@@ -203,9 +232,20 @@ static BOOL notificationActive;
                                              selector:@selector(fadeOutNotification:)
                                                object:currentView];
     
+    CGPoint fadeOutToPoint;
+    if (currentView.messsagePosition == TSMessageNotificationPositionTop)
+    {
+        fadeOutToPoint = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame) / 2.0);;
+    }
+    else
+    {
+        fadeOutToPoint = CGPointMake(currentView.center.x,
+                                     currentView.viewController.view.frame.size.height);
+    }
+    
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
      {
-         currentView.center = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame) / 2.);
+         currentView.center = fadeOutToPoint;
          currentView.alpha = 0.0;
      }
                      completion:^(BOOL finished)

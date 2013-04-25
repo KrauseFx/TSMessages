@@ -46,6 +46,7 @@ static NSDictionary *notificationDesign;
        withDuration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
        withCallback:(void (^)())callback
+         atPosition:(TSMessageNotificationPosition)position
 {
     if (!notificationDesign)
     {
@@ -61,6 +62,7 @@ static NSDictionary *notificationDesign;
         _content = content;
         _duration = duration;
         _viewController = viewController;
+        _messsagePosition = position;
         self.callback = callback;
         
         CGFloat screenWidth = self.viewController.view.frame.size.width;
@@ -167,12 +169,21 @@ static NSDictionary *notificationDesign;
         
         
         CGFloat actualHeight = [self updateHeightOfMessageView]; // this call also takes care of positioning the labels
-        self.frame = CGRectMake(0.0, -actualHeight, screenWidth, actualHeight);
+        CGFloat topPosition = -actualHeight;
+        
+        if (self.messsagePosition == TSMessageNotificationPositionBottom)
+        {
+            topPosition = self.viewController.view.frame.size.height;
+        }
+        
+        self.frame = CGRectMake(0.0, topPosition, screenWidth, actualHeight);
         self.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
         
         UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                                                          action:@selector(fadeMeOut)];
-        [gestureRec setDirection:UISwipeGestureRecognizerDirectionUp];
+        [gestureRec setDirection:(self.messsagePosition == TSMessageNotificationPositionTop ?
+                                  UISwipeGestureRecognizerDirectionUp :
+                                  UISwipeGestureRecognizerDirectionDown)];
         [self addGestureRecognizer:gestureRec];
         
         UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self

@@ -15,6 +15,11 @@ typedef enum {
     TSMessageNotificationTypeSuccess
 } TSMessageNotificationType;
 
+typedef enum {
+    TSMessageNotificationPositionTop = 0,
+    TSMessageNotificationPositionBottom
+} TSMessageNotificationPosition;
+
 @interface TSMessage : NSObject
 
 + (instancetype)sharedMessage;
@@ -73,6 +78,23 @@ typedef enum {
                                 withType:(TSMessageNotificationType)type
                             withDuration:(NSTimeInterval)duration
                             withCallback:(void (^)())callback;
+
+/** Shows a notification message in a specific view controller
+ @param viewController The view controller to show the notification in.
+ @param title The title of the notification view
+ @param message The message that is displayed underneath the title
+ @param type The notification type (Message, Warning, Error, Success)
+ @param duration The duration of the notification being displayed
+ @param callback The block that should be executed, when the user tapped on the message
+ @param position The position of the message on the screen
+ */
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                               withTitle:(NSString *)title
+                             withMessage:(NSString *)message
+                                withType:(TSMessageNotificationType)type
+                            withDuration:(NSTimeInterval)duration
+                            withCallback:(void (^)())callback
+                              atPosition:(TSMessageNotificationPosition)messagePosition;
 
 
 /** Shows a predefined error message, that is displayed, when this action requires an internet connection */
