@@ -69,7 +69,7 @@ static NSDictionary *notificationDesign;
         _buttonTitle = buttonTitle;
         _duration = duration;
         _viewController = viewController;
-        _messsagePosition = position;
+        _messagePosition = position;
         self.callback = callback;
         self.buttonCallback = buttonCallback;
         
@@ -126,8 +126,6 @@ static NSDictionary *notificationDesign;
         self.textSpaceLeft = 2 * TSMessageViewPadding;
         if (image) self.textSpaceLeft += image.size.width + 2 * TSMessageViewPadding;
         
-        if (buttonTitle) self.textSpaceRight = 75;
-        
         // Set up title label
         _titleLabel = [[UILabel alloc] init];
         [self.titleLabel setText:title];
@@ -167,13 +165,12 @@ static NSDictionary *notificationDesign;
             [self addSubview:self.iconImageView];
         }
         
-        //Set up button (if set)
+        // Set up button (if set)
         if ([buttonTitle length])
         {
-            self.button = [UIButton buttonWithType:UIButtonTypeCustom];
-            self.button.frame = CGRectMake(screenWidth - TSMessageViewPadding - 70, 0, 70, 31);
+            _button = [UIButton buttonWithType:UIButtonTypeCustom];
             
-            UIImage * img = [[UIImage imageNamed:@"Button"] resizableImageWithCapInsets:UIEdgeInsetsMake(15, 12, 15, 11)];
+            UIImage *img = [[UIImage imageNamed:@"NotificationButtonBackground"] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
             
             [self.button setBackgroundImage:img forState:UIControlStateNormal];
             [self.button setTitle:self.buttonTitle forState:UIControlStateNormal];
@@ -181,12 +178,23 @@ static NSDictionary *notificationDesign;
             [self.button setTitleColor:fontColor forState:UIControlStateNormal];
             self.button.titleLabel.font = [UIFont boldSystemFontOfSize:[[current valueForKey:@"titleFontSize"] floatValue]];
             self.button.titleLabel.shadowOffset = self.titleLabel.shadowOffset;
-            [self.button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+            [self.button addTarget:self
+                            action:@selector(buttonTapped:)
+                  forControlEvents:UIControlEventTouchUpInside];
+            
+            self.button.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0);
+            [self.button sizeToFit];
+            self.button.frame = CGRectMake(screenWidth - TSMessageViewPadding - self.button.frame.size.width,
+                                           0.0,
+                                           self.button.frame.size.width,
+                                           31.0);
             
             [self addSubview:self.button];
+            
+            self.textSpaceRight = self.button.frame.size.width + TSMessageViewPadding;
         }
         
-        // Add a border on the bottom
+        // Add a border on the bottom (or on the top, depending on the view's postion)
         _borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0,
                                                                0.0, // will be set later
                                                                screenWidth,
@@ -200,7 +208,7 @@ static NSDictionary *notificationDesign;
         CGFloat actualHeight = [self updateHeightOfMessageView]; // this call also takes care of positioning the labels
         CGFloat topPosition = -actualHeight;
         
-        if (self.messsagePosition == TSMessageNotificationPositionBottom)
+        if (self.messagePosition == TSMessageNotificationPositionBottom)
         {
             topPosition = self.viewController.view.frame.size.height;
         }
@@ -210,7 +218,7 @@ static NSDictionary *notificationDesign;
         
         UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                                                          action:@selector(fadeMeOut)];
-        [gestureRec setDirection:(self.messsagePosition == TSMessageNotificationPositionTop ?
+        [gestureRec setDirection:(self.messagePosition == TSMessageNotificationPositionTop ?
                                   UISwipeGestureRecognizerDirectionUp :
                                   UISwipeGestureRecognizerDirectionDown)];
         [self addGestureRecognizer:gestureRec];
@@ -272,14 +280,26 @@ static NSDictionary *notificationDesign;
     self.button.center = CGPointMake([self.button center].x,
                                             round(currentHeight / 2.0));
     
-    // Correct the border position
-    CGRect borderFrame = self.borderView.frame;
-    borderFrame.origin.y = currentHeight;
-    self.borderView.frame = borderFrame;
+    if (self.messagePosition == TSMessageNotificationPositionTop)
+    {
+        // Correct the border position
+        CGRect borderFrame = self.borderView.frame;
+        borderFrame.origin.y = currentHeight;
+        self.borderView.frame = borderFrame;
+    }
     
     currentHeight += self.borderView.frame.size.height;
     
     self.frame = CGRectMake(0.0, self.frame.origin.y, self.frame.size.width, currentHeight);
+    
+    
+    if (self.button)
+    {
+        self.button.frame = CGRectMake(self.frame.size.width - self.textSpaceRight,
+                                       round((self.frame.size.height / 2.0) - self.button.frame.size.height / 2.0),
+                                       self.button.frame.size.width,
+                                       self.button.frame.size.height);
+    }
     
     
     self.backgroundImageView.frame = CGRectMake(self.backgroundImageView.frame.origin.x,

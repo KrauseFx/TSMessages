@@ -20,8 +20,8 @@ install_resource()
       xcrun momc "${PODS_ROOT}/$1" "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename $1 .xcdatamodeld`.momd"
       ;;
     *)
-      echo "rsync -av --exclude '*/.svn/*' ${PODS_ROOT}/$1 ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
-      rsync -av --exclude '*/.svn/*' "${PODS_ROOT}/$1" "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
+      echo "cp -R ${PODS_ROOT}/$1 ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
+      cp -R "${PODS_ROOT}/$1" "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
       ;;
   esac
 }
@@ -40,3 +40,5 @@ install_resource '../../Resources/Images/NotificationBackgroundWarning.png'
 install_resource '../../Resources/Images/NotificationBackgroundWarning@2x.png'
 install_resource '../../Resources/Images/NotificationBackgroundWarningIcon.png'
 install_resource '../../Resources/Images/NotificationBackgroundWarningIcon@2x.png'
+install_resource '../../Resources/Images/NotificationButtonBackground.png'
+install_resource '../../Resources/Images/NotificationButtonBackground@2x.png'

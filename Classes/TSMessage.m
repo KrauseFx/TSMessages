@@ -219,7 +219,7 @@ static BOOL notificationActive;
     }
     
     CGPoint toPoint;
-    if (currentView.messsagePosition == TSMessageNotificationPositionTop)
+    if (currentView.messagePosition == TSMessageNotificationPositionTop)
     {
         toPoint = CGPointMake(currentView.center.x,
                               [[self class] navigationbarBottomOfViewController:currentView.viewController] + verticalOffset + CGRectGetHeight(currentView.frame) / 2.0);
@@ -257,7 +257,7 @@ static BOOL notificationActive;
                                                object:currentView];
     
     CGPoint fadeOutToPoint;
-    if (currentView.messsagePosition == TSMessageNotificationPositionTop)
+    if (currentView.messagePosition == TSMessageNotificationPositionTop)
     {
         fadeOutToPoint = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame) / 2.0);;
     }

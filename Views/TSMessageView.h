@@ -25,7 +25,7 @@
 /** The duration of the displayed message. If it is 0.0, it will automatically be calculated */
 @property (nonatomic, assign) CGFloat duration;
 
-@property (nonatomic, assign) TSMessageNotificationPosition messsagePosition;
+@property (nonatomic, assign) TSMessageNotificationPosition messagePosition;
 
 /** Inits the notification view. Do not call this from outisde this library.
  @param title The title of the notification view

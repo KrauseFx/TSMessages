@@ -33,7 +33,8 @@
                                                                          withTitle:NSLocalizedString(@"You dismisses it", nil)
                                                                        withMessage:nil
                                                                           withType:TSMessageNotificationTypeSuccess];
-                                   }];
+                                   }
+                                     atPosition:self.onBottomToggle.on];
 }
 
 - (IBAction)didTapWarning:(id)sender
@@ -49,7 +50,9 @@
                                       withTitle:notificationTitle
                                     withMessage:notificationDescription
                                        withType:TSMessageNotificationTypeWarning
-                                   withDuration:duration];
+                                   withDuration:duration
+                                   withCallback:nil
+                                     atPosition:self.onBottomToggle.on];
 }
 
 - (IBAction)didTapMessage:(id)sender
@@ -59,8 +62,6 @@
                                          NSLocalizedString(@"This is some neutral notification.", nil) :
                                          nil);
     
-    NSString *buttonTitle = self.buttonToggle.on ? @"UPDATE" : nil;
-    
     CGFloat duration = (self.longDurationToggle.on ? TSSecondViewControllerLongDuration : 0.0);
     
     [TSMessage showNotificationInViewController:self
@@ -69,14 +70,7 @@
                                        withType:TSMessageNotificationTypeMessage
                                    withDuration:duration
                                    withCallback:nil
-                                withButtonTitle:buttonTitle
-                             withButtonCallback:^{
-                                 [TSMessage showNotificationInViewController:self
-                                                                   withTitle:NSLocalizedString(@"Button tapped!", nil)
-                                                                 withMessage:nil
-                                                                    withType:TSMessageNotificationTypeSuccess];
-                             }
-                                     atPosition:TSMessageNotificationPositionTop];
+                                     atPosition:self.onBottomToggle.on];
 }
 
 - (IBAction)didTapSuccess:(id)sender
@@ -92,7 +86,34 @@
                                       withTitle:notificationTitle
                                     withMessage:notificationDescription
                                        withType:TSMessageNotificationTypeSuccess
-                                   withDuration:duration];
+                                   withDuration:duration
+                                   withCallback:nil
+                                     atPosition:self.onBottomToggle.on];
+}
+
+- (IBAction)didTapButtonidsender:(id)sender
+{
+    NSString *notificationTitle = NSLocalizedString(@"New version available", nil);
+    NSString *notificationDescription = (self.descriptionToggle.on ?
+                                         NSLocalizedString(@"Please update our app. This is some neutral notification. lorem ipsum o sole mio wie geht es dir! jeej ksjd", nil) :
+                                         nil);
+    
+    CGFloat duration = (self.longDurationToggle.on ? TSSecondViewControllerLongDuration : 0.0);
+    
+    [TSMessage showNotificationInViewController:self
+                                      withTitle:notificationTitle
+                                    withMessage:notificationDescription
+                                       withType:TSMessageNotificationTypeMessage
+                                   withDuration:duration
+                                   withCallback:nil
+                                withButtonTitle:@"Update" // that's the title of the added button
+                             withButtonCallback:^{
+                                 [TSMessage showNotificationInViewController:self
+                                                                   withTitle:NSLocalizedString(@"Button tapped!", nil)
+                                                                 withMessage:nil
+                                                                    withType:TSMessageNotificationTypeSuccess];
+                             }
+                                     atPosition:self.onBottomToggle.on];
 }
 
 @end
