@@ -185,6 +185,8 @@ static BOOL notificationActive;
 
 - (void)fadeInCurrentNotification
 {
+    if ([self.messages count] == 0) return;
+    
     notificationActive = YES;
     
     TSMessageView *currentView = [self.messages objectAtIndex:0];
@@ -276,7 +278,11 @@ static BOOL notificationActive;
      {
          [currentView removeFromSuperview];
          
-         [self.messages removeObjectAtIndex:0];
+         if ([self.messages count] > 0)
+         {
+             [self.messages removeObjectAtIndex:0];
+         }
+         
          notificationActive = NO;
          
          if ([self.messages count] > 0)
