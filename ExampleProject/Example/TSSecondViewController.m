@@ -95,7 +95,7 @@
 {
     NSString *notificationTitle = NSLocalizedString(@"New version available", nil);
     NSString *notificationDescription = (self.descriptionToggle.on ?
-                                         NSLocalizedString(@"Please update our app. This is some neutral notification. lorem ipsum o sole mio wie geht es dir! jeej ksjd", nil) :
+                                         NSLocalizedString(@"Please update our app. This is some neutral notification.", nil) :
                                          nil);
     
     CGFloat duration = (self.longDurationToggle.on ? TSSecondViewControllerLongDuration : 0.0);
