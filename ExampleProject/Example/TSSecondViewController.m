@@ -20,6 +20,7 @@
     NSString *notificationDescription = (self.descriptionToggle.on ?
                                          NSLocalizedString(@"The internet connection seems to be down. Please check that!", nil) :
                                          nil);
+    
     CGFloat duration = (self.longDurationToggle.on ? TSSecondViewControllerLongDuration : 0.0);
     
     [TSMessage showNotificationInViewController:self
@@ -58,13 +59,24 @@
                                          NSLocalizedString(@"This is some neutral notification.", nil) :
                                          nil);
     
+    NSString *buttonTitle = self.buttonToggle.on ? @"UPDATE" : nil;
+    
     CGFloat duration = (self.longDurationToggle.on ? TSSecondViewControllerLongDuration : 0.0);
     
     [TSMessage showNotificationInViewController:self
                                       withTitle:notificationTitle
                                     withMessage:notificationDescription
                                        withType:TSMessageNotificationTypeMessage
-                                   withDuration:duration];
+                                   withDuration:duration
+                                   withCallback:nil
+                                withButtonTitle:buttonTitle
+                             withButtonCallback:^{
+                                 [TSMessage showNotificationInViewController:self
+                                                                   withTitle:NSLocalizedString(@"Button tapped!", nil)
+                                                                 withMessage:nil
+                                                                    withType:TSMessageNotificationTypeSuccess];
+                             }
+                                     atPosition:TSMessageNotificationPositionTop];
 }
 
 - (IBAction)didTapSuccess:(id)sender
