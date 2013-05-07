@@ -82,33 +82,45 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fsN-5V-GJF"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Show button" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7H-rH-Dyn">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="pne-hG-1yy" firstAttribute="baseline" secondItem="zLn-b7-lUs" secondAttribute="baseline" type="default" id="0Ng-pt-uug"/>
                             <constraint firstItem="zLn-b7-lUs" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="30" id="21Z-az-IcV"/>
-                            <constraint firstAttribute="bottom" secondItem="mRD-99-HfF" secondAttribute="bottom" constant="29" id="4KU-XY-45n"/>
+                            <constraint firstItem="Z7H-rH-Dyn" firstAttribute="top" secondItem="mRD-99-HfF" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="4qF-Ol-Zle"/>
                             <constraint firstItem="hxl-lo-RFJ" firstAttribute="baseline" secondItem="hAh-Ka-NMA" secondAttribute="baseline" type="default" id="8Aq-nS-eVz"/>
+                            <constraint firstAttribute="trailing" secondItem="Jym-Ua-n2C" secondAttribute="trailing" constant="9" id="CBc-Pw-6up"/>
                             <constraint firstAttribute="trailing" secondItem="pne-hG-1yy" secondAttribute="trailing" constant="31" id="Ckh-NS-Qam"/>
-                            <constraint firstAttribute="trailing" secondItem="mRD-99-HfF" secondAttribute="trailing" constant="9" id="Ieb-rT-oW7"/>
+                            <constraint firstItem="zLn-b7-lUs" firstAttribute="top" secondItem="17" secondAttribute="top" constant="201" id="Fgp-Se-9dZ"/>
+                            <constraint firstItem="fsN-5V-GJF" firstAttribute="top" secondItem="mRD-99-HfF" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="GgG-x3-D0F"/>
                             <constraint firstItem="mRD-99-HfF" firstAttribute="leading" secondItem="Jym-Ua-n2C" secondAttribute="leading" type="default" id="Jg3-kp-JfQ"/>
                             <constraint firstItem="yRk-dI-W7x" firstAttribute="trailing" secondItem="FPK-Wl-rdR" secondAttribute="trailing" type="default" id="KAM-F1-5NQ"/>
                             <constraint firstItem="hAh-Ka-NMA" firstAttribute="top" secondItem="zLn-b7-lUs" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="NtF-hL-mCL"/>
                             <constraint firstItem="hAh-Ka-NMA" firstAttribute="leading" secondItem="zLn-b7-lUs" secondAttribute="leading" type="default" id="Sj2-i2-NcJ"/>
+                            <constraint firstItem="Z7H-rH-Dyn" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="X4c-el-aDt"/>
                             <constraint firstItem="hxl-lo-RFJ" firstAttribute="leading" secondItem="pne-hG-1yy" secondAttribute="leading" type="default" id="XAh-cB-KET"/>
                             <constraint firstItem="FPK-Wl-rdR" firstAttribute="top" secondItem="hAh-Ka-NMA" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ZWR-6Y-k4Z"/>
                             <constraint firstItem="yRk-dI-W7x" firstAttribute="top" secondItem="FPK-Wl-rdR" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="cEK-7v-fge"/>
+                            <constraint firstItem="fsN-5V-GJF" firstAttribute="leading" secondItem="mRD-99-HfF" secondAttribute="leading" type="default" id="fEq-6h-Rlq"/>
                             <constraint firstItem="mRD-99-HfF" firstAttribute="top" secondItem="FPK-Wl-rdR" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="fWr-aj-GiM"/>
                             <constraint firstItem="Jym-Ua-n2C" firstAttribute="top" secondItem="hxl-lo-RFJ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="hYe-jW-8wv"/>
                             <constraint firstItem="hAh-Ka-NMA" firstAttribute="trailing" secondItem="zLn-b7-lUs" secondAttribute="trailing" type="default" id="ibP-5N-5Ux"/>
                             <constraint firstItem="hxl-lo-RFJ" firstAttribute="trailing" secondItem="pne-hG-1yy" secondAttribute="trailing" type="default" id="kYf-Q6-6Ht"/>
                             <constraint firstItem="yRk-dI-W7x" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="njH-Eq-WVY"/>
+                            <constraint firstItem="Z7H-rH-Dyn" firstAttribute="trailing" secondItem="yRk-dI-W7x" secondAttribute="trailing" type="default" id="rrC-X0-uuZ"/>
                             <constraint firstItem="FPK-Wl-rdR" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="tDB-Oa-POw"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Second" image="second" id="6"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="buttonToggle" destination="fsN-5V-GJF" id="ZkC-YX-THs"/>
                         <outlet property="descriptionToggle" destination="Jym-Ua-n2C" id="Yqd-zD-AtZ"/>
                         <outlet property="longDurationToggle" destination="mRD-99-HfF" id="OWe-0n-0CY"/>
                     </connections>
@@ -150,7 +162,9 @@
                 <relationship kind="action" name="didTapMessage:"/>
                 <relationship kind="action" name="didTapSuccess:"/>
                 <relationship kind="action" name="didTapWarning:"/>
+                <relationship kind="outlet" name="buttonToggle" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="descriptionToggle" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="longDurationToggle" candidateClass="UISwitch"/>
             </relationships>
         </class>
     </classes>

@@ -106,6 +106,28 @@ static BOOL notificationActive;
                             withCallback:(void (^)())callback
                               atPosition:(TSMessageNotificationPosition)messagePosition
 {
+    [self showNotificationInViewController:viewController
+                                 withTitle:title
+                               withMessage:message
+                                  withType:type
+                              withDuration:duration
+                              withCallback:callback
+                           withButtonTitle:nil
+                        withButtonCallback:nil
+                                atPosition:messagePosition];
+}
+
+
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                               withTitle:(NSString *)title
+                             withMessage:(NSString *)message
+                                withType:(TSMessageNotificationType)type
+                            withDuration:(NSTimeInterval)duration
+                            withCallback:(void (^)())callback
+                         withButtonTitle:(NSString *)buttonTitle
+                      withButtonCallback:(void (^)())buttonCallback
+                              atPosition:(TSMessageNotificationPosition)messagePosition
+{
     for (TSMessageView *n in [TSMessage sharedMessage].messages)
     {
         if ([n.title isEqualToString:title] && [n.content isEqualToString:message])
@@ -121,6 +143,8 @@ static BOOL notificationActive;
                                                withDuration:duration
                                            inViewController:viewController
                                                withCallback:callback
+                                            withButtonTitle:buttonTitle
+                                         withButtonCallback:buttonCallback
                                                  atPosition:messagePosition];
     
     [[TSMessage sharedMessage].messages addObject:v];

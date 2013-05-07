@@ -19,18 +19,22 @@ static NSDictionary *notificationDesign;
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *content;
+@property (nonatomic, strong) NSString *buttonTitle;
 @property (nonatomic, strong) UIViewController *viewController;
 
 /** Internal properties needed to resize the view on device rotation properly */
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *contentLabel;
 @property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UIView *borderView;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 
 @property (nonatomic, assign) CGFloat textSpaceLeft;
+@property (nonatomic, assign) CGFloat textSpaceRight;
 
 @property (copy) void (^callback)();
+@property (copy) void (^buttonCallback)();
 
 - (CGFloat)updateHeightOfMessageView;
 - (void)layoutSubviews;
@@ -46,6 +50,8 @@ static NSDictionary *notificationDesign;
        withDuration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
        withCallback:(void (^)())callback
+    withButtonTitle:(NSString *)buttonTitle
+ withButtonCallback:(void (^)())buttonCallback
          atPosition:(TSMessageNotificationPosition)position
 {
     if (!notificationDesign)
@@ -60,10 +66,12 @@ static NSDictionary *notificationDesign;
     {
         _title = title;
         _content = content;
+        _buttonTitle = buttonTitle;
         _duration = duration;
         _viewController = viewController;
         _messsagePosition = position;
         self.callback = callback;
+        self.buttonCallback = buttonCallback;
         
         CGFloat screenWidth = self.viewController.view.frame.size.width;
         NSDictionary *current;
@@ -118,6 +126,8 @@ static NSDictionary *notificationDesign;
         self.textSpaceLeft = 2 * TSMessageViewPadding;
         if (image) self.textSpaceLeft += image.size.width + 2 * TSMessageViewPadding;
         
+        if (buttonTitle) self.textSpaceRight = 75;
+        
         // Set up title label
         _titleLabel = [[UILabel alloc] init];
         [self.titleLabel setText:title];
@@ -155,6 +165,25 @@ static NSDictionary *notificationDesign;
                                                   image.size.width,
                                                   image.size.height);
             [self addSubview:self.iconImageView];
+        }
+        
+        //Set up button (if set)
+        if ([buttonTitle length])
+        {
+            self.button = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.button.frame = CGRectMake(screenWidth - TSMessageViewPadding - 70, 0, 70, 31);
+            
+            UIImage * img = [[UIImage imageNamed:@"Button"] resizableImageWithCapInsets:UIEdgeInsetsMake(15, 12, 15, 11)];
+            
+            [self.button setBackgroundImage:img forState:UIControlStateNormal];
+            [self.button setTitle:self.buttonTitle forState:UIControlStateNormal];
+            [self.button setTitleShadowColor:self.titleLabel.shadowColor forState:UIControlStateNormal];
+            [self.button setTitleColor:fontColor forState:UIControlStateNormal];
+            self.button.titleLabel.font = [UIFont boldSystemFontOfSize:[[current valueForKey:@"titleFontSize"] floatValue]];
+            self.button.titleLabel.shadowOffset = self.titleLabel.shadowOffset;
+            [self.button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [self addSubview:self.button];
         }
         
         // Add a border on the bottom
@@ -202,7 +231,7 @@ static NSDictionary *notificationDesign;
     
     self.titleLabel.frame = CGRectMake(self.textSpaceLeft,
                                        TSMessageViewPadding,
-                                       screenWidth - TSMessageViewPadding - self.textSpaceLeft,
+                                       screenWidth - TSMessageViewPadding - self.textSpaceLeft - self.textSpaceRight,
                                        0.0);
     [self.titleLabel sizeToFit];
     
@@ -210,7 +239,7 @@ static NSDictionary *notificationDesign;
     {
         self.contentLabel.frame = CGRectMake(self.textSpaceLeft,
                                              self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 5.0,
-                                             screenWidth - TSMessageViewPadding - self.textSpaceLeft,
+                                             screenWidth - TSMessageViewPadding - self.textSpaceLeft - self.textSpaceRight,
                                              0.0);
         [self.contentLabel sizeToFit];
         
@@ -238,7 +267,11 @@ static NSDictionary *notificationDesign;
                                                     round(currentHeight / 2.0));
         }
     }
-        
+    
+    // z-align button
+    self.button.center = CGPointMake([self.button center].x,
+                                            round(currentHeight / 2.0));
+    
     // Correct the border position
     CGRect borderFrame = self.borderView.frame;
     borderFrame.origin.y = currentHeight;
@@ -276,6 +309,17 @@ static NSDictionary *notificationDesign;
         [[TSMessage sharedMessage] performSelector:@selector(fadeOutNotification:)
                                         withObject:self];
     });
+}
+
+#pragma mark - UIButton target
+
+- (void)buttonTapped:(id) sender
+{
+    if (self.buttonCallback) {
+        self.buttonCallback();
+    }
+    
+    [self fadeMeOut];
 }
 
 @end

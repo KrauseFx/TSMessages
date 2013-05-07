@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *descriptionToggle;
 @property (weak, nonatomic) IBOutlet UISwitch *longDurationToggle;
+@property (weak, nonatomic) IBOutlet UISwitch *buttonToggle;
 
 
 - (IBAction)didTapError:(id)sender;
