@@ -130,7 +130,7 @@ static BOOL notificationActive;
 {
     for (TSMessageView *n in [TSMessage sharedMessage].messages)
     {
-        if (([n.title isEqualToString:title] || (!n.title && !title)) && ([n.content isEqualToString:message] || (!n.content && !content)))
+        if (([n.title isEqualToString:title] || (!n.title && !title)) && ([n.content isEqualToString:message] || (!n.content && !message)))
         {
             return; // avoid showing the same messages twice in a row
         }
