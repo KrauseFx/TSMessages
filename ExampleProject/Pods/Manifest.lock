@@ -1,7 +1,5 @@
 PODS:
-  - MLUIColorAdditions (1.0.0)
-  - TSMessages (0.9):
-    - MLUIColorAdditions
+  - TSMessages (0.9.1)
 
 DEPENDENCIES:
   - TSMessages (from `..`)
@@ -11,7 +9,6 @@ EXTERNAL SOURCES:
     :local: ..
 
 SPEC CHECKSUMS:
-  MLUIColorAdditions: c128da8c87b724cdc6c9a1b4cfe8832ca62b8d2a
-  TSMessages: b210370220233cac2a903d134e15ffd66e052b25
+  TSMessages: d72ae40ebb8f54c738d72804f38cecafe5721dc3
 
 COCOAPODS: 0.18.1

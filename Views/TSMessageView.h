@@ -25,7 +25,7 @@
 /** The duration of the displayed message. If it is 0.0, it will automatically be calculated */
 @property (nonatomic, assign) CGFloat duration;
 
-@property (nonatomic, assign) TSMessageNotificationPosition messsagePosition;
+@property (nonatomic, assign) TSMessageNotificationPosition messagePosition;
 
 /** Inits the notification view. Do not call this from outisde this library.
  @param title The title of the notification view
@@ -34,6 +34,8 @@
  @param duration The duration this notification should be displayed (optional)
  @param viewController The view controller this message should be displayed in
  @param callback The block that should be executed, when the user tapped on the message
+ @param buttonTitle The title for button (optional)
+ @param buttonCallback The block that should be executed, when the user tapped on the button
  @param position The position of the message on the screen
  */
 - (id)initWithTitle:(NSString *)title
@@ -42,6 +44,8 @@
        withDuration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
        withCallback:(void (^)())callback
+    withButtonTitle:(NSString *)buttonTitle
+ withButtonCallback:(void (^)())buttonCallback
          atPosition:(TSMessageNotificationPosition)position;
 
 /** Fades out this notification view */
