@@ -67,6 +67,16 @@ This project requires ARC.
 
 If you have ideas how to improve this library please let me know or send a pull request.
 
+Changes
+-----
+**0.9.2**
+
+* Added option to show message on the bottom of the screen
+* Added option to show a button inside the message
+
+
+
+
 TODOs
 -----
-Currently empty
+* Fix auto rotation issues when notification is displayed on the bottom
