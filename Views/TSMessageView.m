@@ -186,7 +186,7 @@ static NSDictionary *notificationDesign;
             }
             
             [self.button setTitleColor:buttonTitleTextColor forState:UIControlStateNormal];
-            self.button.titleLabel.font = [UIFont boldSystemFontOfSize:[[current valueForKey:@"titleFontSize"] floatValue]];
+            self.button.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
             self.button.titleLabel.shadowOffset = self.titleLabel.shadowOffset;
             [self.button addTarget:self
                             action:@selector(buttonTapped:)
