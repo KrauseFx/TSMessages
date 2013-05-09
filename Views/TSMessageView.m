@@ -170,9 +170,13 @@ static NSDictionary *notificationDesign;
         {
             _button = [UIButton buttonWithType:UIButtonTypeCustom];
             
-            UIImage *img = [[UIImage imageNamed:@"NotificationButtonBackground"] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
+            UIImage *buttonBackgroundImage = [[UIImage imageNamed:[current valueForKey:@"buttonBackgroundImageName"]] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
             
-            [self.button setBackgroundImage:img forState:UIControlStateNormal];
+            if (!buttonBackgroundImage) {
+                buttonBackgroundImage = [[UIImage imageNamed:[current valueForKey:@"NotificationButtonBackground"]] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
+            }
+            
+            [self.button setBackgroundImage:buttonBackgroundImage forState:UIControlStateNormal];
             [self.button setTitle:self.buttonTitle forState:UIControlStateNormal];
             [self.button setTitleShadowColor:self.titleLabel.shadowColor forState:UIControlStateNormal];
             [self.button setTitleColor:fontColor forState:UIControlStateNormal];

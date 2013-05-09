@@ -14,6 +14,7 @@
     "message": {
         "contentFontSize": 12,
         "backgroundImageName": "NotificationBackgroundMessage.png",
+        "buttonBackgroundImageName": "NotificationButtonBackground.png",
         "shadowColor": "#EBEEF1",
         "borderHeight": 1,
         "borderColor": "#727C83",
