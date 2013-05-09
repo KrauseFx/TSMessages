@@ -179,7 +179,13 @@ static NSDictionary *notificationDesign;
             [self.button setBackgroundImage:buttonBackgroundImage forState:UIControlStateNormal];
             [self.button setTitle:self.buttonTitle forState:UIControlStateNormal];
             [self.button setTitleShadowColor:self.titleLabel.shadowColor forState:UIControlStateNormal];
-            [self.button setTitleColor:fontColor forState:UIControlStateNormal];
+            
+            UIColor *buttonTitleTextColor = [UIColor colorWithHexString:[current valueForKey:@"buttonTitleTextColor"] alpha:1.0];
+            if (!buttonTitleTextColor) {
+                buttonTitleTextColor = fontColor;
+            }
+            
+            [self.button setTitleColor:buttonTitleTextColor forState:UIControlStateNormal];
             self.button.titleLabel.font = [UIFont boldSystemFontOfSize:[[current valueForKey:@"titleFontSize"] floatValue]];
             self.button.titleLabel.shadowOffset = self.titleLabel.shadowOffset;
             [self.button addTarget:self
