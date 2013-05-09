@@ -144,7 +144,12 @@ static NSDictionary *notificationDesign;
         {
             _contentLabel = [[UILabel alloc] init];
             [self.contentLabel setText:content];
-            [self.contentLabel setTextColor:fontColor];
+            
+            UIColor *contentTextColor = [UIColor colorWithHexString:[current valueForKey:@"contentTextColor"] alpha:1.0];
+            if (!contentTextColor) {
+                contentTextColor = fontColor;
+            }
+            [self.contentLabel setTextColor:contentTextColor];
             [self.contentLabel setBackgroundColor:[UIColor clearColor]];
             [self.contentLabel setFont:[UIFont systemFontOfSize:[[current valueForKey:@"contentFontSize"] floatValue]]];
             [self.contentLabel setShadowColor:self.titleLabel.shadowColor];
@@ -170,14 +175,31 @@ static NSDictionary *notificationDesign;
         {
             _button = [UIButton buttonWithType:UIButtonTypeCustom];
             
-            UIImage *img = [[UIImage imageNamed:@"NotificationButtonBackground"] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
+            UIImage *buttonBackgroundImage = [[UIImage imageNamed:[current valueForKey:@"buttonBackgroundImageName"]] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
             
-            [self.button setBackgroundImage:img forState:UIControlStateNormal];
+            if (!buttonBackgroundImage) {
+                buttonBackgroundImage = [[UIImage imageNamed:[current valueForKey:@"NotificationButtonBackground"]] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
+            }
+            
+            [self.button setBackgroundImage:buttonBackgroundImage forState:UIControlStateNormal];
             [self.button setTitle:self.buttonTitle forState:UIControlStateNormal];
-            [self.button setTitleShadowColor:self.titleLabel.shadowColor forState:UIControlStateNormal];
-            [self.button setTitleColor:fontColor forState:UIControlStateNormal];
-            self.button.titleLabel.font = [UIFont boldSystemFontOfSize:[[current valueForKey:@"titleFontSize"] floatValue]];
-            self.button.titleLabel.shadowOffset = self.titleLabel.shadowOffset;
+            
+            UIColor *buttonTitleShadowColor = [UIColor colorWithHexString:[current valueForKey:@"buttonTitleShadowColor"] alpha:1.0];
+            if (!buttonTitleShadowColor) {
+                buttonTitleShadowColor = self.titleLabel.shadowColor;
+            }
+            
+            [self.button setTitleShadowColor:buttonTitleShadowColor forState:UIControlStateNormal];
+            
+            UIColor *buttonTitleTextColor = [UIColor colorWithHexString:[current valueForKey:@"buttonTitleTextColor"] alpha:1.0];
+            if (!buttonTitleTextColor) {
+                buttonTitleTextColor = fontColor;
+            }
+            
+            [self.button setTitleColor:buttonTitleTextColor forState:UIControlStateNormal];
+            self.button.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+            self.button.titleLabel.shadowOffset = CGSizeMake([[current valueForKey:@"buttonTitleShadowOffsetX"] floatValue],
+                                                             [[current valueForKey:@"buttonTitleShadowOffsetY"] floatValue]);
             [self.button addTarget:self
                             action:@selector(buttonTapped:)
                   forControlEvents:UIControlEventTouchUpInside];
