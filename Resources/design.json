@@ -13,6 +13,7 @@
     },
     "message": {
         "contentFontSize": 12,
+        "contentTextColor": "#727C83",
         "backgroundImageName": "NotificationBackgroundMessage.png",
         "buttonBackgroundImageName": "NotificationButtonBackground.png",
         "buttonTitleTextColor": "#000000",
@@ -22,7 +23,7 @@
         "titleFontSize": 14,
         "shadowOffsetX": 0,
         "imageName": "",
-        "textColor": "#727C83",
+        "textColor": "#626C73",
         "shadowOffsetY": 1
     },
     "warning": {

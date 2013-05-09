@@ -144,7 +144,12 @@ static NSDictionary *notificationDesign;
         {
             _contentLabel = [[UILabel alloc] init];
             [self.contentLabel setText:content];
-            [self.contentLabel setTextColor:fontColor];
+            
+            UIColor *contentTextColor = [UIColor colorWithHexString:[current valueForKey:@"contentTextColor"] alpha:1.0];
+            if (!contentTextColor) {
+                contentTextColor = fontColor;
+            }
+            [self.contentLabel setTextColor:contentTextColor];
             [self.contentLabel setBackgroundColor:[UIColor clearColor]];
             [self.contentLabel setFont:[UIFont systemFontOfSize:[[current valueForKey:@"contentFontSize"] floatValue]]];
             [self.contentLabel setShadowColor:self.titleLabel.shadowColor];
