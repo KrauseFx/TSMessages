@@ -73,7 +73,7 @@ static NSDictionary *notificationDesign;
         self.callback = callback;
         self.buttonCallback = buttonCallback;
         
-        CGFloat screenWidth = self.viewController.view.frame.size.width;
+        CGFloat screenWidth = self.viewController.view.bounds.size.width;
         NSDictionary *current;
         NSString *currentString;
         switch (notificationType)
@@ -234,7 +234,7 @@ static NSDictionary *notificationDesign;
 - (CGFloat)updateHeightOfMessageView
 {
     CGFloat currentHeight;
-    CGFloat screenWidth = self.viewController.view.frame.size.width;
+    CGFloat screenWidth = self.viewController.view.bounds.size.width;
     
     
     self.titleLabel.frame = CGRectMake(self.textSpaceLeft,
