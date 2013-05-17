@@ -146,7 +146,8 @@ static NSDictionary *notificationDesign;
             [self.contentLabel setText:content];
             
             UIColor *contentTextColor = [UIColor colorWithHexString:[current valueForKey:@"contentTextColor"] alpha:1.0];
-            if (!contentTextColor) {
+            if (!contentTextColor)
+            {
                 contentTextColor = fontColor;
             }
             [self.contentLabel setTextColor:contentTextColor];
@@ -177,7 +178,8 @@ static NSDictionary *notificationDesign;
             
             UIImage *buttonBackgroundImage = [[UIImage imageNamed:[current valueForKey:@"buttonBackgroundImageName"]] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
             
-            if (!buttonBackgroundImage) {
+            if (!buttonBackgroundImage)
+            {
                 buttonBackgroundImage = [[UIImage imageNamed:[current valueForKey:@"NotificationButtonBackground"]] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
             }
             
@@ -185,14 +187,16 @@ static NSDictionary *notificationDesign;
             [self.button setTitle:self.buttonTitle forState:UIControlStateNormal];
             
             UIColor *buttonTitleShadowColor = [UIColor colorWithHexString:[current valueForKey:@"buttonTitleShadowColor"] alpha:1.0];
-            if (!buttonTitleShadowColor) {
+            if (!buttonTitleShadowColor)
+            {
                 buttonTitleShadowColor = self.titleLabel.shadowColor;
             }
             
             [self.button setTitleShadowColor:buttonTitleShadowColor forState:UIControlStateNormal];
             
             UIColor *buttonTitleTextColor = [UIColor colorWithHexString:[current valueForKey:@"buttonTitleTextColor"] alpha:1.0];
-            if (!buttonTitleTextColor) {
+            if (!buttonTitleTextColor)
+            {
                 buttonTitleTextColor = fontColor;
             }
             
@@ -357,7 +361,8 @@ static NSDictionary *notificationDesign;
 
 - (void)buttonTapped:(id) sender
 {
-    if (self.buttonCallback) {
+    if (self.buttonCallback)
+    {
         self.buttonCallback();
     }
     
