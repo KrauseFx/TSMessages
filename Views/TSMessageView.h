@@ -27,7 +27,7 @@
 
 @property (nonatomic, assign) TSMessageNotificationPosition messagePosition;
 
-/** Inits the notification view. Do not call this from outisde this library.
+/** Inits the notification view. Do not call this from outside this library.
  @param title The title of the notification view
  @param content The subtitle/content of the notification view (optional)
  @param notificationType The type (color) of the notification view
