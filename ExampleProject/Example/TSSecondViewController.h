@@ -20,5 +20,6 @@
 - (IBAction)didTapMessage:(id)sender;
 - (IBAction)didTapSuccess:(id)sender;
 - (IBAction)didTapButtonidsender:(id)sender;
+- (IBAction)didTapDismissCurrentMessage:(id)sender;
 
 @end

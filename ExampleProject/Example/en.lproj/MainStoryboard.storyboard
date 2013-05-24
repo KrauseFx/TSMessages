@@ -80,6 +80,19 @@
                                     <action selector="didTapButtonidsender:" destination="3" eventType="touchUpInside" id="ls1-OQ-NgN"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dp9-zc-ECU">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="94" id="F7g-aC-cAn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                <state key="normal" title="Dismiss">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapDismissCurrentMessage:" destination="3" eventType="touchUpInside" id="Sat-xm-rkM"/>
+                                </connections>
+                            </button>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jym-Ua-n2C"/>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Show detailed description?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPK-Wl-rdR">
                                 <constraints>
@@ -104,16 +117,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="pne-hG-1yy" firstAttribute="baseline" secondItem="zLn-b7-lUs" secondAttribute="baseline" type="default" id="0Ng-pt-uug"/>
                             <constraint firstItem="zLn-b7-lUs" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="30" id="21Z-az-IcV"/>
+                            <constraint firstItem="pne-hG-1yy" firstAttribute="leading" secondItem="dp9-zc-ECU" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="4vs-ax-0fo"/>
+                            <constraint firstItem="dp9-zc-ECU" firstAttribute="baseline" secondItem="pne-hG-1yy" secondAttribute="baseline" type="default" id="8Ln-Vo-oyx"/>
                             <constraint firstItem="ZMy-CK-HBD" firstAttribute="top" secondItem="yRk-dI-W7x" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="9do-Fs-GPw"/>
-                            <constraint firstAttribute="trailing" secondItem="pne-hG-1yy" secondAttribute="trailing" constant="31" id="Ckh-NS-Qam"/>
                             <constraint firstItem="dhC-fE-thf" firstAttribute="top" secondItem="yRk-dI-W7x" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="DOY-wr-SIA"/>
                             <constraint firstItem="mRD-99-HfF" firstAttribute="leading" secondItem="Jym-Ua-n2C" secondAttribute="leading" type="default" id="Jg3-kp-JfQ"/>
                             <constraint firstItem="yRk-dI-W7x" firstAttribute="trailing" secondItem="FPK-Wl-rdR" secondAttribute="trailing" type="default" id="KAM-F1-5NQ"/>
                             <constraint firstItem="hAh-Ka-NMA" firstAttribute="top" secondItem="zLn-b7-lUs" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="NtF-hL-mCL"/>
                             <constraint firstItem="ZMy-CK-HBD" firstAttribute="leading" secondItem="mRD-99-HfF" secondAttribute="leading" type="default" id="O2O-jE-jMb"/>
+                            <constraint firstItem="dp9-zc-ECU" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="114" id="R8C-Hl-LLc"/>
                             <constraint firstItem="hAh-Ka-NMA" firstAttribute="leading" secondItem="zLn-b7-lUs" secondAttribute="leading" type="default" id="Sj2-i2-NcJ"/>
+                            <constraint firstItem="dp9-zc-ECU" firstAttribute="baseline" secondItem="zLn-b7-lUs" secondAttribute="baseline" type="default" id="TMX-P2-mnb"/>
                             <constraint firstItem="zxX-aS-md3" firstAttribute="baseline" secondItem="hAh-Ka-NMA" secondAttribute="baseline" type="default" id="Wfu-ui-kpW"/>
                             <constraint firstItem="hxl-lo-RFJ" firstAttribute="leading" secondItem="pne-hG-1yy" secondAttribute="leading" type="default" id="XAh-cB-KET"/>
                             <constraint firstItem="FPK-Wl-rdR" firstAttribute="top" secondItem="hAh-Ka-NMA" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ZWR-6Y-k4Z"/>

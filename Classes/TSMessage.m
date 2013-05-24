@@ -236,6 +236,8 @@ static BOOL notificationActive;
      {
          currentView.center = toPoint;
          currentView.alpha = TSMessageViewAlpha;
+     } completion:^(BOOL finished) {
+         currentView.messageIsFullyDisplayed = YES;
      }];
     
     
@@ -254,6 +256,7 @@ static BOOL notificationActive;
 
 - (void)fadeOutNotification:(TSMessageView *)currentView
 {
+    currentView.messageIsFullyDisplayed = NO;
     [NSObject cancelPreviousPerformRequestsWithTarget:self
                                              selector:@selector(fadeOutNotification:)
                                                object:currentView];
@@ -290,6 +293,21 @@ static BOOL notificationActive;
              [self fadeInCurrentNotification];
          }
      }];
+}
+
++ (BOOL)dismissActiveNotification
+{
+    if ([[TSMessage sharedMessage].messages count] == 0) return NO;
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
+        if (currentMessage.messageIsFullyDisplayed)
+        {
+            [[TSMessage sharedMessage] fadeOutNotification:currentMessage];
+        }
+    });
+    return YES;
 }
 
 #pragma mark class Methods to subclass

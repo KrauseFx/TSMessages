@@ -118,6 +118,15 @@ typedef enum {
                               atPosition:(TSMessageNotificationPosition)messagePosition;
 
 
+/** Fades out the currently displayed notification. If another notification is in the queue,
+ the next one will be displayed automatically 
+ @return YES if the currently displayed notification could be hidden. NO if no notification 
+ was currently displayed.
+ */
++ (BOOL)dismissActiveNotification;
+
+
+
 /** Shows a predefined error message, that is displayed, when this action requires an internet connection */
 + (void)showInternetError;
 

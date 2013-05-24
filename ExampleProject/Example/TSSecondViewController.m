@@ -116,4 +116,9 @@
                                      atPosition:self.onBottomToggle.on];
 }
 
+- (IBAction)didTapDismissCurrentMessage:(id)sender
+{
+    [TSMessage dismissActiveNotification];
+}
+
 @end
