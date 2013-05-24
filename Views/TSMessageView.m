@@ -243,7 +243,7 @@ static NSDictionary *notificationDesign;
         
         if (self.messagePosition == TSMessageNotificationPositionTop)
         {
-            self.autoresizingMask = UIViewAutoresizingFlexibleWidth;“
+            self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         }
         else
         {
