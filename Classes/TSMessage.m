@@ -229,7 +229,7 @@ static BOOL notificationActive;
     else
     {
         toPoint = CGPointMake(currentView.center.x,
-                              currentView.viewController.view.frame.size.height - CGRectGetHeight(currentView.frame) / 2.0);
+                              currentView.viewController.view.bounds.size.height - CGRectGetHeight(currentView.frame) / 2.0);
     }
     
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^

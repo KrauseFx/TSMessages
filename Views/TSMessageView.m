@@ -240,7 +240,7 @@ static NSDictionary *notificationDesign;
         }
         
         self.frame = CGRectMake(0.0, topPosition, screenWidth, actualHeight);
-        self.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+        self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleBottomMargin);
         
         UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                                                          action:@selector(fadeMeOut)];
