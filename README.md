@@ -69,6 +69,12 @@ If you have ideas how to improve this library please let me know or send a pull 
 
 Changes
 -----
+**0.9.3** (to be released on Cocoapods)
+
+* Fixed auto rotation when notification is displayed on the bottom
+* Added new customization options for buttons (font size, custom background image, separate font and shadow color)
+* Added method to dismiss the currently active message
+
 **0.9.2**
 
 * Added option to show message on the bottom of the screen
@@ -79,4 +85,4 @@ Changes
 
 TODOs
 -----
-* Fix auto rotation issues when notification is displayed on the bottom
+Currently empty
