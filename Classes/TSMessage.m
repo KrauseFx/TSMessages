@@ -38,6 +38,11 @@ static BOOL notificationActive;
     return sharedMessages;
 }
 
++ (BOOL)isNotificationActive
+{
+    return notificationActive;
+}
+
 #pragma mark Methods to call from outside
 
 + (void)showNotificationWithMessage:(NSString *)message
