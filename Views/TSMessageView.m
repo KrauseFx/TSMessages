@@ -53,6 +53,7 @@ static NSDictionary *notificationDesign;
     withButtonTitle:(NSString *)buttonTitle
  withButtonCallback:(void (^)())buttonCallback
          atPosition:(TSMessageNotificationPosition)position
+  shouldBeDismissed:(BOOL)dismissAble
 {
     if (!notificationDesign)
     {
@@ -250,16 +251,19 @@ static NSDictionary *notificationDesign;
             self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
         }
         
-        UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
-                                                                                         action:@selector(fadeMeOut)];
-        [gestureRec setDirection:(self.messagePosition == TSMessageNotificationPositionTop ?
-                                  UISwipeGestureRecognizerDirectionUp :
-                                  UISwipeGestureRecognizerDirectionDown)];
-        [self addGestureRecognizer:gestureRec];
-        
-        UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                 action:@selector(fadeMeOut)];
-        [self addGestureRecognizer:tapRec];
+        if (dismissAble)
+        {
+            UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                                             action:@selector(fadeMeOut)];
+            [gestureRec setDirection:(self.messagePosition == TSMessageNotificationPositionTop ?
+                                      UISwipeGestureRecognizerDirectionUp :
+                                      UISwipeGestureRecognizerDirectionDown)];
+            [self addGestureRecognizer:gestureRec];
+            
+            UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                     action:@selector(fadeMeOut)];
+            [self addGestureRecognizer:tapRec];
+        }
     }
     return self;
 }

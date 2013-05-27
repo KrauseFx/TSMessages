@@ -114,7 +114,8 @@ static BOOL notificationActive;
                               withCallback:callback
                            withButtonTitle:nil
                         withButtonCallback:nil
-                                atPosition:messagePosition];
+                                atPosition:messagePosition
+                       canBeDismisedByUser:YES];
 }
 
 
@@ -127,6 +128,7 @@ static BOOL notificationActive;
                          withButtonTitle:(NSString *)buttonTitle
                       withButtonCallback:(void (^)())buttonCallback
                               atPosition:(TSMessageNotificationPosition)messagePosition
+                     canBeDismisedByUser:(BOOL)dismissingEnabled
 {
     for (TSMessageView *n in [TSMessage sharedMessage].messages)
     {
@@ -145,7 +147,8 @@ static BOOL notificationActive;
                                                withCallback:callback
                                             withButtonTitle:buttonTitle
                                          withButtonCallback:buttonCallback
-                                                 atPosition:messagePosition];
+                                                 atPosition:messagePosition
+                                          shouldBeDismissed:dismissingEnabled];
     
     [[TSMessage sharedMessage].messages addObject:v];
     
@@ -241,17 +244,20 @@ static BOOL notificationActive;
      }];
     
     
-    if (currentView.duration == 0.0)
+    if (currentView.duration == TSMessageNotificationDurationAutomatic)
     {
         currentView.duration = kTSMessageAnimationDuration + kTSMessageDisplayTime + currentView.frame.size.height * kTSMessageExtraDisplayTimePerPixel;
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^
+    if (currentView.duration != TSMessageNotificationDurationEndless)
     {
-        [self performSelector:@selector(fadeOutNotification:)
-                   withObject:currentView
-                   afterDelay:currentView.duration];
-    });
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+            [self performSelector:@selector(fadeOutNotification:)
+                       withObject:currentView
+                       afterDelay:currentView.duration];
+        });
+    }
 }
 
 - (void)fadeOutNotification:(TSMessageView *)currentView

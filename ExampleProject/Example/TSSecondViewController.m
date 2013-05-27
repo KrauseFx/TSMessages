@@ -34,7 +34,7 @@
                                                                        withMessage:nil
                                                                           withType:TSMessageNotificationTypeSuccess];
                                    }
-                                     atPosition:self.onBottomToggle.on];
+                                     atPosition:(self.onBottomToggle.on ? TSMessageNotificationPositionBottom : TSMessageNotificationPositionTop)];
 }
 
 - (IBAction)didTapWarning:(id)sender
@@ -52,7 +52,7 @@
                                        withType:TSMessageNotificationTypeWarning
                                    withDuration:duration
                                    withCallback:nil
-                                     atPosition:self.onBottomToggle.on];
+                                     atPosition:(self.onBottomToggle.on ? TSMessageNotificationPositionBottom : TSMessageNotificationPositionTop)];
 }
 
 - (IBAction)didTapMessage:(id)sender
@@ -70,7 +70,7 @@
                                        withType:TSMessageNotificationTypeMessage
                                    withDuration:duration
                                    withCallback:nil
-                                     atPosition:self.onBottomToggle.on];
+                                     atPosition:(self.onBottomToggle.on ? TSMessageNotificationPositionBottom : TSMessageNotificationPositionTop)];
 }
 
 - (IBAction)didTapSuccess:(id)sender
@@ -88,7 +88,7 @@
                                        withType:TSMessageNotificationTypeSuccess
                                    withDuration:duration
                                    withCallback:nil
-                                     atPosition:self.onBottomToggle.on];
+                                     atPosition:(self.onBottomToggle.on ? TSMessageNotificationPositionBottom : TSMessageNotificationPositionTop)];
 }
 
 - (IBAction)didTapButtonidsender:(id)sender
@@ -113,12 +113,32 @@
                                                                  withMessage:nil
                                                                     withType:TSMessageNotificationTypeSuccess];
                              }
-                                     atPosition:self.onBottomToggle.on];
+                                     atPosition:(self.onBottomToggle.on ? TSMessageNotificationPositionBottom : TSMessageNotificationPositionTop)
+                            canBeDismisedByUser:YES];
 }
 
 - (IBAction)didTapDismissCurrentMessage:(id)sender
 {
     [TSMessage dismissActiveNotification];
+}
+
+- (IBAction)didTapEasy:(id)sender
+{
+    [TSMessage showNotificationWithMessage:NSLocalizedString(@"This was created with one line of code", nil) withType:TSMessageNotificationTypeSuccess];
+}
+
+- (IBAction)didTapEndless:(id)sender
+{
+    [TSMessage showNotificationInViewController:self
+                                      withTitle:NSLocalizedString(@"Endless notification", nil)
+                                    withMessage:NSLocalizedString(@"This message can not be dismissed and will not be hidden automatically. Tap the 'Dismiss' to dismiss the currently shown message", nil)
+                                       withType:TSMessageNotificationTypeMessage
+                                   withDuration:TSMessageNotificationDurationEndless
+                                   withCallback:nil
+                                withButtonTitle:nil
+                             withButtonCallback:nil
+                                     atPosition:(self.onBottomToggle.on ? TSMessageNotificationPositionBottom : TSMessageNotificationPositionTop)
+                            canBeDismisedByUser:NO];
 }
 
 @end

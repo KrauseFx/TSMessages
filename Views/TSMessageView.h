@@ -28,6 +28,7 @@
 /** The position of the message (top or bottom) */
 @property (nonatomic, assign) TSMessageNotificationPosition messagePosition;
 
+/** Is the message currenlty fully displayed? Is set as soon as the message is really fully visible */
 @property (nonatomic, assign) BOOL messageIsFullyDisplayed;
 
 /** Inits the notification view. Do not call this from outside this library.
@@ -40,6 +41,7 @@
  @param buttonTitle The title for button (optional)
  @param buttonCallback The block that should be executed, when the user tapped on the button
  @param position The position of the message on the screen
+ @param dismissAble Should this message be dismissed when the user taps/swipes it?
  */
 - (id)initWithTitle:(NSString *)title
         withContent:(NSString *)content
@@ -49,7 +51,8 @@
        withCallback:(void (^)())callback
     withButtonTitle:(NSString *)buttonTitle
  withButtonCallback:(void (^)())buttonCallback
-         atPosition:(TSMessageNotificationPosition)position;
+         atPosition:(TSMessageNotificationPosition)position
+  shouldBeDismissed:(BOOL)dismissAble;
 
 /** Fades out this notification view */
 - (void)fadeMeOut;

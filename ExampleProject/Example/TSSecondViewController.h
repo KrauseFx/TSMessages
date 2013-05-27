@@ -21,5 +21,7 @@
 - (IBAction)didTapSuccess:(id)sender;
 - (IBAction)didTapButtonidsender:(id)sender;
 - (IBAction)didTapDismissCurrentMessage:(id)sender;
+- (IBAction)didTapEasy:(id)sender;
+- (IBAction)didTapEndless:(id)sender;
 
 @end
