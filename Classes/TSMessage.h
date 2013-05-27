@@ -31,6 +31,9 @@ typedef enum {
 
 + (instancetype)sharedMessage;
 
+/** Indicates whether a notification is currently active. */
++ (BOOL)isNotificationActive;
+
 /** Shows a notification message 
  @param message The title of the notification view
  @param type The notification type (Message, Warning, Error, Success)
