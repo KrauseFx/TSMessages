@@ -280,7 +280,7 @@ static BOOL notificationActive;
     else
     {
         fadeOutToPoint = CGPointMake(currentView.center.x,
-                                     currentView.viewController.view.frame.size.height);
+                                     currentView.viewController.view.bounds.size.height);
     }
     
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
