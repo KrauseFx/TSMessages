@@ -237,7 +237,7 @@ static NSDictionary *notificationDesign;
         
         if (self.messagePosition == TSMessageNotificationPositionBottom)
         {
-            topPosition = self.viewController.view.frame.size.height;
+            topPosition = self.viewController.view.bounds.size.height;
         }
         
         self.frame = CGRectMake(0.0, topPosition, screenWidth, actualHeight);
