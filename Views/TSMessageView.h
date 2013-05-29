@@ -13,6 +13,12 @@
 
 @interface TSMessageView : UIView
 
+/** */
++ (NSMutableDictionary*)notificationDesign;
+
+/** */
++ (void)addNotificationDesignFromFile:(NSString*)file;
+
 /** The displayed title of this message */
 @property (nonatomic, readonly) NSString *title;
 
