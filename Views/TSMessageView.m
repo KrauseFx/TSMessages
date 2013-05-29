@@ -13,7 +13,7 @@
 
 #define TSDesignFileName @"design.json"
 
-static NSDictionary *notificationDesign;
+static NSMutableDictionary *_notificationDesign;
 
 @interface TSMessageView ()
 
@@ -44,6 +44,29 @@ static NSDictionary *notificationDesign;
 
 @implementation TSMessageView
 
++ (NSMutableDictionary*)notificationDesign
+{
+    if (!_notificationDesign)
+    {
+        NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:TSDesignFileName];
+        _notificationDesign = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
+                                                                                      options:kNilOptions
+                                                                                        error:nil]];
+    }
+    
+    return _notificationDesign;
+}
+
++ (void)addNotificationDesignFromFile:(NSString*)filename
+{
+    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:filename];
+    NSDictionary* design = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
+                                                          options:kNilOptions
+                                                            error:nil];
+    
+    [[TSMessageView notificationDesign] addEntriesFromDictionary:design];
+}
+
 - (id)initWithTitle:(NSString *)title
         withContent:(NSString *)content
            withType:(TSMessageNotificationType)notificationType
@@ -55,13 +78,7 @@ static NSDictionary *notificationDesign;
          atPosition:(TSMessageNotificationPosition)position
   shouldBeDismissed:(BOOL)dismissAble
 {
-    if (!notificationDesign)
-    {
-        NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:TSDesignFileName];
-        notificationDesign = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
-                                                             options:kNilOptions
-                                                               error:nil];
-    }
+    NSDictionary* notificationDesign = [TSMessageView notificationDesign];
     
     if ((self = [self init]))
     {
