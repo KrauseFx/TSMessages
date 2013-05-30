@@ -135,14 +135,6 @@ static BOOL notificationActive;
                               atPosition:(TSMessageNotificationPosition)messagePosition
                      canBeDismisedByUser:(BOOL)dismissingEnabled
 {
-    for (TSMessageView *n in [TSMessage sharedMessage].messages)
-    {
-        if (([n.title isEqualToString:title] || (!n.title && !title)) && ([n.content isEqualToString:message] || (!n.content && !message)))
-        {
-            return; // avoid showing the same messages twice in a row
-        }
-    }
-    
     // Create the TSMessageView
     TSMessageView *v = [[TSMessageView alloc] initWithTitle:title
                                                 withContent:message
@@ -154,8 +146,23 @@ static BOOL notificationActive;
                                          withButtonCallback:buttonCallback
                                                  atPosition:messagePosition
                                           shouldBeDismissed:dismissingEnabled];
+    [self showNotification:v];
+}
+
++ (void)showNotification:(TSMessageView *)messageView
+{
+    NSString *title = messageView.title;
+    NSString *content = messageView.content;
+
+    for (TSMessageView *n in [TSMessage sharedMessage].messages)
+    {
+        if (([n.title isEqualToString:title] || (!n.title && !title)) && ([n.content isEqualToString:content] || (!n.content && !content)))
+        {
+            return; // avoid showing the same messages twice in a row
+        }
+    }
     
-    [[TSMessage sharedMessage].messages addObject:v];
+    [[TSMessage sharedMessage].messages addObject:messageView];
     
     if (!notificationActive)
     {
