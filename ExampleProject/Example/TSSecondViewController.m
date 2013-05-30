@@ -122,11 +122,6 @@
     [TSMessage dismissActiveNotification];
 }
 
-- (IBAction)didTapEasy:(id)sender
-{
-    [TSMessage showNotificationWithMessage:NSLocalizedString(@"This was created with one line of code", nil) withType:TSMessageNotificationTypeSuccess];
-}
-
 - (IBAction)didTapEndless:(id)sender
 {
     [TSMessage showNotificationInViewController:self
