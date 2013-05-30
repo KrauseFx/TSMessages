@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TSMessageView.h"
+
+@class TSMessageView;
 
 typedef enum {
     TSMessageNotificationTypeMessage = 0,
