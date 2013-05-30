@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSMessageView.h"
 
 typedef enum {
     TSMessageNotificationTypeMessage = 0,
@@ -129,6 +130,10 @@ typedef enum {
                               atPosition:(TSMessageNotificationPosition)messagePosition
                      canBeDismisedByUser:(BOOL)dismissingEnabled;
 
+/** Shows a notification message view in a specific view controller
+ @param messageView The message view to show
+ */
++ (void)showNotification:(TSMessageView *)messageView;
 
 /** Fades out the currently displayed notification. If another notification is in the queue,
  the next one will be displayed automatically 

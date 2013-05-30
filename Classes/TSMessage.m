@@ -7,7 +7,6 @@
 //
 
 #import "TSMessage.h"
-#import "TSMessageView.h"
 
 #define kTSMessageDisplayTime 1.5
 #define kTSMessageExtraDisplayTimePerPixel 0.04
