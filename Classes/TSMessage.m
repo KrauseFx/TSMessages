@@ -223,6 +223,14 @@ static BOOL notificationActive;
             [currentView.viewController.view addSubview:currentView];
         }
     }
+    else if ([currentView.viewController isKindOfClass:[UITabBarController class]])
+    {
+        if (![UIApplication sharedApplication].statusBarHidden) {
+            verticalOffset += 20.0f;
+        }
+        
+        [currentView.viewController.view addSubview:currentView];
+    }
     else
     {
         [currentView.viewController.view addSubview:currentView];
