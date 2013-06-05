@@ -11,6 +11,12 @@
 
 #define TSMessageViewAlpha 0.95
 
+@protocol TSMessageViewProtocol<NSObject>
+@optional
+/** Can be implemented differently. Is used to define the top position from which the notification flies in from */
+- (CGFloat)navigationbarBottomOfViewController:(UIViewController *)viewController;
+@end
+
 @interface TSMessageView : UIView
 
 + (NSMutableDictionary *)notificationDesign;
@@ -35,6 +41,8 @@
 
 /** Is the message currenlty fully displayed? Is set as soon as the message is really fully visible */
 @property (nonatomic, assign) BOOL messageIsFullyDisplayed;
+
+@property(nonatomic, assign) id <TSMessageViewProtocol> delegate;
 
 /** Inits the notification view. Do not call this from outside this library.
  @param title The title of the notification view
