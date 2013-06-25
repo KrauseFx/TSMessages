@@ -275,10 +275,12 @@ static NSMutableDictionary *_notificationDesign;
             [gestureRec setDirection:(self.messagePosition == TSMessageNotificationPositionTop ?
                                       UISwipeGestureRecognizerDirectionUp :
                                       UISwipeGestureRecognizerDirectionDown)];
+            gestureRec.delegate = self;
             [self addGestureRecognizer:gestureRec];
             
             UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                      action:@selector(fadeMeOut)];
+            tapRec.delegate = self;
             [self addGestureRecognizer:tapRec];
         }
     }
@@ -396,6 +398,13 @@ static NSMutableDictionary *_notificationDesign;
     }
     
     [self fadeMeOut];
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return ! ([touch.view isKindOfClass:[UIControl class]]);
 }
 
 @end
