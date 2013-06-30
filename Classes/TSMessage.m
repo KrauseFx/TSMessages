@@ -238,8 +238,13 @@ static BOOL notificationActive;
     CGPoint toPoint;
     if (currentView.messagePosition == TSMessageNotificationPositionTop)
     {
+        CGFloat navigationbarBottomOfViewController = 0;
+
+        if (currentView.delegate && [currentView.delegate respondsToSelector:@selector(navigationbarBottomOfViewController:)])
+            navigationbarBottomOfViewController = [currentView.delegate navigationbarBottomOfViewController:currentView.viewController];
+
         toPoint = CGPointMake(currentView.center.x,
-                              [[self class] navigationbarBottomOfViewController:currentView.viewController] + verticalOffset + CGRectGetHeight(currentView.frame) / 2.0);
+                              navigationbarBottomOfViewController + verticalOffset + CGRectGetHeight(currentView.frame) / 2.0);
     }
     else
     {
@@ -334,13 +339,6 @@ static BOOL notificationActive;
 {
     NSLog(@"No view controller was set as parameter and TSMessage was not subclassed. If you want to subclass, implement defaultViewController to set the default viewController.");
     return nil;
-    // Implement this in subclass
-}
-
-
-+ (CGFloat)navigationbarBottomOfViewController:(UIViewController *)viewController
-{
-    return 0;
     // Implement this in subclass
 }
 

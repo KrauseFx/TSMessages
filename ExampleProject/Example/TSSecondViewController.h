@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSMessageView.h"
 
-@interface TSSecondViewController : UIViewController
+@interface TSSecondViewController : UIViewController <TSMessageViewProtocol>
 
 @property (weak, nonatomic) IBOutlet UISwitch *descriptionToggle;
 @property (weak, nonatomic) IBOutlet UISwitch *longDurationToggle;
