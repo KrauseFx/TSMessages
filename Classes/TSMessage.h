@@ -157,7 +157,4 @@ typedef enum {
 /** Implement this in subclass to set a default view controller */
 + (UIViewController *)defaultViewController;
 
-/** Can be implemented differently in subclass. Is used to define the top position from which the notification flies in from */
-+ (CGFloat)navigationbarBottomOfViewController:(UIViewController *)viewController;
-
 @end

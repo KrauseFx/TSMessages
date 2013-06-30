@@ -6,8 +6,10 @@
 //  Copyright (c) 2013 Toursprung. All rights reserved.
 //
 
+
 #import "TSSecondViewController.h"
 #import "TSMessage.h"
+#import "TSMessageView.h"
 
 #define TSSecondViewControllerLongDuration 10.0
 
@@ -57,6 +59,7 @@
 
 - (IBAction)didTapMessage:(id)sender
 {
+
     NSString *notificationTitle = NSLocalizedString(@"Tell the user something", nil);
     NSString *notificationDescription = (self.descriptionToggle.on ?
                                          NSLocalizedString(@"This is some neutral notification.", nil) :
@@ -134,6 +137,35 @@
                              withButtonCallback:nil
                                      atPosition:(self.onBottomToggle.on ? TSMessageNotificationPositionBottom : TSMessageNotificationPositionTop)
                             canBeDismisedByUser:NO];
+}
+
+- (IBAction)didTapMessageWithDelegate:(id)sender
+{
+    NSString *notificationTitle = NSLocalizedString(@"Tell the user something", nil);
+    NSString *notificationDescription = (self.descriptionToggle.on ?
+                                         NSLocalizedString(@"This is some neutral notification.", nil) :
+                                         nil);
+
+    CGFloat duration = (self.longDurationToggle.on ? TSSecondViewControllerLongDuration : 0.0);
+
+    TSMessageView *warningMessage = [[TSMessageView alloc] initWithTitle:notificationTitle
+                                                             withContent:notificationDescription
+                                                                withType:TSMessageNotificationTypeMessage
+                                                            withDuration:duration
+                                                        inViewController:self
+                                                            withCallback:nil
+                                                         withButtonTitle:nil
+                                                      withButtonCallback:nil
+                                                              atPosition:TSMessageNotificationPositionTop
+                                                       shouldBeDismissed:YES];
+    warningMessage.delegate = self;
+
+    [TSMessage showNotification:warningMessage];
+}
+
+- (CGFloat)navigationbarBottomOfViewController:(UIViewController *)viewController
+{
+    return 55;
 }
 
 @end
