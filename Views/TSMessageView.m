@@ -15,7 +15,7 @@
 
 static NSMutableDictionary *_notificationDesign;
 
-@interface TSMessageView ()
+@interface TSMessageView () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *content;
