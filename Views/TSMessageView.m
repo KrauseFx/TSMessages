@@ -7,7 +7,7 @@
 //
 
 #import "TSMessageView.h"
-#import "UIColor+MLColorAdditions.h"
+#import "HexColor.h"
 
 #define TSMessageViewPadding 15.0
 
