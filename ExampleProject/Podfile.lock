@@ -1,14 +1,17 @@
 PODS:
-  - TSMessages (0.9.1)
+  - HexColors (2.0.0)
+  - TSMessages (0.9.3):
+    - HexColors
 
 DEPENDENCIES:
   - TSMessages (from `..`)
 
 EXTERNAL SOURCES:
   TSMessages:
-    :local: ..
+    :path: ..
 
 SPEC CHECKSUMS:
-  TSMessages: d72ae40ebb8f54c738d72804f38cecafe5721dc3
+  HexColors: 24cee4b04d7b2b0922b93a3acf7739a25ae227e7
+  TSMessages: debb1243751f0cd7429dc85ca2b0c8f9fba408ac
 
-COCOAPODS: 0.18.1
+COCOAPODS: 0.21.0
