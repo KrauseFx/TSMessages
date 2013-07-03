@@ -2,4 +2,4 @@ platform :ios, '5.1'
 
 xcodeproj 'Example.xcodeproj'
 
-pod 'TSMessages', :local => '..'
+pod 'TSMessages', :path => '..'
