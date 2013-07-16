@@ -280,6 +280,11 @@ static NSMutableDictionary *_notificationDesign;
             UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                      action:@selector(fadeMeOut)];
             [self addGestureRecognizer:tapRec];
+            
+            UITapGestureRecognizer *tapRec2= [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                     action:@selector(buttonTapped2:)];
+            [self.button addGestureRecognizer:tapRec2];
+
         }
     }
     return self;
@@ -396,6 +401,19 @@ static NSMutableDictionary *_notificationDesign;
     }
     
     [self fadeMeOut];
+}
+
+- (void)buttonTapped2:(id) sender
+{
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        if (self.buttonCallback)
+        {
+        self.buttonCallback();
+        }
+
+        [self fadeMeOut];
+    });
 }
 
 #pragma mark - UIGestureRecognizerDelegate
