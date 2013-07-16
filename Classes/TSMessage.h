@@ -8,25 +8,41 @@
 
 #import <UIKit/UIKit.h>
 
+// NS_ENUM is now the preferred way to do typedefs. It gives the compiler and debugger more information, which helps everyone.
+// When using SDK 6.1 or later, NS_ENUM is defined by Apple, so this block does nothing.
+// For SDK 5 or earlier, this is the same definition block Apple uses.
+#ifndef NS_ENUM
+#if (__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
+#define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
+#if (__cplusplus)
+#define NS_OPTIONS(_type, _name) _type _name; enum : _type
+#else
+#define NS_OPTIONS(_type, _name) enum _name : _type _name; enum _name : _type
+#endif
+#else
+#define NS_ENUM(_type, _name) _type _name; enum
+#define NS_OPTIONS(_type, _name) _type _name; enum
+#endif
+#endif
+
 @class TSMessageView;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, TSMessageNotificationType) {
     TSMessageNotificationTypeMessage = 0,
     TSMessageNotificationTypeWarning,
     TSMessageNotificationTypeError,
     TSMessageNotificationTypeSuccess
-} TSMessageNotificationType;
-
-typedef enum {
+};
+typedef NS_ENUM(NSInteger, TSMessageNotificationPosition) {
     TSMessageNotificationPositionTop = 0,
     TSMessageNotificationPositionBottom
-} TSMessageNotificationPosition;
+};
 
 /** This enum can be passed to the duration parameter */
-typedef enum {
+typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
     TSMessageNotificationDurationAutomatic = 0,
     TSMessageNotificationDurationEndless = -1 // The notification is displayed until the user dismissed it or it is dismissed by calling dismissActiveNotification
-} TSMessageNotificationDuration;
+};
 
 
 @interface TSMessage : NSObject
@@ -151,10 +167,8 @@ typedef enum {
 /** Shows a predefined error message, that is displayed, when this action requires location services */
 + (void)showLocationError;
 
-
-
-
-/** Implement this in subclass to set a default view controller */
++ (void)setDefaultViewController:(UIViewController *)defaultViewController;
+/** You can also override this in subclass instead of using setDefaultViewController */
 + (UIViewController *)defaultViewController;
 
 @end
