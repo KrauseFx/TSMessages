@@ -151,10 +151,8 @@ typedef enum {
 /** Shows a predefined error message, that is displayed, when this action requires location services */
 + (void)showLocationError;
 
-
-
-
-/** Implement this in subclass to set a default view controller */
++ (void)setDefaultViewController:(UIViewController *)defaultViewController;
+/** You can also override this in subclass instead of using setDefaultViewController */
 + (UIViewController *)defaultViewController;
 
 @end

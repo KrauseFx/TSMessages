@@ -28,6 +28,7 @@
 static TSMessage *sharedMessages;
 static BOOL notificationActive;
 
+__weak static UIViewController *_defaultViewController;
 
 + (TSMessage *)sharedMessage
 {
@@ -136,6 +137,7 @@ static BOOL notificationActive;
                      canBeDismisedByUser:(BOOL)dismissingEnabled
 {
     // Create the TSMessageView
+    if(!viewController) viewController = [self defaultViewController];
     TSMessageView *v = [[TSMessageView alloc] initWithTitle:title
                                                 withContent:message
                                                    withType:type
@@ -337,9 +339,14 @@ static BOOL notificationActive;
 
 + (UIViewController *)defaultViewController
 {
-    NSLog(@"No view controller was set as parameter and TSMessage was not subclassed. If you want to subclass, implement defaultViewController to set the default viewController.");
-    return nil;
-    // Implement this in subclass
+    if(!_defaultViewController) {
+        NSLog(@"Attempted to present TSMessage in default view controller, but no default view controller was set. Use +[TSMessage setDefaultViewController:] or subclass TSMessage.");
+    }
+    return _defaultViewController;
 }
 
++ (void)setDefaultViewController:(UIViewController *)defaultViewController
+{
+    _defaultViewController = defaultViewController;
+}
 @end
