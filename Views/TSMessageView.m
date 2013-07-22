@@ -149,7 +149,13 @@ static NSMutableDictionary *_notificationDesign;
         [self.titleLabel setText:title];
         [self.titleLabel setTextColor:fontColor];
         [self.titleLabel setBackgroundColor:[UIColor clearColor]];
-        [self.titleLabel setFont:[UIFont boldSystemFontOfSize:[[current valueForKey:@"titleFontSize"] floatValue]]];
+        CGFloat fontSize = [[current valueForKey:@"titleFontSize"] floatValue];
+        NSString *fontName = [current valueForKey:@"titleFontName"];
+        if (fontName != nil) {
+            [self.titleLabel setFont:[UIFont fontWithName:fontName size:fontSize]];
+        } else {
+            [self.titleLabel setFont:[UIFont boldSystemFontOfSize:fontSize]];
+        }
         [self.titleLabel setShadowColor:[UIColor colorWithHexString:[current valueForKey:@"shadowColor"] alpha:1.0]];
         [self.titleLabel setShadowOffset:CGSizeMake([[current valueForKey:@"shadowOffsetX"] floatValue],
                                                     [[current valueForKey:@"shadowOffsetY"] floatValue])];
@@ -170,7 +176,13 @@ static NSMutableDictionary *_notificationDesign;
             }
             [self.contentLabel setTextColor:contentTextColor];
             [self.contentLabel setBackgroundColor:[UIColor clearColor]];
-            [self.contentLabel setFont:[UIFont systemFontOfSize:[[current valueForKey:@"contentFontSize"] floatValue]]];
+            CGFloat fontSize = [[current valueForKey:@"contentFontSize"] floatValue];
+            NSString *fontName = [current valueForKey:@"contentFontName"];
+            if (fontName != nil) {
+                [self.contentLabel setFont:[UIFont fontWithName:fontName size:fontSize]];
+            } else {
+                [self.contentLabel setFont:[UIFont boldSystemFontOfSize:fontSize]];
+            }
             [self.contentLabel setShadowColor:self.titleLabel.shadowColor];
             [self.contentLabel setShadowOffset:self.titleLabel.shadowOffset];
             self.contentLabel.lineBreakMode = self.titleLabel.lineBreakMode;
