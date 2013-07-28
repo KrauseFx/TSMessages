@@ -292,6 +292,13 @@ static NSMutableDictionary *_notificationDesign;
             UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                      action:@selector(fadeMeOut)];
             [self addGestureRecognizer:tapRec];
+            
+            
+            // fix for withButtonCallback not working in ios 5
+            UITapGestureRecognizer *tapRec2= [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                     action:@selector(buttonTapped2:)];
+            [self.button addGestureRecognizer:tapRec2];
+
         }
     }
     return self;
@@ -408,6 +415,20 @@ static NSMutableDictionary *_notificationDesign;
     }
     
     [self fadeMeOut];
+}
+
+// new function to call buttonCallback in ios5, this is a temperary fix for #46 
+- (void)buttonTapped2:(id) sender
+{
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        if (self.buttonCallback)
+        {
+        self.buttonCallback();
+        }
+
+        [self fadeMeOut];
+    });
 }
 
 #pragma mark - UIGestureRecognizerDelegate
