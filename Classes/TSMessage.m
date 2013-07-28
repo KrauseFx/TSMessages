@@ -340,7 +340,7 @@ __weak static UIViewController *_defaultViewController;
 + (UIViewController *)defaultViewController
 {
     if(!_defaultViewController) {
-        NSLog(@"Attempted to present TSMessage in default view controller, but no default view controller was set. Use +[TSMessage setDefaultViewController:] or subclass TSMessage.");
+        NSLog(@"Attempted to present TSMessage in default view controller, but no default view controller was set. Use +[TSMessage setDefaultViewController:].");
     }
     return _defaultViewController;
 }

@@ -167,7 +167,9 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 /** Shows a predefined error message, that is displayed, when this action requires location services */
 + (void)showLocationError;
 
+/** Use this method to set a default view controller to display the messages in */
 + (void)setDefaultViewController:(UIViewController *)defaultViewController;
+
 /** You can also override this in subclass instead of using setDefaultViewController */
 + (UIViewController *)defaultViewController;
 
