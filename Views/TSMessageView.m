@@ -181,7 +181,7 @@ static NSMutableDictionary *_notificationDesign;
             if (fontName != nil) {
                 [self.contentLabel setFont:[UIFont fontWithName:fontName size:fontSize]];
             } else {
-                [self.contentLabel setFont:[UIFont boldSystemFontOfSize:fontSize]];
+                [self.contentLabel setFont:[UIFont systemFontOfSize:fontSize]];
             }
             [self.contentLabel setShadowColor:self.titleLabel.shadowColor];
             [self.contentLabel setShadowOffset:self.titleLabel.shadowOffset];
