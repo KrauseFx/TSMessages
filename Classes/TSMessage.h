@@ -160,7 +160,6 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 + (BOOL)dismissActiveNotification;
 
 
-
 /** Shows a predefined error message, that is displayed, when this action requires an internet connection */
 + (void)showInternetError;
 

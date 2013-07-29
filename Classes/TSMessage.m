@@ -279,6 +279,8 @@ __weak static UIViewController *_defaultViewController;
     }
 }
 
+#pragma mark Fading out
+
 - (void)fadeOutNotification:(TSMessageView *)currentView
 {
     currentView.messageIsFullyDisplayed = NO;
@@ -335,7 +337,14 @@ __weak static UIViewController *_defaultViewController;
     return YES;
 }
 
-#pragma mark class Methods to subclass
+#pragma mark Customizing TSMessages
+
++ (void)setDefaultViewController:(UIViewController *)defaultViewController
+{
+    _defaultViewController = defaultViewController;
+}
+
+#pragma mark class Method to subclass
 
 + (UIViewController *)defaultViewController
 {
@@ -345,8 +354,4 @@ __weak static UIViewController *_defaultViewController;
     return _defaultViewController;
 }
 
-+ (void)setDefaultViewController:(UIViewController *)defaultViewController
-{
-    _defaultViewController = defaultViewController;
-}
 @end
