@@ -292,6 +292,10 @@ static NSMutableDictionary *_notificationDesign;
             UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                      action:@selector(fadeMeOut)];
             [self addGestureRecognizer:tapRec];
+
+            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+            tapGesture.delegate = self;
+            [self addGestureRecognizer:tapGesture];
         }
     }
     return self;
@@ -385,20 +389,10 @@ static NSMutableDictionary *_notificationDesign;
 
 - (void)fadeMeOut
 {
-    // user tapped on the message
-    dispatch_async(dispatch_get_main_queue(), ^
-    {
-        if (self.callback)
-        {
-            self.callback();
-        }
-        
-        [[TSMessage sharedMessage] performSelector:@selector(fadeOutNotification:)
-                                        withObject:self];
-    });
+    [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutNotification:) withObject:self waitUntilDone:NO];
 }
 
-#pragma mark - UIButton target
+#pragma mark - Target/Action
 
 - (void)buttonTapped:(id) sender
 {
@@ -408,6 +402,17 @@ static NSMutableDictionary *_notificationDesign;
     }
     
     [self fadeMeOut];
+}
+
+- (void)handleTap:(UITapGestureRecognizer *)tapGesture {
+    if (tapGesture.state == UIGestureRecognizerStateRecognized) {
+        if (self.callback)
+        {
+            self.callback();
+        }
+
+        [self fadeMeOut];
+    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate
