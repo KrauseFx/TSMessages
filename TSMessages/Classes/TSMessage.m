@@ -246,12 +246,12 @@ __weak static UIViewController *_defaultViewController;
     CGPoint fadeOutToPoint;
     if (currentView.messagePosition == TSMessageNotificationPositionTop)
     {
-        fadeOutToPoint = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame) / 2.0);
+        fadeOutToPoint = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame)/2.f);
     }
     else
     {
         fadeOutToPoint = CGPointMake(currentView.center.x,
-                                     currentView.viewController.view.bounds.size.height);
+                                     currentView.viewController.view.bounds.size.height + CGRectGetHeight(currentView.frame)/2.f);
     }
     
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
