@@ -63,7 +63,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
  @param subtitle The text that is displayed underneath the title
  @param type The notification type (Message, Warning, Error, Success)
  */
-+ (void)showNotificationwithTitle:(NSString *)title
++ (void)showNotificationWithTitle:(NSString *)title
                          subtitle:(NSString *)subtitle
                              type:(TSMessageNotificationType)type;
 

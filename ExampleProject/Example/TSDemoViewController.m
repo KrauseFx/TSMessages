@@ -22,7 +22,7 @@
 
 - (IBAction)didTapError:(id)sender
 {
-    [TSMessage showNotificationwithTitle:NSLocalizedString(@"Something failed", nil)
+    [TSMessage showNotificationWithTitle:NSLocalizedString(@"Something failed", nil)
                                 subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check that!", nil)
                                     type:TSMessageNotificationTypeError];
     
@@ -43,21 +43,21 @@
 
 - (IBAction)didTapWarning:(id)sender
 {
-    [TSMessage showNotificationwithTitle:NSLocalizedString(@"Some random warning", nil)
+    [TSMessage showNotificationWithTitle:NSLocalizedString(@"Some random warning", nil)
                                 subtitle:NSLocalizedString(@"Look out! Something is happening there!", nil)
                                     type:TSMessageNotificationTypeWarning];
 }
 
 - (IBAction)didTapMessage:(id)sender
 {
-    [TSMessage showNotificationwithTitle:NSLocalizedString(@"Tell the user something", nil)
+    [TSMessage showNotificationWithTitle:NSLocalizedString(@"Tell the user something", nil)
                                 subtitle:NSLocalizedString(@"This is some neutral notification!", nil)
                                     type:TSMessageNotificationTypeMessage];
 }
 
 - (IBAction)didTapSuccess:(id)sender
 {
-    [TSMessage showNotificationwithTitle:NSLocalizedString(@"Success", nil)
+    [TSMessage showNotificationWithTitle:NSLocalizedString(@"Success", nil)
                                 subtitle:NSLocalizedString(@"Some task was successfully completed!", nil)
                                     type:TSMessageNotificationTypeSuccess];
 }
@@ -128,6 +128,13 @@
                                  buttonCallback:nil
                                      atPosition:TSMessageNotificationPositionBottom
                             canBeDismisedByUser:YES];
+}
+
+- (IBAction)didTapText:(id)sender
+{
+    [TSMessage showNotificationWithTitle:NSLocalizedString(@"With 'Text' I meant a long text, so here it is", nil)
+                                subtitle:NSLocalizedString(@"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus", nil)
+                                    type:TSMessageNotificationTypeWarning];
 }
 
 

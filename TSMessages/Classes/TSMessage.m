@@ -48,12 +48,12 @@ __weak static UIViewController *_defaultViewController;
 + (void)showNotificationWithTitle:(NSString *)title
                              type:(TSMessageNotificationType)type
 {
-    [self showNotificationwithTitle:title
+    [self showNotificationWithTitle:title
                            subtitle:nil
                                type:type];
 }
 
-+ (void)showNotificationwithTitle:(NSString *)title
++ (void)showNotificationWithTitle:(NSString *)title
                          subtitle:(NSString *)subtitle
                              type:(TSMessageNotificationType)type
 {

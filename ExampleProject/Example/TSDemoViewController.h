@@ -21,5 +21,6 @@
 - (IBAction)didTapEndless:(id)sender;
 - (IBAction)didTapLong:(id)sender;
 - (IBAction)didTapBottom:(id)sender;
+- (IBAction)didTapText:(id)sender;
 
 @end
