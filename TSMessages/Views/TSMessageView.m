@@ -395,16 +395,24 @@ static NSMutableDictionary *_notificationDesign;
                                        self.button.frame.size.width,
                                        self.button.frame.size.height);
     }
-    
-    
-    self.backgroundImageView.frame = CGRectMake(self.backgroundImageView.frame.origin.x,
-                                                self.backgroundImageView.frame.origin.y,
-                                                screenWidth,
-                                                currentHeight);
-    self.backgroundBlurView.frame = CGRectMake(self.backgroundBlurView.frame.origin.x,
-                                               self.backgroundBlurView.frame.origin.y,
-                                               screenWidth,
-                                               currentHeight);
+
+
+    CGRect backgroundFrame = CGRectMake(self.backgroundImageView.frame.origin.x,
+                                        self.backgroundImageView.frame.origin.y,
+                                        screenWidth,
+                                        currentHeight);
+
+    // increase frame of background view because of the spring animation
+    if (!TS_SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        if (self.messagePosition == TSMessageNotificationPositionTop) {
+            backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(-30.f, 0.f, 0.f, 0.f));
+        } else if (self.messagePosition == TSMessageNotificationPositionBottom) {
+            backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(0.f, 0.f, -30.f, 0.f));
+        }
+    }
+
+    self.backgroundImageView.frame = backgroundFrame;
+    self.backgroundBlurView.frame = backgroundFrame;
     
     return currentHeight;
 }

@@ -211,9 +211,9 @@ __weak static UIViewController *_defaultViewController;
                          animations:animationBlock
                          completion:completionBlock];
     } else {
-        [UIView animateWithDuration:kTSMessageAnimationDuration
+        [UIView animateWithDuration:kTSMessageAnimationDuration + 0.1
                               delay:0.
-             usingSpringWithDamping:0.75
+             usingSpringWithDamping:0.8
               initialSpringVelocity:0.f
                             options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
                          animations:animationBlock
@@ -260,8 +260,7 @@ __weak static UIViewController *_defaultViewController;
          if(TS_SYSTEM_VERSION_LESS_THAN(@"7.0")) {
              currentView.alpha = 0.f;
          }
-     }
-                     completion:^(BOOL finished)
+     } completion:^(BOOL finished)
      {
          [currentView removeFromSuperview];
          
