@@ -1,5 +1,5 @@
 PODS:
-  - HexColors (2.0.0)
+  - HexColors (2.2.0)
   - TSMessages (0.9.3):
     - HexColors
 
@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: ..
 
 SPEC CHECKSUMS:
-  HexColors: 24cee4b04d7b2b0922b93a3acf7739a25ae227e7
-  TSMessages: debb1243751f0cd7429dc85ca2b0c8f9fba408ac
+  HexColors: 72b7e16c2b42cc3dfb17d4a61f64d218d1ccbba7
+  TSMessages: 8262e9ec46b9d3e21c49f7372c5ea026f495f4a9
 
-COCOAPODS: 0.21.0
+COCOAPODS: 0.20.2

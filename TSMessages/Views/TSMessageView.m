@@ -11,7 +11,7 @@
 
 #define TSMessageViewPadding 15.0
 
-#define TSDesignFileName @"design.json"
+#define TSDesignFileName @"TSMessagesDefaultDesign.json"
 
 static NSMutableDictionary *_notificationDesign;
 
