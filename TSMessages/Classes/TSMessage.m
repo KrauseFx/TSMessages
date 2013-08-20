@@ -193,17 +193,32 @@ __weak static UIViewController *_defaultViewController;
         toPoint = CGPointMake(currentView.center.x,
                               currentView.viewController.view.bounds.size.height - CGRectGetHeight(currentView.frame) / 2.0);
     }
-    
-    [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
-     {
-         currentView.center = toPoint;
-         if(TS_SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-             currentView.alpha = TSMessageViewAlpha;
-         }
-     } completion:^(BOOL finished) {
-         currentView.messageIsFullyDisplayed = YES;
-     }];
-    
+
+    dispatch_block_t animationBlock = ^{
+        currentView.center = toPoint;
+        if(TS_SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+            currentView.alpha = TSMessageViewAlpha;
+        }
+    };
+    void(^completionBlock)(BOOL) = ^(BOOL finished) {
+        currentView.messageIsFullyDisplayed = YES;
+    };
+
+    if (TS_SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        [UIView animateWithDuration:kTSMessageAnimationDuration
+                              delay:0.
+                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
+                         animations:animationBlock
+                         completion:completionBlock];
+    } else {
+        [UIView animateWithDuration:kTSMessageAnimationDuration
+                              delay:0.
+             usingSpringWithDamping:0.75
+              initialSpringVelocity:0.f
+                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
+                         animations:animationBlock
+                         completion:completionBlock];
+    }
     
     if (currentView.duration == TSMessageNotificationDurationAutomatic)
     {
