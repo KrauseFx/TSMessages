@@ -282,6 +282,12 @@ __weak static UIViewController *_defaultViewController;
     _defaultViewController = defaultViewController;
 }
 
++ (void)addCustomDesignFromFileWithName:(NSString *)fileName
+{
+    [TSMessageView addNotificationDesignFromFile:fileName];
+}
+
+
 #pragma mark Other methods
 
 

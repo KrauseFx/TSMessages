@@ -19,6 +19,7 @@
 		CA0B971B1719CD6800E06F84 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA0B971A1719CD6800E06F84 /* Default-568h@2x.png */; };
 		CA0B971E1719CD6800E06F84 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA0B971C1719CD6800E06F84 /* MainStoryboard.storyboard */; };
 		CA0B97281719CD6800E06F84 /* TSDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0B97271719CD6800E06F84 /* TSDemoViewController.m */; };
+		CAA3C9E817C3CD180085E06E /* AlternativeDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = CAA3C9E717C3CD180085E06E /* AlternativeDesign.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		CA0B971D1719CD6800E06F84 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		CA0B97261719CD6800E06F84 /* TSDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSDemoViewController.h; sourceTree = "<group>"; };
 		CA0B97271719CD6800E06F84 /* TSDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSDemoViewController.m; sourceTree = "<group>"; };
+		CAA3C9E717C3CD180085E06E /* AlternativeDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AlternativeDesign.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		CA0B970A1719CD6800E06F84 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				CAA3C9E717C3CD180085E06E /* AlternativeDesign.json */,
 				CA0B97131719CD6800E06F84 /* TSAppDelegate.h */,
 				CA0B97141719CD6800E06F84 /* TSAppDelegate.m */,
 				CA0B971C1719CD6800E06F84 /* MainStoryboard.storyboard */,
@@ -171,6 +174,7 @@
 				CA0B97191719CD6800E06F84 /* Default@2x.png in Resources */,
 				CA0B971B1719CD6800E06F84 /* Default-568h@2x.png in Resources */,
 				CA0B971E1719CD6800E06F84 /* MainStoryboard.storyboard in Resources */,
+				CAA3C9E817C3CD180085E06E /* AlternativeDesign.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

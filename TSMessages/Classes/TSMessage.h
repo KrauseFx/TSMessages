@@ -113,12 +113,15 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 /** Use this method to set a default view controller to display the messages in */
 + (void)setDefaultViewController:(UIViewController *)defaultViewController;
 
+/** Use this method to use custom designs in your messages. */
++ (void)addCustomDesignFromFileWithName:(NSString *)fileName;
+
 /** Indicates whether a notification is currently active. */
 + (BOOL)isNotificationActive;
 
 /** Prepares the notification view to be displayed in the future. It is queued and then
  displayed in fadeInCurrentNotification.
- You don't have to use this method, use [yourMesageView show] instead. */
+ You don't have to use this method. */
 + (void)prepareNotificatoinToBeShown:(TSMessageView *)messageView;
 
 @end

@@ -24,11 +24,6 @@
 
 @interface TSMessageView : UIView
 
-+ (NSMutableDictionary *)notificationDesign;
-
-/** Use this method to load a custom design file */
-+ (void)addNotificationDesignFromFile:(NSString *)file;
-
 /** The displayed title of this message */
 @property (nonatomic, readonly) NSString *title;
 
@@ -76,5 +71,9 @@
 
 /** Fades out this notification view */
 - (void)fadeMeOut;
+
+/** Use this method to load a custom design file */
++ (void)addNotificationDesignFromFile:(NSString *)file;
+
 
 @end

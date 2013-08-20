@@ -146,6 +146,21 @@
                                     <action selector="didTapText:" destination="3" eventType="touchUpInside" id="45V-8J-XUD"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PD8-pS-pWg">
+                                <rect key="frame" x="73" y="307" width="175" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Load custom design">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapCustomDesign:" destination="3" eventType="touchUpInside" id="Q5n-Fb-cOv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -162,12 +177,14 @@
             <relationships>
                 <relationship kind="action" name="didTapBottom:"/>
                 <relationship kind="action" name="didTapButton:"/>
+                <relationship kind="action" name="didTapCustomDesign:"/>
                 <relationship kind="action" name="didTapDismissCurrentMessage:"/>
                 <relationship kind="action" name="didTapEndless:"/>
                 <relationship kind="action" name="didTapError:"/>
                 <relationship kind="action" name="didTapLong:"/>
                 <relationship kind="action" name="didTapMessage:"/>
                 <relationship kind="action" name="didTapSuccess:"/>
+                <relationship kind="action" name="didTapText:"/>
                 <relationship kind="action" name="didTapWarning:"/>
             </relationships>
         </class>

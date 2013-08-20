@@ -25,20 +25,6 @@
     [TSMessage showNotificationWithTitle:NSLocalizedString(@"Something failed", nil)
                                 subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check that!", nil)
                                     type:TSMessageNotificationTypeError];
-    
-    
-//    [TSMessage showNotificationInViewController:self
-//                                      title:notificationTitle
-//                                    message:notificationDescription
-//                                       type:TSMessageNotificationTypeError
-//                                   duration:duration
-//                                   callback:^{
-//                                       [TSMessage showNotificationInViewController:self
-//                                                                         withTitle:NSLocalizedString(@"You dismisses it", nil)
-//                                                                       withMessage:nil
-//                                                                          withType:TSMessageNotificationTypeSuccess];
-//                                   }
-//                                     atPosition:(self.onBottomToggle.on ? TSMessageNotificationPositionBottom : TSMessageNotificationPositionTop)];
 }
 
 - (IBAction)didTapWarning:(id)sender
@@ -135,6 +121,15 @@
     [TSMessage showNotificationWithTitle:NSLocalizedString(@"With 'Text' I meant a long text, so here it is", nil)
                                 subtitle:NSLocalizedString(@"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus", nil)
                                     type:TSMessageNotificationTypeWarning];
+}
+
+- (IBAction)didTapCustomDesign:(id)sender
+{
+    // this is an example on how to apply a custom design
+    [TSMessage addCustomDesignFromFileWithName:@"AlternativeDesign.json"];
+    [TSMessage showNotificationWithTitle:NSLocalizedString(@"Updated to custom design file", nil)
+                                    subtitle:NSLocalizedString(@"From now on, all the titles of success messages are larger", nil)
+                                    type:TSMessageNotificationTypeSuccess];
 }
 
 

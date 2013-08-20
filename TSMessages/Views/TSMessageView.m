@@ -52,7 +52,7 @@ static NSMutableDictionary *_notificationDesign;
 
 @implementation TSMessageView
 
-+ (NSMutableDictionary*)notificationDesign
++ (NSMutableDictionary *)notificationDesign
 {
     if (!_notificationDesign)
     {
@@ -65,10 +65,11 @@ static NSMutableDictionary *_notificationDesign;
     return _notificationDesign;
 }
 
-+ (void)addNotificationDesignFromFile:(NSString*)filename
+
++ (void)addNotificationDesignFromFile:(NSString *)filename
 {
     NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:filename];
-    NSDictionary* design = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
+    NSDictionary *design = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
                                                           options:kNilOptions
                                                             error:nil];
     
@@ -86,7 +87,7 @@ static NSMutableDictionary *_notificationDesign;
          atPosition:(TSMessageNotificationPosition)position
   shouldBeDismissed:(BOOL)dismissAble
 {
-    NSDictionary* notificationDesign = [TSMessageView notificationDesign];
+    NSDictionary *notificationDesign = [TSMessageView notificationDesign];
     
     if ((self = [self init]))
     {
@@ -412,8 +413,10 @@ static NSMutableDictionary *_notificationDesign;
     [self fadeMeOut];
 }
 
-- (void)handleTap:(UITapGestureRecognizer *)tapGesture {
-    if (tapGesture.state == UIGestureRecognizerStateRecognized) {
+- (void)handleTap:(UITapGestureRecognizer *)tapGesture
+{
+    if (tapGesture.state == UIGestureRecognizerStateRecognized)
+    {
         if (self.callback)
         {
             self.callback();
