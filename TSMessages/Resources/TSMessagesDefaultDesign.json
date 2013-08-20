@@ -15,7 +15,9 @@
         "shadowOffsetX": 0,
         "shadowOffsetY": -1,
         "textColor": "#FFFFFF",
-        "titleFontSize": 14
+        "titleFontSize": 14,
+        "backgroundColor": "#76CF67",
+        "backgroundAlpha": 0.8
     },
     "message": {
         "backgroundImageName": "NotificationBackgroundMessage.png",
@@ -33,7 +35,8 @@
         "shadowOffsetX": 0,
         "shadowOffsetY": 1,
         "textColor": "#727C83",
-        "titleFontSize": 14
+        "titleFontSize": 14,
+        "backgroundColor": "#D4DDDF"
     },
     "warning": {
         "backgroundImageName": "NotificationBackgroundWarning.png",
@@ -51,7 +54,8 @@
         "shadowOffsetX": 0,
         "shadowOffsetY": 1,
         "textColor": "#484638",
-        "titleFontSize": 14
+        "titleFontSize": 14,
+        "backgroundColor": "#DAC43C"
     },
     "error": {
         "backgroundImageName": "NotificationBackgroundError.png",
@@ -69,6 +73,7 @@
         "shadowOffsetX": 0,
         "shadowOffsetY": -1,
         "textColor": "#FFFFFF",
-        "titleFontSize": 14
+        "titleFontSize": 14,
+        "backgroundColor": "#DD3B41"
     }
 }

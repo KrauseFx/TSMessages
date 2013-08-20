@@ -8,6 +8,10 @@
 
 #import "TSMessageView.h"
 #import "HexColor.h"
+#import "TSBlurView.h"
+
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
 
 #define TSMessageViewPadding 15.0
 
@@ -37,6 +41,7 @@ static NSMutableDictionary *_notificationDesign;
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UIView *borderView;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
+@property (nonatomic, strong) TSBlurView *backgroundBlurView; // Only used in iOS 7
 
 @property (nonatomic, assign) CGFloat textSpaceLeft;
 @property (nonatomic, assign) CGFloat textSpaceRight;
@@ -140,11 +145,22 @@ static NSMutableDictionary *_notificationDesign;
             image = [UIImage imageNamed:[current valueForKey:@"imageName"]];
         }
         
-        // add background image here
-        UIImage *backgroundImage = [[UIImage imageNamed:[current valueForKey:@"backgroundImageName"]] stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0];
-        _backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
-        self.backgroundImageView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
-        [self addSubview:self.backgroundImageView];
+        if (SYSTEM_VERSION_LESS_THAN(@"7.0"))
+        {
+            // add background image here
+            UIImage *backgroundImage = [[UIImage imageNamed:[current valueForKey:@"backgroundImageName"]] stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0];
+            _backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
+            self.backgroundImageView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+            [self addSubview:self.backgroundImageView];
+        }
+        else
+        {
+            // On iOS 7 and above use a blur layer instead (not yet finished)
+            _backgroundBlurView = [[TSBlurView alloc] init];
+            self.backgroundBlurView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+            self.backgroundBlurView.blurTintColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
+            [self addSubview:self.backgroundBlurView];
+        }
         
         UIColor *fontColor = [UIColor colorWithHexString:[current valueForKey:@"textColor"]
                                                    alpha:1.0];
@@ -386,6 +402,10 @@ static NSMutableDictionary *_notificationDesign;
                                                 self.backgroundImageView.frame.origin.y,
                                                 screenWidth,
                                                 currentHeight);
+    self.backgroundBlurView.frame = CGRectMake(self.backgroundBlurView.frame.origin.x,
+                                               self.backgroundBlurView.frame.origin.y,
+                                               screenWidth,
+                                               currentHeight);
     
     return currentHeight;
 }

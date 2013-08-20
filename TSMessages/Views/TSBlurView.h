@@ -10,4 +10,6 @@
 
 @interface TSBlurView : UIView
 
+@property (nonatomic, strong) UIColor *blurTintColor;
+
 @end
