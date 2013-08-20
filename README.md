@@ -27,27 +27,35 @@ To show notifications use the following code:
 --------
 
 ```objective-c
-    [TSMessage showNotificationInViewController:self
-                                      withTitle:notificationTitle
-                                    withMessage:notificationDescription
-                                       withType:TSMessageNotificationTypeError];
+    [TSMessage showNotificationWithTitle:title
+                                subtitle:subtitle
+                                    type:TSMessageNotificationTypeError];
 
 
+    // Add a button inside the message
     [TSMessage showNotificationInViewController:self
-                                      withTitle:title
-                                    withMessage:message
-                                       withType:TSMessageNotificationTypeSuccess
-                                   withDuration:15.0
-                                   withCallback:^{
-                                       // user dismissed callback
-                                   }];
+                                          title:NSLocalizedString(@"New version available", nil)
+                                       subtitle:NSLocalizedString(@"Please update our app. We would be very thankful", nil)
+                                           type:TSMessageNotificationTypeMessage
+                                       duration:TSMessageNotificationDurationAutomatic
+                                       callback:nil
+                                    buttonTitle:NSLocalizedString(@"Update", nil)
+                                 buttonCallback:^{
+                                     [TSMessage showNotificationWithTitle:NSLocalizedString(@"Thanks for updating", nil)
+                                                                     type:TSMessageNotificationTypeSuccess];
+                                 }
+                                     atPosition:TSMessageNotificationPositionTop
+                            canBeDismisedByUser:YES];
+    
+    // Use a custom design file
+    [TSMessage addCustomDesignFromFileWithName:@"AlternativeDesign.json"];
 ```
 
 The following properties can be set:
 
 * **viewController**: The view controller to show the notification in. This might be the navigation controller.
 * **title**: The title of the notification view
-* **message**: The message that is displayed underneath the title.
+* **subtitle**: The text that is displayed underneath the title.
 * **type**: The notification type (Message, Warning, Error, Success)
 * **duration**: The duration the notification should be displayed
 * **callback**: The block that should be executed, when the user dismissed the message by tapping on it or swiping it to the top.
@@ -69,6 +77,12 @@ If you have ideas how to improve this library please let me know or send a pull 
 
 Changes
 -----
+
+**0.9.4 (to be released)**
+* Added new initializer (Sorry about that, it was necessary)
+* Added easy way to customize the design with an additional design file
+* Added iOS 7 support
+
 **0.9.3**
 
 * Added new customization options for buttons (font size, custom background image, separate font and shadow color)
