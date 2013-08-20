@@ -1,9 +1,9 @@
 //
 //  TSMessageView.m
-//  Toursprung
+//  Felix Krause
 //
 //  Created by Felix Krause on 24.08.12.
-//  Copyright (c) 2012 Toursprung. All rights reserved.
+//  Copyright (c) 2012 Felix Krause. All rights reserved.
 //
 
 #import "TSMessageView.h"
@@ -17,10 +17,18 @@ static NSMutableDictionary *_notificationDesign;
 
 @interface TSMessageView () <UIGestureRecognizerDelegate>
 
+/** The displayed title of this message */
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *content;
+
+/** The displayed subtitle of this message view */
+@property (nonatomic, strong) NSString *subtitle;
+
+/** The title of the added button */
 @property (nonatomic, strong) NSString *buttonTitle;
+
+/** The view controller this message is displayed in */
 @property (nonatomic, strong) UIViewController *viewController;
+
 
 /** Internal properties needed to resize the view on device rotation properly */
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -68,13 +76,13 @@ static NSMutableDictionary *_notificationDesign;
 }
 
 - (id)initWithTitle:(NSString *)title
-        withContent:(NSString *)content
-           withType:(TSMessageNotificationType)notificationType
-       withDuration:(CGFloat)duration
+            subtitle:(NSString *)subtitle
+               type:(TSMessageNotificationType)notificationType
+           duration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
-       withCallback:(void (^)())callback
-    withButtonTitle:(NSString *)buttonTitle
- withButtonCallback:(void (^)())buttonCallback
+           callback:(void (^)())callback
+        buttonTitle:(NSString *)buttonTitle
+     buttonCallback:(void (^)())buttonCallback
          atPosition:(TSMessageNotificationPosition)position
   shouldBeDismissed:(BOOL)dismissAble
 {
@@ -83,7 +91,7 @@ static NSMutableDictionary *_notificationDesign;
     if ((self = [self init]))
     {
         _title = title;
-        _content = content;
+        _subtitle = subtitle;
         _buttonTitle = buttonTitle;
         _duration = duration;
         _viewController = viewController;
@@ -164,10 +172,10 @@ static NSMutableDictionary *_notificationDesign;
         [self addSubview:self.titleLabel];
         
         // Set up content label (if set)
-        if ([content length])
+        if ([subtitle length])
         {
             _contentLabel = [[UILabel alloc] init];
-            [self.contentLabel setText:content];
+            [self.contentLabel setText:subtitle];
             
             UIColor *contentTextColor = [UIColor colorWithHexString:[current valueForKey:@"contentTextColor"] alpha:1.0];
             if (!contentTextColor)
@@ -314,7 +322,7 @@ static NSMutableDictionary *_notificationDesign;
                                        0.0);
     [self.titleLabel sizeToFit];
     
-    if ([self.content length])
+    if ([self.subtitle length])
     {
         self.contentLabel.frame = CGRectMake(self.textSpaceLeft,
                                              self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 5.0,

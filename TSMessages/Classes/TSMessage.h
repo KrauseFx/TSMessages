@@ -1,9 +1,9 @@
 //
 //  TSMessage.h
-//  Toursprung
+//  Felix Krause
 //
 //  Created by Felix Krause on 24.08.12.
-//  Copyright (c) 2012 Toursprung. All rights reserved.
+//  Copyright (c) 2012 Felix Krause. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -24,6 +24,8 @@
 #define NS_OPTIONS(_type, _name) _type _name; enum
 #endif
 #endif
+
+
 
 @class TSMessageView;
 
@@ -49,80 +51,33 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 
 + (instancetype)sharedMessage;
 
-/** Indicates whether a notification is currently active. */
-+ (BOOL)isNotificationActive;
-
-/** Shows a notification message 
- @param message The title of the notification view
+/** Shows a notification message
+ @param title The title of the notification view
  @param type The notification type (Message, Warning, Error, Success)
  */
-+ (void)showNotificationWithMessage:(NSString *)message
-                           withType:(TSMessageNotificationType)type;
++ (void)showNotificationWithTitle:(NSString *)message
+                             type:(TSMessageNotificationType)type;
 
 /** Shows a notification message
  @param title The title of the notification view
- @param message The message that is displayed underneath the title
+ @param subtitle The text that is displayed underneath the title
  @param type The notification type (Message, Warning, Error, Success)
  */
-+ (void)showNotificationWithTitle:(NSString *)title
-                      withMessage:(NSString *)message
-                         withType:(TSMessageNotificationType)type;
++ (void)showNotificationwithTitle:(NSString *)title
+                         subtitle:(NSString *)subtitle
+                             type:(TSMessageNotificationType)type;
 
 /** Shows a notification message in a specific view controller
  @param viewController The view controller to show the notification in.
+ You can use +setDefaultViewController: to set the the default one instead
  @param title The title of the notification view
- @param message The message that is displayed underneath the title
+ @param subtitle The text that is displayed underneath the title
  @param type The notification type (Message, Warning, Error, Success)
  */
 + (void)showNotificationInViewController:(UIViewController *)viewController
-                               withTitle:(NSString *)title
-                             withMessage:(NSString *)message
-                                withType:(TSMessageNotificationType)type;
-
-/** Shows a notification message in a specific view controller
- @param viewController The view controller to show the notification in.
- @param title The title of the notification view
- @param message The message that is displayed underneath the title
- @param type The notification type (Message, Warning, Error, Success)
- @param duration The duration of the notification being displayed
- */
-+ (void)showNotificationInViewController:(UIViewController *)viewController
-                               withTitle:(NSString *)title
-                             withMessage:(NSString *)message
-                                withType:(TSMessageNotificationType)type
-                            withDuration:(NSTimeInterval)duration;
-
-/** Shows a notification message in a specific view controller
- @param viewController The view controller to show the notification in.
- @param title The title of the notification view
- @param message The message that is displayed underneath the title
- @param type The notification type (Message, Warning, Error, Success)
- @param duration The duration of the notification being displayed
- @param callback The block that should be executed, when the user tapped on the message
- */
-+ (void)showNotificationInViewController:(UIViewController *)viewController
-                               withTitle:(NSString *)title
-                             withMessage:(NSString *)message
-                                withType:(TSMessageNotificationType)type
-                            withDuration:(NSTimeInterval)duration
-                            withCallback:(void (^)())callback;
-
-/** Shows a notification message in a specific view controller
- @param viewController The view controller to show the notification in.
- @param title The title of the notification view
- @param message The message that is displayed underneath the title
- @param type The notification type (Message, Warning, Error, Success)
- @param duration The duration of the notification being displayed
- @param callback The block that should be executed, when the user tapped on the message
- @param position The position of the message on the screen
- */
-+ (void)showNotificationInViewController:(UIViewController *)viewController
-                               withTitle:(NSString *)title
-                             withMessage:(NSString *)message
-                                withType:(TSMessageNotificationType)type
-                            withDuration:(NSTimeInterval)duration
-                            withCallback:(void (^)())callback
-                              atPosition:(TSMessageNotificationPosition)messagePosition;
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                    type:(TSMessageNotificationType)type;
 
 /** Shows a notification message in a specific view controller
  @param viewController The view controller to show the notification in.
@@ -137,39 +92,33 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
  @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
  */
 + (void)showNotificationInViewController:(UIViewController *)viewController
-                               withTitle:(NSString *)title
-                             withMessage:(NSString *)message
-                                withType:(TSMessageNotificationType)type
-                            withDuration:(NSTimeInterval)duration
-                            withCallback:(void (^)())callback
-                         withButtonTitle:(NSString *)buttonTitle
-                      withButtonCallback:(void (^)())buttonCallback
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                    type:(TSMessageNotificationType)type
+                                duration:(NSTimeInterval)duration
+                                callback:(void (^)())callback
+                             buttonTitle:(NSString *)buttonTitle
+                          buttonCallback:(void (^)())buttonCallback
                               atPosition:(TSMessageNotificationPosition)messagePosition
                      canBeDismisedByUser:(BOOL)dismissingEnabled;
 
-/** Shows a notification message view in a specific view controller
- @param messageView The message view to show
- */
-+ (void)showNotification:(TSMessageView *)messageView;
 
 /** Fades out the currently displayed notification. If another notification is in the queue,
- the next one will be displayed automatically 
- @return YES if the currently displayed notification could be hidden. NO if no notification 
+ the next one will be displayed automatically
+ @return YES if the currently displayed notification was successfully dismissed. NO if no notification
  was currently displayed.
  */
 + (BOOL)dismissActiveNotification;
 
-
-/** Shows a predefined error message, that is displayed, when this action requires an internet connection */
-+ (void)showInternetError;
-
-/** Shows a predefined error message, that is displayed, when this action requires location services */
-+ (void)showLocationError;
-
 /** Use this method to set a default view controller to display the messages in */
 + (void)setDefaultViewController:(UIViewController *)defaultViewController;
 
-/** You can also override this in subclass instead of using setDefaultViewController */
-+ (UIViewController *)defaultViewController;
+/** Indicates whether a notification is currently active. */
++ (BOOL)isNotificationActive;
+
+/** Prepares the notification view to be displayed in the future. It is queued and then
+ displayed in fadeInCurrentNotification.
+ You don't have to use this method, use [yourMesageView show] instead. */
++ (void)prepareNotificatoinToBeShown:(TSMessageView *)messageView;
 
 @end
