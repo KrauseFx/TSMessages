@@ -9,8 +9,7 @@
 #import "TSMessageView.h"
 #import "HexColor.h"
 #import "TSBlurView.h"
-
-#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#import "TSMessage.h"
 
 
 #define TSMessageViewPadding 15.0
@@ -136,17 +135,17 @@ static NSMutableDictionary *_notificationDesign;
         }
         
         current = [notificationDesign valueForKey:currentString];
-        
-        self.alpha = 0.0;
-        
+
         UIImage *image;
         if ([current valueForKey:@"imageName"])
         {
             image = [UIImage imageNamed:[current valueForKey:@"imageName"]];
         }
         
-        if (SYSTEM_VERSION_LESS_THAN(@"7.0"))
+        if (TS_SYSTEM_VERSION_LESS_THAN(@"7.0"))
         {
+            self.alpha = 0.0;
+            
             // add background image here
             UIImage *backgroundImage = [[UIImage imageNamed:[current valueForKey:@"backgroundImageName"]] stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0];
             _backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];

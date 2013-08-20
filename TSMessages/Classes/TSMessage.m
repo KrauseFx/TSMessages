@@ -197,7 +197,9 @@ __weak static UIViewController *_defaultViewController;
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
      {
          currentView.center = toPoint;
-         currentView.alpha = TSMessageViewAlpha;
+         if(TS_SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+             currentView.alpha = TSMessageViewAlpha;
+         }
      } completion:^(BOOL finished) {
          currentView.messageIsFullyDisplayed = YES;
      }];
@@ -229,7 +231,7 @@ __weak static UIViewController *_defaultViewController;
     CGPoint fadeOutToPoint;
     if (currentView.messagePosition == TSMessageNotificationPositionTop)
     {
-        fadeOutToPoint = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame) / 2.0);;
+        fadeOutToPoint = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame) / 2.0);
     }
     else
     {
@@ -240,7 +242,9 @@ __weak static UIViewController *_defaultViewController;
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
      {
          currentView.center = fadeOutToPoint;
-         currentView.alpha = 0.0;
+         if(TS_SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+             currentView.alpha = 0.f;
+         }
      }
                      completion:^(BOOL finished)
      {
