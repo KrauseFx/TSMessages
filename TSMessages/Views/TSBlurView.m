@@ -32,12 +32,17 @@
 
 - (void)setBlurTintColor:(UIColor *)blurTintColor
 {
-    self.toolbar.barTintColor = blurTintColor;
+    if ([self.toolbar respondsToSelector:@selector(setBarTintColor:)]) {
+        [self.toolbar performSelector:@selector(setBarTintColor:) withObject:blurTintColor];
+    }
 }
 
 - (UIColor *)blurTintColor
 {
-    return self.toolbar.barTintColor;
+    if ([self.toolbar respondsToSelector:@selector(barTintColor)]) {
+        return [self.toolbar performSelector:@selector(barTintColor:)];
+    }
+    return nil;
 }
 
 @end

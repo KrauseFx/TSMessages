@@ -13,6 +13,8 @@
 #define kTSMessageExtraDisplayTimePerPixel 0.04
 #define kTSMessageAnimationDuration 0.3
 
+
+
 @interface TSMessage ()
 
 /** The queued messages (TSMessageView objects) */
@@ -30,6 +32,9 @@
 
 static TSMessage *sharedMessages;
 static BOOL notificationActive;
+
+static BOOL _useiOS7Style;
+
 
 __weak static UIViewController *_defaultViewController;
 
@@ -196,28 +201,30 @@ __weak static UIViewController *_defaultViewController;
 
     dispatch_block_t animationBlock = ^{
         currentView.center = toPoint;
-        if(TS_SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        if (![TSMessage iOS7StyleEnabled]) {
             currentView.alpha = TSMessageViewAlpha;
         }
     };
     void(^completionBlock)(BOOL) = ^(BOOL finished) {
         currentView.messageIsFullyDisplayed = YES;
     };
-
-    if (TS_SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+    
+    if (![TSMessage iOS7StyleEnabled]) {
         [UIView animateWithDuration:kTSMessageAnimationDuration
-                              delay:0.
+                              delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
                          animations:animationBlock
                          completion:completionBlock];
     } else {
+        #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
         [UIView animateWithDuration:kTSMessageAnimationDuration + 0.1
-                              delay:0.
+                              delay:0
              usingSpringWithDamping:0.8
               initialSpringVelocity:0.f
                             options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
                          animations:animationBlock
                          completion:completionBlock];
+        #endif
     }
     
     if (currentView.duration == TSMessageNotificationDurationAutomatic)
@@ -257,7 +264,7 @@ __weak static UIViewController *_defaultViewController;
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
      {
          currentView.center = fadeOutToPoint;
-         if(TS_SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+         if (![TSMessage iOS7StyleEnabled]) {
              currentView.alpha = 0.f;
          }
      } completion:^(BOOL finished)
@@ -322,6 +329,21 @@ __weak static UIViewController *_defaultViewController;
         NSLog(@"Attempted to present TSMessage in default view controller, but no default view controller was set. Use +[TSMessage setDefaultViewController:].");
     }
     return defaultViewController;
+}
+
++ (BOOL)iOS7StyleEnabled
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        // Decide wheter to use iOS 7 style or not based on the running device and the base sdk
+        BOOL iOS7SDK = NO;
+        #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+            iOS7SDK = YES;
+        #endif
+        
+        _useiOS7Style = ! (TS_SYSTEM_VERSION_LESS_THAN(@"7.0") || !iOS7SDK);
+    });
+    return _useiOS7Style;
 }
 
 @end

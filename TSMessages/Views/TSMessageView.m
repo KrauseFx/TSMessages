@@ -16,7 +16,9 @@
 
 #define TSDesignFileName @"TSMessagesDefaultDesign.json"
 
+
 static NSMutableDictionary *_notificationDesign;
+
 
 @interface TSMessageView () <UIGestureRecognizerDelegate>
 
@@ -142,7 +144,7 @@ static NSMutableDictionary *_notificationDesign;
             image = [UIImage imageNamed:[current valueForKey:@"imageName"]];
         }
         
-        if (TS_SYSTEM_VERSION_LESS_THAN(@"7.0"))
+        if (![TSMessage iOS7StyleEnabled])
         {
             self.alpha = 0.0;
             
@@ -275,14 +277,17 @@ static NSMutableDictionary *_notificationDesign;
         }
         
         // Add a border on the bottom (or on the top, depending on the view's postion)
-        _borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0,
-                                                               0.0, // will be set later
-                                                               screenWidth,
-                                                               [[current valueForKey:@"borderHeight"] floatValue])];
-        self.borderView.backgroundColor = [UIColor colorWithHexString:[current valueForKey:@"borderColor"]
-                                                           alpha:1.0];
-        self.borderView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
-        [self addSubview:self.borderView];
+        if (![TSMessage iOS7StyleEnabled])
+        {
+            _borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0,
+                                                                   0.0, // will be set later
+                                                                   screenWidth,
+                                                                   [[current valueForKey:@"borderHeight"] floatValue])];
+            self.borderView.backgroundColor = [UIColor colorWithHexString:[current valueForKey:@"borderColor"]
+                                                                    alpha:1.0];
+            self.borderView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+            [self addSubview:self.borderView];
+        }
         
         
         CGFloat actualHeight = [self updateHeightOfMessageView]; // this call also takes care of positioning the labels
@@ -373,7 +378,7 @@ static NSMutableDictionary *_notificationDesign;
     
     // z-align button
     self.button.center = CGPointMake([self.button center].x,
-                                            round(currentHeight / 2.0));
+                                     round(currentHeight / 2.0));
     
     if (self.messagePosition == TSMessageNotificationPositionTop)
     {
@@ -403,10 +408,14 @@ static NSMutableDictionary *_notificationDesign;
                                         currentHeight);
 
     // increase frame of background view because of the spring animation
-    if (!TS_SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-        if (self.messagePosition == TSMessageNotificationPositionTop) {
+    if ([TSMessage iOS7StyleEnabled])
+    {
+        if (self.messagePosition == TSMessageNotificationPositionTop)
+        {
             backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(-30.f, 0.f, 0.f, 0.f));
-        } else if (self.messagePosition == TSMessageNotificationPositionBottom) {
+        }
+        else if (self.messagePosition == TSMessageNotificationPositionBottom)
+        {
             backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(0.f, 0.f, -30.f, 0.f));
         }
     }
