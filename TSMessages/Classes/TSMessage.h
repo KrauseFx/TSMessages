@@ -100,7 +100,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
                                 duration:(NSTimeInterval)duration
                                 callback:(void (^)())callback
                              buttonTitle:(NSString *)buttonTitle
-                          buttonCallback:(void (^)())buttonCallback
+                          buttonCallback:(void (^)(NSInteger buttonIndex))buttonCallback
                               atPosition:(TSMessageNotificationPosition)messagePosition
                      canBeDismisedByUser:(BOOL)dismissingEnabled;
 
@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
                                 callback:(void (^)())callback
                              buttonTitle:(NSString *)buttonTitle
                              buttonTitle:(NSString *)buttonTitleSecond
-                          buttonCallback:(void (^)())buttonCallback
+                          buttonCallback:(void (^)(NSInteger buttonIndex))buttonCallback
                               atPosition:(TSMessageNotificationPosition)messagePosition
                      canBeDismisedByUser:(BOOL)dismissingEnabled;
 

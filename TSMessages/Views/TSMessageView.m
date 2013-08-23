@@ -52,7 +52,7 @@ static NSMutableDictionary *_notificationDesign;
 @property (nonatomic, assign) CGFloat textSpaceRight;
 
 @property (copy) void (^callback)();
-@property (copy) void (^buttonCallback)();
+@property (copy) void (^buttonCallback)(NSInteger buttonIndex);
 
 - (CGFloat)updateHeightOfMessageView;
 - (void)layoutSubviews;
@@ -505,7 +505,8 @@ static NSMutableDictionary *_notificationDesign;
 {
     if (self.buttonCallback)
     {
-        self.buttonCallback();
+        NSInteger buttonIndex = sender == self.button ? 0 : 1;
+        self.buttonCallback(buttonIndex);
     }
     
     [self fadeMeOut];

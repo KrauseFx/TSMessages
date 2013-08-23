@@ -57,7 +57,7 @@
                                        duration:TSMessageNotificationDurationAutomatic
                                        callback:nil
                                     buttonTitle:NSLocalizedString(@"Update", nil)
-                                 buttonCallback:^{
+                                 buttonCallback:^(NSInteger buttonIndex){
                                      [TSMessage showNotificationWithTitle:NSLocalizedString(@"Thanks for updating", nil)
                                                                      type:TSMessageNotificationTypeSuccess];
                                  }
@@ -75,7 +75,7 @@
                                        callback:nil
                                     buttonTitle:@"Try Again"
                                     buttonTitle:@"Skip"
-                                 buttonCallback:^{
+                                 buttonCallback:^(NSInteger buttonIndex){
                                      [TSMessage showNotificationWithTitle:NSLocalizedString(@"Thanks for updating", nil)
                                                                      type:TSMessageNotificationTypeSuccess];
                                  }
