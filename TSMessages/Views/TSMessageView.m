@@ -94,7 +94,7 @@ static NSMutableDictionary *_notificationDesign;
            callback:(void (^)())callback
         buttonTitle:(NSString *)buttonTitle
         buttonTitle:(NSString *)buttonTitleSecond
-     buttonCallback:(void (^)())buttonCallback
+     buttonCallback:(void (^)(NSInteger buttonIndex))buttonCallback
          atPosition:(TSMessageNotificationPosition)position
   shouldBeDismissed:(BOOL)dismissAble
 {

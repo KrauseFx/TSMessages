@@ -93,7 +93,7 @@ __weak static UIViewController *_defaultViewController;
                                 duration:(NSTimeInterval)duration
                                 callback:(void (^)())callback
                              buttonTitle:(NSString *)buttonTitle
-                          buttonCallback:(void (^)())buttonCallback
+                          buttonCallback:(void (^)(NSInteger buttonIndex))buttonCallback
                               atPosition:(TSMessageNotificationPosition)messagePosition
                      canBeDismisedByUser:(BOOL)dismissingEnabled
 {
@@ -118,7 +118,7 @@ __weak static UIViewController *_defaultViewController;
                                 callback:(void (^)())callback
                              buttonTitle:(NSString *)buttonTitle
                              buttonTitle:(NSString *)buttonTitleSecond
-                          buttonCallback:(void (^)())buttonCallback
+                          buttonCallback:(void (^)(NSInteger buttonIndex))buttonCallback
                               atPosition:(TSMessageNotificationPosition)messagePosition
                      canBeDismisedByUser:(BOOL)dismissingEnabled
 {
