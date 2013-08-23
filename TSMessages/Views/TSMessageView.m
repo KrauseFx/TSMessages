@@ -31,6 +31,9 @@ static NSMutableDictionary *_notificationDesign;
 /** The title of the added button */
 @property (nonatomic, strong) NSString *buttonTitle;
 
+/** The title of the added button */
+@property (nonatomic, strong) NSString *buttonTitleSecond;
+
 /** The view controller this message is displayed in */
 @property (nonatomic, strong) UIViewController *viewController;
 
@@ -40,6 +43,7 @@ static NSMutableDictionary *_notificationDesign;
 @property (nonatomic, strong) UILabel *contentLabel;
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UIButton *button;
+@property (nonatomic, strong) UIButton *buttonSecond;
 @property (nonatomic, strong) UIView *borderView;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 @property (nonatomic, strong) TSBlurView *backgroundBlurView; // Only used in iOS 7
@@ -48,7 +52,7 @@ static NSMutableDictionary *_notificationDesign;
 @property (nonatomic, assign) CGFloat textSpaceRight;
 
 @property (copy) void (^callback)();
-@property (copy) void (^buttonCallback)();
+@property (copy) void (^buttonCallback)(NSInteger buttonIndex);
 
 - (CGFloat)updateHeightOfMessageView;
 - (void)layoutSubviews;
@@ -89,7 +93,8 @@ static NSMutableDictionary *_notificationDesign;
    inViewController:(UIViewController *)viewController
            callback:(void (^)())callback
         buttonTitle:(NSString *)buttonTitle
-     buttonCallback:(void (^)())buttonCallback
+        buttonTitle:(NSString *)buttonTitleSecond
+     buttonCallback:(void (^)(NSInteger buttonIndex))buttonCallback
          atPosition:(TSMessageNotificationPosition)position
   shouldBeDismissed:(BOOL)dismissAble
 {
@@ -100,6 +105,7 @@ static NSMutableDictionary *_notificationDesign;
         _title = title;
         _subtitle = subtitle;
         _buttonTitle = buttonTitle;
+        _buttonTitleSecond = buttonTitleSecond;
         _duration = duration;
         _viewController = viewController;
         _messagePosition = position;
@@ -274,6 +280,52 @@ static NSMutableDictionary *_notificationDesign;
             [self addSubview:self.button];
             
             self.textSpaceRight = self.button.frame.size.width + TSMessageViewPadding;
+            if ([buttonTitleSecond length]) {
+                _buttonSecond = [UIButton buttonWithType:UIButtonTypeCustom];
+
+                UIImage *buttonBackgroundImage = [[UIImage imageNamed:[current valueForKey:@"buttonBackgroundImageName"]] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
+
+                if (!buttonBackgroundImage)
+                {
+                    buttonBackgroundImage = [[UIImage imageNamed:[current valueForKey:@"NotificationButtonBackground"]] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
+                }
+
+                [self.buttonSecond setBackgroundImage:buttonBackgroundImage forState:UIControlStateNormal];
+                [self.buttonSecond setTitle:self.buttonTitleSecond forState:UIControlStateNormal];
+
+                UIColor *buttonTitleShadowColor = [UIColor colorWithHexString:[current valueForKey:@"buttonTitleShadowColor"] alpha:1.0];
+                if (!buttonTitleShadowColor)
+                {
+                    buttonTitleShadowColor = self.titleLabel.shadowColor;
+                }
+
+                [self.buttonSecond setTitleShadowColor:buttonTitleShadowColor forState:UIControlStateNormal];
+
+                UIColor *buttonTitleTextColor = [UIColor colorWithHexString:[current valueForKey:@"buttonTitleTextColor"] alpha:1.0];
+                if (!buttonTitleTextColor)
+                {
+                    buttonTitleTextColor = fontColor;
+                }
+
+                [self.buttonSecond setTitleColor:buttonTitleTextColor forState:UIControlStateNormal];
+                self.buttonSecond.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+                self.buttonSecond.titleLabel.shadowOffset = CGSizeMake([[current valueForKey:@"buttonTitleShadowOffsetX"] floatValue],
+                                                                 [[current valueForKey:@"buttonTitleShadowOffsetY"] floatValue]);
+                [self.buttonSecond addTarget:self
+                                action:@selector(buttonTapped:)
+                      forControlEvents:UIControlEventTouchUpInside];
+
+                self.buttonSecond.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0);
+                [self.buttonSecond sizeToFit];
+                self.buttonSecond.frame = CGRectMake(screenWidth - TSMessageViewPadding - self.buttonSecond.frame.size.width,
+                                               0.0,
+                                               self.button.frame.size.width,
+                                               31.0);
+                
+                [self addSubview:self.buttonSecond];
+                
+                self.textSpaceRight = self.buttonSecond.frame.size.width + TSMessageViewPadding;
+            }
         }
         
         // Add a border on the bottom (or on the top, depending on the view's postion)
@@ -375,10 +427,11 @@ static NSMutableDictionary *_notificationDesign;
                                                     round(currentHeight / 2.0));
         }
     }
-    
-    // z-align button
+
     self.button.center = CGPointMake([self.button center].x,
                                      round(currentHeight / 2.0));
+    self.buttonSecond.center = CGPointMake([self.buttonSecond center].x,
+                                           round(currentHeight / 2.0));
     
     if (self.messagePosition == TSMessageNotificationPositionTop)
     {
@@ -391,9 +444,18 @@ static NSMutableDictionary *_notificationDesign;
     currentHeight += self.borderView.frame.size.height;
     
     self.frame = CGRectMake(0.0, self.frame.origin.y, self.frame.size.width, currentHeight);
-    
-    
-    if (self.button)
+
+    if (self.button && self.buttonSecond) {
+        self.button.frame = CGRectMake(self.frame.size.width - self.textSpaceRight,
+                                       round((self.frame.size.height / 4.0) - self.button.frame.size.height / 2.0),
+                                       self.button.frame.size.width,
+                                       self.button.frame.size.height);
+        self.buttonSecond.frame = CGRectMake(self.frame.size.width - self.textSpaceRight,
+                                                                         round((3 * self.frame.size.height / 4.0) - self.buttonSecond.frame.size.height / 2.0),
+                                                                         self.buttonSecond.frame.size.width,
+                                                                         self.buttonSecond.frame.size.height);
+    }
+    else if (self.button)
     {
         self.button.frame = CGRectMake(self.frame.size.width - self.textSpaceRight,
                                        round((self.frame.size.height / 2.0) - self.button.frame.size.height / 2.0),
@@ -443,7 +505,8 @@ static NSMutableDictionary *_notificationDesign;
 {
     if (self.buttonCallback)
     {
-        self.buttonCallback();
+        NSInteger buttonIndex = sender == self.button ? 0 : 1;
+        self.buttonCallback(buttonIndex);
     }
     
     [self fadeMeOut];

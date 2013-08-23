@@ -64,7 +64,8 @@
    inViewController:(UIViewController *)viewController
            callback:(void (^)())callback
         buttonTitle:(NSString *)buttonTitle
-     buttonCallback:(void (^)())buttonCallback
+        buttonTitle:(NSString *)buttonTitleSecond
+     buttonCallback:(void (^)(NSInteger buttonIndex))buttonCallback
          atPosition:(TSMessageNotificationPosition)position
   shouldBeDismissed:(BOOL)dismissAble;
 

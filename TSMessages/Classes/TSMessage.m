@@ -93,7 +93,32 @@ __weak static UIViewController *_defaultViewController;
                                 duration:(NSTimeInterval)duration
                                 callback:(void (^)())callback
                              buttonTitle:(NSString *)buttonTitle
-                          buttonCallback:(void (^)())buttonCallback
+                          buttonCallback:(void (^)(NSInteger buttonIndex))buttonCallback
+                              atPosition:(TSMessageNotificationPosition)messagePosition
+                     canBeDismisedByUser:(BOOL)dismissingEnabled
+{
+    [self showNotificationInViewController:viewController
+                                     title:title
+                                     subtitle:subtitle
+                                     type:type
+                                    duration:duration
+                                    callback:callback
+                                    buttonTitle:buttonTitle
+                                    buttonTitle:nil
+                                    buttonCallback:buttonCallback
+                                    atPosition:messagePosition
+                                    canBeDismisedByUser:dismissingEnabled];
+}
+
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                    type:(TSMessageNotificationType)type
+                                duration:(NSTimeInterval)duration
+                                callback:(void (^)())callback
+                             buttonTitle:(NSString *)buttonTitle
+                             buttonTitle:(NSString *)buttonTitleSecond
+                          buttonCallback:(void (^)(NSInteger buttonIndex))buttonCallback
                               atPosition:(TSMessageNotificationPosition)messagePosition
                      canBeDismisedByUser:(BOOL)dismissingEnabled
 {
@@ -105,6 +130,7 @@ __weak static UIViewController *_defaultViewController;
                                            inViewController:viewController
                                                    callback:callback
                                                 buttonTitle:buttonTitle
+                                                buttonTitle:buttonTitleSecond
                                              buttonCallback:buttonCallback
                                                  atPosition:messagePosition
                                           shouldBeDismissed:dismissingEnabled];
