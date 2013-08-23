@@ -97,6 +97,31 @@ __weak static UIViewController *_defaultViewController;
                               atPosition:(TSMessageNotificationPosition)messagePosition
                      canBeDismisedByUser:(BOOL)dismissingEnabled
 {
+    [self showNotificationInViewController:viewController
+                                     title:title
+                                     subtitle:subtitle
+                                     type:type
+                                    duration:duration
+                                    callback:callback
+                                    buttonTitle:buttonTitle
+                                    buttonTitle:nil
+                                    buttonCallback:buttonCallback
+                                    atPosition:messagePosition
+                                    canBeDismisedByUser:dismissingEnabled];
+}
+
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                    type:(TSMessageNotificationType)type
+                                duration:(NSTimeInterval)duration
+                                callback:(void (^)())callback
+                             buttonTitle:(NSString *)buttonTitle
+                             buttonTitle:(NSString *)buttonTitleSecond
+                          buttonCallback:(void (^)())buttonCallback
+                              atPosition:(TSMessageNotificationPosition)messagePosition
+                     canBeDismisedByUser:(BOOL)dismissingEnabled
+{
     // Create the TSMessageView
     TSMessageView *v = [[TSMessageView alloc] initWithTitle:title
                                                    subtitle:subtitle
@@ -105,6 +130,7 @@ __weak static UIViewController *_defaultViewController;
                                            inViewController:viewController
                                                    callback:callback
                                                 buttonTitle:buttonTitle
+                                                buttonTitle:buttonTitleSecond
                                              buttonCallback:buttonCallback
                                                  atPosition:messagePosition
                                           shouldBeDismissed:dismissingEnabled];

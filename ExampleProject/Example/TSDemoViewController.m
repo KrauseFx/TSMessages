@@ -65,6 +65,24 @@
                             canBeDismisedByUser:YES];
 }
 
+- (IBAction)didTapTwoButton:(id)sender
+{
+    [TSMessage showNotificationInViewController:self
+                                          title:NSLocalizedString(@"New version available", nil)
+                                       subtitle:NSLocalizedString(@"Please update our app. We would be very thankful", nil)
+                                           type:TSMessageNotificationTypeMessage
+                                       duration:TSMessageNotificationDurationAutomatic
+                                       callback:nil
+                                    buttonTitle:@"Try Again"
+                                    buttonTitle:@"Skip"
+                                 buttonCallback:^{
+                                     [TSMessage showNotificationWithTitle:NSLocalizedString(@"Thanks for updating", nil)
+                                                                     type:TSMessageNotificationTypeSuccess];
+                                 }
+                                     atPosition:TSMessageNotificationPositionBottom
+                            canBeDismisedByUser:YES];
+}
+
 - (IBAction)didTapDismissCurrentMessage:(id)sender
 {
     [TSMessage dismissActiveNotification];
