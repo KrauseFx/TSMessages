@@ -82,7 +82,7 @@ If you have ideas how to improve this library please let me know or send a pull 
 Changes
 -----
 
-**0.9.4 (to be released)**
+**0.9.4**
 * Added new initializer (Sorry about that, it was necessary)
 * Added easy way to customize the design with an additional design file
 * Added iOS 7 support
