@@ -71,6 +71,10 @@ If you don't want a detailed description (the text underneath the title) you don
 ![Error](http://www.toursprung.com/wp-content/uploads/2013/04/iNotificationError.png)
 ![Message](http://www.toursprung.com/wp-content/uploads/2013/04/iNotificationMessage.png)
 
+**iOS 7 Support**
+![iOS 7 Error](http://www.toursprung.com/wp-content/uploads/2013/09/iOSScreenshot_40.png)
+![iOS 7 Message](http://www.toursprung.com/wp-content/uploads/2013/09/iOSScreenshot_41.png)
+
 This project requires ARC.
 
 If you have ideas how to improve this library please let me know or send a pull request.
