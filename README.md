@@ -1,13 +1,13 @@
 TSMessages
 ==========
 
-This framework provides an easy to use class to show little notification views on the top of the screen. (à la Tweetbot). 
+This framework provides an easy to use class to show little notification views on the top of the screen. (à la Tweetbot).
 
 The notification moves from the top of the screen underneath the navigation bar and stays there for a few seconds, depending on the length of the displayed text. To dismiss a notification before the time runs out, the user can swipe it to the top or just tap it.
 
 There are 4 different types already set up for you: Success, Error, Warning, Message (take a look at the screenshots)
 
-It is very easy to add new notification types with a different design. Add the new type to the notificationType enum, add the needed design properties to the configuration file and set the name of the theme (used in the config file and images) in TSMessagesView.m inside the switch case. 
+It is very easy to add new notification types with a different design. Add the new type to the notificationType enum, add the needed design properties to the configuration file and set the name of the theme (used in the config file and images) in TSMessagesView.m inside the switch case.
 
 **Take a look at the Example project to see how to use this library.** You have to open the workspace, not the project file, since the Example project uses cocoapods.
 
@@ -36,6 +36,7 @@ To show notifications use the following code:
     [TSMessage showNotificationInViewController:self
                                           title:NSLocalizedString(@"New version available", nil)
                                        subtitle:NSLocalizedString(@"Please update our app. We would be very thankful", nil)
+                                          image:nil
                                            type:TSMessageNotificationTypeMessage
                                        duration:TSMessageNotificationDurationAutomatic
                                        callback:nil
@@ -46,7 +47,7 @@ To show notifications use the following code:
                                  }
                                      atPosition:TSMessageNotificationPositionTop
                             canBeDismisedByUser:YES];
-    
+
     // Use a custom design file
     [TSMessage addCustomDesignFromFileWithName:@"AlternativeDesign.json"];
 ```
@@ -55,7 +56,8 @@ The following properties can be set:
 
 * **viewController**: The view controller to show the notification in. This might be the navigation controller.
 * **title**: The title of the notification view
-* **subtitle**: The text that is displayed underneath the title.
+* **subtitle**: The text that is displayed underneath the title (optional)
+* **image**: A custom icon image that is used instead of the default one (optional)
 * **type**: The notification type (Message, Warning, Error, Success)
 * **duration**: The duration the notification should be displayed
 * **callback**: The block that should be executed, when the user dismissed the message by tapping on it or swiping it to the top.

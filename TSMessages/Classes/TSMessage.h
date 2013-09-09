@@ -84,7 +84,8 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 /** Shows a notification message in a specific view controller
  @param viewController The view controller to show the notification in.
  @param title The title of the notification view
- @param message The message that is displayed underneath the title
+ @param subtitle The message that is displayed underneath the title (optional)
+ @param image A custom icon image (optional)
  @param type The notification type (Message, Warning, Error, Success)
  @param duration The duration of the notification being displayed
  @param callback The block that should be executed, when the user tapped on the message
@@ -96,6 +97,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                    title:(NSString *)title
                                 subtitle:(NSString *)subtitle
+                                   image:(UIImage *)image
                                     type:(TSMessageNotificationType)type
                                 duration:(NSTimeInterval)duration
                                 callback:(void (^)())callback
@@ -124,7 +126,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 /** Prepares the notification view to be displayed in the future. It is queued and then
  displayed in fadeInCurrentNotification.
  You don't have to use this method. */
-+ (void)prepareNotificatoinToBeShown:(TSMessageView *)messageView;
++ (void)prepareNotificationToBeShown:(TSMessageView *)messageView;
 
 /** Indicates whether currently the iOS 7 style of TSMessasges is used
  This depends on the Base SDK and the currently used device */

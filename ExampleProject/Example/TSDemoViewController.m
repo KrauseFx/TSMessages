@@ -53,6 +53,7 @@
     [TSMessage showNotificationInViewController:self
                                           title:NSLocalizedString(@"New version available", nil)
                                        subtitle:NSLocalizedString(@"Please update our app. We would be very thankful", nil)
+                                          image:nil
                                            type:TSMessageNotificationTypeMessage
                                        duration:TSMessageNotificationDurationAutomatic
                                        callback:nil
@@ -61,6 +62,21 @@
                                      [TSMessage showNotificationWithTitle:NSLocalizedString(@"Thanks for updating", nil)
                                                                      type:TSMessageNotificationTypeSuccess];
                                  }
+                                     atPosition:TSMessageNotificationPositionTop
+                            canBeDismisedByUser:YES];
+}
+
+- (IBAction)didTapCustomImage:(id)sender
+{
+    [TSMessage showNotificationInViewController:self
+                                          title:NSLocalizedString(@"Custom image", nil)
+                                       subtitle:NSLocalizedString(@"This uses an image you can define", nil)
+                                          image:[UIImage imageNamed:@"NotificationButtonBackground.png"]
+                                           type:TSMessageNotificationTypeMessage
+                                       duration:TSMessageNotificationDurationAutomatic
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:nil
                                      atPosition:TSMessageNotificationPositionTop
                             canBeDismisedByUser:YES];
 }
@@ -75,7 +91,8 @@
     [TSMessage showNotificationInViewController:self
                                           title:NSLocalizedString(@"Endless", nil)
                                        subtitle:NSLocalizedString(@"This message can not be dismissed and will not be hidden automatically. Tap the 'Dismiss' button to dismiss the currently shown message", nil)
-                                           type:TSMessageNotificationTypeMessage
+                                          image:nil
+                                           type:TSMessageNotificationTypeSuccess
                                        duration:TSMessageNotificationDurationEndless
                                        callback:nil
                                     buttonTitle:nil
@@ -84,15 +101,12 @@
                             canBeDismisedByUser:NO];
 }
 
-
-
-
-
 - (IBAction)didTapLong:(id)sender
 {
     [TSMessage showNotificationInViewController:self
                                           title:NSLocalizedString(@"Long", nil)
                                        subtitle:NSLocalizedString(@"This message is displayed 10 seconds instead of the calculated value", nil)
+                                          image:nil
                                            type:TSMessageNotificationTypeWarning
                                        duration:10.0
                                        callback:nil
@@ -107,6 +121,7 @@
     [TSMessage showNotificationInViewController:self
                                           title:NSLocalizedString(@"Hu!", nil)
                                        subtitle:NSLocalizedString(@"I'm down here :)", nil)
+                                          image:nil
                                            type:TSMessageNotificationTypeSuccess
                                        duration:TSMessageNotificationDurationAutomatic
                                        callback:nil
