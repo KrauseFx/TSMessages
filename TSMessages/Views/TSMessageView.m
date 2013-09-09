@@ -83,7 +83,8 @@ static NSMutableDictionary *_notificationDesign;
 }
 
 - (id)initWithTitle:(NSString *)title
-            subtitle:(NSString *)subtitle
+           subtitle:(NSString *)subtitle
+              image:(UIImage *)image
                type:(TSMessageNotificationType)notificationType
            duration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
@@ -138,8 +139,8 @@ static NSMutableDictionary *_notificationDesign;
         
         current = [notificationDesign valueForKey:currentString];
 
-        UIImage *image;
-        if ([current valueForKey:@"imageName"])
+        
+        if (!image && [current valueForKey:@"imageName"])
         {
             image = [UIImage imageNamed:[current valueForKey:@"imageName"]];
         }

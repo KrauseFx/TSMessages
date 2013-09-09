@@ -48,6 +48,7 @@
 /** Inits the notification view. Do not call this from outside this library.
  @param title The title of the notification view
  @param subtitle The subtitle of the notification view (optional)
+ @param image A custom icon image (optional)
  @param notificationType The type (color) of the notification view
  @param duration The duration this notification should be displayed (optional)
  @param viewController The view controller this message should be displayed in
@@ -59,6 +60,7 @@
  */
 - (id)initWithTitle:(NSString *)title
            subtitle:(NSString *)subtitle
+              image:(UIImage *)image
                type:(TSMessageNotificationType)notificationType
            duration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
@@ -67,7 +69,6 @@
      buttonCallback:(void (^)())buttonCallback
          atPosition:(TSMessageNotificationPosition)position
   shouldBeDismissed:(BOOL)dismissAble;
-
 
 /** Fades out this notification view */
 - (void)fadeMeOut;

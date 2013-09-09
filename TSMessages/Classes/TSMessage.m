@@ -76,6 +76,7 @@ __weak static UIViewController *_defaultViewController;
     [self showNotificationInViewController:viewController
                                      title:title
                                   subtitle:subtitle
+                                     image:nil
                                       type:type
                                   duration:TSMessageNotificationDurationAutomatic
                                   callback:nil
@@ -89,6 +90,7 @@ __weak static UIViewController *_defaultViewController;
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                    title:(NSString *)title
                                 subtitle:(NSString *)subtitle
+                                   image:(UIImage *)image
                                     type:(TSMessageNotificationType)type
                                 duration:(NSTimeInterval)duration
                                 callback:(void (^)())callback
@@ -100,6 +102,7 @@ __weak static UIViewController *_defaultViewController;
     // Create the TSMessageView
     TSMessageView *v = [[TSMessageView alloc] initWithTitle:title
                                                    subtitle:subtitle
+                                                      image:image
                                                        type:type
                                                    duration:duration
                                            inViewController:viewController

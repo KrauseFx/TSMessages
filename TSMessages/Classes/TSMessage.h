@@ -84,7 +84,8 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 /** Shows a notification message in a specific view controller
  @param viewController The view controller to show the notification in.
  @param title The title of the notification view
- @param message The message that is displayed underneath the title
+ @param subtitle The message that is displayed underneath the title (optional)
+ @param image A custom icon image (optional)
  @param type The notification type (Message, Warning, Error, Success)
  @param duration The duration of the notification being displayed
  @param callback The block that should be executed, when the user tapped on the message
@@ -96,6 +97,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                    title:(NSString *)title
                                 subtitle:(NSString *)subtitle
+                                   image:(UIImage *)image
                                     type:(TSMessageNotificationType)type
                                 duration:(NSTimeInterval)duration
                                 callback:(void (^)())callback
