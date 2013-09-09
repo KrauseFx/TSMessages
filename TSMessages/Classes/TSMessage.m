@@ -108,11 +108,11 @@ __weak static UIViewController *_defaultViewController;
                                              buttonCallback:buttonCallback
                                                  atPosition:messagePosition
                                           shouldBeDismissed:dismissingEnabled];
-    [self prepareNotificatoinToBeShown:v];
+    [self prepareNotificationToBeShown:v];
 }
 
 
-+ (void)prepareNotificatoinToBeShown:(TSMessageView *)messageView
++ (void)prepareNotificationToBeShown:(TSMessageView *)messageView
 {
     NSString *title = messageView.title;
     NSString *subtitle = messageView.subtitle;

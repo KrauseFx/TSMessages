@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 /** Prepares the notification view to be displayed in the future. It is queued and then
  displayed in fadeInCurrentNotification.
  You don't have to use this method. */
-+ (void)prepareNotificatoinToBeShown:(TSMessageView *)messageView;
++ (void)prepareNotificationToBeShown:(TSMessageView *)messageView;
 
 /** Indicates whether currently the iOS 7 style of TSMessasges is used
  This depends on the Base SDK and the currently used device */
