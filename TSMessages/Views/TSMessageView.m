@@ -438,6 +438,13 @@ static NSMutableDictionary *_notificationDesign;
     [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutNotification:) withObject:self waitUntilDone:NO];
 }
 
+- (void)didMoveToWindow {
+    [super didMoveToWindow];
+    if (self.duration == TSMessageNotificationDurationEndless && self.superview && !self.window ) {
+        // view controller was dismissed, let's fade out
+        [self fadeMeOut];
+    }
+}
 #pragma mark - Target/Action
 
 - (void)buttonTapped:(id) sender
