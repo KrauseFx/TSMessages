@@ -156,7 +156,14 @@ __weak static UIViewController *_defaultViewController;
     
     TSMessageView *currentView = [self.messages objectAtIndex:0];
     
-    CGFloat verticalOffset = 0.0f;
+    __block CGFloat verticalOffset = 0.0f;
+    
+    void (^addStatusBarHeightToVerticalOffset)() = ^void() {
+        BOOL isPortrait = UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]);
+        CGSize statusBarSize = [UIApplication sharedApplication].statusBarFrame.size;
+        CGFloat offset = isPortrait ? statusBarSize.height : statusBarSize.width;
+        verticalOffset += offset;
+    };
     
     if ([currentView.viewController isKindOfClass:[UINavigationController class]])
     {
@@ -165,24 +172,22 @@ __weak static UIViewController *_defaultViewController;
             [currentView.viewController.view insertSubview:currentView
                                               belowSubview:[(UINavigationController *)currentView.viewController navigationBar]];
             verticalOffset = [(UINavigationController *)currentView.viewController navigationBar].bounds.size.height;
-            
-            if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
-            {
-                verticalOffset += [UIApplication sharedApplication].statusBarFrame.size.height;
-            }
-            else
-            {
-                verticalOffset += [UIApplication sharedApplication].statusBarFrame.size.width;
-            }
+            addStatusBarHeightToVerticalOffset();
         }
         else
         {
             [currentView.viewController.view addSubview:currentView];
+            if ([TSMessage iOS7StyleEnabled]) {
+                addStatusBarHeightToVerticalOffset();
+            }
         }
     }
     else
     {
         [currentView.viewController.view addSubview:currentView];
+        if ([TSMessage iOS7StyleEnabled]) {
+            addStatusBarHeightToVerticalOffset();
+        }
     }
     
     CGPoint toPoint;
