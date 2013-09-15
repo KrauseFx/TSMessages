@@ -336,8 +336,9 @@ __weak static UIViewController *_defaultViewController;
 {
     __strong UIViewController *defaultViewController = _defaultViewController;
     
-    if(!defaultViewController) {
-        NSLog(@"Attempted to present TSMessage in default view controller, but no default view controller was set. Use +[TSMessage setDefaultViewController:].");
+    if (!defaultViewController) {
+        NSLog(@"TSMessages: It is recommended to set a custom defaultViewController that is used to display the notifications");
+        defaultViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     }
     return defaultViewController;
 }
