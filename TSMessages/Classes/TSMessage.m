@@ -172,7 +172,9 @@ __weak static UIViewController *_defaultViewController;
             [currentView.viewController.view insertSubview:currentView
                                               belowSubview:[(UINavigationController *)currentView.viewController navigationBar]];
             verticalOffset = [(UINavigationController *)currentView.viewController navigationBar].bounds.size.height;
-            addStatusBarHeightToVerticalOffset();
+            if ([TSMessage iOS7StyleEnabled]) {
+                addStatusBarHeightToVerticalOffset();
+            }
         }
         else
         {
