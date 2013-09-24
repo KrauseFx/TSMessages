@@ -165,14 +165,24 @@ __weak static UIViewController *_defaultViewController;
         verticalOffset += offset;
     };
     
-    if ([currentView.viewController isKindOfClass:[UINavigationController class]])
+    if ([currentView.viewController isKindOfClass:[UINavigationController class]] || [currentView.viewController.parentViewController isKindOfClass:[UINavigationController class]])
     {
-        if (![(UINavigationController *)currentView.viewController isNavigationBarHidden])
+        UINavigationController *currentNavigationController;
+        
+        if([currentView.viewController isKindOfClass:[UINavigationController class]])
+            currentNavigationController = (UINavigationController *)currentView.viewController;
+        else
+            currentNavigationController = (UINavigationController *)currentView.viewController.parentViewController;
+            
+        
+        if (![currentNavigationController isNavigationBarHidden])
         {
-            [currentView.viewController.view insertSubview:currentView
-                                              belowSubview:[(UINavigationController *)currentView.viewController navigationBar]];
-            verticalOffset = [(UINavigationController *)currentView.viewController navigationBar].bounds.size.height;
-            addStatusBarHeightToVerticalOffset();
+            [currentNavigationController.view insertSubview:currentView
+                                              belowSubview:[currentNavigationController navigationBar]];
+            verticalOffset = [currentNavigationController navigationBar].bounds.size.height;
+            if ([TSMessage iOS7StyleEnabled]) {
+                addStatusBarHeightToVerticalOffset();
+            }
         }
         else
         {
