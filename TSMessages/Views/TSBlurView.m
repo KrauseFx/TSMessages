@@ -24,6 +24,7 @@
         _toolbar = [[UIToolbar alloc] initWithFrame:self.bounds];
         _toolbar.userInteractionEnabled = NO;
         _toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [_toolbar setBackgroundImage:nil forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault]; // remove background set through the appearence proxy
         [self addSubview:_toolbar];
     }
 
