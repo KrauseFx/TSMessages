@@ -23,6 +23,8 @@ Add `pod 'TSMessages'` to your Podfile.
 
 Drag the whole folder into your project and remove the example project. This library requires ARC.
 
+Drag HexColors{.h/.m} from Submodules/HexColors/Classes into your project.
+
 To show notifications use the following code:
 --------
 
