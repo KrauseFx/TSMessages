@@ -36,7 +36,9 @@
         "shadowOffsetY": 1,
         "textColor": "#727C83",
         "titleFontSize": 14,
-        "backgroundColor": "#D4DDDF"
+        "backgroundColor": "#D4DDDF",
+        "buttonFontSize" : 18,
+        "buttonFontName" : "Arial"
     },
     "warning": {
         "backgroundImageName": "NotificationBackgroundWarning.png",

@@ -258,7 +258,19 @@ static NSMutableDictionary *_notificationDesign;
             }
             
             [self.button setTitleColor:buttonTitleTextColor forState:UIControlStateNormal];
-            self.button.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+            
+            CGFloat fontSize = [[current valueForKey:@"buttonFontSize"] floatValue];
+            NSString *fontName = [current valueForKey:@"buttonFontName"];
+            
+            if (fontName != nil)
+            {
+                self.button.titleLabel.font = [UIFont fontWithName:fontName size:fontSize];
+            }
+            else
+            {
+                self.button.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+            }
+            
             self.button.titleLabel.shadowOffset = CGSizeMake([[current valueForKey:@"buttonTitleShadowOffsetX"] floatValue],
                                                              [[current valueForKey:@"buttonTitleShadowOffsetY"] floatValue]);
             [self.button addTarget:self
