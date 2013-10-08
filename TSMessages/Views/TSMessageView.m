@@ -413,7 +413,11 @@ static NSMutableDictionary *_notificationDesign;
     {
         if (self.messagePosition == TSMessageNotificationPositionTop)
         {
-            backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(-30.f, 0.f, 0.f, 0.f));
+            float topOffset = 0.f;
+            if (self.viewController.navigationController.navigationBar.alpha == 1) {
+                topOffset = -30.f;
+            }
+            backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(topOffset, 0.f, 0.f, 0.f));
         }
         else if (self.messagePosition == TSMessageNotificationPositionBottom)
         {
