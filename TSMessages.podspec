@@ -14,7 +14,7 @@ There are 4 different types already set up for you: Success, Error, Warning, Mes
 
   s.author       = { "Felix Krause" => "krausefx@gmail.com" }
 
-  s.source       = { :git => "https://github.com/toursprung/TSMessages.git" :tag => "0.9.4"}
+  s.source       = { :git => "https://github.com/toursprung/TSMessages.git", :tag => "#{spec.version}"}
   
   s.platform     = :ios, '5.0'
 
