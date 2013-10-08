@@ -175,19 +175,21 @@ __weak static UIViewController *_defaultViewController;
             currentNavigationController = (UINavigationController *)currentView.viewController.parentViewController;
             
         
+        BOOL statusBarIsTranslucent = [[UIApplication sharedApplication] statusBarStyle] == UIStatusBarStyleBlackTranslucent;
+        BOOL isViewIsUnderStatusBar = currentNavigationController.wantsFullScreenLayout && statusBarIsTranslucent;
         if (![currentNavigationController isNavigationBarHidden])
         {
             [currentNavigationController.view insertSubview:currentView
-                                              belowSubview:[currentNavigationController navigationBar]];
+                                               belowSubview:[currentNavigationController navigationBar]];
             verticalOffset = [currentNavigationController navigationBar].bounds.size.height;
-            if ([TSMessage iOS7StyleEnabled]) {
+            if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
                 addStatusBarHeightToVerticalOffset();
             }
         }
         else
         {
             [currentView.viewController.view addSubview:currentView];
-            if ([TSMessage iOS7StyleEnabled]) {
+            if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
                 addStatusBarHeightToVerticalOffset();
             }
         }
