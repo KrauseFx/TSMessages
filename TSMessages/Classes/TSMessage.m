@@ -174,9 +174,7 @@ __weak static UIViewController *_defaultViewController;
         else
             currentNavigationController = (UINavigationController *)currentView.viewController.parentViewController;
             
-        
-        BOOL statusBarIsTranslucent = [[UIApplication sharedApplication] statusBarStyle] == UIStatusBarStyleBlackTranslucent;
-        BOOL isViewIsUnderStatusBar = currentNavigationController.wantsFullScreenLayout && statusBarIsTranslucent;
+        BOOL isViewIsUnderStatusBar = currentNavigationController.wantsFullScreenLayout;
         if (![currentNavigationController isNavigationBarHidden])
         {
             [currentNavigationController.view insertSubview:currentView
