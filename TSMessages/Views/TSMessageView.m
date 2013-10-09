@@ -414,8 +414,12 @@ static NSMutableDictionary *_notificationDesign;
         if (self.messagePosition == TSMessageNotificationPositionTop)
         {
             float topOffset = 0.f;
-            if (self.viewController.navigationController.navigationBar.alpha == 1
-                && !self.viewController.navigationController.navigationBar.isTranslucent) {
+
+            UINavigationController *navigationController = self.viewController.navigationController;
+            BOOL isNavBarIsHidden = !navigationController || self.viewController.navigationController.navigationBarHidden;
+            BOOL isNavBarIsOpaque = !self.viewController.navigationController.navigationBar.isTranslucent && self.viewController.navigationController.navigationBar.alpha == 1;
+            
+            if (isNavBarIsHidden || isNavBarIsOpaque) {
                 topOffset = -30.f;
             }
             backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(topOffset, 0.f, 0.f, 0.f));

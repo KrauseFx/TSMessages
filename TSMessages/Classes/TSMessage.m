@@ -174,7 +174,10 @@ __weak static UIViewController *_defaultViewController;
         else
             currentNavigationController = (UINavigationController *)currentView.viewController.parentViewController;
             
-        BOOL isViewIsUnderStatusBar = currentNavigationController.wantsFullScreenLayout;
+        BOOL isViewIsUnderStatusBar = [[[currentNavigationController childViewControllers] firstObject] wantsFullScreenLayout];
+        if (!isViewIsUnderStatusBar) {
+            isViewIsUnderStatusBar = ![currentNavigationController isNavigationBarHidden]; // strange but true
+        }
         if (![currentNavigationController isNavigationBarHidden])
         {
             [currentNavigationController.view insertSubview:currentView
