@@ -18,6 +18,8 @@
     [super viewDidLoad];
     
     [TSMessage setDefaultViewController:self];
+    self.wantsFullScreenLayout = YES;
+    [self.navigationController.navigationBar setTranslucent:YES];
 }
 
 - (IBAction)didTapError:(id)sender
@@ -64,6 +66,18 @@
                                  }
                                      atPosition:TSMessageNotificationPositionTop
                             canBeDismisedByUser:YES];
+}
+
+- (IBAction)didTapToggleNavigationBar:(id)sender {
+    [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
+}
+- (IBAction)didTapToggleNavigationBarAlpha:(id)sender {
+    CGFloat alpha = self.navigationController.navigationBar.alpha;
+    self.navigationController.navigationBar.alpha = (alpha==1)?0.5:1;
+}
+- (IBAction)didTapToggleWantsFullscreen:(id)sender {
+    self.wantsFullScreenLayout = !self.wantsFullScreenLayout;
+    [self.navigationController.navigationBar setTranslucent:!self.navigationController.navigationBar.isTranslucent];
 }
 
 - (IBAction)didTapCustomImage:(id)sender
