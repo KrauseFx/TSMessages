@@ -416,6 +416,9 @@ static NSMutableDictionary *_notificationDesign;
             float topOffset = 0.f;
 
             UINavigationController *navigationController = self.viewController.navigationController;
+            if (!navigationController && [self.viewController isKindOfClass:[UINavigationController class]]) {
+                navigationController = (UINavigationController *)self.viewController;
+            }
             BOOL isNavBarIsHidden = !navigationController || self.viewController.navigationController.navigationBarHidden;
             BOOL isNavBarIsOpaque = !self.viewController.navigationController.navigationBar.isTranslucent && self.viewController.navigationController.navigationBar.alpha == 1;
             
