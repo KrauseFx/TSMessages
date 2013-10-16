@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 + (instancetype)sharedMessage;
 
 /** Shows a notification message
- @param title The title of the notification view
+ @param message The title of the notification view
  @param type The notification type (Message, Warning, Error, Success)
  */
 + (void)showNotificationWithTitle:(NSString *)message
@@ -91,7 +91,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
  @param callback The block that should be executed, when the user tapped on the message
  @param buttonTitle The title for button (optional)
  @param buttonCallback The block that should be executed, when the user tapped on the button
- @param position The position of the message on the screen
+ @param messagePosition The position of the message on the screen
  @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
  */
 + (void)showNotificationInViewController:(UIViewController *)viewController
@@ -128,7 +128,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
  You don't have to use this method. */
 + (void)prepareNotificationToBeShown:(TSMessageView *)messageView;
 
-/** Indicates whether currently the iOS 7 style of TSMessasges is used
+/** Indicates whether currently the iOS 7 style of TSMessages is used
  This depends on the Base SDK and the currently used device */
 + (BOOL)iOS7StyleEnabled;
 
