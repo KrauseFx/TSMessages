@@ -73,7 +73,7 @@
 }
 - (IBAction)didTapToggleNavigationBarAlpha:(id)sender {
     CGFloat alpha = self.navigationController.navigationBar.alpha;
-    self.navigationController.navigationBar.alpha = (alpha==1)?0.5:1;
+    self.navigationController.navigationBar.alpha = (alpha==1.f)?0.5:1;
 }
 - (IBAction)didTapToggleWantsFullscreen:(id)sender {
     self.wantsFullScreenLayout = !self.wantsFullScreenLayout;

@@ -43,7 +43,7 @@
 - (UIColor *)blurTintColor
 {
     if ([self.toolbar respondsToSelector:@selector(barTintColor)]) {
-        return [self.toolbar performSelector:@selector(barTintColor:)];
+        return [self.toolbar performSelector:@selector(barTintColor)];
     }
     return nil;
 }

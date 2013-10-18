@@ -19,6 +19,9 @@
 
 static NSMutableDictionary *_notificationDesign;
 
+@interface TSMessage (TSMessageView)
+- (void)fadeOutNotification:(TSMessageView *)currentView; // private method of TSMessage, but called by TSMessageView in -[fadeMeOut]
+@end
 
 @interface TSMessageView () <UIGestureRecognizerDelegate>
 
