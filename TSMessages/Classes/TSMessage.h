@@ -53,6 +53,8 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 
 + (instancetype)sharedMessage;
 
++ (UIViewController *)defaultViewController;
+
 /** Shows a notification message
  @param message The title of the notification view
  @param type The notification type (Message, Warning, Error, Success)
