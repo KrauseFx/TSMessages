@@ -30,6 +30,7 @@
 
 
 @class TSMessageView;
+@protocol TSMessageViewAnimationProtocol;
 
 typedef NS_ENUM(NSInteger, TSMessageNotificationType) {
     TSMessageNotificationTypeMessage = 0,
@@ -50,6 +51,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 
 
 @interface TSMessage : NSObject
+@property (nonatomic, strong) Class<TSMessageViewAnimationProtocol> animationClass;
 
 + (instancetype)sharedMessage;
 

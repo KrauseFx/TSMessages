@@ -13,8 +13,6 @@
 
 #define kTSMessageDisplayTime 1.5
 #define kTSMessageExtraDisplayTimePerPixel 0.04
-#define kTSMessageAnimationDuration 0.3
-
 
 
 @interface TSMessage ()
@@ -42,6 +40,7 @@ __weak static UIViewController *_defaultViewController;
     if (!sharedMessages)
     {
         sharedMessages = [[[self class] alloc] init];
+        sharedMessages.animationClass = [TSMessage iOS7StyleEnabled] ? [TSMessageSpringAnimation class] : [TSMessageAnimation class];
     }
     return sharedMessages;
 }
@@ -220,38 +219,30 @@ __weak static UIViewController *_defaultViewController;
         toFrame.origin.y = y;
     }
 
-    void(^completionBlock)(void) = ^(void) {
-        currentView.messageIsFullyDisplayed = YES;
-    };
-    
-    if (![TSMessage iOS7StyleEnabled]) {
-        [TSMessageAnimation animateMessageView:currentView
-                                       toFrame:toFrame
-                                  withDuration:kTSMessageAnimationDuration
-                                     appearing:YES
-                                    completion:completionBlock];
-    } else {
-        [TSMessageSpringAnimation animateMessageView:currentView
-                                             toFrame:toFrame
-                                        withDuration:kTSMessageAnimationDuration
-                                           appearing:YES
-                                          completion:completionBlock];
-    }
-    
     if (currentView.duration == TSMessageNotificationDurationAutomatic)
     {
-        currentView.duration = kTSMessageAnimationDuration + kTSMessageDisplayTime + currentView.frame.size.height * kTSMessageExtraDisplayTimePerPixel;
+        currentView.duration = + kTSMessageDisplayTime + currentView.frame.size.height * kTSMessageExtraDisplayTimePerPixel;
     }
     
-    if (currentView.duration != TSMessageNotificationDurationEndless)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^
-                       {
-                           [self performSelector:@selector(fadeOutNotification:)
-                                      withObject:currentView
-                                      afterDelay:currentView.duration];
-                       });
-    }
+    [self.animationClass animateMessageView:currentView
+                                    toFrame:toFrame
+                                  appearing:YES
+                                 completion:^{
+                                     currentView.messageIsFullyDisplayed = YES;
+                                     
+                                     if (currentView.duration != TSMessageNotificationDurationEndless)
+                                     {
+                                         dispatch_async(dispatch_get_main_queue(), ^
+                                                        {
+                                                            [self performSelector:@selector(fadeOutNotification:)
+                                                                       withObject:currentView
+                                                                       afterDelay:currentView.duration];
+                                                        });
+                                     }
+
+                                 }];
+    
+    
 }
 
 - (void)fadeOutNotification:(TSMessageView *)currentView
@@ -272,34 +263,26 @@ __weak static UIViewController *_defaultViewController;
         toFrame.origin.y = CGRectGetHeight(currentView.viewController.view.bounds);
     }
     
-    void(^completionBlock)(void) = ^(void) {
-        [currentView removeFromSuperview];
-        
-        if ([self.messages count] > 0)
-        {
-            [self.messages removeObjectAtIndex:0];
-        }
-        
-        notificationActive = NO;
-        
-        if ([self.messages count] > 0)
-        {
-            [self fadeInCurrentNotification];
-        }
-    };
-    if (![TSMessage iOS7StyleEnabled]) {
-        [TSMessageAnimation animateMessageView:currentView
-                                       toFrame:toFrame
-                                  withDuration:kTSMessageAnimationDuration
-                                     appearing:NO
-                                    completion:completionBlock];
-    } else {
-        [TSMessageSpringAnimation animateMessageView:currentView
-                                             toFrame:toFrame
-                                        withDuration:kTSMessageAnimationDuration + 0.1
-                                           appearing:NO
-                                          completion:completionBlock];
-    }
+    [self.animationClass animateMessageView:currentView
+                                    toFrame:toFrame
+                                  appearing:NO
+                                 completion:^{
+                                     [currentView removeFromSuperview];
+                                     
+                                     if ([self.messages count] > 0)
+                                     {
+                                         [self.messages removeObjectAtIndex:0];
+                                     }
+                                     
+                                     notificationActive = NO;
+                                     
+                                     if ([self.messages count] > 0)
+                                     {
+                                         [self fadeInCurrentNotification];
+                                     }
+                                 }];
+
+    
 }
 
 + (BOOL)dismissActiveNotification

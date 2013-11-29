@@ -12,12 +12,12 @@
 @implementation TSMessageSpringAnimation
 + (void)animateMessageView:(TSMessageView *)view
                    toFrame:(CGRect)targetFrame
-              withDuration:(NSTimeInterval)duration
                  appearing:(BOOL)isAppearing
                 completion:(void (^)(void))completionBlock {
+    
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
     CGFloat damping = isAppearing ? 0.8 : 1.0;
-    [UIView animateWithDuration:duration + 0.1
+    [UIView animateWithDuration:self.animationDuration
                           delay:0
          usingSpringWithDamping:damping
           initialSpringVelocity:0.f
@@ -36,9 +36,15 @@
                  withDuration:duration
                     appearing:isAppearing
                    completion:completionBlock];
-
 #endif
-
-
 }
+
+static NSTimeInterval TSMessageAnimationDuration = 0.4;
++ (void)setAnimationDuration:(NSTimeInterval)animationDuration {
+    TSMessageAnimationDuration = animationDuration;
+}
++ (NSTimeInterval)animationDuration {
+    return TSMessageAnimationDuration;
+}
+
 @end

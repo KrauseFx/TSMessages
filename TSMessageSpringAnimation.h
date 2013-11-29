@@ -13,4 +13,6 @@
  */
 NS_CLASS_AVAILABLE_IOS(7_0) @interface TSMessageSpringAnimation : TSMessageAnimation
 
++ (void) setAnimationDuration:(NSTimeInterval)animationDuration; // default = 0.4
++ (NSTimeInterval)animationDuration;
 @end
