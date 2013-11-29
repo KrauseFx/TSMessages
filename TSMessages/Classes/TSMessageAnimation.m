@@ -14,13 +14,14 @@
                    toFrame:(CGRect)targetFrame
                  appearing:(BOOL)isAppearing
                 completion:(void (^)(void))completionBlock {
-    
     [UIView animateWithDuration:[self animationDuration]
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
                      animations:^{
                          view.frame = targetFrame;
-                         view.alpha = isAppearing ? TSMessageViewAlpha : 0.f;
+                         if (![TSMessage iOS7StyleEnabled]) {
+                             view.alpha = isAppearing ? TSMessageViewAlpha : 0.f;
+                         }
                      }
                      completion:^(BOOL finished) {
                          if (completionBlock) {
