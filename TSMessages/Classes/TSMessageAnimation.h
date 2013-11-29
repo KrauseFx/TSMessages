@@ -6,8 +6,7 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @class TSMessageView;
 @protocol TSMessageViewAnimationProtocol <NSObject>
 

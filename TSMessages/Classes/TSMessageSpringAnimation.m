@@ -16,6 +16,7 @@
                 completion:(void (^)(void))completionBlock {
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+    if ([UIView instancesRespondToSelector:@selector(animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:)]) {
     CGFloat damping = isAppearing ? 0.8 : 1.0;
     [UIView animateWithDuration:self.animationDuration
                           delay:0
@@ -29,6 +30,9 @@
                              completionBlock();
                          }
                      }];
+    } else { // fall back if on pre iOS 7
+        [super animateMessageView:view toFrame:targetFrame appearing:isAppearing completion:completionBlock];
+    }
 #else
     // fallback to super
     [super animateMessageView:view
