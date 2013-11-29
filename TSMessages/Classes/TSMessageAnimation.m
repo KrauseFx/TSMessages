@@ -14,7 +14,6 @@
                    toFrame:(CGRect)targetFrame
                  appearing:(BOOL)isAppearing
                 completion:(void (^)(void))completionBlock {
-    
     [UIView animateWithDuration:[self animationDuration]
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
