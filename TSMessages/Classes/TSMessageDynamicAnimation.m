@@ -46,11 +46,6 @@
     
 }
 
-- (void)nop {
-    // just to suppress warning
-}
-
-
 #if iOS7Enabled
 
 #pragma mark - Dynamics
