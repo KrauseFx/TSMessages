@@ -26,8 +26,7 @@
         animationObject.completionBlock = ^{
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
-#pragma clang diagnostic ignored "-Wunused-value"
-            animationObject; // hold onto self until the animator completes
+            [animationObject class]; // hold onto self until the animator completes
 #pragma clang diagnostic pop
             
             if (completionBlock) {
