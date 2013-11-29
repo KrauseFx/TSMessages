@@ -8,6 +8,8 @@
 
 #import "TSMessage.h"
 #import "TSMessageView.h"
+#import "TSMessageAnimation.h"
+#import "TSMessageSpringAnimation.h"
 
 #define kTSMessageDisplayTime 1.5
 #define kTSMessageExtraDisplayTimePerPixel 0.04
@@ -200,52 +202,40 @@ __weak static UIViewController *_defaultViewController;
         }
     }
     
-    CGPoint toPoint;
+    CGRect toFrame = currentView.frame;
     if (currentView.messagePosition == TSMessageNotificationPositionTop)
     {
         CGFloat navigationbarBottomOfViewController = 0;
         
         if (currentView.delegate && [currentView.delegate respondsToSelector:@selector(navigationbarBottomOfViewController:)])
             navigationbarBottomOfViewController = [currentView.delegate navigationbarBottomOfViewController:currentView.viewController];
-        
-        toPoint = CGPointMake(currentView.center.x,
-                              navigationbarBottomOfViewController + verticalOffset + CGRectGetHeight(currentView.frame) / 2.0);
+        toFrame.origin.y = navigationbarBottomOfViewController + verticalOffset;
     }
     else
     {
-        CGFloat y = currentView.viewController.view.bounds.size.height - CGRectGetHeight(currentView.frame) / 2.0;
+        CGFloat y = currentView.viewController.view.bounds.size.height - CGRectGetHeight(currentView.frame);
         if (!currentView.viewController.navigationController.isToolbarHidden) {
             y -= CGRectGetHeight(currentView.viewController.navigationController.toolbar.bounds);
         }
-        toPoint = CGPointMake(currentView.center.x, y);
+        toFrame.origin.y = y;
     }
 
-    dispatch_block_t animationBlock = ^{
-        currentView.center = toPoint;
-        if (![TSMessage iOS7StyleEnabled]) {
-            currentView.alpha = TSMessageViewAlpha;
-        }
-    };
-    void(^completionBlock)(BOOL) = ^(BOOL finished) {
+    void(^completionBlock)(void) = ^(void) {
         currentView.messageIsFullyDisplayed = YES;
     };
     
     if (![TSMessage iOS7StyleEnabled]) {
-        [UIView animateWithDuration:kTSMessageAnimationDuration
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
-                         animations:animationBlock
-                         completion:completionBlock];
+        [TSMessageAnimation animateMessageView:currentView
+                                       toFrame:toFrame
+                                  withDuration:kTSMessageAnimationDuration
+                                     appearing:YES
+                                    completion:completionBlock];
     } else {
-        #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-        [UIView animateWithDuration:kTSMessageAnimationDuration + 0.1
-                              delay:0
-             usingSpringWithDamping:0.8
-              initialSpringVelocity:0.f
-                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
-                         animations:animationBlock
-                         completion:completionBlock];
-        #endif
+        [TSMessageSpringAnimation animateMessageView:currentView
+                                             toFrame:toFrame
+                                        withDuration:kTSMessageAnimationDuration
+                                           appearing:YES
+                                          completion:completionBlock];
     }
     
     if (currentView.duration == TSMessageNotificationDurationAutomatic)
@@ -271,39 +261,45 @@ __weak static UIViewController *_defaultViewController;
                                              selector:@selector(fadeOutNotification:)
                                                object:currentView];
     
-    CGPoint fadeOutToPoint;
+    CGRect toFrame = currentView.frame;
+
     if (currentView.messagePosition == TSMessageNotificationPositionTop)
     {
-        fadeOutToPoint = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame)/2.f);
+        toFrame.origin.y = -CGRectGetHeight(currentView.frame);
     }
     else
     {
-        fadeOutToPoint = CGPointMake(currentView.center.x,
-                                     currentView.viewController.view.bounds.size.height + CGRectGetHeight(currentView.frame)/2.f);
+        toFrame.origin.y = CGRectGetHeight(currentView.viewController.view.bounds);
     }
     
-    [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
-     {
-         currentView.center = fadeOutToPoint;
-         if (![TSMessage iOS7StyleEnabled]) {
-             currentView.alpha = 0.f;
-         }
-     } completion:^(BOOL finished)
-     {
-         [currentView removeFromSuperview];
-         
-         if ([self.messages count] > 0)
-         {
-             [self.messages removeObjectAtIndex:0];
-         }
-         
-         notificationActive = NO;
-         
-         if ([self.messages count] > 0)
-         {
-             [self fadeInCurrentNotification];
-         }
-     }];
+    void(^completionBlock)(void) = ^(void) {
+        [currentView removeFromSuperview];
+        
+        if ([self.messages count] > 0)
+        {
+            [self.messages removeObjectAtIndex:0];
+        }
+        
+        notificationActive = NO;
+        
+        if ([self.messages count] > 0)
+        {
+            [self fadeInCurrentNotification];
+        }
+    };
+    if (![TSMessage iOS7StyleEnabled]) {
+        [TSMessageAnimation animateMessageView:currentView
+                                       toFrame:toFrame
+                                  withDuration:kTSMessageAnimationDuration
+                                     appearing:NO
+                                    completion:completionBlock];
+    } else {
+        [TSMessageSpringAnimation animateMessageView:currentView
+                                             toFrame:toFrame
+                                        withDuration:kTSMessageAnimationDuration + 0.1
+                                           appearing:NO
+                                          completion:completionBlock];
+    }
 }
 
 + (BOOL)dismissActiveNotification
