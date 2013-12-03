@@ -312,6 +312,7 @@ __weak static UIViewController *_defaultViewController;
     
     dispatch_async(dispatch_get_main_queue(), ^
                    {
+                       if ([[TSMessage sharedMessage].messages count] == 0) return;
                        TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
                        if (currentMessage.messageIsFullyDisplayed)
                        {
