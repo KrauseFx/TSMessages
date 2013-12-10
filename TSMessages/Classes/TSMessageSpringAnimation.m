@@ -37,7 +37,6 @@
     // fallback to super
     [super animateMessageView:view
                       toFrame:targetFrame
-                 withDuration:duration
                     appearing:isAppearing
                    completion:completionBlock];
 #endif
