@@ -11,13 +11,12 @@
 
 #define iOS7Enabled __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
 
-@interface TSMessageDynamicAnimation () <UIDynamicAnimatorDelegate>
 #if iOS7Enabled
+@interface TSMessageDynamicAnimation () <UIDynamicAnimatorDelegate>
 @property (nonatomic, strong) UIDynamicAnimator *animator;
-#endif
 @property (nonatomic, copy) void (^completionBlock)(void);
-
 @end
+#endif
 
 @implementation TSMessageDynamicAnimation
 
@@ -96,7 +95,9 @@ static CGFloat TSMessageItemElasticity = 0.3;
 }
 
 - (void)stopAnimation {
-    [self.animator removeAllBehaviors];
+    if ([self.animator respondsToSelector:@selector(removeAllBehaviors)]) {
+        [self.animator removeAllBehaviors];
+    }
     self.animator = nil;
 }
 
