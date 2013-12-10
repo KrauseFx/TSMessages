@@ -54,6 +54,21 @@ static TSMessageDynamicAnimation *TSMessageDynamicAnimationInstance = nil;
     [self.animator removeAllBehaviors];
     self.animator = nil;
 }
+
+static CGFloat TSMessageGravityMagnitude = 2.0;
++ (void)setGravityMagnitude:(CGFloat)magnitude {
+    TSMessageGravityMagnitude = magnitude;
+}
++ (CGFloat)gravityMagnitude {
+    return TSMessageGravityMagnitude;
+}
+static CGFloat TSMessageItemElasticity = 0.3;
++ (void)setItemElasticity:(CGFloat)elasticity {
+    TSMessageItemElasticity = elasticity;
+}
++ (CGFloat)itemElasticity {
+    return TSMessageItemElasticity;
+}
 #if iOS7Enabled
 
 #pragma mark - Dynamics
@@ -72,8 +87,16 @@ static TSMessageDynamicAnimation *TSMessageDynamicAnimationInstance = nil;
     UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:itemsArray];
     [collision addBoundaryWithIdentifier:@"bottom" fromPoint:fromPoint toPoint:toPoint];
     [animator addBehavior:collision];
+    
+    CGFloat gravityY = isTopAnimation ? [[self class] gravityMagnitude] : - [[self class] gravityMagnitude];
     UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:itemsArray];
+    gravity.gravityDirection = CGVectorMake(0, gravityY);
     [animator addBehavior:gravity];
+    
+    UIDynamicItemBehavior *itemBehavior = [[UIDynamicItemBehavior alloc] initWithItems:itemsArray];
+    itemBehavior.elasticity = [[self class] itemElasticity];
+    [animator addBehavior:itemBehavior];
+
     self.animator = animator;
 }
 
@@ -85,7 +108,5 @@ static TSMessageDynamicAnimation *TSMessageDynamicAnimationInstance = nil;
         self.completionBlock = nil;
     }
 }
-
 #endif
-
 @end
