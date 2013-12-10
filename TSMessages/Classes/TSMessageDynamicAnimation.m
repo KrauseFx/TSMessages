@@ -57,16 +57,22 @@ static TSMessageDynamicAnimation *TSMessageDynamicAnimationInstance = nil;
 #if iOS7Enabled
 
 #pragma mark - Dynamics
-- (void) animateView:(UIView*) view toFrame:(CGRect)targetFrame {
+
+- (void)animateView:(TSMessageView*) view toFrame:(CGRect)targetFrame {
     UIDynamicAnimator *animator = [[UIDynamicAnimator alloc] initWithReferenceView:view.superview];
     animator.delegate = self;
-    UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[view]];
-    CGFloat boundaryY = CGRectGetMaxY(targetFrame);
+    
+    NSArray *itemsArray = @[view];
+
+    BOOL isTopAnimation = view.messagePosition == TSMessageNotificationPositionTop;
+    CGFloat boundaryY = isTopAnimation ? CGRectGetMaxY(targetFrame) : CGRectGetMinY(targetFrame);
     CGPoint fromPoint = CGPointMake(CGRectGetMinX(targetFrame), boundaryY);
     CGPoint toPoint = CGPointMake(CGRectGetMaxX(targetFrame), boundaryY);
+
+    UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:itemsArray];
     [collision addBoundaryWithIdentifier:@"bottom" fromPoint:fromPoint toPoint:toPoint];
     [animator addBehavior:collision];
-    UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[view]];
+    UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:itemsArray];
     [animator addBehavior:gravity];
     self.animator = animator;
 }
