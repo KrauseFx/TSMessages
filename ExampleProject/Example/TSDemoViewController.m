@@ -10,6 +10,7 @@
 #import "TSDemoViewController.h"
 #import "TSMessage.h"
 #import "TSMessageView.h"
+#import <TSMessages/TSMessageDynamicAnimation.h>
 
 @implementation TSDemoViewController
 
@@ -20,6 +21,7 @@
     [TSMessage setDefaultViewController:self];
     self.wantsFullScreenLayout = YES;
     [self.navigationController.navigationBar setTranslucent:YES];
+    [[TSMessage sharedMessage] setAnimationClass:[TSMessageDynamicAnimation class]];
 }
 
 - (IBAction)didTapError:(id)sender
