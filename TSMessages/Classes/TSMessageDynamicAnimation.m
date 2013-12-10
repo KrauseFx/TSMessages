@@ -50,11 +50,6 @@ static TSMessageDynamicAnimation *TSMessageDynamicAnimationInstance = nil;
     
 }
 
-- (void)stopAnimation {
-    [self.animator removeAllBehaviors];
-    self.animator = nil;
-}
-
 static CGFloat TSMessageGravityMagnitude = 2.0;
 + (void)setGravityMagnitude:(CGFloat)magnitude {
     TSMessageGravityMagnitude = magnitude;
@@ -98,6 +93,11 @@ static CGFloat TSMessageItemElasticity = 0.3;
     [animator addBehavior:itemBehavior];
 
     self.animator = animator;
+}
+
+- (void)stopAnimation {
+    [self.animator removeAllBehaviors];
+    self.animator = nil;
 }
 
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator {
