@@ -325,11 +325,11 @@ static NSMutableDictionary *_notificationDesign;
             UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                      action:@selector(fadeMeOut)];
             [self addGestureRecognizer:tapRec];
-
-            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-            tapGesture.delegate = self;
-            [self addGestureRecognizer:tapGesture];
         }
+        
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        tapGesture.delegate = self;
+        [self addGestureRecognizer:tapGesture];
     }
     return self;
 }
@@ -480,8 +480,6 @@ static NSMutableDictionary *_notificationDesign;
         {
             self.callback();
         }
-
-        [self fadeMeOut];
     }
 }
 
