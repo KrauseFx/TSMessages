@@ -23,5 +23,8 @@
 - (IBAction)didTapBottom:(id)sender;
 - (IBAction)didTapText:(id)sender;
 - (IBAction)didTapCustomDesign:(id)sender;
+- (IBAction)didTapHighPriority:(id)sender;
+- (IBAction)didTapNormalPriority:(id)sender;
+- (IBAction)didTapLowPriority:(id)sender;
 
 @end

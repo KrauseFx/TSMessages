@@ -48,6 +48,11 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
     TSMessageNotificationDurationEndless = -1 // The notification is displayed until the user dismissed it or it is dismissed by calling dismissActiveNotification
 };
 
+typedef NS_ENUM(NSInteger, TSMessageNotificationPriority) {
+    TSMessageNotificationPriorityNormal = 0,
+    TSMessageNotificationPriorityHighest = NSIntegerMax,
+    TSMessageNotificationPriorityLowest = NSIntegerMin
+};
 
 @interface TSMessage : NSObject
 
@@ -108,6 +113,32 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
                               atPosition:(TSMessageNotificationPosition)messagePosition
                      canBeDismisedByUser:(BOOL)dismissingEnabled;
 
+/** Shows a notification message in a specific view controller
+ @param viewController The view controller to show the notification in.
+ @param title The title of the notification view
+ @param subtitle The message that is displayed underneath the title (optional)
+ @param image A custom icon image (optional)
+ @param type The notification type (Message, Warning, Error, Success)
+ @param duration The duration of the notification being displayed
+ @param priority The priority of the notification being displayed (higher is more)
+ @param callback The block that should be executed, when the user tapped on the message
+ @param buttonTitle The title for button (optional)
+ @param buttonCallback The block that should be executed, when the user tapped on the button
+ @param messagePosition The position of the message on the screen
+ @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
+ */
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                   image:(UIImage *)image
+                                    type:(TSMessageNotificationType)type
+                                duration:(NSTimeInterval)duration
+                                priority:(NSInteger)priority
+                                callback:(void (^)())callback
+                             buttonTitle:(NSString *)buttonTitle
+                          buttonCallback:(void (^)())buttonCallback
+                              atPosition:(TSMessageNotificationPosition)messagePosition
+                     canBeDismisedByUser:(BOOL)dismissingEnabled;
 
 /** Fades out the currently displayed notification. If another notification is in the queue,
  the next one will be displayed automatically

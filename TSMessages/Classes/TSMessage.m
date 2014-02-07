@@ -102,6 +102,7 @@ __weak static UIViewController *_defaultViewController;
                                                       image:image
                                                        type:type
                                                    duration:duration
+                                                   priority:TSMessageNotificationPriorityNormal
                                            inViewController:viewController
                                                    callback:callback
                                                 buttonTitle:buttonTitle
@@ -112,6 +113,35 @@ __weak static UIViewController *_defaultViewController;
 }
 
 
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                   image:(UIImage *)image
+                                    type:(TSMessageNotificationType)type
+                                duration:(NSTimeInterval)duration
+                                priority:(NSInteger)priority
+                                callback:(void (^)())callback
+                             buttonTitle:(NSString *)buttonTitle
+                          buttonCallback:(void (^)())buttonCallback
+                              atPosition:(TSMessageNotificationPosition)messagePosition
+                     canBeDismisedByUser:(BOOL)dismissingEnabled
+{
+    // Create the TSMessageView
+    TSMessageView *v = [[TSMessageView alloc] initWithTitle:title
+                                                   subtitle:subtitle
+                                                      image:image
+                                                       type:type
+                                                   duration:duration
+                                                   priority:priority
+                                           inViewController:viewController
+                                                   callback:callback
+                                                buttonTitle:buttonTitle
+                                             buttonCallback:buttonCallback
+                                                 atPosition:messagePosition
+                                          shouldBeDismissed:dismissingEnabled];
+    [self prepareNotificationToBeShown:v];
+}
+
 + (void)prepareNotificationToBeShown:(TSMessageView *)messageView
 {
     NSString *title = messageView.title;
@@ -121,6 +151,10 @@ __weak static UIViewController *_defaultViewController;
     {
         if (([n.title isEqualToString:title] || (!n.title && !title)) && ([n.subtitle isEqualToString:subtitle] || (!n.subtitle && !subtitle)))
         {
+            if (n.priority < messageView.priority)
+            {
+                n.priority = messageView.priority; //new priority is higher, so raise the priority.
+            }
             return; // avoid showing the same messages twice in a row
         }
     }
@@ -131,6 +165,21 @@ __weak static UIViewController *_defaultViewController;
     {
         [[TSMessage sharedMessage] fadeInCurrentNotification];
     }
+}
+
++(void)sortMessagesOnPriority: (NSMutableArray*) messages
+{
+    [[TSMessage sharedMessage].messages sortUsingComparator:^NSComparisonResult(TSMessageView* obj1, TSMessageView* obj2) {
+        if ( obj1.priority < obj2.priority )
+        {
+            return NSOrderedDescending;
+        }
+        else if ( obj1.priority > obj2.priority )
+        {
+            return NSOrderedAscending;
+        }
+        return NSOrderedSame;
+    }];
 }
 
 
@@ -149,6 +198,8 @@ __weak static UIViewController *_defaultViewController;
 {
     if ([self.messages count] == 0) return;
     
+    [TSMessage sortMessagesOnPriority:[TSMessage sharedMessage].messages];
+
     notificationActive = YES;
     
     TSMessageView *currentView = [self.messages objectAtIndex:0];
@@ -294,7 +345,7 @@ __weak static UIViewController *_defaultViewController;
          
          if ([self.messages count] > 0)
          {
-             [self.messages removeObjectAtIndex:0];
+             [self.messages removeObject:currentView];
          }
          
          notificationActive = NO;

@@ -115,6 +115,54 @@
                             canBeDismisedByUser:NO];
 }
 
+- (IBAction)didTapLowPriority:(id)sender
+{
+    [TSMessage showNotificationInViewController:self
+                                          title:NSLocalizedString(@"Low priority", nil)
+                                       subtitle:NSLocalizedString(@"This message has a low priority.", nil)
+                                          image:nil
+                                           type:TSMessageNotificationTypeSuccess
+                                       duration:TSMessageNotificationDurationAutomatic
+                                       priority:TSMessageNotificationPriorityLowest
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:nil
+                                     atPosition:TSMessageNotificationPositionTop
+                            canBeDismisedByUser:NO];
+}
+
+- (IBAction)didTapNormalPriority:(id)sender
+{
+    [TSMessage showNotificationInViewController:self
+                                          title:NSLocalizedString(@"Normal priority", nil)
+                                       subtitle:NSLocalizedString(@"This message has a normal priority.", nil)
+                                          image:nil
+                                           type:TSMessageNotificationTypeMessage
+                                       duration:TSMessageNotificationDurationAutomatic
+                                       priority:TSMessageNotificationPriorityNormal
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:nil
+                                     atPosition:TSMessageNotificationPositionTop
+                            canBeDismisedByUser:NO];
+}
+
+- (IBAction)didTapHighPriority:(id)sender
+{
+    [TSMessage showNotificationInViewController:self
+                                          title:NSLocalizedString(@"High priority", nil)
+                                       subtitle:NSLocalizedString(@"This message has a high priority!", nil)
+                                          image:nil
+                                           type:TSMessageNotificationTypeError
+                                       duration:TSMessageNotificationDurationAutomatic
+                                       priority:TSMessageNotificationPriorityHighest
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:nil
+                                     atPosition:TSMessageNotificationPositionTop
+                            canBeDismisedByUser:NO];
+}
+
 - (IBAction)didTapLong:(id)sender
 {
     [TSMessage showNotificationInViewController:self
