@@ -22,7 +22,7 @@
 
 
 
-@interface TSMessageView : UIView
+@interface TSMessageView : UIView <NSCopying>
 
 /** The displayed title of this message */
 @property (nonatomic, readonly) NSString *title;
@@ -35,6 +35,9 @@
 
 /** The duration of the displayed message. If it is 0.0, it will automatically be calculated */
 @property (nonatomic, assign) CGFloat duration;
+
+/** The priority of the displayed message. Higher is more priority. */
+@property (nonatomic, assign) NSInteger priority;
 
 /** The position of the message (top or bottom) */
 @property (nonatomic, assign) TSMessageNotificationPosition messagePosition;
@@ -63,6 +66,7 @@
               image:(UIImage *)image
                type:(TSMessageNotificationType)notificationType
            duration:(CGFloat)duration
+           priority:(NSInteger)priority
    inViewController:(UIViewController *)viewController
            callback:(void (^)())callback
         buttonTitle:(NSString *)buttonTitle

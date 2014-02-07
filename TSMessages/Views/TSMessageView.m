@@ -37,6 +37,8 @@ static NSMutableDictionary *_notificationDesign;
 /** The view controller this message is displayed in */
 @property (nonatomic, strong) UIViewController *viewController;
 
+@property (nonatomic, assign) TSMessageNotificationType notificationType;
+@property (nonatomic, assign) BOOL dismissAble;
 
 /** Internal properties needed to resize the view on device rotation properly */
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -90,6 +92,7 @@ static NSMutableDictionary *_notificationDesign;
               image:(UIImage *)image
                type:(TSMessageNotificationType)notificationType
            duration:(CGFloat)duration
+           priority:(NSInteger) priority
    inViewController:(UIViewController *)viewController
            callback:(void (^)())callback
         buttonTitle:(NSString *)buttonTitle
@@ -105,8 +108,11 @@ static NSMutableDictionary *_notificationDesign;
         _subtitle = subtitle;
         _buttonTitle = buttonTitle;
         _duration = duration;
+        _priority = priority;
         _viewController = viewController;
         _messagePosition = position;
+        _notificationType = notificationType;
+        _dismissAble = dismissAble;
         self.callback = callback;
         self.buttonCallback = buttonCallback;
         
@@ -488,6 +494,24 @@ static NSMutableDictionary *_notificationDesign;
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     return ! ([touch.view isKindOfClass:[UIControl class]]);
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    return [[TSMessageView alloc] initWithTitle:self.title
+                                       subtitle:self.subtitle
+                                          image:self.iconImageView.image
+                                           type:self.notificationType
+                                       duration:self.duration
+                                       priority:self.priority
+                               inViewController:self.viewController
+                                       callback:self.callback
+                                    buttonTitle:self.buttonTitle
+                                 buttonCallback:self.buttonCallback
+                                     atPosition:self.messagePosition
+                              shouldBeDismissed:self.dismissAble ];
 }
 
 @end
