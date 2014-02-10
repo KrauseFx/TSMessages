@@ -450,7 +450,7 @@ static NSMutableDictionary *_notificationDesign;
 
 - (void)fadeMeOut
 {
-    [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutNotification:) withObject:self waitUntilDone:NO];
+    [[TSMessage sharedMessage] performSelectorOnMainThread:NSSelectorFromString(@"fadeOutNotification:") withObject:self waitUntilDone:NO];
 }
 
 - (void)didMoveToWindow {
