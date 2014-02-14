@@ -48,6 +48,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
     TSMessageNotificationDurationEndless = -1 // The notification is displayed until the user dismissed it or it is dismissed by calling dismissActiveNotification
 };
 
+typedef void (^TSMessageCallback)(TSMessageView *messageView);
 
 @interface TSMessage : NSObject
 
@@ -102,9 +103,9 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
                                    image:(UIImage *)image
                                     type:(TSMessageNotificationType)type
                                 duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback
+                                callback:(TSMessageCallback)callback
                              buttonTitle:(NSString *)buttonTitle
-                          buttonCallback:(void (^)())buttonCallback
+                          buttonCallback:(TSMessageCallback)buttonCallback
                               atPosition:(TSMessageNotificationPosition)messagePosition
                      canBeDismisedByUser:(BOOL)dismissingEnabled;
 

@@ -60,7 +60,7 @@
                                        duration:TSMessageNotificationDurationAutomatic
                                        callback:nil
                                     buttonTitle:NSLocalizedString(@"Update", nil)
-                                 buttonCallback:^{
+                                 buttonCallback:^(TSMessageView *messageView){
                                      [TSMessage showNotificationWithTitle:NSLocalizedString(@"Thanks for updating", nil)
                                                                      type:TSMessageNotificationTypeSuccess];
                                  }
