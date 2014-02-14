@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="udN-k3-MmQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="udN-k3-MmQ">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Demo View Controller - Second-->
@@ -81,12 +81,21 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q12-ec-HEe">
-                                <rect key="frame" x="120" y="485" width="54" height="30"/>
+                                <rect key="frame" x="73" y="485" width="54" height="30"/>
                                 <state key="normal" title="Endless">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="didTapEndless:" destination="3" eventType="touchUpInside" id="qcM-aZ-O3Z"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTy-Wa-dht">
+                                <rect key="frame" x="183" y="485" width="75" height="30"/>
+                                <state key="normal" title="Permanent">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapPermanent:" destination="3" eventType="touchUpInside" id="F0U-vO-f5A"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36v-bR-L60">
@@ -178,6 +187,7 @@
                         <constraints>
                             <constraint firstItem="zxX-aS-md3" firstAttribute="top" secondItem="17" secondAttribute="top" constant="186" id="0bX-Rg-fCt"/>
                             <constraint firstItem="pne-hG-1yy" firstAttribute="baseline" secondItem="hAh-Ka-NMA" secondAttribute="baseline" id="28g-uv-mSE"/>
+                            <constraint firstItem="Q12-ec-HEe" firstAttribute="leading" secondItem="PD8-pS-pWg" secondAttribute="leading" id="38I-79-d2Q"/>
                             <constraint firstItem="36v-bR-L60" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="20" symbolic="YES" id="4Gy-Q8-IsW"/>
                             <constraint firstItem="zLn-b7-lUs" firstAttribute="trailing" secondItem="zxX-aS-md3" secondAttribute="trailing" id="CfO-Gx-ikg"/>
                             <constraint firstAttribute="bottom" secondItem="PD8-pS-pWg" secondAttribute="bottom" constant="15" id="D6I-AW-QTy"/>
@@ -189,11 +199,12 @@
                             <constraint firstItem="zxX-aS-md3" firstAttribute="leading" secondItem="17" secondAttribute="leading" constant="20" symbolic="YES" id="Ucv-GT-hEs"/>
                             <constraint firstItem="pne-hG-1yy" firstAttribute="top" secondItem="17" secondAttribute="top" constant="124" id="UiP-5H-OND"/>
                             <constraint firstItem="zxX-aS-md3" firstAttribute="trailing" secondItem="36v-bR-L60" secondAttribute="trailing" id="Vrj-R9-WoE"/>
-                            <constraint firstItem="Q12-ec-HEe" firstAttribute="leading" secondItem="dp9-zc-ECU" secondAttribute="leading" id="VzS-Es-Ra6"/>
+                            <constraint firstItem="Q12-ec-HEe" firstAttribute="baseline" secondItem="cTy-Wa-dht" secondAttribute="baseline" id="XdM-GE-8WK"/>
                             <constraint firstAttribute="bottom" secondItem="l7u-u7-Do8" secondAttribute="bottom" constant="184" id="Zdt-Cn-M6q"/>
                             <constraint firstItem="hxl-lo-RFJ" firstAttribute="leading" secondItem="pne-hG-1yy" secondAttribute="leading" id="aQE-sc-gTU"/>
                             <constraint firstItem="zxX-aS-md3" firstAttribute="baseline" secondItem="hxl-lo-RFJ" secondAttribute="baseline" id="cNg-gf-jwn"/>
                             <constraint firstItem="Kd4-cj-zFf" firstAttribute="baseline" secondItem="hxl-lo-RFJ" secondAttribute="baseline" id="dha-21-YNZ"/>
+                            <constraint firstItem="cTy-Wa-dht" firstAttribute="leading" secondItem="Q12-ec-HEe" secondAttribute="trailing" constant="56" id="eSH-yx-4eE"/>
                             <constraint firstAttribute="trailing" secondItem="cQR-ea-6Bc" secondAttribute="trailing" constant="20" symbolic="YES" id="fPY-TX-rs5"/>
                             <constraint firstItem="l7u-u7-Do8" firstAttribute="centerX" secondItem="hxl-lo-RFJ" secondAttribute="centerX" id="l1p-rd-VKU"/>
                             <constraint firstItem="l7u-u7-Do8" firstAttribute="leading" secondItem="PD8-pS-pWg" secondAttribute="leading" id="lLU-hu-0qL"/>

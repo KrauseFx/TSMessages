@@ -68,6 +68,22 @@
                            canBeDismissedByUser:YES];
 }
 
+- (IBAction)didTapPermanent:(id)sender {
+    [TSMessage showPermanentNotificationInViewController:self
+                                                   title:NSLocalizedString(@"Permanent notification", nil)
+                                                subtitle:NSLocalizedString(@"Stays here until it gets dismissed", nil)
+                                                   image:nil
+                                                    type:TSMessageNotificationTypeMessage
+                                                callback:^(TSMessageView *messageView) {
+                                                    [TSMessage showNotificationWithTitle:NSLocalizedString(@"Action triggered", nil)
+                                                                                    type:TSMessageNotificationTypeSuccess];
+                                                } buttonTitle:NSLocalizedString(@"Dismiss", nil)
+                                          buttonCallback:^(TSMessageView *messageView) {
+                                              [messageView fadeMeOut];
+                                          } atPosition:TSMessageNotificationPositionBottom
+                                    canBeDismissedByUser:NO];
+}
+
 - (IBAction)didTapToggleNavigationBar:(id)sender {
     [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
 }
