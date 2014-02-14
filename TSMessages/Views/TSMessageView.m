@@ -10,6 +10,7 @@
 #import "HexColor.h"
 #import "TSBlurView.h"
 #import "TSMessage.h"
+#import "TSMessage+Private.h"
 
 
 #define TSMessageViewPadding 15.0
@@ -18,10 +19,6 @@
 
 
 static NSMutableDictionary *_notificationDesign;
-
-@interface TSMessage (TSMessageView)
-- (void)fadeOutNotification:(TSMessageView *)currentView; // private method of TSMessage, but called by TSMessageView in -[fadeMeOut]
-@end
 
 @interface TSMessageView () <UIGestureRecognizerDelegate>
 
@@ -450,7 +447,11 @@ static NSMutableDictionary *_notificationDesign;
 
 - (void)fadeMeOut
 {
-    [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutNotification:) withObject:self waitUntilDone:NO];
+    if (self == [TSMessage sharedMessage].currentNotification) {
+        [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutCurrentNotification) withObject:nil waitUntilDone:NO];
+    } else {
+        [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutNotification:) withObject:self waitUntilDone:NO];
+    }
 }
 
 - (void)didMoveToWindow {
