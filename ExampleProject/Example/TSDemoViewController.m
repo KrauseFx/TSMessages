@@ -60,12 +60,28 @@
                                        duration:TSMessageNotificationDurationAutomatic
                                        callback:nil
                                     buttonTitle:NSLocalizedString(@"Update", nil)
-                                 buttonCallback:^{
+                                 buttonCallback:^(TSMessageView *messageView){
                                      [TSMessage showNotificationWithTitle:NSLocalizedString(@"Thanks for updating", nil)
                                                                      type:TSMessageNotificationTypeSuccess];
                                  }
                                      atPosition:TSMessageNotificationPositionTop
                             canBeDismisedByUser:YES];
+}
+
+- (IBAction)didTapPermanent:(id)sender {
+    [TSMessage showPermanentNotificationInViewController:self
+                                                   title:NSLocalizedString(@"Permanent notification", nil)
+                                                subtitle:NSLocalizedString(@"Stays here until it gets dismissed", nil)
+                                                   image:nil
+                                                    type:TSMessageNotificationTypeMessage
+                                                callback:^(TSMessageView *messageView) {
+                                                    [TSMessage showNotificationWithTitle:NSLocalizedString(@"Action triggered", nil)
+                                                                                    type:TSMessageNotificationTypeSuccess];
+                                                } buttonTitle:NSLocalizedString(@"Dismiss", nil)
+                                          buttonCallback:^(TSMessageView *messageView) {
+                                              [messageView fadeMeOut];
+                                          } atPosition:TSMessageNotificationPositionBottom
+                                    canBeDismissedByUser:NO];
 }
 
 - (IBAction)didTapToggleNavigationBar:(id)sender {

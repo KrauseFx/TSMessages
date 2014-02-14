@@ -10,6 +10,7 @@
 #import "HexColor.h"
 #import "TSBlurView.h"
 #import "TSMessage.h"
+#import "TSMessage+Private.h"
 
 
 #define TSMessageViewPadding 15.0
@@ -18,10 +19,6 @@
 
 
 static NSMutableDictionary *_notificationDesign;
-
-@interface TSMessage (TSMessageView)
-- (void)fadeOutNotification:(TSMessageView *)currentView; // private method of TSMessage, but called by TSMessageView in -[fadeMeOut]
-@end
 
 @interface TSMessageView () <UIGestureRecognizerDelegate>
 
@@ -50,8 +47,8 @@ static NSMutableDictionary *_notificationDesign;
 @property (nonatomic, assign) CGFloat textSpaceLeft;
 @property (nonatomic, assign) CGFloat textSpaceRight;
 
-@property (copy) void (^callback)();
-@property (copy) void (^buttonCallback)();
+@property (copy) TSMessageCallback callback;
+@property (copy) TSMessageCallback buttonCallback;
 
 - (CGFloat)updateHeightOfMessageView;
 - (void)layoutSubviews;
@@ -91,9 +88,9 @@ static NSMutableDictionary *_notificationDesign;
                type:(TSMessageNotificationType)notificationType
            duration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
-           callback:(void (^)())callback
+           callback:(TSMessageCallback)callback
         buttonTitle:(NSString *)buttonTitle
-     buttonCallback:(void (^)())buttonCallback
+     buttonCallback:(TSMessageCallback)buttonCallback
          atPosition:(TSMessageNotificationPosition)position
   shouldBeDismissed:(BOOL)dismissAble
 {
@@ -450,7 +447,11 @@ static NSMutableDictionary *_notificationDesign;
 
 - (void)fadeMeOut
 {
-    [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutNotification:) withObject:self waitUntilDone:NO];
+    if (self == [TSMessage sharedMessage].currentNotification) {
+        [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutCurrentNotification) withObject:nil waitUntilDone:NO];
+    } else {
+        [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutNotification:) withObject:self waitUntilDone:NO];
+    }
 }
 
 - (void)didMoveToWindow {
@@ -466,7 +467,7 @@ static NSMutableDictionary *_notificationDesign;
 {
     if (self.buttonCallback)
     {
-        self.buttonCallback();
+        self.buttonCallback(self);
     }
     
     [self fadeMeOut];
@@ -478,7 +479,7 @@ static NSMutableDictionary *_notificationDesign;
     {
         if (self.callback)
         {
-            self.callback();
+            self.callback(self);
         }
     }
 }

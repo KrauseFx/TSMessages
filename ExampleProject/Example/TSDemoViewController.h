@@ -23,5 +23,6 @@
 - (IBAction)didTapBottom:(id)sender;
 - (IBAction)didTapText:(id)sender;
 - (IBAction)didTapCustomDesign:(id)sender;
+- (IBAction)didTapPermanent:(id)sender;
 
 @end
