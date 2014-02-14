@@ -50,8 +50,8 @@ static NSMutableDictionary *_notificationDesign;
 @property (nonatomic, assign) CGFloat textSpaceLeft;
 @property (nonatomic, assign) CGFloat textSpaceRight;
 
-@property (copy) void (^callback)();
-@property (copy) void (^buttonCallback)();
+@property (copy) TSMessageCallback callback;
+@property (copy) TSMessageCallback buttonCallback;
 
 - (CGFloat)updateHeightOfMessageView;
 - (void)layoutSubviews;
@@ -91,9 +91,9 @@ static NSMutableDictionary *_notificationDesign;
                type:(TSMessageNotificationType)notificationType
            duration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
-           callback:(void (^)())callback
+           callback:(TSMessageCallback)callback
         buttonTitle:(NSString *)buttonTitle
-     buttonCallback:(void (^)())buttonCallback
+     buttonCallback:(TSMessageCallback)buttonCallback
          atPosition:(TSMessageNotificationPosition)position
 canBeDismissedByUser:(BOOL)dismissingEnabled
 {
@@ -466,7 +466,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 {
     if (self.buttonCallback)
     {
-        self.buttonCallback();
+        self.buttonCallback(self);
     }
     
     [self fadeMeOut];
@@ -478,7 +478,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     {
         if (self.callback)
         {
-            self.callback();
+            self.callback(self);
         }
     }
 }

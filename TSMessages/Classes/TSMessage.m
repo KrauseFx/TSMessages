@@ -90,9 +90,9 @@ __weak static UIViewController *_defaultViewController;
                                    image:(UIImage *)image
                                     type:(TSMessageNotificationType)type
                                 duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback
+                                callback:(TSMessageCallback)callback
                              buttonTitle:(NSString *)buttonTitle
-                          buttonCallback:(void (^)())buttonCallback
+                          buttonCallback:(TSMessageCallback)buttonCallback
                               atPosition:(TSMessageNotificationPosition)messagePosition
                     canBeDismissedByUser:(BOOL)dismissingEnabled
 {
