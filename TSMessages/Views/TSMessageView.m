@@ -469,8 +469,6 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     {
         self.buttonCallback(self);
     }
-    
-    [self fadeMeOut];
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tapGesture
