@@ -166,8 +166,4 @@ typedef void (^TSMessageCallback)(TSMessageView *messageView);
  You don't have to use this method. */
 + (void)prepareNotificationToBeShown:(TSMessageView *)messageView;
 
-/** Indicates whether currently the iOS 7 style of TSMessages is used
- This depends on the Base SDK and the currently used device */
-+ (BOOL)iOS7StyleEnabled;
-
 @end

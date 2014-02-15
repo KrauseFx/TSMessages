@@ -11,16 +11,44 @@
 #import "TSMessage.h"
 #import "TSMessageView.h"
 
+@interface TSDemoViewController ()
+
+@property (nonatomic) BOOL hideStatusbar;
+
+@end
+
 @implementation TSDemoViewController
+
+- (void)awakeFromNib
+{
+    self.hideStatusbar = NO;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [TSMessage setDefaultViewController:self];
-    self.wantsFullScreenLayout = YES;
+    
     [self.navigationController.navigationBar setTranslucent:YES];
 }
+
+- (void)setHideStatusbar:(BOOL)hideStatusbar {
+    _hideStatusbar = hideStatusbar;
+    
+    [self setNeedsStatusBarAppearanceUpdate];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return self.hideStatusbar;
+}
+
+- (CGFloat)navigationbarBottomOfViewController:(UIViewController *)viewController
+{
+    return 55;
+}
+
+#pragma mark Actions
 
 - (IBAction)didTapError:(id)sender
 {
@@ -87,13 +115,15 @@
 - (IBAction)didTapToggleNavigationBar:(id)sender {
     [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
 }
+
 - (IBAction)didTapToggleNavigationBarAlpha:(id)sender {
     CGFloat alpha = self.navigationController.navigationBar.alpha;
-    self.navigationController.navigationBar.alpha = (alpha==1.f)?0.5:1;
+    
+    self.navigationController.navigationBar.alpha = (alpha == 1.f) ? 0.5 : 1;
 }
-- (IBAction)didTapToggleWantsFullscreen:(id)sender {
-    self.wantsFullScreenLayout = !self.wantsFullScreenLayout;
-    [self.navigationController.navigationBar setTranslucent:!self.navigationController.navigationBar.isTranslucent];
+
+- (IBAction)didTapToggleStatusbar:(id)sender {
+    self.hideStatusbar = !self.hideStatusbar;
 }
 
 - (IBAction)didTapCustomImage:(id)sender
@@ -175,16 +205,6 @@
     [TSMessage showNotificationWithTitle:NSLocalizedString(@"Updated to custom design file", nil)
                                     subtitle:NSLocalizedString(@"From now on, all the titles of success messages are larger", nil)
                                     type:TSMessageNotificationTypeSuccess];
-}
-
-
-
-
-
-
-- (CGFloat)navigationbarBottomOfViewController:(UIViewController *)viewController
-{
-    return 55;
 }
 
 @end

@@ -145,24 +145,10 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             image = [UIImage imageNamed:[current valueForKey:@"imageName"]];
         }
         
-        if (![TSMessage iOS7StyleEnabled])
-        {
-            self.alpha = 0.0;
-            
-            // add background image here
-            UIImage *backgroundImage = [[UIImage imageNamed:[current valueForKey:@"backgroundImageName"]] stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0];
-            _backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
-            self.backgroundImageView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
-            [self addSubview:self.backgroundImageView];
-        }
-        else
-        {
-            // On iOS 7 and above use a blur layer instead (not yet finished)
-            _backgroundBlurView = [[TSBlurView alloc] init];
-            self.backgroundBlurView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
-            self.backgroundBlurView.blurTintColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
-            [self addSubview:self.backgroundBlurView];
-        }
+        _backgroundBlurView = [[TSBlurView alloc] init];
+        self.backgroundBlurView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+        self.backgroundBlurView.blurTintColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
+        [self addSubview:self.backgroundBlurView];
         
         UIColor *fontColor = [UIColor colorWithHexString:[current valueForKey:@"textColor"]
                                                    alpha:1.0];
@@ -276,20 +262,6 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             
             self.textSpaceRight = self.button.frame.size.width + TSMessageViewPadding;
         }
-        
-        // Add a border on the bottom (or on the top, depending on the view's postion)
-        if (![TSMessage iOS7StyleEnabled])
-        {
-            _borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0,
-                                                                   0.0, // will be set later
-                                                                   screenWidth,
-                                                                   [[current valueForKey:@"borderHeight"] floatValue])];
-            self.borderView.backgroundColor = [UIColor colorWithHexString:[current valueForKey:@"borderColor"]
-                                                                    alpha:1.0];
-            self.borderView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
-            [self addSubview:self.borderView];
-        }
-        
         
         CGFloat actualHeight = [self updateHeightOfMessageView]; // this call also takes care of positioning the labels
         CGFloat topPosition = -actualHeight;
@@ -409,28 +381,25 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                                         currentHeight);
     
     // increase frame of background view because of the spring animation
-    if ([TSMessage iOS7StyleEnabled])
+    if (self.messagePosition == TSMessageNotificationPositionTop)
     {
-        if (self.messagePosition == TSMessageNotificationPositionTop)
-        {
-            float topOffset = 0.f;
-            
-            UINavigationController *navigationController = self.viewController.navigationController;
-            if (!navigationController && [self.viewController isKindOfClass:[UINavigationController class]]) {
-                navigationController = (UINavigationController *)self.viewController;
-            }
-            BOOL isNavBarIsHidden = !navigationController || self.viewController.navigationController.navigationBarHidden;
-            BOOL isNavBarIsOpaque = !self.viewController.navigationController.navigationBar.isTranslucent && self.viewController.navigationController.navigationBar.alpha == 1;
-            
-            if (isNavBarIsHidden || isNavBarIsOpaque) {
-                topOffset = -30.f;
-            }
-            backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(topOffset, 0.f, 0.f, 0.f));
+        float topOffset = 0.f;
+        
+        UINavigationController *navigationController = self.viewController.navigationController;
+        if (!navigationController && [self.viewController isKindOfClass:[UINavigationController class]]) {
+            navigationController = (UINavigationController *)self.viewController;
         }
-        else if (self.messagePosition == TSMessageNotificationPositionBottom)
-        {
-            backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(0.f, 0.f, -30.f, 0.f));
+        BOOL isNavBarIsHidden = !navigationController || self.viewController.navigationController.navigationBarHidden;
+        BOOL isNavBarIsOpaque = !self.viewController.navigationController.navigationBar.isTranslucent && self.viewController.navigationController.navigationBar.alpha == 1;
+        
+        if (isNavBarIsHidden || isNavBarIsOpaque) {
+            topOffset = -30.f;
         }
+        backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(topOffset, 0.f, 0.f, 0.f));
+    }
+    else if (self.messagePosition == TSMessageNotificationPositionBottom)
+    {
+        backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(0.f, 0.f, -30.f, 0.f));
     }
     
     self.backgroundImageView.frame = backgroundFrame;

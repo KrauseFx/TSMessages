@@ -203,30 +203,33 @@ __weak static UIViewController *_defaultViewController;
 
     if ([messageView.viewController isKindOfClass:[UINavigationController class]] || [messageView.viewController.parentViewController isKindOfClass:[UINavigationController class]])
     {
-        UINavigationController *currentNavigationController;
+        UINavigationController *navigationController;
+        UIViewController *viewController = messageView.viewController;
 
-        if([messageView.viewController isKindOfClass:[UINavigationController class]])
-            currentNavigationController = (UINavigationController *)messageView.viewController;
+        if ([viewController isKindOfClass:[UINavigationController class]])
+            navigationController = (UINavigationController *)viewController;
         else
-            currentNavigationController = (UINavigationController *)messageView.viewController.parentViewController;
+            navigationController = (UINavigationController *)viewController.parentViewController;
 
-        BOOL isViewIsUnderStatusBar = [[[currentNavigationController childViewControllers] firstObject] wantsFullScreenLayout];
-        if (!isViewIsUnderStatusBar && currentNavigationController.parentViewController == nil) {
-            isViewIsUnderStatusBar = ![currentNavigationController isNavigationBarHidden]; // strange but true
+        viewController = [[navigationController childViewControllers] firstObject];
+        
+        BOOL isViewIsUnderStatusBar = ![viewController prefersStatusBarHidden];
+        
+        if (!isViewIsUnderStatusBar && navigationController.parentViewController == nil) {
+            isViewIsUnderStatusBar = ![navigationController isNavigationBarHidden]; // strange but true
         }
-        if (![currentNavigationController isNavigationBarHidden])
+        
+        if (![navigationController isNavigationBarHidden])
         {
-            [currentNavigationController.view insertSubview:messageView
-                                               belowSubview:[currentNavigationController navigationBar]];
-            verticalOffset = [currentNavigationController navigationBar].bounds.size.height;
-            if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
-                addStatusBarHeightToVerticalOffset();
-            }
+            [navigationController.view insertSubview:messageView
+                                               belowSubview:[navigationController navigationBar]];
+            verticalOffset = [navigationController navigationBar].bounds.size.height;
+            addStatusBarHeightToVerticalOffset();
         }
         else
         {
             [messageView.viewController.view addSubview:messageView];
-            if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
+            if (isViewIsUnderStatusBar) {
                 addStatusBarHeightToVerticalOffset();
             }
         }
@@ -234,9 +237,7 @@ __weak static UIViewController *_defaultViewController;
     else
     {
         [messageView.viewController.view addSubview:messageView];
-        if ([TSMessage iOS7StyleEnabled]) {
-            addStatusBarHeightToVerticalOffset();
-        }
+        addStatusBarHeightToVerticalOffset();
     }
 
     CGPoint toPoint;
@@ -261,31 +262,19 @@ __weak static UIViewController *_defaultViewController;
 
     dispatch_block_t animationBlock = ^{
         messageView.center = toPoint;
-        if (![TSMessage iOS7StyleEnabled]) {
-            messageView.alpha = TSMessageViewAlpha;
-        }
     };
+    
     void(^completionBlock)(BOOL) = ^(BOOL finished) {
         messageView.messageIsFullyDisplayed = YES;
     };
 
-    if (![TSMessage iOS7StyleEnabled]) {
-        [UIView animateWithDuration:kTSMessageAnimationDuration
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
-                         animations:animationBlock
-                         completion:completionBlock];
-    } else {
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-        [UIView animateWithDuration:kTSMessageAnimationDuration + 0.1
-                              delay:0
-             usingSpringWithDamping:0.8
-              initialSpringVelocity:0.f
-                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
-                         animations:animationBlock
-                         completion:completionBlock];
-#endif
-    }
+    [UIView animateWithDuration:kTSMessageAnimationDuration + 0.1
+                          delay:0
+         usingSpringWithDamping:0.8
+          initialSpringVelocity:0.f
+                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
+                     animations:animationBlock
+                     completion:completionBlock];
 
     if (messageView.duration == TSMessageNotificationDurationAutomatic)
     {
@@ -326,9 +315,6 @@ __weak static UIViewController *_defaultViewController;
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
      {
          messageView.center = fadeOutToPoint;
-         if (![TSMessage iOS7StyleEnabled]) {
-             messageView.alpha = 0.f;
-         }
      } completion:^(BOOL finished)
      {
          [messageView removeFromSuperview];
@@ -385,9 +371,7 @@ __weak static UIViewController *_defaultViewController;
     [TSMessageView addNotificationDesignFromFile:fileName];
 }
 
-
 #pragma mark Other methods
-
 
 + (BOOL)isNotificationActive
 {
@@ -403,21 +387,6 @@ __weak static UIViewController *_defaultViewController;
         defaultViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     }
     return defaultViewController;
-}
-
-+ (BOOL)iOS7StyleEnabled
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // Decide wheter to use iOS 7 style or not based on the running device and the base sdk
-        BOOL iOS7SDK = NO;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-        iOS7SDK = YES;
-#endif
-
-        _useiOS7Style = ! (TS_SYSTEM_VERSION_LESS_THAN(@"7.0") || !iOS7SDK);
-    });
-    return _useiOS7Style;
 }
 
 @end

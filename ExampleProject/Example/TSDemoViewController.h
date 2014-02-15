@@ -11,7 +11,6 @@
 
 @interface TSDemoViewController : UIViewController <TSMessageViewProtocol>
 
-
 - (IBAction)didTapError:(id)sender;
 - (IBAction)didTapWarning:(id)sender;
 - (IBAction)didTapMessage:(id)sender;
