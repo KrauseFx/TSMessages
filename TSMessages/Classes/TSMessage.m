@@ -30,9 +30,6 @@
 static TSMessage *sharedMessage;
 static BOOL notificationActive;
 
-static BOOL _useiOS7Style;
-
-
 __weak static UIViewController *_defaultViewController;
 
 + (TSMessage *)sharedMessage
