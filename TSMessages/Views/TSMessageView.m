@@ -140,7 +140,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         current = [notificationDesign valueForKey:currentString];
         
         
-        if (!image && [current valueForKey:@"imageName"])
+        if (!image && [current valueForKey:@"imageName"] != [NSNull null] && [[current valueForKey:@"imageName"] length])
         {
             image = [UIImage imageNamed:[current valueForKey:@"imageName"]];
         }
