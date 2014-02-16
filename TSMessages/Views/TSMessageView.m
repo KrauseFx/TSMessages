@@ -67,8 +67,8 @@ static NSMutableDictionary *_notificationDesign;
     {
         NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:TSDesignFileName];
         _notificationDesign = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
-                                                                                      options:kNilOptions
-                                                                                        error:nil]];
+                                                                                                            options:kNilOptions
+                                                                                                              error:nil]];
     }
     
     return _notificationDesign;
@@ -79,8 +79,8 @@ static NSMutableDictionary *_notificationDesign;
 {
     NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:filename];
     NSDictionary *design = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
-                                                          options:kNilOptions
-                                                            error:nil];
+                                                           options:kNilOptions
+                                                             error:nil];
     
     [[TSMessageView notificationDesign] addEntriesFromDictionary:design];
 }
@@ -95,7 +95,7 @@ static NSMutableDictionary *_notificationDesign;
         buttonTitle:(NSString *)buttonTitle
      buttonCallback:(void (^)())buttonCallback
          atPosition:(TSMessageNotificationPosition)position
-  shouldBeDismissed:(BOOL)dismissAble
+canBeDismissedByUser:(BOOL)dismissingEnabled
 {
     NSDictionary *notificationDesign = [TSMessageView notificationDesign];
     
@@ -141,7 +141,7 @@ static NSMutableDictionary *_notificationDesign;
         }
         
         current = [notificationDesign valueForKey:currentString];
-
+        
         
         if (!image && [current valueForKey:@"imageName"])
         {
@@ -313,7 +313,7 @@ static NSMutableDictionary *_notificationDesign;
             self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
         }
         
-        if (dismissAble)
+        if (dismissingEnabled)
         {
             UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                                                              action:@selector(fadeMeOut)];
@@ -404,20 +404,20 @@ static NSMutableDictionary *_notificationDesign;
                                        self.button.frame.size.width,
                                        self.button.frame.size.height);
     }
-
-
+    
+    
     CGRect backgroundFrame = CGRectMake(self.backgroundImageView.frame.origin.x,
                                         self.backgroundImageView.frame.origin.y,
                                         screenWidth,
                                         currentHeight);
-
+    
     // increase frame of background view because of the spring animation
     if ([TSMessage iOS7StyleEnabled])
     {
         if (self.messagePosition == TSMessageNotificationPositionTop)
         {
             float topOffset = 0.f;
-
+            
             UINavigationController *navigationController = self.viewController.navigationController;
             if (!navigationController && [self.viewController isKindOfClass:[UINavigationController class]]) {
                 navigationController = (UINavigationController *)self.viewController;
@@ -435,7 +435,7 @@ static NSMutableDictionary *_notificationDesign;
             backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(0.f, 0.f, -30.f, 0.f));
         }
     }
-
+    
     self.backgroundImageView.frame = backgroundFrame;
     self.backgroundBlurView.frame = backgroundFrame;
     
