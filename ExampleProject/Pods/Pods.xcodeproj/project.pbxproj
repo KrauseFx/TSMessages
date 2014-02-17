@@ -58,6 +58,7 @@
 		24F689F22A5A42809DBA68A7 /* TSBlurView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSBlurView.m; path = TSMessages/Views/TSBlurView.m; sourceTree = "<group>"; };
 		29BDFA547266427AA426611F /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
 		2E35B5F218AED63C0000C422 /* TSMessage+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TSMessage+Private.h"; path = "TSMessages/Classes/TSMessage+Private.h"; sourceTree = "<group>"; };
+		2EA90CF918B2AB60008B71EF /* TSMessageView+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TSMessageView+Private.h"; path = "TSMessages/Views/TSMessageView+Private.h"; sourceTree = "<group>"; };
 		3B17E30CA6F248738B1CCE1F /* TSBlurView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TSBlurView.h; path = TSMessages/Views/TSBlurView.h; sourceTree = "<group>"; };
 		3DED0B6E248A4FBEB11DFB7D /* Pods-HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-HexColors-prefix.pch"; sourceTree = "<group>"; };
 		3EEBBA57508D41E99C45BA64 /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "NotificationButtonBackground@2x.png"; path = "TSMessages/Resources/Images/NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
@@ -152,6 +153,7 @@
 				E6F8608730F84A098DEB8A05 /* TSMessage.h */,
 				2E35B5F218AED63C0000C422 /* TSMessage+Private.h */,
 				53202C8D4E6B4B018F7C74D6 /* TSMessageView.h */,
+				2EA90CF918B2AB60008B71EF /* TSMessageView+Private.h */,
 				24F689F22A5A42809DBA68A7 /* TSBlurView.m */,
 				09E89CC7D8724A98B872DF42 /* TSMessage.m */,
 				BEBBB8EDFAD74B189406A0B0 /* TSMessageView.m */,

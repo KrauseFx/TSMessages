@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>82A6ACD6-46DE-447A-A964-E17104032B30</string>
+	<string>AE4EFDAC-4D12-4D15-A6B2-1AAEAC767CAB</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Example</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>D20D76B5-659E-40F1-BC19-299E96EF607D</key>
-		<string>https://github.com/onato/TSMessages.git</string>
+		<key>CBF9685F-3E4F-4E6C-92E3-4DF0D18A1180</key>
+		<string>ssh://github.com/dennisreimann/TSMessages.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ExampleProject/Example.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>D20D76B5-659E-40F1-BC19-299E96EF607D</key>
+		<key>CBF9685F-3E4F-4E6C-92E3-4DF0D18A1180</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/onato/TSMessages.git</string>
+	<string>ssh://github.com/dennisreimann/TSMessages.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D20D76B5-659E-40F1-BC19-299E96EF607D</string>
+	<string>CBF9685F-3E4F-4E6C-92E3-4DF0D18A1180</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D20D76B5-659E-40F1-BC19-299E96EF607D</string>
+			<string>CBF9685F-3E4F-4E6C-92E3-4DF0D18A1180</string>
 			<key>IDESourceControlWCCName</key>
 			<string>TSMessages</string>
 		</dict>

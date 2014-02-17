@@ -10,13 +10,10 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface TSBlurView ()
-
 @property (nonatomic, strong) UIToolbar *toolbar;
-
 @end
 
 @implementation TSBlurView
-
 
 - (UIToolbar *)toolbar
 {
