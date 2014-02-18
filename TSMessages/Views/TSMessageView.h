@@ -59,7 +59,7 @@
  @param buttonTitle The title for button (optional)
  @param buttonCallback The block that should be executed, when the user tapped on the button
  @param position The position of the message on the screen
- @param dismissAble Should this message be dismissed when the user taps/swipes it?
+ @param dismissingEnabled Should this message be dismissed when the user taps/swipes it?
  @param textAlign The align of the message on the screen
  */
 - (id)initWithTitle:(NSString *)title
@@ -72,7 +72,7 @@
         buttonTitle:(NSString *)buttonTitle
      buttonCallback:(void (^)())buttonCallback
          atPosition:(TSMessageNotificationPosition)position
-  shouldBeDismissed:(BOOL)dismissAble
+canBeDismissedByUser:(BOOL)dismissingEnabled
           textAlign:(NSTextAlignment)alignment;
 
 

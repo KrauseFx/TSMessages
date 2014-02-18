@@ -95,7 +95,7 @@ static NSMutableDictionary *_notificationDesign;
         buttonTitle:(NSString *)buttonTitle
      buttonCallback:(void (^)())buttonCallback
          atPosition:(TSMessageNotificationPosition)position
-  shouldBeDismissed:(BOOL)dismissAble
+canBeDismissedByUser:(BOOL)dismissingEnabled
           textAlign:(NSTextAlignment)alignment
 {
     NSDictionary *notificationDesign = [TSMessageView notificationDesign];
@@ -327,7 +327,7 @@ static NSMutableDictionary *_notificationDesign;
             self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
         }
         
-        if (dismissAble)
+        if (dismissingEnabled)
         {
             UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                                                              action:@selector(fadeMeOut)];
