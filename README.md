@@ -1,6 +1,13 @@
 TSMessages
 ==========
 
+**Edit** by [Ricardo Pereira](http://twitter.com/ricardopereiraw)
+* Add text align support
+
+--------
+
+** Original **
+
 This framework provides an easy to use class to show little notification views on the top of the screen. (à la Tweetbot).
 
 The notification moves from the top of the screen underneath the navigation bar and stays there for a few seconds, depending on the length of the displayed text. To dismiss a notification before the time runs out, the user can swipe it to the top or just tap it.
