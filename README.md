@@ -1,12 +1,12 @@
 TSMessages
 ==========
 
-**Edit** by [Ricardo Pereira](http://twitter.com/ricardopereiraw)
+**Edited** by [Ricardo Pereira](http://twitter.com/ricardopereiraw)
 * Add text align support
 
 --------
 
-** Original **
+**Original**
 
 This framework provides an easy to use class to show little notification views on the top of the screen. (à la Tweetbot).
 
@@ -117,4 +117,4 @@ Changes
 
 TODOs
 -----
-Currently empty
+* iOS 7: Blur effect
