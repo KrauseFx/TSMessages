@@ -67,8 +67,8 @@ static NSMutableDictionary *_notificationDesign;
     {
         NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:TSDesignFileName];
         _notificationDesign = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
-                                                                                                            options:kNilOptions
-                                                                                                              error:nil]];
+                                                                                      options:kNilOptions
+                                                                                        error:nil]];
     }
     
     return _notificationDesign;
@@ -79,8 +79,8 @@ static NSMutableDictionary *_notificationDesign;
 {
     NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:filename];
     NSDictionary *design = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
-                                                           options:kNilOptions
-                                                             error:nil];
+                                                          options:kNilOptions
+                                                            error:nil];
     
     [[TSMessageView notificationDesign] addEntriesFromDictionary:design];
 }
@@ -96,6 +96,7 @@ static NSMutableDictionary *_notificationDesign;
      buttonCallback:(void (^)())buttonCallback
          atPosition:(TSMessageNotificationPosition)position
 canBeDismissedByUser:(BOOL)dismissingEnabled
+          textAlign:(NSTextAlignment)alignment
 {
     NSDictionary *notificationDesign = [TSMessageView notificationDesign];
     
@@ -107,6 +108,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         _duration = duration;
         _viewController = viewController;
         _messagePosition = position;
+        _messageAlignment = alignment;
         self.callback = callback;
         self.buttonCallback = buttonCallback;
         
@@ -141,7 +143,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         }
         
         current = [notificationDesign valueForKey:currentString];
-        
+
         
         if (!image && [current valueForKey:@"imageName"])
         {
@@ -191,6 +193,13 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                                                     [[current valueForKey:@"shadowOffsetY"] floatValue])];
         self.titleLabel.numberOfLines = 0;
         self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        // Check alignment: layout has priority!
+        int align = [[current valueForKey:@"textAlignment"] intValue];
+        if (align > 0)
+            self.titleLabel.textAlignment = align;
+        else
+            self.titleLabel.textAlignment = self.messageAlignment;
+        
         [self addSubview:self.titleLabel];
         
         // Set up content label (if set)
@@ -217,7 +226,12 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             [self.contentLabel setShadowOffset:self.titleLabel.shadowOffset];
             self.contentLabel.lineBreakMode = self.titleLabel.lineBreakMode;
             self.contentLabel.numberOfLines = 0;
-            
+            // Check alignment: layout has priority!
+            if (align > 0)
+                self.contentLabel.textAlignment = align;
+            else
+                self.contentLabel.textAlignment = self.messageAlignment;
+
             [self addSubview:self.contentLabel];
         }
         
@@ -347,6 +361,11 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                                        0.0);
     [self.titleLabel sizeToFit];
     
+    // for title text alignment
+    CGRect currFrame = self.titleLabel.frame;
+    
+    self.titleLabel.frame = CGRectMake(currFrame.origin.x, currFrame.origin.y, screenWidth - TSMessageViewPadding - self.iconImageView.frame.origin.x - self.iconImageView.frame.size.width - TSMessageViewPadding - self.textSpaceLeft - self.textSpaceRight, currFrame.size.height);
+    
     if ([self.subtitle length])
     {
         self.contentLabel.frame = CGRectMake(self.textSpaceLeft,
@@ -354,6 +373,11 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                                              screenWidth - TSMessageViewPadding - self.textSpaceLeft - self.textSpaceRight,
                                              0.0);
         [self.contentLabel sizeToFit];
+        
+        // for content text alignment
+        currFrame = self.contentLabel.frame;
+        
+        self.contentLabel.frame = CGRectMake(currFrame.origin.x, currFrame.origin.y, screenWidth - TSMessageViewPadding - self.iconImageView.frame.origin.x - self.iconImageView.frame.size.width - TSMessageViewPadding - self.textSpaceLeft - self.textSpaceRight, currFrame.size.height);
         
         currentHeight = self.contentLabel.frame.origin.y + self.contentLabel.frame.size.height;
     }
@@ -404,20 +428,20 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                                        self.button.frame.size.width,
                                        self.button.frame.size.height);
     }
-    
-    
+
+
     CGRect backgroundFrame = CGRectMake(self.backgroundImageView.frame.origin.x,
                                         self.backgroundImageView.frame.origin.y,
                                         screenWidth,
                                         currentHeight);
-    
+
     // increase frame of background view because of the spring animation
     if ([TSMessage iOS7StyleEnabled])
     {
         if (self.messagePosition == TSMessageNotificationPositionTop)
         {
             float topOffset = 0.f;
-            
+
             UINavigationController *navigationController = self.viewController.navigationController;
             if (!navigationController && [self.viewController isKindOfClass:[UINavigationController class]]) {
                 navigationController = (UINavigationController *)self.viewController;
@@ -435,7 +459,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(0.f, 0.f, -30.f, 0.f));
         }
     }
-    
+
     self.backgroundImageView.frame = backgroundFrame;
     self.backgroundBlurView.frame = backgroundFrame;
     

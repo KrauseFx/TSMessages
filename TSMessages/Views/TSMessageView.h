@@ -39,6 +39,9 @@
 /** The position of the message (top or bottom) */
 @property (nonatomic, assign) TSMessageNotificationPosition messagePosition;
 
+/** The alignment of the message (left, center, right, justified, natural) */
+@property (nonatomic, assign) NSTextAlignment messageAlignment;
+
 /** Is the message currenlty fully displayed? Is set as soon as the message is really fully visible */
 @property (nonatomic, assign) BOOL messageIsFullyDisplayed;
 
@@ -57,6 +60,7 @@
  @param buttonCallback The block that should be executed, when the user tapped on the button
  @param position The position of the message on the screen
  @param dismissingEnabled Should this message be dismissed when the user taps/swipes it?
+ @param textAlign The align of the message on the screen
  */
 - (id)initWithTitle:(NSString *)title
            subtitle:(NSString *)subtitle
@@ -68,7 +72,9 @@
         buttonTitle:(NSString *)buttonTitle
      buttonCallback:(void (^)())buttonCallback
          atPosition:(TSMessageNotificationPosition)position
-canBeDismissedByUser:(BOOL)dismissingEnabled;
+canBeDismissedByUser:(BOOL)dismissingEnabled
+          textAlign:(NSTextAlignment)alignment;
+
 
 /** Fades out this notification view */
 - (void)fadeMeOut;

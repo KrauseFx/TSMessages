@@ -80,7 +80,8 @@ __weak static UIViewController *_defaultViewController;
                                buttonTitle:nil
                             buttonCallback:nil
                                 atPosition:TSMessageNotificationPositionTop
-                      canBeDismissedByUser:YES];
+                      canBeDismissedByUser:YES
+                                 textAlign:NSTextAlignmentLeft];
 }
 
 
@@ -95,6 +96,7 @@ __weak static UIViewController *_defaultViewController;
                           buttonCallback:(void (^)())buttonCallback
                               atPosition:(TSMessageNotificationPosition)messagePosition
                     canBeDismissedByUser:(BOOL)dismissingEnabled
+                               textAlign:(NSTextAlignment)messageAlign
 {
     // Create the TSMessageView
     TSMessageView *v = [[TSMessageView alloc] initWithTitle:title
@@ -107,7 +109,8 @@ __weak static UIViewController *_defaultViewController;
                                                 buttonTitle:buttonTitle
                                              buttonCallback:buttonCallback
                                                  atPosition:messagePosition
-                                       canBeDismissedByUser:dismissingEnabled];
+                                       canBeDismissedByUser:dismissingEnabled
+                                                  textAlign:messageAlign];
     [self prepareNotificationToBeShown:v];
 }
 
@@ -170,7 +173,7 @@ __weak static UIViewController *_defaultViewController;
             currentNavigationController = (UINavigationController *)currentView.viewController;
         else
             currentNavigationController = (UINavigationController *)currentView.viewController.parentViewController;
-        
+
         BOOL isViewIsUnderStatusBar = [[[currentNavigationController childViewControllers] firstObject] wantsFullScreenLayout];
         if (!isViewIsUnderStatusBar && currentNavigationController.parentViewController == nil) {
             isViewIsUnderStatusBar = ![currentNavigationController isNavigationBarHidden]; // strange but true
@@ -219,7 +222,7 @@ __weak static UIViewController *_defaultViewController;
         }
         toPoint = CGPointMake(currentView.center.x, y);
     }
-    
+
     dispatch_block_t animationBlock = ^{
         currentView.center = toPoint;
         if (![TSMessage iOS7StyleEnabled]) {
@@ -361,7 +364,7 @@ __weak static UIViewController *_defaultViewController;
         // Decide wheter to use iOS 7 style or not based on the running device and the base sdk
         BOOL iOS7SDK = NO;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-        iOS7SDK = YES;
+            iOS7SDK = YES;
 #endif
         
         _useiOS7Style = ! (TS_SYSTEM_VERSION_LESS_THAN(@"7.0") || !iOS7SDK);
