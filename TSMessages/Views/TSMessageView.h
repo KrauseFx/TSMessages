@@ -47,7 +47,4 @@
 /** Enables dismissing the message by swiping */
 - (void)setUserDismissEnabled;
 - (void)setUserDismissEnabledWithCallback:(TSMessageCallback)callback;
-
-/** Use this method to load a custom design file */
-+ (void)addNotificationDesignFromFile:(NSString *)file;
 @end

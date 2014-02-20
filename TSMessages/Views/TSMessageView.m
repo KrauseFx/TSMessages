@@ -14,9 +14,6 @@
 #import "TSMessageView+Private.h"
 
 #define TSMessageViewPadding 15.0
-#define TSDesignFileName @"TSMessagesDefaultDesign.json"
-
-static NSMutableDictionary *_notificationDesign;
 
 @interface TSMessageView () <UIGestureRecognizerDelegate>
 @property (nonatomic) NSDictionary *config;
@@ -66,7 +63,7 @@ static NSMutableDictionary *_notificationDesign;
         default: config = @"message"; break;
     }
     
-    self.config = [TSMessageView notificationDesign][config];
+    self.config = [TSMessage notificationDesign][config];
 }
 
 - (void)setupBackgroundView
@@ -353,33 +350,6 @@ static NSMutableDictionary *_notificationDesign;
     {
         [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutNotification:) withObject:self waitUntilDone:NO];
     }
-}
-
-#pragma mark - Custom design
-
-+ (NSMutableDictionary *)notificationDesign
-{
-    if (!_notificationDesign)
-    {
-        NSError *error = nil;
-        NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:TSDesignFileName];
-        NSData *data = [NSData dataWithContentsOfFile:path];
-        NSDictionary *config = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        _notificationDesign = [NSMutableDictionary dictionaryWithDictionary:config];
-    }
-    
-    return _notificationDesign;
-}
-
-
-+ (void)addNotificationDesignFromFile:(NSString *)filename
-{
-    NSError *error = nil;
-    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:filename];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    NSDictionary *design = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-    
-    [[TSMessageView notificationDesign] addEntriesFromDictionary:design];
 }
 
 #pragma mark - UIGestureRecognizerDelegate

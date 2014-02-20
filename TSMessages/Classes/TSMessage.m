@@ -13,6 +13,7 @@
 #define kTSMessageDisplayTime 1.5
 #define kTSMessageAnimationDuration 0.3
 #define kTSMessageExtraDisplayTimePerPixel 0.04
+#define kTSDesignFileName @"TSMessagesDefaultDesign.json"
 
 @interface TSMessage ()
 @property (nonatomic, strong) NSMutableArray *messages;
@@ -20,8 +21,9 @@
 
 @implementation TSMessage
 
-static TSMessage *_sharedMessage;
 static BOOL _notificationActive;
+static TSMessage *_sharedMessage;
+static NSMutableDictionary *_notificationDesign;
 
 __weak static UIViewController *_defaultViewController;
 
@@ -122,11 +124,31 @@ __weak static UIViewController *_defaultViewController;
     return _notificationActive;
 }
 
-#pragma mark - Customizing notifications
+#pragma mark - Customizing notifications design
 
 + (void)addCustomDesignFromFileWithName:(NSString *)fileName
 {
-    [TSMessageView addNotificationDesignFromFile:fileName];
+    NSError *error = nil;
+    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fileName];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    NSDictionary *design = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+    
+    [self.notificationDesign addEntriesFromDictionary:design];
+}
+
++ (NSMutableDictionary *)notificationDesign
+{
+    if (!_notificationDesign)
+    {
+        NSError *error = nil;
+        NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:kTSDesignFileName];
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        NSDictionary *config = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        
+        _notificationDesign = [NSMutableDictionary dictionaryWithDictionary:config];
+    }
+    
+    return _notificationDesign;
 }
 
 #pragma mark - Default view controller

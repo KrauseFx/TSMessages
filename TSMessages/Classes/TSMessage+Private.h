@@ -11,6 +11,7 @@
 @class TSMessageView;
 
 @interface TSMessage (Private)
++ (NSMutableDictionary *)notificationDesign;
 - (void)fadeOutCurrentNotification;
 - (void)fadeOutNotification:(TSMessageView *)messageView;
 - (void)fadeOutNotification:(TSMessageView *)messageView completion:(void (^)())completion;
