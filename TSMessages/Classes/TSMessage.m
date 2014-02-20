@@ -306,7 +306,7 @@ __weak static UIViewController *_defaultViewController;
      }];
 }
 
-+ (BOOL)dismissActiveNotification
++ (BOOL)dismissActiveNotification:(BOOL)forceDismiss
 {
     if ([[TSMessage sharedMessage].messages count] == 0) return NO;
     
@@ -314,12 +314,17 @@ __weak static UIViewController *_defaultViewController;
                    {
                        if ([[TSMessage sharedMessage].messages count] == 0) return;
                        TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
-                       if (currentMessage.messageIsFullyDisplayed)
+                       if (forceDismiss || currentMessage.messageIsFullyDisplayed)
                        {
                            [[TSMessage sharedMessage] fadeOutNotification:currentMessage];
                        }
                    });
     return YES;
+}
+
++ (BOOL)dismissActiveNotification
+{
+    return [TSMessage dismissActiveNotification: NO];
 }
 
 #pragma mark Customizing TSMessages
