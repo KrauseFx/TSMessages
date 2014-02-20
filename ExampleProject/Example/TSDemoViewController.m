@@ -98,7 +98,7 @@
     
     [view setUserDismissEnabled];
     
-    [TSMessage prepareNotificationToBeShown:view];
+    [TSMessage showOrEnqueueNotification:view];
 }
 
 - (IBAction)didTapPermanent:(id)sender
@@ -151,7 +151,7 @@
     
     [messageView setUserDismissEnabled];
     
-    [TSMessage prepareNotificationToBeShown:messageView];
+    [TSMessage showOrEnqueueNotification:messageView];
 }
 
 - (IBAction)didTapDismissCurrentMessage:(id)sender
@@ -167,7 +167,7 @@
     
     messageView.duration = TSMessageNotificationDurationEndless;
     
-    [TSMessage prepareNotificationToBeShown:messageView];
+    [TSMessage showOrEnqueueNotification:messageView];
 }
 
 - (IBAction)didTapLong:(id)sender
@@ -179,7 +179,7 @@
     
     [messageView setUserDismissEnabled];
     
-    [TSMessage prepareNotificationToBeShown:messageView];
+    [TSMessage showOrEnqueueNotification:messageView];
 }
 
 - (IBAction)didTapBottom:(id)sender
@@ -193,7 +193,7 @@
     
     [messageView setUserDismissEnabled];
     
-    [TSMessage prepareNotificationToBeShown:messageView];
+    [TSMessage showOrEnqueueNotification:messageView];
 }
 
 - (IBAction)didTapText:(id)sender

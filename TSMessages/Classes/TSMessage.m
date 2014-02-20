@@ -72,7 +72,7 @@ __weak static UIViewController *_defaultViewController;
 {
     TSMessageView *view = [self notificationWithTitle:title subtitle:subtitle image:image type:type inViewController:viewController];
     
-    [self prepareNotificationToBeShown:view];
+    [self showOrEnqueueNotification:view];
     
     return view;
 }
@@ -84,7 +84,7 @@ __weak static UIViewController *_defaultViewController;
     [[TSMessage sharedMessage] fadeInNotification:messageView];
 }
 
-+ (void)prepareNotificationToBeShown:(TSMessageView *)messageView
++ (void)showOrEnqueueNotification:(TSMessageView *)messageView
 {
     NSString *title = messageView.title;
     NSString *subtitle = messageView.subtitle;

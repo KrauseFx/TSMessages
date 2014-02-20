@@ -132,10 +132,12 @@ typedef void (^TSMessageCallback)(TSMessageView *messageView);
  */
 + (BOOL)isNotificationActive;
 
-/** Prepares the notification view to be displayed in the future.
- It is queued and then displayed in fadeInCurrentNotification.
+/** Shows or enqueues the notification view. If there is a notification
+ displayed currently, the notification view gets added to the end of the
+ queue and displayed after its prior notifications are shown. If it is
+ the only notification it gets shown right away.
  */
-+ (void)prepareNotificationToBeShown:(TSMessageView *)messageView;
++ (void)showOrEnqueueNotification:(TSMessageView *)messageView;
 
 /** Shows a permanent notification message.
  
