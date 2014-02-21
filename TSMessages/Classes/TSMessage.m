@@ -21,7 +21,6 @@
 
 @implementation TSMessage
 
-static BOOL _notificationActive;
 static TSMessage *_sharedMessage;
 static NSMutableDictionary *_notificationDesign;
 
@@ -99,10 +98,12 @@ __weak static UIViewController *_defaultViewController;
         
         if (equalTitle && equalSubtitle) return;
     }
+    
+    BOOL isDisplayable = !self.isNotificationActive;
 
     [[TSMessage sharedMessage].messages addObject:messageView];
 
-    if (!_notificationActive)
+    if (isDisplayable)
     {
         [[TSMessage sharedMessage] fadeInCurrentNotification];
     }
@@ -121,7 +122,7 @@ __weak static UIViewController *_defaultViewController;
 
 + (BOOL)isNotificationActive
 {
-    return _notificationActive;
+    return !![TSMessage sharedMessage].currentNotification;
 }
 
 #pragma mark - Customizing notifications design
@@ -183,8 +184,6 @@ __weak static UIViewController *_defaultViewController;
 - (void)fadeInCurrentNotification
 {
     if (!self.currentNotification) return;
-
-    _notificationActive = YES;
 
     [self fadeInNotification:self.currentNotification];
 }
@@ -338,8 +337,6 @@ __weak static UIViewController *_defaultViewController;
         {
             [self.messages removeObjectAtIndex:0];
         }
-
-        _notificationActive = NO;
 
         if (self.messages.count)
         {
