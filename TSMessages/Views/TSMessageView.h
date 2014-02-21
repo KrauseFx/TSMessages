@@ -47,4 +47,10 @@
 /** Enables dismissing the message by swiping */
 - (void)setUserDismissEnabled;
 - (void)setUserDismissEnabledWithCallback:(TSMessageCallback)callback;
+
+/** Displays or enqueues the message view. */
+- (void)displayOrEnqueue;
+
+/** Displays the message permanently. */
+- (void)displayPermanently;
 @end

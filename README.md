@@ -46,7 +46,7 @@ To display messages use the following code:
                                       type:TSMessageTypeSuccess];
     }];
 
-    [TSMessage displayOrEnqueueMessage:view];
+    [view displayOrEnqueue];
 
     // Use a custom design file
     [TSMessage addCustomDesignFromFileWithName:@"AlternativeDesign.json"];

@@ -194,6 +194,14 @@
     [self addGestureRecognizer:gestureRec];
 }
 
+- (void)displayOrEnqueue {
+    [TSMessage displayOrEnqueueMessage:self];
+}
+
+- (void)displayPermanently {
+    [TSMessage displayPermanentMessage:self];
+}
+
 #pragma mark - View handling
 
 - (void)didMoveToWindow
