@@ -81,7 +81,7 @@ __weak static UIViewController *_defaultViewController;
 
 + (void)displayPermanentMessage:(TSMessageView *)messageView
 {
-    [[TSMessage sharedMessage] fadeInMessage:messageView];
+    [[TSMessage sharedMessage] displayMessage:messageView];
 }
 
 + (void)displayOrEnqueueMessage:(TSMessageView *)messageView
@@ -104,7 +104,7 @@ __weak static UIViewController *_defaultViewController;
 
     if (isDisplayable)
     {
-        [[TSMessage sharedMessage] fadeInCurrentMessage];
+        [[TSMessage sharedMessage] displayCurrentMessage];
     }
 }
 
@@ -182,14 +182,14 @@ __weak static UIViewController *_defaultViewController;
     return [self.messages firstObject];
 }
 
-- (void)fadeInCurrentMessage
+- (void)displayCurrentMessage
 {
     if (!self.currentMessage) return;
 
-    [self fadeInMessage:self.currentMessage];
+    [self displayMessage:self.currentMessage];
 }
 
-- (void)fadeInMessage:(TSMessageView *)messageView
+- (void)displayMessage:(TSMessageView *)messageView
 {
     [messageView prepareForDisplay];
     
@@ -341,7 +341,7 @@ __weak static UIViewController *_defaultViewController;
 
         if (self.messages.count)
         {
-            [self fadeInCurrentMessage];
+            [self displayCurrentMessage];
         }
     }];
 }
