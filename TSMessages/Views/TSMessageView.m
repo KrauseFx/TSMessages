@@ -29,14 +29,14 @@
 
 @implementation TSMessageView
 
-- (id)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle image:(UIImage *)image type:(TSMessageNotificationType)notificationType
+- (id)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle image:(UIImage *)image type:(TSMessageType)type
 {
     if ((self = [self init]))
     {
-        self.duration = TSMessageNotificationDurationAutomatic;
-        self.position = TSMessageNotificationPositionTop;
+        self.duration = TSMessageDurationAutomatic;
+        self.position = TSMessagePositionTop;
         
-        [self setupConfigForType:notificationType];
+        [self setupConfigForType:type];
         [self setupBackgroundView];
         [self setupTitle:title];
         [self setupSubtitle:subtitle];
@@ -50,20 +50,20 @@
 
 #pragma mark - Setup helpers
 
-- (void)setupConfigForType:(TSMessageNotificationType)notificationType
+- (void)setupConfigForType:(TSMessageType)type
 {
     NSString *config;
     
-    switch (notificationType)
+    switch (type)
     {
-        case TSMessageNotificationTypeError: config = @"error"; break;
-        case TSMessageNotificationTypeSuccess: config = @"success"; break;
-        case TSMessageNotificationTypeWarning: config = @"warning"; break;
+        case TSMessageTypeError: config = @"error"; break;
+        case TSMessageTypeSuccess: config = @"success"; break;
+        case TSMessageTypeWarning: config = @"warning"; break;
             
         default: config = @"message"; break;
     }
     
-    self.config = [TSMessage notificationDesign][config];
+    self.config = [TSMessage design][config];
 }
 
 - (void)setupBackgroundView
@@ -77,7 +77,7 @@
 
 - (void)setupAutoresizing
 {
-    self.autoresizingMask = (self.position == TSMessageNotificationPositionTop) ?
+    self.autoresizingMask = (self.position == TSMessagePositionTop) ?
         (UIViewAutoresizingFlexibleWidth) :
         (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
 }
@@ -157,7 +157,7 @@
     UIColor *buttonTitleTextColor = [UIColor colorWithHexString:self.config[@"buttonTitleTextColor"] alpha:1];
     UIColor *fontColor = [UIColor colorWithHexString:self.config[@"textColor"] alpha:1];
     
-    if (!buttonBackgroundImage) buttonBackgroundImage = [[UIImage imageNamed:self.config[@"NotificationButtonBackground"]] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
+    if (!buttonBackgroundImage) buttonBackgroundImage = [[UIImage imageNamed:self.config[@"MessageButtonBackground"]] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
     if (!buttonTitleShadowColor) buttonTitleShadowColor = [UIColor colorWithHexString:self.config[@"shadowColor"] alpha:1];
     if (!buttonTitleTextColor) buttonTitleTextColor = fontColor;
     
@@ -190,7 +190,7 @@
     self.dismissCallback = callback;
     
     UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
-    gestureRec.direction = (self.position == TSMessageNotificationPositionTop ? UISwipeGestureRecognizerDirectionUp : UISwipeGestureRecognizerDirectionDown);
+    gestureRec.direction = (self.position == TSMessagePositionTop ? UISwipeGestureRecognizerDirectionUp : UISwipeGestureRecognizerDirectionDown);
     [self addGestureRecognizer:gestureRec];
 }
 
@@ -200,7 +200,7 @@
 {
     [super didMoveToWindow];
     
-    if (self.duration == TSMessageNotificationDurationEndless && self.superview && !self.window)
+    if (self.duration == TSMessageDurationEndless && self.superview && !self.window)
     {
         [self dismiss];
     }
@@ -277,7 +277,7 @@
                                         currentHeight);
     
     // increase frame of background view because of the spring animation
-    if (self.position == TSMessageNotificationPositionTop)
+    if (self.position == TSMessagePositionTop)
     {
         float topOffset = 0.f;
         
@@ -296,7 +296,7 @@
         
         backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(topOffset, 0.f, topOffset, 0.f));
     }
-    else if (self.position == TSMessageNotificationPositionBottom)
+    else if (self.position == TSMessagePositionBottom)
     {
         backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(0.f, 0.f, -30.f, 0.f));
     }
@@ -312,7 +312,7 @@
     CGFloat actualHeight = self.frame.size.height;
     CGFloat topPosition = -actualHeight;
     
-    if (self.position == TSMessageNotificationPositionBottom)
+    if (self.position == TSMessagePositionBottom)
     {
         topPosition = self.viewController.view.bounds.size.height;
     }
@@ -342,13 +342,13 @@
 
 - (void)dismiss
 {
-    if (self == [TSMessage sharedMessage].currentNotification)
+    if (self == [TSMessage sharedMessage].currentMessage)
     {
-        [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutCurrentNotification) withObject:nil waitUntilDone:NO];
+        [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(dismissCurrentMessage) withObject:nil waitUntilDone:NO];
     }
     else
     {
-        [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutNotification:) withObject:self waitUntilDone:NO];
+        [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(dismissMessage:) withObject:self waitUntilDone:NO];
     }
 }
 

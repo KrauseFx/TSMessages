@@ -45,14 +45,14 @@ __weak static UIViewController *_defaultViewController;
     return self;
 }
 
-#pragma mark - Setup notifications
+#pragma mark - Setup messages
 
-+ (TSMessageView *)notificationWithTitle:(NSString *)title subtitle:(NSString *)subtitle type:(TSMessageNotificationType)type
++ (TSMessageView *)messageWithTitle:(NSString *)title subtitle:(NSString *)subtitle type:(TSMessageType)type
 {
-    return [self notificationWithTitle:title subtitle:subtitle image:nil type:type inViewController:self.defaultViewController];
+    return [self messageWithTitle:title subtitle:subtitle image:nil type:type inViewController:self.defaultViewController];
 }
 
-+ (TSMessageView *)notificationWithTitle:(NSString *)title subtitle:(NSString *)subtitle image:(UIImage *)image type:(TSMessageNotificationType)type inViewController:(UIViewController *)viewController
++ (TSMessageView *)messageWithTitle:(NSString *)title subtitle:(NSString *)subtitle image:(UIImage *)image type:(TSMessageType)type inViewController:(UIViewController *)viewController
 {
     TSMessageView *view = [[TSMessageView alloc] initWithTitle:title subtitle:subtitle image:image type:type];
     
@@ -61,70 +61,70 @@ __weak static UIViewController *_defaultViewController;
     return view;
 }
 
-#pragma mark - Setup notifications and display them right away
+#pragma mark - Setup messages and display them right away
 
-+ (TSMessageView *)showNotificationWithTitle:(NSString *)title subtitle:(NSString *)subtitle type:(TSMessageNotificationType)type
++ (TSMessageView *)displayMessageWithTitle:(NSString *)title subtitle:(NSString *)subtitle type:(TSMessageType)type
 {
-    return [self showNotificationWithTitle:title subtitle:subtitle image:nil type:type inViewController:self.defaultViewController];
+    return [self displayMessageWithTitle:title subtitle:subtitle image:nil type:type inViewController:self.defaultViewController];
 }
 
-+ (TSMessageView *)showNotificationWithTitle:(NSString *)title subtitle:(NSString *)subtitle image:(UIImage *)image type:(TSMessageNotificationType)type inViewController:(UIViewController *)viewController
++ (TSMessageView *)displayMessageWithTitle:(NSString *)title subtitle:(NSString *)subtitle image:(UIImage *)image type:(TSMessageType)type inViewController:(UIViewController *)viewController
 {
-    TSMessageView *view = [self notificationWithTitle:title subtitle:subtitle image:image type:type inViewController:viewController];
+    TSMessageView *view = [self messageWithTitle:title subtitle:subtitle image:image type:type inViewController:viewController];
     
-    [self showOrEnqueueNotification:view];
+    [self displayOrEnqueueMessage:view];
     
     return view;
 }
 
-#pragma mark - Displaying notifications
+#pragma mark - Displaying messages
 
-+ (void)showPermanentNotification:(TSMessageView *)messageView
++ (void)displayPermanentMessage:(TSMessageView *)messageView
 {
-    [[TSMessage sharedMessage] fadeInNotification:messageView];
+    [[TSMessage sharedMessage] fadeInMessage:messageView];
 }
 
-+ (void)showOrEnqueueNotification:(TSMessageView *)messageView
++ (void)displayOrEnqueueMessage:(TSMessageView *)messageView
 {
     NSString *title = messageView.title;
     NSString *subtitle = messageView.subtitle;
 
     for (TSMessageView *n in [TSMessage sharedMessage].messages)
     {
-        // avoid showing the same messages twice in a row
+        // avoid displaying the same messages twice in a row
         BOOL equalTitle = ([n.title isEqualToString:title] || (!n.title && !title));
         BOOL equalSubtitle = ([n.subtitle isEqualToString:subtitle] || (!n.subtitle && !subtitle));
         
         if (equalTitle && equalSubtitle) return;
     }
     
-    BOOL isDisplayable = !self.isNotificationActive;
+    BOOL isDisplayable = !self.isDisplayingMessage;
 
     [[TSMessage sharedMessage].messages addObject:messageView];
 
     if (isDisplayable)
     {
-        [[TSMessage sharedMessage] fadeInCurrentNotification];
+        [[TSMessage sharedMessage] fadeInCurrentMessage];
     }
 }
 
-+ (BOOL)dismissActiveNotification
++ (BOOL)dismissCurrentMessage
 {
-    if (![TSMessage sharedMessage].currentNotification) return NO;
+    if (![TSMessage sharedMessage].currentMessage) return NO;
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[TSMessage sharedMessage] fadeOutCurrentNotification];
+        [[TSMessage sharedMessage] dismissCurrentMessage];
     });
     
     return YES;
 }
 
-+ (BOOL)isNotificationActive
++ (BOOL)isDisplayingMessage
 {
-    return !![TSMessage sharedMessage].currentNotification;
+    return !![TSMessage sharedMessage].currentMessage;
 }
 
-#pragma mark - Customizing notifications design
+#pragma mark - Customizing design
 
 + (void)addCustomDesignFromFileWithName:(NSString *)fileName
 {
@@ -133,12 +133,12 @@ __weak static UIViewController *_defaultViewController;
     NSData *data = [NSData dataWithContentsOfFile:path];
     NSDictionary *design = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
     
-    [self.notificationDesign addEntriesFromDictionary:design];
+    [self.design addEntriesFromDictionary:design];
 }
 
-+ (NSMutableDictionary *)notificationDesign
++ (NSMutableDictionary *)design
 {
-    static NSMutableDictionary *notificationDesign = nil;
+    static NSMutableDictionary *design = nil;
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
@@ -147,10 +147,10 @@ __weak static UIViewController *_defaultViewController;
         NSData *data = [NSData dataWithContentsOfFile:path];
         NSDictionary *config = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         
-        notificationDesign = [NSMutableDictionary dictionaryWithDictionary:config];
+        design = [NSMutableDictionary dictionaryWithDictionary:config];
     });
     
-    return notificationDesign;
+    return design;
 }
 
 #pragma mark - Default view controller
@@ -161,7 +161,7 @@ __weak static UIViewController *_defaultViewController;
     
     if (!defaultViewController)
     {
-        NSLog(@"TSMessages: It is recommended to set a custom defaultViewController that is used to display the notifications");
+        NSLog(@"TSMessages: It is recommended to set a custom defaultViewController that is used to display the messages");
         defaultViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     }
     
@@ -175,21 +175,21 @@ __weak static UIViewController *_defaultViewController;
 
 #pragma mark - Internals
 
-- (TSMessageView *)currentNotification
+- (TSMessageView *)currentMessage
 {
     if (!self.messages.count) return nil;
     
     return [self.messages firstObject];
 }
 
-- (void)fadeInCurrentNotification
+- (void)fadeInCurrentMessage
 {
-    if (!self.currentNotification) return;
+    if (!self.currentMessage) return;
 
-    [self fadeInNotification:self.currentNotification];
+    [self fadeInMessage:self.currentMessage];
 }
 
-- (void)fadeInNotification:(TSMessageView *)messageView
+- (void)fadeInMessage:(TSMessageView *)messageView
 {
     [messageView prepareForDisplay];
     
@@ -250,7 +250,7 @@ __weak static UIViewController *_defaultViewController;
     }
 
     CGPoint toPoint;
-    if (messageView.position == TSMessageNotificationPositionTop)
+    if (messageView.position == TSMessagePositionTop)
     {
         CGFloat navigationbarBottomOfViewController = 0;
 
@@ -285,41 +285,41 @@ __weak static UIViewController *_defaultViewController;
                          messageView.messageFullyDisplayed = YES;
                      }];
 
-    if (messageView.duration == TSMessageNotificationDurationAutomatic)
+    if (messageView.duration == TSMessageDurationAutomatic)
     {
         messageView.duration = kTSMessageAnimationDuration + kTSMessageDisplayTime + messageView.frame.size.height * kTSMessageExtraDisplayTimePerPixel;
     }
 
-    if (messageView.duration != TSMessageNotificationDurationEndless)
+    if (messageView.duration != TSMessageDurationEndless)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self performSelector:@selector(fadeOutCurrentNotification) withObject:nil afterDelay:messageView.duration];
+            [self performSelector:@selector(dismissCurrentMessage) withObject:nil afterDelay:messageView.duration];
         });
     }
 }
 
-- (void)fadeOutNotification:(TSMessageView *)messageView
+- (void)dismissMessage:(TSMessageView *)messageView
 {
-    [self fadeOutNotification:messageView completion:NULL];
+    [self dismissMessage:messageView completion:NULL];
 }
 
-- (void)fadeOutNotification:(TSMessageView *)messageView completion:(void (^)())completion
+- (void)dismissMessage:(TSMessageView *)messageView completion:(void (^)())completion
 {
     messageView.messageFullyDisplayed = NO;
 
-    CGPoint fadeOutToPoint;
+    CGPoint dismissToPoint;
     
-    if (messageView.position == TSMessageNotificationPositionTop)
+    if (messageView.position == TSMessagePositionTop)
     {
-        fadeOutToPoint = CGPointMake(messageView.center.x, -CGRectGetHeight(messageView.frame)/2.f);
+        dismissToPoint = CGPointMake(messageView.center.x, -CGRectGetHeight(messageView.frame)/2.f);
     }
     else
     {
-        fadeOutToPoint = CGPointMake(messageView.center.x, messageView.viewController.view.bounds.size.height + CGRectGetHeight(messageView.frame)/2.f);
+        dismissToPoint = CGPointMake(messageView.center.x, messageView.viewController.view.bounds.size.height + CGRectGetHeight(messageView.frame)/2.f);
     }
 
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^{
-         messageView.center = fadeOutToPoint;
+         messageView.center = dismissToPoint;
      } completion:^(BOOL finished) {
          [messageView removeFromSuperview];
 
@@ -327,13 +327,13 @@ __weak static UIViewController *_defaultViewController;
      }];
 }
 
-- (void)fadeOutCurrentNotification
+- (void)dismissCurrentMessage
 {
-    if (!self.currentNotification) return;
+    if (!self.currentMessage) return;
 
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(fadeOutCurrentNotification) object:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismissCurrentMessage) object:nil];
 
-    [self fadeOutNotification:self.currentNotification completion:^{
+    [self dismissMessage:self.currentMessage completion:^{
         if (self.messages.count)
         {
             [self.messages removeObjectAtIndex:0];
@@ -341,7 +341,7 @@ __weak static UIViewController *_defaultViewController;
 
         if (self.messages.count)
         {
-            [self fadeInCurrentNotification];
+            [self fadeInCurrentMessage];
         }
     }];
 }

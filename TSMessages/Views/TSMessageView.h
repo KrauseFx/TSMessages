@@ -28,17 +28,17 @@
 @property (nonatomic, assign) CGFloat duration;
 
 /** The position of the message (top or bottom) */
-@property (nonatomic, assign) TSMessageNotificationPosition position;
+@property (nonatomic, assign) TSMessagePosition position;
 
-/** By setting this delegate it's possible to set a custom offset for the notification view */
-@property(nonatomic, assign) id <TSMessageViewProtocol> delegate;
+/** By setting this delegate it's possible to set a custom offset for the message view */
+@property (nonatomic, assign) id <TSMessageViewProtocol> delegate;
 
 /** The callback that should be invoked, when the user taps the message */
 @property (nonatomic, copy) TSMessageCallback tapCallback;
 
-- (id)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle image:(UIImage *)image type:(TSMessageNotificationType)notificationType;
+- (id)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle image:(UIImage *)image type:(TSMessageType)type;
 
-/** Dismisses this notification view */
+/** Dismisses this message view */
 - (void)dismiss;
 
 /** Adds a button with a callback that gets invoked when the button is tapped */
