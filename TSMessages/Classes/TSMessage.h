@@ -8,25 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-// NS_ENUM is now the preferred way to do typedefs. It gives the compiler and debugger more information, which helps everyone.
-// When using SDK 6 or later, NS_ENUM is defined by Apple, so this block does nothing.
-// For SDK 5 or earlier, this is the same definition block Apple uses.
-#ifndef NS_ENUM
-#if (__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
-#define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
-#if (__cplusplus)
-#define NS_OPTIONS(_type, _name) _type _name; enum : _type
-#else
-#define NS_OPTIONS(_type, _name) enum _name : _type _name; enum _name : _type
-#endif
-#else
-#define NS_ENUM(_type, _name) _type _name; enum
-#define NS_OPTIONS(_type, _name) _type _name; enum
-#endif
-#endif
-
-#define TS_SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-
 @class TSMessageView;
 
 typedef NS_ENUM(NSInteger, TSMessageNotificationType) {
