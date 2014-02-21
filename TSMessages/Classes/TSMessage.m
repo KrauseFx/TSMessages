@@ -21,19 +21,18 @@
 
 @implementation TSMessage
 
-static TSMessage *_sharedMessage;
-static NSMutableDictionary *_notificationDesign;
-
 __weak static UIViewController *_defaultViewController;
 
 + (TSMessage *)sharedMessage
 {
-    if (!_sharedMessage)
-    {
-        _sharedMessage = [[[self class] alloc] init];
-    }
+    static TSMessage *sharedMessage = nil;
+    static dispatch_once_t onceToken;
     
-    return _sharedMessage;
+    dispatch_once(&onceToken, ^{
+        sharedMessage = [[[self class] alloc] init];
+    });
+    
+    return sharedMessage;
 }
 
 - (id)init
@@ -139,17 +138,19 @@ __weak static UIViewController *_defaultViewController;
 
 + (NSMutableDictionary *)notificationDesign
 {
-    if (!_notificationDesign)
-    {
+    static NSMutableDictionary *notificationDesign = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
         NSError *error = nil;
         NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:kTSDesignFileName];
         NSData *data = [NSData dataWithContentsOfFile:path];
         NSDictionary *config = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         
-        _notificationDesign = [NSMutableDictionary dictionaryWithDictionary:config];
-    }
+        notificationDesign = [NSMutableDictionary dictionaryWithDictionary:config];
+    });
     
-    return _notificationDesign;
+    return notificationDesign;
 }
 
 #pragma mark - Default view controller
