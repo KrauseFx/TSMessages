@@ -1,7 +1,7 @@
 TSMessages
 ==========
 
-This framework provides an easy to use class to show little notification views on the top of the screen. (à la Tweetbot).
+This library provides an easy to use class to show little notification views on the top of the screen. (à la Tweetbot).
 
 The notification moves from the top of the screen underneath the navigation bar and stays there for a few seconds, depending on the length of the displayed text. To dismiss a notification before the time runs out, the user can swipe it to the top or just tap it.
 
@@ -11,7 +11,7 @@ It is very easy to add new notification types with a different design. Add the n
 
 **Take a look at the Example project to see how to use this library.** You have to open the workspace, not the project file, since the Example project uses cocoapods.
 
-Follow the developer on Twitter: [KrauseFx](http://twitter.com/krausefx) (Felix Krause)
+Follow the developer on Twitter: [KrauseFx](http://twitter.com/KrauseFx) (Felix Krause)
 
 ## Installation
 
@@ -85,6 +85,10 @@ If you have ideas how to improve this library please let me know or send a pull 
 
 Changes
 -----
+
+**0.9.5**
+* Fixed warnings
+* Other little bugfixes
 
 **0.9.4**
 * Added new initializer (Sorry about that, it was necessary)
