@@ -10,8 +10,6 @@
 #import "TSMessageView.h"
 
 @interface TSDemoViewController : UIViewController <TSMessageViewProtocol>
-
-
 - (IBAction)didTapError:(id)sender;
 - (IBAction)didTapWarning:(id)sender;
 - (IBAction)didTapMessage:(id)sender;
@@ -23,5 +21,5 @@
 - (IBAction)didTapBottom:(id)sender;
 - (IBAction)didTapText:(id)sender;
 - (IBAction)didTapCustomDesign:(id)sender;
-
+- (IBAction)didTapPermanent:(id)sender;
 @end

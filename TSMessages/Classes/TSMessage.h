@@ -8,46 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
-// NS_ENUM is now the preferred way to do typedefs. It gives the compiler and debugger more information, which helps everyone.
-// When using SDK 6 or later, NS_ENUM is defined by Apple, so this block does nothing.
-// For SDK 5 or earlier, this is the same definition block Apple uses.
-#ifndef NS_ENUM
-#if (__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
-#define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
-#if (__cplusplus)
-#define NS_OPTIONS(_type, _name) _type _name; enum : _type
-#else
-#define NS_OPTIONS(_type, _name) enum _name : _type _name; enum _name : _type
-#endif
-#else
-#define NS_ENUM(_type, _name) _type _name; enum
-#define NS_OPTIONS(_type, _name) _type _name; enum
-#endif
-#endif
-
-
-#define TS_SYSTEM_VERSION_LESS_THAN(v)            ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-
-
 @class TSMessageView;
 
-typedef NS_ENUM(NSInteger, TSMessageNotificationType) {
-    TSMessageNotificationTypeMessage = 0,
-    TSMessageNotificationTypeWarning,
-    TSMessageNotificationTypeError,
-    TSMessageNotificationTypeSuccess
-};
-typedef NS_ENUM(NSInteger, TSMessageNotificationPosition) {
-    TSMessageNotificationPositionTop = 0,
-    TSMessageNotificationPositionBottom
+typedef NS_ENUM(NSInteger, TSMessageType) {
+    TSMessageTypeDefault = 0,
+    TSMessageTypeSuccess,
+    TSMessageTypeWarning,
+    TSMessageTypeError
 };
 
-/** This enum can be passed to the duration parameter */
-typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
-    TSMessageNotificationDurationAutomatic = 0,
-    TSMessageNotificationDurationEndless = -1 // The notification is displayed until the user dismissed it or it is dismissed by calling dismissActiveNotification
+typedef NS_ENUM(NSInteger, TSMessagePosition) {
+    TSMessagePositionTop = 0,
+    TSMessagePositionBottom
 };
 
+typedef NS_ENUM(NSInteger, TSMessageDuration) {
+    TSMessageDurationAutomatic = 0,
+    TSMessageDurationEndless = -1, // The message is displayed until the user dismissed it or it is dismissed by calling dismissCurrentMessage
+};
+
+typedef void (^TSMessageCallback)(TSMessageView *messageView);
 
 @interface TSMessage : NSObject
 
@@ -55,82 +35,101 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 
 + (UIViewController *)defaultViewController;
 
-/** Shows a notification message
- @param message The title of the notification view
- @param type The notification type (Message, Warning, Error, Success)
- */
-+ (void)showNotificationWithTitle:(NSString *)message
-                             type:(TSMessageNotificationType)type;
+/** Returns a message view for further customization
 
-/** Shows a notification message
- @param title The title of the notification view
+ @param title The title of the message view
  @param subtitle The text that is displayed underneath the title
- @param type The notification type (Message, Warning, Error, Success)
- */
-+ (void)showNotificationWithTitle:(NSString *)title
-                         subtitle:(NSString *)subtitle
-                             type:(TSMessageNotificationType)type;
+ @param type The message type (Default, Warning, Error, Success)
 
-/** Shows a notification message in a specific view controller
- @param viewController The view controller to show the notification in.
- You can use +setDefaultViewController: to set the the default one instead
- @param title The title of the notification view
+ @return The message view
+ */
++ (TSMessageView *)messageWithTitle:(NSString *)title
+                           subtitle:(NSString *)subtitle
+                               type:(TSMessageType)type;
+
+/** Displays a message right away and returns the message view
+
+ @param title The title of the message view
  @param subtitle The text that is displayed underneath the title
- @param type The notification type (Message, Warning, Error, Success)
- */
-+ (void)showNotificationInViewController:(UIViewController *)viewController
-                                   title:(NSString *)title
-                                subtitle:(NSString *)subtitle
-                                    type:(TSMessageNotificationType)type;
+ @param type The message type (Default, Warning, Error, Success)
 
-/** Shows a notification message in a specific view controller
- @param viewController The view controller to show the notification in.
- @param title The title of the notification view
+ @return The message view
+ */
++ (TSMessageView *)displayMessageWithTitle:(NSString *)title
+                                  subtitle:(NSString *)subtitle
+                                      type:(TSMessageType)type;
+
+/** Returns a message view in a specific view controller for further customization
+
+ @param title The title of the message view
  @param subtitle The message that is displayed underneath the title (optional)
  @param image A custom icon image (optional)
- @param type The notification type (Message, Warning, Error, Success)
- @param duration The duration of the notification being displayed
- @param callback The block that should be executed, when the user tapped on the message
- @param buttonTitle The title for button (optional)
- @param buttonCallback The block that should be executed, when the user tapped on the button
- @param messagePosition The position of the message on the screen
- @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
- */
-+ (void)showNotificationInViewController:(UIViewController *)viewController
-                                   title:(NSString *)title
-                                subtitle:(NSString *)subtitle
-                                   image:(UIImage *)image
-                                    type:(TSMessageNotificationType)type
-                                duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback
-                             buttonTitle:(NSString *)buttonTitle
-                          buttonCallback:(void (^)())buttonCallback
-                              atPosition:(TSMessageNotificationPosition)messagePosition
-                    canBeDismissedByUser:(BOOL)dismissingEnabled;
+ @param type The message type (Default, Warning, Error, Success)
+ @param viewController The view controller to display the message in
 
-/** Fades out the currently displayed notification. If another notification is in the queue,
- the next one will be displayed automatically
- @return YES if the currently displayed notification was successfully dismissed. NO if no notification
- was currently displayed.
+ @return The message view
  */
-+ (BOOL)dismissActiveNotification;
++ (TSMessageView *)messageWithTitle:(NSString *)title
+                           subtitle:(NSString *)subtitle
+                              image:(UIImage *)image
+                               type:(TSMessageType)type
+                   inViewController:(UIViewController *)viewController;
+
+/** Displays a message right away in a specific view controller and returns
+ the message view
+
+ @param title The title of the message view
+ @param subtitle The text that is displayed underneath the title
+ @param image A custom icon image (optional)
+ @param type The message type (Default, Warning, Error, Success)
+ @param viewController The view controller to display the message in
+
+ @return The message view
+ */
++ (TSMessageView *)displayMessageWithTitle:(NSString *)title
+                                  subtitle:(NSString *)subtitle
+                                     image:(UIImage *)image
+                                      type:(TSMessageType)type
+                          inViewController:(UIViewController *)viewController;
 
 /** Use this method to set a default view controller to display the messages in */
 + (void)setDefaultViewController:(UIViewController *)defaultViewController;
 
-/** Use this method to use custom designs in your messages. */
+/** Use this method to use custom designs for your messages. */
 + (void)addCustomDesignFromFileWithName:(NSString *)fileName;
 
-/** Indicates whether a notification is currently active. */
-+ (BOOL)isNotificationActive;
+/** Dismisses the current message. If another message is in the queue,
+ it will be displayed automatically.
 
-/** Prepares the notification view to be displayed in the future. It is queued and then
- displayed in fadeInCurrentNotification.
- You don't have to use this method. */
-+ (void)prepareNotificationToBeShown:(TSMessageView *)messageView;
+ @return YES if the current message was successfully dismissed.
+ NO if there is no current message to be dismissed.
+ */
++ (BOOL)dismissCurrentMessage;
 
-/** Indicates whether currently the iOS 7 style of TSMessages is used
- This depends on the Base SDK and the currently used device */
-+ (BOOL)iOS7StyleEnabled;
+/** Indicates whether a message is currently being displayed.
+
+ @return YES if a message is currently being displayed.
+         NO if no message is currently being displayed.
+ */
++ (BOOL)isDisplayingMessage;
+
+/** Displays or enqueues the message view. If there is a message
+ displayed currently, the message view gets added to the end of the
+ queue and displayed after its prior messages are displayed.
+ If it is the only message it gets displayed right away.
+ */
++ (void)displayOrEnqueueMessage:(TSMessageView *)messageView;
+
+/** Displays a permanent message.
+
+ This differs from normal message in that permanent messages are not
+ contained in the messages queue and can be displayed in addition to the
+ other messages.
+
+ Permanent messages do not get dismissed automatically, hence they do
+ not have a duration but have to be dismissed by the user or programmatically
+ in one of the callbacks.
+ */
++ (void)displayPermanentMessage:(TSMessageView *)messageView;
 
 @end
