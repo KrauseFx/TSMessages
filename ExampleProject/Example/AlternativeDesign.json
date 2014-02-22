@@ -11,11 +11,13 @@
         "contentFontSize": 12,
         "contentTextColor": "#FFFFFF",
         "imageName": "MessageBackgroundSuccessIcon.png",
-        "shadowColor": "#000000",
+        "shadowColor": "#67B759",
         "shadowOffsetX": 0,
         "shadowOffsetY": -1,
         "textColor": "#FFFFFF",
-        "titleFontSize": 25
+        "titleFontSize": 25,
+        "backgroundColor": "#76CF67",
+        "backgroundAlpha": 0.8
     },
     "message": {
         "backgroundImageName": "MessageBackgroundDefault.png",
@@ -29,11 +31,12 @@
         "contentFontSize": 12,
         "contentTextColor": "#727C83",
         "imageName": "",
-        "shadowColor": "#000000",
+        "shadowColor": "#EBEEF1",
         "shadowOffsetX": 0,
         "shadowOffsetY": 1,
         "textColor": "#727C83",
-        "titleFontSize": 14
+        "titleFontSize": 14,
+        "backgroundColor": "#D4DDDF"
     },
     "warning": {
         "backgroundImageName": "MessageBackgroundWarning.png",
@@ -47,11 +50,12 @@
         "contentFontSize": 12,
         "contentTextColor": "#484638",
         "imageName": "MessageBackgroundWarningIcon.png",
-        "shadowColor": "#000000",
+        "shadowColor": "#E5D87C",
         "shadowOffsetX": 0,
         "shadowOffsetY": 1,
         "textColor": "#484638",
-        "titleFontSize": 14
+        "titleFontSize": 14,
+        "backgroundColor": "#DAC43C"
     },
     "error": {
         "backgroundImageName": "MessageBackgroundError.png",
@@ -65,10 +69,11 @@
         "contentFontSize": 12,
         "contentTextColor": "#FFFFFF",
         "imageName": "MessageBackgroundErrorIcon.png",
-        "shadowColor": "#000000",
+        "shadowColor": "#812929",
         "shadowOffsetX": 0,
         "shadowOffsetY": -1,
         "textColor": "#FFFFFF",
-        "titleFontSize": 14
+        "titleFontSize": 14,
+        "backgroundColor": "#DD3B41"
     }
 }
