@@ -69,6 +69,45 @@ __weak static UIViewController *_defaultViewController;
                                    title:(NSString *)title
                                 subtitle:(NSString *)subtitle
                                     type:(TSMessageNotificationType)type
+                                duration:(NSTimeInterval)duration
+{
+    [self showNotificationInViewController:viewController
+                                     title:title
+                                  subtitle:subtitle
+                                     image:nil
+                                      type:type
+                                  duration:duration
+                                  callback:nil
+                               buttonTitle:nil
+                            buttonCallback:nil
+                                atPosition:TSMessageNotificationPositionTop
+                       canBeDismisedByUser:YES];
+}
+
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                    type:(TSMessageNotificationType)type
+                                duration:(NSTimeInterval)duration
+                     canBeDismisedByUser:(BOOL)dismissingEnabled
+{
+    [self showNotificationInViewController:viewController
+                                     title:title
+                                  subtitle:subtitle
+                                     image:nil
+                                      type:type
+                                  duration:duration
+                                  callback:nil
+                               buttonTitle:nil
+                            buttonCallback:nil
+                                atPosition:TSMessageNotificationPositionTop
+                       canBeDismisedByUser:dismissingEnabled];
+}
+
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                    type:(TSMessageNotificationType)type
 {
     [self showNotificationInViewController:viewController
                                      title:title
