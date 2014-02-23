@@ -281,22 +281,20 @@
         
         UINavigationController *navigationController = self.viewController.navigationController;
         
-        if (!navigationController && [self.viewController isKindOfClass:[UINavigationController class]]) {
+        if (!navigationController && [self.viewController isKindOfClass:[UINavigationController class]])
+        {
             navigationController = (UINavigationController *)self.viewController;
         }
         
         BOOL isNavBarIsHidden = !navigationController || self.viewController.navigationController.navigationBarHidden;
         BOOL isNavBarIsOpaque = !self.viewController.navigationController.navigationBar.isTranslucent && self.viewController.navigationController.navigationBar.alpha == 1;
         
-        if (isNavBarIsHidden || isNavBarIsOpaque) {
+        if (isNavBarIsHidden || isNavBarIsOpaque)
+        {
             topOffset = -30.f;
         }
         
         backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(topOffset, 0.f, topOffset, 0.f));
-    }
-    else if (self.position == TSMessagePositionBottom)
-    {
-        backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(0.f, 0.f, -30.f, 0.f));
     }
     
     self.backgroundBlurView.frame = backgroundFrame;
@@ -315,7 +313,86 @@
         topPosition = self.viewController.view.bounds.size.height;
     }
     
-    self.frame = CGRectMake(0.0, topPosition, self.viewController.view.bounds.size.width, actualHeight);
+    self.frame = CGRectMake(0, topPosition, self.viewController.view.bounds.size.width, actualHeight);
+}
+
+- (CGPoint)centerForDisplay
+{
+    CGFloat y;
+    CGFloat heightOffset = CGRectGetHeight(self.frame) / 2;
+    
+    if ([self.delegate respondsToSelector:@selector(customMessageOffsetForPosition:inViewController:)])
+    {
+        CGFloat offset = [self.delegate customMessageOffsetForPosition:self.position inViewController:self.viewController];
+        
+        if (self.position == TSMessagePositionTop)
+        {
+            y = offset + heightOffset;
+        }
+        else
+        {
+            y = self.viewController.view.bounds.size.height - (offset + heightOffset);
+        }
+    }
+    else
+    {
+        __block CGFloat offset = 0;
+        
+        void (^addStatusBarHeightToVerticalOffset)() = ^void() {
+            BOOL isPortrait = UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]);
+            CGSize statusBarSize = [UIApplication sharedApplication].statusBarFrame.size;
+            
+            offset += isPortrait ? statusBarSize.height : statusBarSize.width;
+        };
+        
+        if ([self.viewController isKindOfClass:[UINavigationController class]] || [self.viewController.parentViewController isKindOfClass:[UINavigationController class]])
+        {
+            UIViewController *viewController = self.viewController;
+            UINavigationController *navigationController = (UINavigationController *)([viewController isKindOfClass:[UINavigationController class]] ? viewController : viewController.parentViewController);
+            
+            viewController = [[navigationController childViewControllers] firstObject];
+            
+            BOOL isViewIsUnderStatusBar = !viewController.prefersStatusBarHidden;
+            
+            if (!isViewIsUnderStatusBar && navigationController.parentViewController == nil)
+            {
+                // strange but true
+                isViewIsUnderStatusBar = !navigationController.isNavigationBarHidden;
+            }
+            
+            if (!navigationController.isNavigationBarHidden)
+            {
+                offset = [navigationController navigationBar].bounds.size.height;
+                addStatusBarHeightToVerticalOffset();
+            }
+            else if (isViewIsUnderStatusBar)
+            {
+                addStatusBarHeightToVerticalOffset();
+            }
+        }
+        else
+        {
+            addStatusBarHeightToVerticalOffset();
+        }
+        
+        if (self.position == TSMessagePositionTop)
+        {
+            y = offset + heightOffset;
+        }
+        else
+        {
+            y = self.viewController.view.bounds.size.height - heightOffset;
+            
+            if (!self.viewController.navigationController.isToolbarHidden)
+            {
+                y -= CGRectGetHeight(self.viewController.navigationController.toolbar.bounds);
+            }
+        }
+    }
+    
+    CGPoint center = CGPointMake(self.center.x, y);
+    
+    return center;
 }
 
 #pragma mark - Actions

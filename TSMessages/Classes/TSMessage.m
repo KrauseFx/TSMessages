@@ -193,98 +193,33 @@ __weak static UIViewController *_defaultViewController;
 {
     [messageView prepareForDisplay];
     
-    __block CGFloat verticalOffset = 0.0f;
-
-    void (^addStatusBarHeightToVerticalOffset)() = ^void() {
-        BOOL isPortrait = UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]);
-        CGSize statusBarSize = [UIApplication sharedApplication].statusBarFrame.size;
-        CGFloat offset = isPortrait ? statusBarSize.height : statusBarSize.width;
-        verticalOffset += offset;
-    };
-
-    if ([messageView.viewController isKindOfClass:[UINavigationController class]] || [messageView.viewController.parentViewController isKindOfClass:[UINavigationController class]])
-    {
-        UINavigationController *navigationController;
-        UIViewController *viewController = messageView.viewController;
-
-        if ([viewController isKindOfClass:[UINavigationController class]])
-        {
-            navigationController = (UINavigationController *)viewController;
-        }
-        else
-        {
-            navigationController = (UINavigationController *)viewController.parentViewController;
-        }
-
-        viewController = [[navigationController childViewControllers] firstObject];
-        
-        BOOL isViewIsUnderStatusBar = ![viewController prefersStatusBarHidden];
-        
-        if (!isViewIsUnderStatusBar && navigationController.parentViewController == nil)
-        {
-            // strange but true
-            isViewIsUnderStatusBar = ![navigationController isNavigationBarHidden];
-        }
-        
-        if (![navigationController isNavigationBarHidden])
-        {
-            [navigationController.view insertSubview:messageView
-                                               belowSubview:[navigationController navigationBar]];
-            verticalOffset = [navigationController navigationBar].bounds.size.height;
-            addStatusBarHeightToVerticalOffset();
-        }
-        else
-        {
-            [messageView.viewController.view addSubview:messageView];
-            
-            if (isViewIsUnderStatusBar)
-            {
-                addStatusBarHeightToVerticalOffset();
-            }
-        }
-    }
-    else
+    // add view
+    UIViewController *viewController = messageView.viewController;
+    UINavigationController *navigationController = (UINavigationController *)([viewController isKindOfClass:[UINavigationController class]] ? viewController : viewController.parentViewController);
+    
+    if (navigationController.isNavigationBarHidden)
     {
         [messageView.viewController.view addSubview:messageView];
-        addStatusBarHeightToVerticalOffset();
-    }
-
-    CGPoint toPoint;
-    if (messageView.position == TSMessagePositionTop)
-    {
-        CGFloat navigationbarBottomOfViewController = 0;
-
-        if (messageView.delegate && [messageView.delegate respondsToSelector:@selector(navigationbarBottomOfViewController:)])
-        {
-            navigationbarBottomOfViewController = [messageView.delegate navigationbarBottomOfViewController:messageView.viewController];
-        }
-        
-        toPoint = CGPointMake(messageView.center.x, navigationbarBottomOfViewController + verticalOffset + CGRectGetHeight(messageView.frame) / 2.0);
     }
     else
     {
-        CGFloat y = messageView.viewController.view.bounds.size.height - CGRectGetHeight(messageView.frame) / 2.0;
-        
-        if (!messageView.viewController.navigationController.isToolbarHidden)
-        {
-            y -= CGRectGetHeight(messageView.viewController.navigationController.toolbar.bounds);
-        }
-        
-        toPoint = CGPointMake(messageView.center.x, y);
+        [navigationController.view insertSubview:messageView belowSubview:navigationController.navigationBar];
     }
 
+    // animate
     [UIView animateWithDuration:kTSMessageAnimationDuration + 0.1
                           delay:0
          usingSpringWithDamping:0.8
           initialSpringVelocity:0.f
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                         messageView.center = toPoint;
+                         messageView.center = messageView.centerForDisplay;
                      }
                      completion:^(BOOL finished) {
                          messageView.messageFullyDisplayed = YES;
                      }];
 
+    // duration
     if (messageView.duration == TSMessageDurationAutomatic)
     {
         messageView.duration = kTSMessageAnimationDuration + kTSMessageDisplayTime + messageView.frame.size.height * kTSMessageExtraDisplayTimePerPixel;
