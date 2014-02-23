@@ -13,7 +13,7 @@
 @property (nonatomic, readonly) NSString *title;
 @property (nonatomic, readonly) NSString *subtitle;
 @property (nonatomic, readonly) CGPoint centerForDisplay;
-@property (nonatomic, assign, getter = isMessageFullyDisplayed) BOOL messageFullyDisplayed;
+@property (nonatomic, assign, getter=isMessageFullyDisplayed) BOOL messageFullyDisplayed;
 
 - (void)prepareForDisplay;
 @end

@@ -108,15 +108,21 @@ __weak static UIViewController *_defaultViewController;
     }
 }
 
-+ (BOOL)dismissCurrentMessage
++ (BOOL)dismissCurrentMessageForce:(BOOL)force
 {
-    if (![TSMessage sharedMessage].currentMessage) return NO;
+    TSMessageView *currentMessage = [TSMessage sharedMessage].currentMessage;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[TSMessage sharedMessage] dismissCurrentMessage];
-    });
+    if (!currentMessage) return NO;
+    if (!currentMessage.isMessageFullyDisplayed && !force) return NO;
+    
+    [[TSMessage sharedMessage] dismissCurrentMessage];
     
     return YES;
+}
+
++ (BOOL)dismissCurrentMessage
+{
+    return [self dismissCurrentMessageForce:NO];
 }
 
 + (BOOL)isDisplayingMessage

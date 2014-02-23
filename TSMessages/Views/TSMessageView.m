@@ -25,7 +25,7 @@
 @property (nonatomic) UISwipeGestureRecognizer *swipeRecognizer;
 @property (nonatomic) TSBlurView *backgroundBlurView;
 @property (nonatomic, copy) TSMessageCallback buttonCallback;
-@property (nonatomic, assign, getter = isMessageFullyDisplayed) BOOL messageFullyDisplayed;
+@property (nonatomic, getter=isMessageFullyDisplayed) BOOL messageFullyDisplayed;
 @end
 
 @implementation TSMessageView

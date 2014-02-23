@@ -99,12 +99,21 @@ typedef void (^TSMessageCallback)(TSMessageView *messageView);
 + (void)addCustomDesignFromFileWithName:(NSString *)fileName;
 
 /** Dismisses the current message. If another message is in the queue,
- it will be displayed automatically.
+ it will be displayed automatically after the current one is dismissed.
 
  @return YES if the current message was successfully dismissed.
  NO if there is no current message to be dismissed.
  */
 + (BOOL)dismissCurrentMessage;
+
+/** Dismisses the current message even if it is not fully displayed, yet.
+ If another message is in the queue, it will be displayed automatically
+ after the current one is dismissed.
+ 
+ @return YES if the current message was successfully dismissed.
+ NO if there is no current message to be dismissed.
+ */
++ (BOOL)dismissCurrentMessageForce:(BOOL)force;
 
 /** Indicates whether a message is currently being displayed.
 

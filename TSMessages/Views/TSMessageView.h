@@ -21,9 +21,6 @@
 /** The view controller this message is displayed in */
 @property (nonatomic, weak) UIViewController *viewController;
 
-/** Is the message currenlty fully displayed? Is set as soon as the message is really fully visible */
-@property (nonatomic, readonly) BOOL isMessageFullyDisplayed;
-
 /** The duration of the displayed message. If it is 0.0, it will automatically be calculated */
 @property (nonatomic, assign) CGFloat duration;
 
@@ -52,4 +49,7 @@
 
 /** Displays the message permanently. */
 - (void)displayPermanently;
+
+/** Is the message currently fully displayed? Is set as soon as the message is really fully visible */
+- (BOOL)isMessageFullyDisplayed;
 @end
