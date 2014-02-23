@@ -61,6 +61,7 @@ The following properties can be set:
 * **type**: The message type (Message, Warning, Error, Success)
 * **duration**: The duration the message should be displayed (optional)
 * **callback**: The block that should be executed, when the user dismissed the message by swiping it away (optional)
+* **userDismissEnabled**: Define whether or not the message can be dismissed by the user by tapping and swipping (on by default)
 
 Except the title and the message type, all of the listed values are optional
 
