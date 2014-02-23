@@ -36,6 +36,9 @@
 /** The callback that should be invoked, when the user taps the message */
 @property (nonatomic, copy) TSMessageCallback tapCallback;
 
+/** Define whether or not the message can be dismissed by the user by tapping and swipping */
+@property (nonatomic, assign, getter=isUserDismissEnabled) BOOL userDismissEnabled;
+
 - (id)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle image:(UIImage *)image type:(TSMessageType)type;
 
 /** Dismisses this message view */
@@ -43,10 +46,6 @@
 
 /** Adds a button with a callback that gets invoked when the button is tapped */
 - (void)setButtonWithTitle:(NSString *)title callback:(TSMessageCallback)callback;
-
-/** Enables dismissing the message by swiping */
-- (void)setUserDismissEnabled;
-- (void)setUserDismissEnabledWithCallback:(TSMessageCallback)callback;
 
 /** Displays or enqueues the message view. */
 - (void)displayOrEnqueue;

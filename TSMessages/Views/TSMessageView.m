@@ -21,9 +21,10 @@
 @property (nonatomic) UILabel *contentLabel;
 @property (nonatomic) UIImageView *iconImageView;
 @property (nonatomic) UIButton *button;
+@property (nonatomic) UITapGestureRecognizer *tapRecognizer;
+@property (nonatomic) UISwipeGestureRecognizer *swipeRecognizer;
 @property (nonatomic) TSBlurView *backgroundBlurView;
 @property (nonatomic, copy) TSMessageCallback buttonCallback;
-@property (nonatomic, copy) TSMessageCallback dismissCallback;
 @property (nonatomic, assign, getter = isMessageFullyDisplayed) BOOL messageFullyDisplayed;
 @end
 
@@ -33,6 +34,7 @@
 {
     if ((self = [self init]))
     {
+        self.userDismissEnabled = YES;
         self.duration = TSMessageDurationAutomatic;
         self.position = TSMessagePositionTop;
         
@@ -42,7 +44,7 @@
         [self setupSubtitle:subtitle];
         [self setupImage:image];
         [self setupAutoresizing];
-        [self setupTapHandler];
+        [self setupGestureRecognizers];
     }
     
     return self;
@@ -139,11 +141,15 @@
     [self addSubview:self.iconImageView];
 }
 
-- (void)setupTapHandler
+- (void)setupGestureRecognizers
 {
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    tapGesture.delegate = self;
-    [self addGestureRecognizer:tapGesture];
+    self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleViewTap:)];
+    self.tapRecognizer.delegate = self;
+    [self addGestureRecognizer:self.tapRecognizer];
+    
+    self.swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleViewSwipe:)];
+    self.swipeRecognizer.direction = (self.position == TSMessagePositionTop ? UISwipeGestureRecognizerDirectionUp : UISwipeGestureRecognizerDirectionDown);
+    [self addGestureRecognizer:self.swipeRecognizer];
 }
 
 #pragma mark - Message view attributes and actions
@@ -170,28 +176,12 @@
     [self.button setBackgroundImage:buttonBackgroundImage forState:UIControlStateNormal];
     [self.button setTitleShadowColor:buttonTitleShadowColor forState:UIControlStateNormal];
     [self.button setTitleColor:buttonTitleTextColor forState:UIControlStateNormal];
-    [self.button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.button addTarget:self action:@selector(handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.button sizeToFit];
     
     self.button.frame = CGRectMake(self.viewController.view.bounds.size.width - TSMessageViewPadding - self.button.frame.size.width, 0, self.button.frame.size.width, 31);
     
     [self addSubview:self.button];
-}
-
-- (void)setUserDismissEnabled
-{
-    [self setUserDismissEnabledWithCallback:^(TSMessageView *messageView) {
-        [messageView dismiss];
-    }];
-}
-
-- (void)setUserDismissEnabledWithCallback:(TSMessageCallback)callback
-{
-    self.dismissCallback = callback;
-    
-    UISwipeGestureRecognizer *gestureRec = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
-    gestureRec.direction = (self.position == TSMessagePositionTop ? UISwipeGestureRecognizerDirectionUp : UISwipeGestureRecognizerDirectionDown);
-    [self addGestureRecognizer:gestureRec];
 }
 
 - (void)displayOrEnqueue {
@@ -330,7 +320,7 @@
 
 #pragma mark - Actions
 
-- (void)buttonTapped:(id) sender
+- (void)handleButtonTap:(id) sender
 {
     if (self.buttonCallback)
     {
@@ -338,14 +328,32 @@
     }
 }
 
-- (void)handleTap:(UITapGestureRecognizer *)tapGesture
+- (void)handleViewTap:(UITapGestureRecognizer *)tapRecognizer
 {
-    if (tapGesture.state != UIGestureRecognizerStateRecognized) return;
+    if (tapRecognizer.state != UIGestureRecognizerStateRecognized) return;
+    
+    if (self.isUserDismissEnabled)
+    {
+        [self dismiss];
+    }
     
     if (self.tapCallback)
     {
         self.tapCallback(self);
     }
+}
+
+- (void)handleViewSwipe:(UISwipeGestureRecognizer *)swipeRecognizer
+{
+    if (swipeRecognizer.state == UIGestureRecognizerStateRecognized && self.isUserDismissEnabled)
+    {
+        [self dismiss];
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    return !([touch.view isKindOfClass:[UIControl class]]);
 }
 
 - (void)dismiss
@@ -358,13 +366,6 @@
     {
         [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(dismissMessage:) withObject:self waitUntilDone:NO];
     }
-}
-
-#pragma mark - UIGestureRecognizerDelegate
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    return !([touch.view isKindOfClass:[UIControl class]]);
 }
 
 #pragma mark - Private

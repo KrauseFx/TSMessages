@@ -54,34 +54,30 @@
 
 - (IBAction)didTapError:(id)sender
 {
-    TSMessageView *messageView = [TSMessage displayMessageWithTitle:NSLocalizedString(@"Something failed", nil)
-                                                           subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check that!", nil)
-                                                               type:TSMessageTypeError];
-    [messageView setUserDismissEnabled];
+    [TSMessage displayMessageWithTitle:NSLocalizedString(@"Something failed", nil)
+                              subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check that!", nil)
+                                  type:TSMessageTypeError];
 }
 
 - (IBAction)didTapWarning:(id)sender
 {
-    TSMessageView *messageView = [TSMessage displayMessageWithTitle:NSLocalizedString(@"Some random warning", nil)
-                                                           subtitle:NSLocalizedString(@"Look out! Something is happening there!", nil)
-                                                               type:TSMessageTypeWarning];
-    [messageView setUserDismissEnabled];
+    [TSMessage displayMessageWithTitle:NSLocalizedString(@"Some random warning", nil)
+                              subtitle:NSLocalizedString(@"Look out! Something is happening there!", nil)
+                                  type:TSMessageTypeWarning];
 }
 
 - (IBAction)didTapMessage:(id)sender
 {
-    TSMessageView *messageView = [TSMessage displayMessageWithTitle:NSLocalizedString(@"Tell the user something", nil)
-                                                           subtitle:NSLocalizedString(@"This is some neutral message!", nil)
-                                                               type:TSMessageTypeDefault];
-    [messageView setUserDismissEnabled];
+    [TSMessage displayMessageWithTitle:NSLocalizedString(@"Tell the user something", nil)
+                              subtitle:NSLocalizedString(@"This is some neutral message!", nil)
+                                  type:TSMessageTypeDefault];
 }
 
 - (IBAction)didTapSuccess:(id)sender
 {
-    TSMessageView *messageView = [TSMessage displayMessageWithTitle:NSLocalizedString(@"Success", nil)
-                                                           subtitle:NSLocalizedString(@"Some task was successfully completed!", nil)
-                                                               type:TSMessageTypeSuccess];
-    [messageView setUserDismissEnabled];
+    [TSMessage displayMessageWithTitle:NSLocalizedString(@"Success", nil)
+                              subtitle:NSLocalizedString(@"Some task was successfully completed!", nil)
+                                  type:TSMessageTypeSuccess];
 }
 
 - (IBAction)didTapButton:(id)sender
@@ -98,8 +94,6 @@
                                       type:TSMessageTypeSuccess];
     }];
     
-    [view setUserDismissEnabled];
-    
     [view displayOrEnqueue];
 }
 
@@ -108,7 +102,8 @@
     TSMessageView *view = [TSMessage messageWithTitle:NSLocalizedString(@"Permanent message", nil)
                                              subtitle:NSLocalizedString(@"Stays here until it gets dismissed", nil)
                                                  type:TSMessageTypeDefault];
-
+    
+    view.userDismissEnabled = NO;
     view.position = TSMessagePositionBottom;
     
     [view setButtonWithTitle:NSLocalizedString(@"Dismiss", nil) callback:^(TSMessageView *messageView) {
@@ -120,8 +115,6 @@
                                   subtitle:nil
                                       type:TSMessageTypeSuccess];
     };
-    
-    [view setUserDismissEnabled];
     
     [view displayPermanently];
 }
@@ -153,8 +146,6 @@
                                                         type:TSMessageTypeDefault
                                             inViewController:self];
     
-    [messageView setUserDismissEnabled];
-    
     [messageView displayOrEnqueue];
 }
 
@@ -170,6 +161,7 @@
                                                         type:TSMessageTypeSuccess];
     
     messageView.duration = TSMessageDurationEndless;
+    messageView.userDismissEnabled = NO;
     
     [messageView displayOrEnqueue];
 }
@@ -180,8 +172,6 @@
                                                     subtitle:NSLocalizedString(@"This message is displayed 10 seconds instead of the calculated value", nil)
                                                         type:TSMessageTypeWarning];
     messageView.duration = 10.0;
-    
-    [messageView setUserDismissEnabled];
     
     [messageView displayOrEnqueue];
 }
@@ -195,29 +185,23 @@
     messageView.duration = TSMessageDurationAutomatic;
     messageView.position = TSMessagePositionBottom;
     
-    [messageView setUserDismissEnabled];
-    
     [messageView displayOrEnqueue];
 }
 
 - (IBAction)didTapText:(id)sender
 {
-    TSMessageView *messageView = [TSMessage displayMessageWithTitle:NSLocalizedString(@"With 'Text' I meant a long text, so here it is", nil)
-                                                           subtitle:NSLocalizedString(@"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus", nil)
-                                                               type:TSMessageTypeWarning];
-    
-    [messageView setUserDismissEnabled];
+    [TSMessage displayMessageWithTitle:NSLocalizedString(@"With 'Text' I meant a long text, so here it is", nil)
+                              subtitle:NSLocalizedString(@"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus", nil)
+                                  type:TSMessageTypeWarning];
 }
 
 - (IBAction)didTapCustomDesign:(id)sender
 {
     [TSMessage addCustomDesignFromFileWithName:@"AlternativeDesign.json"];
     
-    TSMessageView *messageView = [TSMessage displayMessageWithTitle:NSLocalizedString(@"Updated to custom design file", nil)
-                                                           subtitle:NSLocalizedString(@"From now on, all the titles of success messages are larger", nil)
-                                                               type:TSMessageTypeSuccess];
-    
-    [messageView setUserDismissEnabled];
+    [TSMessage displayMessageWithTitle:NSLocalizedString(@"Updated to custom design file", nil)
+                              subtitle:NSLocalizedString(@"From now on, all the titles of success messages are larger", nil)
+                                  type:TSMessageTypeSuccess];
 }
 
 @end
