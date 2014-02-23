@@ -14,7 +14,7 @@
 @protocol TSMessageViewProtocol<NSObject>
 @optional
 /** Implement this method to pass a custom value for positioning the message view */
-- (CGFloat)navigationbarBottomOfViewController:(UIViewController *)viewController;
+- (CGFloat)customMessageOffsetForPosition:(TSMessagePosition)position inViewController:(UIViewController *)viewController;
 @end
 
 @interface TSMessageView : UIView

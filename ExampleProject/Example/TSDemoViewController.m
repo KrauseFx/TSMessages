@@ -45,12 +45,29 @@
     return self.hideStatusbar;
 }
 
-- (CGFloat)navigationbarBottomOfViewController:(UIViewController *)viewController
+- (CGFloat)customMessageOffsetForPosition:(TSMessagePosition)position inViewController:(UIViewController *)viewController
 {
-    return 55;
+    return position == TSMessagePositionTop ? 75 : 25;
 }
 
 #pragma mark Actions
+
+- (IBAction)didTapToggleNavigationBar:(id)sender
+{
+    [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
+}
+
+- (IBAction)didTapToggleNavigationBarAlpha:(id)sender
+{
+    CGFloat alpha = self.navigationController.navigationBar.alpha;
+    
+    self.navigationController.navigationBar.alpha = (alpha == 1.f) ? 0.5 : 1;
+}
+
+- (IBAction)didTapToggleStatusbar:(id)sender
+{
+    self.hideStatusbar = !self.hideStatusbar;
+}
 
 - (IBAction)didTapError:(id)sender
 {
@@ -86,6 +103,8 @@
                                              subtitle:NSLocalizedString(@"Please update our app. We would be very thankful", nil)
                                                  type:TSMessageTypeDefault];
     
+    view.delegate = self;
+    
     [view setButtonWithTitle:NSLocalizedString(@"Update", nil) callback:^(TSMessageView *messageView) {
         [messageView dismiss];
 
@@ -103,6 +122,7 @@
                                              subtitle:NSLocalizedString(@"Stays here until it gets dismissed", nil)
                                                  type:TSMessageTypeDefault];
     
+    view.delegate = self;
     view.userDismissEnabled = NO;
     view.position = TSMessagePositionBottom;
     
@@ -119,21 +139,16 @@
     [view displayPermanently];
 }
 
-- (IBAction)didTapToggleNavigationBar:(id)sender
+- (IBAction)didTapCustomPosition:(id)sender
 {
-    [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
-}
-
-- (IBAction)didTapToggleNavigationBarAlpha:(id)sender
-{
-    CGFloat alpha = self.navigationController.navigationBar.alpha;
+    TSMessageView *messageView = [TSMessage messageWithTitle:NSLocalizedString(@"Custom position", nil)
+                                                    subtitle:NSLocalizedString(@"Define this via a delegation method", nil)
+                                                        type:TSMessageTypeDefault];
     
-    self.navigationController.navigationBar.alpha = (alpha == 1.f) ? 0.5 : 1;
-}
-
-- (IBAction)didTapToggleStatusbar:(id)sender
-{
-    self.hideStatusbar = !self.hideStatusbar;
+    messageView.delegate = self;
+    messageView.position = TSMessagePositionBottom;
+    
+    [messageView displayOrEnqueue];
 }
 
 - (IBAction)didTapCustomImage:(id)sender
