@@ -111,7 +111,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
                                 subtitle:(NSString *)subtitle
                                     type:(TSMessageNotificationType)type
                                 duration:(NSTimeInterval)duration
-                     canBeDismisedByUser:(BOOL)dismissingEnabled;
+                     canBeDismissedByUser:(BOOL)dismissingEnabled;
 
 
 

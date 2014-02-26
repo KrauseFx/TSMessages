@@ -81,7 +81,7 @@ __weak static UIViewController *_defaultViewController;
                                buttonTitle:nil
                             buttonCallback:nil
                                 atPosition:TSMessageNotificationPositionTop
-                       canBeDismisedByUser:YES];
+                       canBeDismissedByUser:YES];
 }
 
 + (void)showNotificationInViewController:(UIViewController *)viewController
@@ -89,7 +89,7 @@ __weak static UIViewController *_defaultViewController;
                                 subtitle:(NSString *)subtitle
                                     type:(TSMessageNotificationType)type
                                 duration:(NSTimeInterval)duration
-                     canBeDismisedByUser:(BOOL)dismissingEnabled
+                     canBeDismissedByUser:(BOOL)dismissingEnabled
 {
     [self showNotificationInViewController:viewController
                                      title:title
@@ -101,7 +101,7 @@ __weak static UIViewController *_defaultViewController;
                                buttonTitle:nil
                             buttonCallback:nil
                                 atPosition:TSMessageNotificationPositionTop
-                       canBeDismisedByUser:dismissingEnabled];
+                       canBeDismissedByUser:dismissingEnabled];
 }
 
 + (void)showNotificationInViewController:(UIViewController *)viewController

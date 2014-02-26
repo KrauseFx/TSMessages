@@ -171,4 +171,7 @@
     return 55;
 }
 
+- (IBAction)didTapNavbarHidden:(id)sender {
+    self.navigationController.navigationBarHidden = !self.navigationController.navigationBarHidden;
+}
 @end
