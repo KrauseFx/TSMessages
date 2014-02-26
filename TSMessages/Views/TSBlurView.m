@@ -24,6 +24,9 @@
         _toolbar = [[UIToolbar alloc] initWithFrame:self.bounds];
         _toolbar.userInteractionEnabled = NO;
         _toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+        [_toolbar setBackgroundImage:nil forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault]; // remove background set through the appearence proxy
+#endif
         [self addSubview:_toolbar];
     }
 
@@ -40,7 +43,7 @@
 - (UIColor *)blurTintColor
 {
     if ([self.toolbar respondsToSelector:@selector(barTintColor)]) {
-        return [self.toolbar performSelector:@selector(barTintColor:)];
+        return [self.toolbar performSelector:@selector(barTintColor)];
     }
     return nil;
 }

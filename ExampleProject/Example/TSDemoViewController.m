@@ -18,6 +18,8 @@
     [super viewDidLoad];
     
     [TSMessage setDefaultViewController:self];
+    self.wantsFullScreenLayout = YES;
+    [self.navigationController.navigationBar setTranslucent:YES];
 }
 
 - (IBAction)didTapError:(id)sender
@@ -63,7 +65,19 @@
                                                                      type:TSMessageNotificationTypeSuccess];
                                  }
                                      atPosition:TSMessageNotificationPositionTop
-                            canBeDismisedByUser:YES];
+                           canBeDismissedByUser:YES];
+}
+
+- (IBAction)didTapToggleNavigationBar:(id)sender {
+    [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
+}
+- (IBAction)didTapToggleNavigationBarAlpha:(id)sender {
+    CGFloat alpha = self.navigationController.navigationBar.alpha;
+    self.navigationController.navigationBar.alpha = (alpha==1.f)?0.5:1;
+}
+- (IBAction)didTapToggleWantsFullscreen:(id)sender {
+    self.wantsFullScreenLayout = !self.wantsFullScreenLayout;
+    [self.navigationController.navigationBar setTranslucent:!self.navigationController.navigationBar.isTranslucent];
 }
 
 - (IBAction)didTapCustomImage:(id)sender
@@ -78,7 +92,7 @@
                                     buttonTitle:nil
                                  buttonCallback:nil
                                      atPosition:TSMessageNotificationPositionTop
-                            canBeDismisedByUser:YES];
+                           canBeDismissedByUser:YES];
 }
 
 - (IBAction)didTapDismissCurrentMessage:(id)sender
@@ -98,7 +112,7 @@
                                     buttonTitle:nil
                                  buttonCallback:nil
                                      atPosition:TSMessageNotificationPositionTop
-                            canBeDismisedByUser:NO];
+                            canBeDismissedByUser:NO];
 }
 
 - (IBAction)didTapLong:(id)sender
@@ -113,7 +127,7 @@
                                     buttonTitle:nil
                                  buttonCallback:nil
                                      atPosition:TSMessageNotificationPositionTop
-                            canBeDismisedByUser:YES];
+                           canBeDismissedByUser:YES];
 }
 
 - (IBAction)didTapBottom:(id)sender
@@ -128,7 +142,7 @@
                                     buttonTitle:nil
                                  buttonCallback:nil
                                      atPosition:TSMessageNotificationPositionBottom
-                            canBeDismisedByUser:YES];
+                            canBeDismissedByUser:YES];
 }
 
 - (IBAction)didTapText:(id)sender

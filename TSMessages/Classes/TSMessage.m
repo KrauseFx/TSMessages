@@ -20,9 +20,6 @@
 /** The queued messages (TSMessageView objects) */
 @property (nonatomic, strong) NSMutableArray *messages;
 
-+ (UIViewController *)defaultViewController;
-
-
 - (void)fadeInCurrentNotification;
 - (void)fadeOutNotification:(TSMessageView *)currentView;
 
@@ -30,7 +27,7 @@
 
 @implementation TSMessage
 
-static TSMessage *sharedMessages;
+static TSMessage *sharedMessage;
 static BOOL notificationActive;
 
 static BOOL _useiOS7Style;
@@ -40,11 +37,11 @@ __weak static UIViewController *_defaultViewController;
 
 + (TSMessage *)sharedMessage
 {
-    if (!sharedMessages)
+    if (!sharedMessage)
     {
-        sharedMessages = [[[self class] alloc] init];
+        sharedMessage = [[[self class] alloc] init];
     }
-    return sharedMessages;
+    return sharedMessage;
 }
 
 
@@ -122,7 +119,7 @@ __weak static UIViewController *_defaultViewController;
                                buttonTitle:nil
                             buttonCallback:nil
                                 atPosition:TSMessageNotificationPositionTop
-                       canBeDismisedByUser:YES];
+                      canBeDismissedByUser:YES];
 }
 
 
@@ -136,7 +133,7 @@ __weak static UIViewController *_defaultViewController;
                              buttonTitle:(NSString *)buttonTitle
                           buttonCallback:(void (^)())buttonCallback
                               atPosition:(TSMessageNotificationPosition)messagePosition
-                     canBeDismisedByUser:(BOOL)dismissingEnabled
+                    canBeDismissedByUser:(BOOL)dismissingEnabled
 {
     // Create the TSMessageView
     TSMessageView *v = [[TSMessageView alloc] initWithTitle:title
@@ -149,7 +146,7 @@ __weak static UIViewController *_defaultViewController;
                                                 buttonTitle:buttonTitle
                                              buttonCallback:buttonCallback
                                                  atPosition:messagePosition
-                                          shouldBeDismissed:dismissingEnabled];
+                                       canBeDismissedByUser:dismissingEnabled];
     [self prepareNotificationToBeShown:v];
 }
 
@@ -204,21 +201,32 @@ __weak static UIViewController *_defaultViewController;
         verticalOffset += offset;
     };
     
-    if ([currentView.viewController isKindOfClass:[UINavigationController class]])
+    if ([currentView.viewController isKindOfClass:[UINavigationController class]] || [currentView.viewController.parentViewController isKindOfClass:[UINavigationController class]])
     {
-        if (![(UINavigationController *)currentView.viewController isNavigationBarHidden])
+        UINavigationController *currentNavigationController;
+        
+        if([currentView.viewController isKindOfClass:[UINavigationController class]])
+            currentNavigationController = (UINavigationController *)currentView.viewController;
+        else
+            currentNavigationController = (UINavigationController *)currentView.viewController.parentViewController;
+        
+        BOOL isViewIsUnderStatusBar = [[[currentNavigationController childViewControllers] firstObject] wantsFullScreenLayout];
+        if (!isViewIsUnderStatusBar && currentNavigationController.parentViewController == nil) {
+            isViewIsUnderStatusBar = ![currentNavigationController isNavigationBarHidden]; // strange but true
+        }
+        if (![currentNavigationController isNavigationBarHidden])
         {
-            [currentView.viewController.view insertSubview:currentView
-                                              belowSubview:[(UINavigationController *)currentView.viewController navigationBar]];
-            verticalOffset = [(UINavigationController *)currentView.viewController navigationBar].bounds.size.height;
-            if ([TSMessage iOS7StyleEnabled]) {
+            [currentNavigationController.view insertSubview:currentView
+                                               belowSubview:[currentNavigationController navigationBar]];
+            verticalOffset = [currentNavigationController navigationBar].bounds.size.height;
+            if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
                 addStatusBarHeightToVerticalOffset();
             }
         }
         else
         {
             [currentView.viewController.view addSubview:currentView];
-            if ([TSMessage iOS7StyleEnabled]) {
+            if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
                 addStatusBarHeightToVerticalOffset();
             }
         }
@@ -250,7 +258,7 @@ __weak static UIViewController *_defaultViewController;
         }
         toPoint = CGPointMake(currentView.center.x, y);
     }
-
+    
     dispatch_block_t animationBlock = ^{
         currentView.center = toPoint;
         if (![TSMessage iOS7StyleEnabled]) {
@@ -268,7 +276,7 @@ __weak static UIViewController *_defaultViewController;
                          animations:animationBlock
                          completion:completionBlock];
     } else {
-        #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
         [UIView animateWithDuration:kTSMessageAnimationDuration + 0.1
                               delay:0
              usingSpringWithDamping:0.8
@@ -276,7 +284,7 @@ __weak static UIViewController *_defaultViewController;
                             options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
                          animations:animationBlock
                          completion:completionBlock];
-        #endif
+#endif
     }
     
     if (currentView.duration == TSMessageNotificationDurationAutomatic)
@@ -343,6 +351,7 @@ __weak static UIViewController *_defaultViewController;
     
     dispatch_async(dispatch_get_main_queue(), ^
                    {
+                       if ([[TSMessage sharedMessage].messages count] == 0) return;
                        TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
                        if (currentMessage.messageIsFullyDisplayed)
                        {
@@ -390,9 +399,9 @@ __weak static UIViewController *_defaultViewController;
     dispatch_once(&onceToken, ^{
         // Decide wheter to use iOS 7 style or not based on the running device and the base sdk
         BOOL iOS7SDK = NO;
-        #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-            iOS7SDK = YES;
-        #endif
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+        iOS7SDK = YES;
+#endif
         
         _useiOS7Style = ! (TS_SYSTEM_VERSION_LESS_THAN(@"7.0") || !iOS7SDK);
     });
