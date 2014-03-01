@@ -203,7 +203,7 @@ __weak static UIViewController *_defaultViewController;
     UIViewController *viewController = messageView.viewController;
     UINavigationController *navigationController = (UINavigationController *)([viewController isKindOfClass:[UINavigationController class]] ? viewController : viewController.parentViewController);
     
-    if (navigationController.isNavigationBarHidden)
+    if (!navigationController || navigationController.isNavigationBarHidden)
     {
         [messageView.viewController.view addSubview:messageView];
     }
