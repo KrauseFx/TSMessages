@@ -357,10 +357,10 @@
             if (!isViewIsUnderStatusBar && navigationController.parentViewController == nil)
             {
                 // strange but true
-                isViewIsUnderStatusBar = !navigationController.isNavigationBarHidden;
+                isViewIsUnderStatusBar = ![self isNavigationBarInNavigationControllerHidden:navigationController];
             }
             
-            if (!navigationController.isNavigationBarHidden)
+            if (![self isNavigationBarInNavigationControllerHidden:navigationController])
             {
                 offset = [navigationController navigationBar].bounds.size.height;
                 addStatusBarHeightToVerticalOffset();
@@ -455,6 +455,19 @@
 - (NSString *)subtitle
 {
     return self.contentLabel.text;
+}
+
+/** Indicates whether the current navigationBar is hidden by isNavigationBarHidden on the
+ UINavigationController or isHidden on the navigationBar of the UINavigationController */
+- (BOOL)isNavigationBarInNavigationControllerHidden:(UINavigationController *)navController
+{
+    if (navController.isNavigationBarHidden) {
+        return YES;
+    } else if (navController.navigationBar.isHidden) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 @end
