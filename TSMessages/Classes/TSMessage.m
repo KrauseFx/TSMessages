@@ -212,9 +212,9 @@ __weak static UIViewController *_defaultViewController;
         
         BOOL isViewIsUnderStatusBar = [[[currentNavigationController childViewControllers] firstObject] wantsFullScreenLayout];
         if (!isViewIsUnderStatusBar && currentNavigationController.parentViewController == nil) {
-            isViewIsUnderStatusBar = ![self isNavigationBarInNavigationControllerHidden:currentNavigationController]; // strange but true
+            isViewIsUnderStatusBar = ![TSMessage isNavigationBarInNavigationControllerHidden:currentNavigationController]; // strange but true
         }
-        if (![self isNavigationBarInNavigationControllerHidden:currentNavigationController])
+        if (![TSMessage isNavigationBarInNavigationControllerHidden:currentNavigationController])
         {
             [currentNavigationController.view insertSubview:currentView
                                                belowSubview:[currentNavigationController navigationBar]];
@@ -303,7 +303,7 @@ __weak static UIViewController *_defaultViewController;
     }
 }
 
-- (BOOL)isNavigationBarInNavigationControllerHidden:(UINavigationController *)navController
++ (BOOL)isNavigationBarInNavigationControllerHidden:(UINavigationController *)navController
 {
     if([navController isNavigationBarHidden]) {
         return YES;

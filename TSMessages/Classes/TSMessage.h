@@ -165,4 +165,9 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
  This depends on the Base SDK and the currently used device */
 + (BOOL)iOS7StyleEnabled;
 
+/** Indicates whether the current navigationBar is hidden by isNavigationBarHidden 
+ on the UINavigationController or isHidden on the navigationBar of the current 
+ UINavigationController */
++ (BOOL)isNavigationBarInNavigationControllerHidden:(UINavigationController *)navController;
+
 @end
