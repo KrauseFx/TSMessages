@@ -86,6 +86,9 @@ If you have ideas how to improve this library please let me know or send a pull 
 Changes
 -----
 
+**0.9.6**
+* Fixed a Position bug when you hide the UINavigationBar with the UINavigationBar hidden property.
+
 **0.9.5**
 * Fixed warnings
 * Other little bugfixes
