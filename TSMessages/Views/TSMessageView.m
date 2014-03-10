@@ -445,6 +445,12 @@
     }
 }
 
+- (void)setPosition:(TSMessagePosition)position {
+    _position = position;
+    
+    self.swipeRecognizer.direction = (self.position == TSMessagePositionTop ? UISwipeGestureRecognizerDirectionUp : UISwipeGestureRecognizerDirectionDown);
+}
+
 #pragma mark - Private
 
 - (NSString *)title
