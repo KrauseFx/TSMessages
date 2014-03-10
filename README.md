@@ -76,6 +76,7 @@ If you don't want a detailed description (the text underneath the title) you don
 ![Message](http://www.toursprung.com/wp-content/uploads/2013/04/iNotificationMessage.png)
 
 **iOS 7 Support**
+
 ![iOS 7 Error](http://www.toursprung.com/wp-content/uploads/2013/09/error_ios7.png)
 ![iOS 7 Message](http://www.toursprung.com/wp-content/uploads/2013/09/warning_ios7.png)
 
@@ -83,38 +84,4 @@ This project requires ARC.
 
 If you have ideas how to improve this library please let me know or send a pull request.
 
-Changes
------
-
-**0.9.6**
-* Fixed a Position bug when you hide the UINavigationBar with the UINavigationBar hidden property.
-
-**0.9.5**
-* Fixed warnings
-* Other little bugfixes
-
-**0.9.4**
-* Added new initializer (Sorry about that, it was necessary)
-* Added easy way to customize the design with an additional design file
-* Added iOS 7 support
-
-**0.9.3**
-
-* Added new customization options for buttons (font size, custom background image, separate font and shadow color)
-* Added method to dismiss the currently active message
-* Added option to show a message until it is dismissed by the user
-* Added option to disable dismissing notification by the user
-* Added method to check whether a notification is currently being displayed
-* Fixed auto rotation when notification is displayed on the bottom
-
-**0.9.2**
-
-* Added option to show message on the bottom of the screen
-* Added option to show a button inside the message
-
-
-
-
-TODOs
------
-Currently empty
+**Recent changes can be found in the releases section of this repo.**
