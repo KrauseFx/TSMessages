@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TSMessageView.h"
 
-@interface TSDemoViewController : UIViewController <TSMessageViewProtocol>
-
+@interface TSDemoViewController : UIViewController
 
 - (IBAction)didTapError:(id)sender;
 - (IBAction)didTapWarning:(id)sender;
@@ -24,5 +23,6 @@
 - (IBAction)didTapText:(id)sender;
 - (IBAction)didTapCustomDesign:(id)sender;
 - (IBAction)didTapNavbarHidden:(id)sender;
+- (IBAction)didTapCustomView:(id)sender;
 
 @end
