@@ -10,6 +10,7 @@
 #import "TSDemoViewController.h"
 #import "TSMessage.h"
 #import "TSMessageView.h"
+#import "TSMessageCustomItem.h"
 
 @implementation TSDemoViewController
 
@@ -162,9 +163,16 @@
 }
 
 
-
-
-
+- (IBAction)didTapCustomView:(id)sender {
+    TSMessageCustomItem *item = [TSMessageCustomItem itemWithTitle:@"Test" subtitle:@"description" type:TSMessageNotificationTypeSuccess inViewController:self tapHandler:^(TSMessageCustomItem *item) {
+        NSLog(@"Message did pressed");
+    } iconHandler:^(TSMessageCustomItem *item) {
+        NSLog(@"Icon did pressed");
+    } disclosureView:nil disclosureHandler:^(TSMessageCustomItem *item) {
+        NSLog(@"Disclosure view did pressed");
+    }];
+    [TSMessage showNotificationMessageWithItem:item];
+}
 
 - (CGFloat)navigationbarBottomOfViewController:(UIViewController *)viewController
 {
@@ -174,4 +182,5 @@
 - (IBAction)didTapNavbarHidden:(id)sender {
     self.navigationController.navigationBarHidden = !self.navigationController.navigationBarHidden;
 }
+
 @end

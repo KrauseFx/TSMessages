@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0C9D527520AF4EAA93E80BC5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64AE23935D5499BAF0AC8C1 /* libPods.a */; };
+		4C67F9E218F6C38700021ADD /* closeIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C67F9E018F6C38700021ADD /* closeIcon.png */; };
+		4C67F9E318F6C38700021ADD /* closeIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C67F9E118F6C38700021ADD /* closeIcon@2x.png */; };
+		4CCFEF4318EF06FF00CDFE92 /* TSMessageCustomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCFEF4218EF06FF00CDFE92 /* TSMessageCustomItem.m */; };
+		4CCFEF4618EF09C100CDFE92 /* TSMessageCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCFEF4518EF09C100CDFE92 /* TSMessageCustomView.m */; };
 		CA0B97051719CD6800E06F84 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0B97041719CD6800E06F84 /* UIKit.framework */; };
 		CA0B97071719CD6800E06F84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0B97061719CD6800E06F84 /* Foundation.framework */; };
 		CA0B97091719CD6800E06F84 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0B97081719CD6800E06F84 /* CoreGraphics.framework */; };
@@ -23,6 +27,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C67F9E018F6C38700021ADD /* closeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeIcon.png; sourceTree = "<group>"; };
+		4C67F9E118F6C38700021ADD /* closeIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeIcon@2x.png"; sourceTree = "<group>"; };
+		4CCFEF4118EF06FF00CDFE92 /* TSMessageCustomItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMessageCustomItem.h; sourceTree = "<group>"; };
+		4CCFEF4218EF06FF00CDFE92 /* TSMessageCustomItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMessageCustomItem.m; sourceTree = "<group>"; };
+		4CCFEF4418EF09C100CDFE92 /* TSMessageCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMessageCustomView.h; sourceTree = "<group>"; };
+		4CCFEF4518EF09C100CDFE92 /* TSMessageCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMessageCustomView.m; sourceTree = "<group>"; };
 		8B33F75B47A447C8B36A0061 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		A64AE23935D5499BAF0AC8C1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0B97011719CD6800E06F84 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +108,10 @@
 				CA0B97261719CD6800E06F84 /* TSDemoViewController.h */,
 				CA0B97271719CD6800E06F84 /* TSDemoViewController.m */,
 				CA0B970B1719CD6800E06F84 /* Supporting Files */,
+				4CCFEF4118EF06FF00CDFE92 /* TSMessageCustomItem.h */,
+				4CCFEF4218EF06FF00CDFE92 /* TSMessageCustomItem.m */,
+				4CCFEF4418EF09C100CDFE92 /* TSMessageCustomView.h */,
+				4CCFEF4518EF09C100CDFE92 /* TSMessageCustomView.m */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -105,6 +119,8 @@
 		CA0B970B1719CD6800E06F84 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4C67F9E018F6C38700021ADD /* closeIcon.png */,
+				4C67F9E118F6C38700021ADD /* closeIcon@2x.png */,
 				CA0B970C1719CD6800E06F84 /* Example-Info.plist */,
 				CA0B970D1719CD6800E06F84 /* InfoPlist.strings */,
 				CA0B97101719CD6800E06F84 /* main.m */,
@@ -170,8 +186,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA0B970F1719CD6800E06F84 /* InfoPlist.strings in Resources */,
+				4C67F9E318F6C38700021ADD /* closeIcon@2x.png in Resources */,
 				CA0B97171719CD6800E06F84 /* Default.png in Resources */,
 				CA0B97191719CD6800E06F84 /* Default@2x.png in Resources */,
+				4C67F9E218F6C38700021ADD /* closeIcon.png in Resources */,
 				CA0B971B1719CD6800E06F84 /* Default-568h@2x.png in Resources */,
 				CA0B971E1719CD6800E06F84 /* MainStoryboard.storyboard in Resources */,
 				CAA3C9E817C3CD180085E06E /* AlternativeDesign.json in Resources */,
@@ -204,6 +222,8 @@
 			files = (
 				CA0B97111719CD6800E06F84 /* main.m in Sources */,
 				CA0B97151719CD6800E06F84 /* TSAppDelegate.m in Sources */,
+				4CCFEF4618EF09C100CDFE92 /* TSMessageCustomView.m in Sources */,
+				4CCFEF4318EF06FF00CDFE92 /* TSMessageCustomItem.m in Sources */,
 				CA0B97281719CD6800E06F84 /* TSDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
