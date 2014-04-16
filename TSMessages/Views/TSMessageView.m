@@ -327,9 +327,11 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             [self addGestureRecognizer:tapRec];
         }
         
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-        tapGesture.delegate = self;
-        [self addGestureRecognizer:tapGesture];
+        if (self.callback) {
+            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+            tapGesture.delegate = self;
+            [self addGestureRecognizer:tapGesture];
+        }
     }
     return self;
 }
