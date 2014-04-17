@@ -45,12 +45,13 @@
 + (CGFloat)heightWithItem:(TSMessageItem *)item {
     
     CGFloat calculatedHeight = TSMessageViewPadding; //padding on top
+    CGFloat width = item.viewController.view.bounds.size.width - TSMessageViewPadding * 4;
     
     if (item.title.length) {
         CGFloat fontSize = [[[TSMessage notificationDesignWithMessageType:item.messageType] valueForKey:@"titleFontSize"] floatValue];
         NSString *fontName = [[TSMessage notificationDesignWithMessageType:item.messageType] valueForKey:@"titleFontName"];
         UIFont *titleFont = fontName ? [UIFont fontWithName:fontName size:fontSize] : [UIFont boldSystemFontOfSize:fontSize];
-        CGSize titleSize = [item.title sizeWithFont:titleFont forWidth:item.viewController.view.bounds.size.width - TSMessageViewPadding * 4 lineBreakMode:NSLineBreakByWordWrapping];
+        CGSize titleSize = [item.title sizeWithFont:titleFont constrainedToSize:CGSizeMake(width, INTMAX_MAX) lineBreakMode:NSLineBreakByWordWrapping];
         
         calculatedHeight += titleSize.height + 5.f; //title size
     }
@@ -59,7 +60,7 @@
         CGFloat fontSizeContent = [[[TSMessage notificationDesignWithMessageType:item.messageType] valueForKey:@"contentFontSize"] floatValue];
         NSString *fontNameContent = [[TSMessage notificationDesignWithMessageType:item.messageType] valueForKey:@"contentFontName"];
         UIFont *contentFont = fontNameContent ? [UIFont fontWithName:fontNameContent size:fontSizeContent] : [UIFont boldSystemFontOfSize:fontSizeContent];
-        CGSize contentSize = [item.subtitle sizeWithFont:contentFont forWidth:item.viewController.view.bounds.size.width - TSMessageViewPadding * 4 lineBreakMode:NSLineBreakByWordWrapping];
+        CGSize contentSize = [item.subtitle sizeWithFont:contentFont constrainedToSize:CGSizeMake(width, INTMAX_MAX) lineBreakMode:NSLineBreakByWordWrapping];
         
         calculatedHeight += contentSize.height + 5.f; //content size
     }
@@ -112,7 +113,7 @@
         _titleLabel.font = titleFont;
         [_titleLabel setShadowColor:[UIColor colorWithHexString:[[TSMessage notificationDesignWithMessageType:_item.messageType] valueForKey:@"shadowColor"] alpha:1.0]];
         [_titleLabel setShadowOffset:CGSizeMake([[[TSMessage notificationDesignWithMessageType:_item.messageType] valueForKey:@"shadowOffsetX"] floatValue],
-                                                    [[[TSMessage notificationDesignWithMessageType:_item.messageType] valueForKey:@"shadowOffsetY"] floatValue])];
+                                                [[[TSMessage notificationDesignWithMessageType:_item.messageType] valueForKey:@"shadowOffsetY"] floatValue])];
         _titleLabel.numberOfLines = 0;
         _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         
@@ -124,11 +125,11 @@
     if (!_contentLabel) {
         _contentLabel = [[UILabel alloc] init];
         [_contentLabel setText:_item.subtitle];
-
+        
         UIColor *contentTextColor = [UIColor colorWithHexString:[[TSMessage notificationDesignWithMessageType:_item.messageType] valueForKey:@"contentTextColor"] alpha:1.0];
         CGFloat fontSizeContent = [[[TSMessage notificationDesignWithMessageType:_item.messageType] valueForKey:@"contentFontSize"] floatValue];
         NSString *fontNameContent = [[TSMessage notificationDesignWithMessageType:_item.messageType] valueForKey:@"contentFontName"];
-
+        
         if (!contentTextColor) {
             UIColor *fontColor = [UIColor colorWithHexString:[[TSMessage notificationDesignWithMessageType:_item.messageType] valueForKey:@"textColor"] alpha:1.0];
             contentTextColor = fontColor;
@@ -151,11 +152,11 @@
 -(UIView *)borderView {
     if (!_borderView) {
         _borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0,
-                                                                   0.0, // will be set later
-                                                                   _item.viewController.view.bounds.size.width,
-                                                                   [[[TSMessage notificationDesignWithMessageType:_item.messageType] valueForKey:@"borderHeight"] floatValue])];
+                                                               0.0, // will be set later
+                                                               _item.viewController.view.bounds.size.width,
+                                                               [[[TSMessage notificationDesignWithMessageType:_item.messageType] valueForKey:@"borderHeight"] floatValue])];
         _borderView.backgroundColor = [UIColor colorWithHexString:[[TSMessage notificationDesignWithMessageType:_item.messageType] valueForKey:@"borderColor"]
-                                                                alpha:1.0];
+                                                            alpha:1.0];
         _borderView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
     }
     return _borderView;
@@ -230,7 +231,7 @@
         self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
     }
     
-    CGFloat actualHeight = [TSMessageView heightWithItem:_item];
+    CGFloat actualHeight = [self.class heightWithItem:_item];
     CGFloat topPosition = -actualHeight;
     
     if (_item.messagePosition == TSMessageNotificationPositionBottom)
@@ -286,7 +287,6 @@
 -(void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat currentHeight;
     CGFloat screenWidth = _item.viewController.view.bounds.size.width;
     
     self.titleLabel.frame = CGRectMake(self.textSpaceLeft,
@@ -302,39 +302,20 @@
                                              screenWidth - TSMessageViewPadding - self.textSpaceLeft - self.textSpaceRight,
                                              0.0);
         [self.contentLabel sizeToFit];
-        
-        currentHeight = self.contentLabel.frame.origin.y + self.contentLabel.frame.size.height;
     }
-    else
-    {
-        // only the title was set
-        currentHeight = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height;
-    }
-    
-    currentHeight += TSMessageViewPadding;
     
     if (_item.messagePosition == TSMessageNotificationPositionTop)
     {
         // Correct the border position
         CGRect borderFrame = self.borderView.frame;
-        borderFrame.origin.y = currentHeight;
+        borderFrame.origin.y = CGRectGetHeight(self.frame);
         self.borderView.frame = borderFrame;
     }
     
-    currentHeight += self.borderView.frame.size.height;
-    
     if (self.iconImageView.image)
     {
-        // Check if that makes the popup larger (height)
-        if (self.iconImageView.frame.origin.y + self.iconImageView.frame.size.height + TSMessageViewPadding > currentHeight)
-        {
-            currentHeight = self.iconImageView.frame.origin.y + self.iconImageView.frame.size.height;
-        }
-        else
-        {
-            // z-align
-            self.iconImageView.center = CGPointMake([self.iconImageView center].x, roundf(currentHeight / 2.0));
-        }
+        // z-align
+        self.iconImageView.center = CGPointMake([self.iconImageView center].x, roundf(CGRectGetHeight(self.frame) / 2.0));
         
         self.iconImageView.frame = CGRectMake(round((_textSpaceLeft - self.iconImageView.frame.size.width)/2),
                                               self.iconImageView.frame.origin.y,
@@ -342,12 +323,12 @@
                                               self.iconImageView.frame.size.height);
     }
     
-    self.frame = CGRectMake(0.0, self.frame.origin.y, self.frame.size.width, currentHeight);
+    self.frame = CGRectMake(0.0, self.frame.origin.y, self.frame.size.width, CGRectGetHeight(self.frame));
     
     CGRect backgroundFrame = CGRectMake(self.backgroundImageView.frame.origin.x,
                                         self.backgroundImageView.frame.origin.y,
                                         screenWidth,
-                                        currentHeight);
+                                        CGRectGetHeight(self.frame));
     
     // increase frame of background view because of the spring animation
     if ([TSMessage iOS7StyleEnabled])
