@@ -147,6 +147,13 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
  */
 + (BOOL)dismissActiveNotification;
 
+/** Fades out the currently displayed notification with a completion block after the animation has finished. If another notification is in the queue,
+ the next one will be displayed automatically
+ @return YES if the currently displayed notification was successfully dismissed. NO if no notification
+ was currently displayed.
+ */
++ (BOOL)dismissActiveNotificationWithCompletion:(void (^)())completion;
+
 /** Use this method to set a default view controller to display the messages in */
 + (void)setDefaultViewController:(UIViewController *)defaultViewController;
 
