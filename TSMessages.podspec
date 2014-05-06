@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TSMessages"
-  s.version      = "0.9.4"
+  s.version      = "0.9.8"
   s.summary      = "Easy to use and customizable messages/notifications for iOS à la Tweetbot."
   s.description  = <<-DESC
                     This framework provides an easy to use class to show little notification views on the top of the screen. (à la Tweetbot). 
