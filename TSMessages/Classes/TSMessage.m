@@ -20,9 +20,6 @@
 /** The queued messages (TSMessageView objects) */
 @property (nonatomic, strong) NSMutableArray *messages;
 
-- (void)fadeInCurrentNotification;
-- (void)fadeOutNotification:(TSMessageView *)currentView animationFinishedBlock:(void (^)())animationFinished;
-
 @end
 
 @implementation TSMessage
@@ -312,6 +309,11 @@ __weak static UIViewController *_defaultViewController;
     } else {
         return NO;
     }
+}
+
+- (void)fadeOutNotification:(TSMessageView *)currentView
+{
+    [self fadeOutNotification:currentView animationFinishedBlock:nil];
 }
 
 - (void)fadeOutNotification:(TSMessageView *)currentView animationFinishedBlock:(void (^)())animationFinished
