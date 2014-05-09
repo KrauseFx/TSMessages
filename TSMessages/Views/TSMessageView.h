@@ -33,6 +33,9 @@
 /** The callback that should be invoked, when the user taps the message */
 @property (nonatomic, copy) TSMessageCallback tapCallback;
 
+/** The callback that should be invoked, when the user swipes the message */
+@property (nonatomic, copy) TSMessageCallback swipeCallback;
+
 /** Define whether or not the message can be dismissed by the user by tapping and swipping */
 @property (nonatomic, assign, getter=isUserDismissEnabled) BOOL userDismissEnabled;
 

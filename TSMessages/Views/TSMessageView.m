@@ -422,9 +422,16 @@
 
 - (void)handleViewSwipe:(UISwipeGestureRecognizer *)swipeRecognizer
 {
-    if (swipeRecognizer.state == UIGestureRecognizerStateRecognized && self.isUserDismissEnabled)
+    if (swipeRecognizer.state != UIGestureRecognizerStateRecognized) return;
+    
+    if (self.isUserDismissEnabled)
     {
         [self dismiss];
+    }
+    
+    if (self.swipeCallback)
+    {
+        self.swipeCallback(self);
     }
 }
 
