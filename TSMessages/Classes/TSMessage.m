@@ -293,7 +293,7 @@ __weak static UIViewController *_defaultViewController;
     {
         dispatch_async(dispatch_get_main_queue(), ^
                        {
-                           [self performSelector:@selector(fadeOutNotification:animationFinishedBlock:)
+                           [self performSelector:@selector(fadeOutNotification:)
                                       withObject:currentView
                                       afterDelay:currentView.duration];
                        });
@@ -377,11 +377,7 @@ __weak static UIViewController *_defaultViewController;
                        TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
                        if (currentMessage.messageIsFullyDisplayed)
                        {
-                           [[TSMessage sharedMessage] fadeOutNotification:currentMessage animationFinishedBlock:^{
-                               if(completion) {
-                                   completion();
-                               }
-                           }];
+                           [[TSMessage sharedMessage] fadeOutNotification:currentMessage animationFinishedBlock:completion];
                        }
                    });
     return YES;
