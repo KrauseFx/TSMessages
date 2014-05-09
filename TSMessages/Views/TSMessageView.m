@@ -281,7 +281,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         }
         
         // Add a border on the bottom (or on the top, depending on the view's postion)
-        if (![TSMessage iOS7StyleEnabled])
+        if ([[current valueForKey:@"borderHeight"] floatValue])
         {
             _borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0,
                                                                    0.0, // will be set later
