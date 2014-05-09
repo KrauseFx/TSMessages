@@ -293,7 +293,7 @@ __weak static UIViewController *_defaultViewController;
     {
         dispatch_async(dispatch_get_main_queue(), ^
                        {
-                           [self performSelector:@selector(fadeOutNotification:animationFinishedBlock:)
+                           [self performSelector:@selector(fadeOutNotification:)
                                       withObject:currentView
                                       afterDelay:currentView.duration];
                        });
