@@ -76,5 +76,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled;
 /** Use this method to load a custom design file */
 + (void)addNotificationDesignFromFile:(NSString *)file;
 
+/** Perform callback if exists **/
+- (void)executeCallback;
 
 @end

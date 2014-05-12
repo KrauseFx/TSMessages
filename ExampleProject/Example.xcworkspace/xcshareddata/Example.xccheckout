@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>F6FF7C22-1562-4A01-9CD1-A3C34B7E21C3</string>
+	<string>F5457609-387E-4BAC-A3E1-DE061D0E133A</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Example</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>56C72571-8325-46B6-BC46-920E7DE5B629</key>
-		<string>https://github.com/toursprung/TSMessages.git</string>
+		<key>D48E31BE-405E-43F2-AEE5-E5D5996DE94E</key>
+		<string>https://github.com/Bluezen/TSMessages.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ExampleProject/Example.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>56C72571-8325-46B6-BC46-920E7DE5B629</key>
+		<key>D48E31BE-405E-43F2-AEE5-E5D5996DE94E</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/toursprung/TSMessages.git</string>
+	<string>https://github.com/Bluezen/TSMessages.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>56C72571-8325-46B6-BC46-920E7DE5B629</string>
+	<string>D48E31BE-405E-43F2-AEE5-E5D5996DE94E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>56C72571-8325-46B6-BC46-920E7DE5B629</string>
+			<string>D48E31BE-405E-43F2-AEE5-E5D5996DE94E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>TSMessages</string>
 		</dict>
