@@ -186,11 +186,11 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         } else {
             [self.titleLabel setFont:[UIFont boldSystemFontOfSize:fontSize]];
         }
-		if ([current valueForKey:@"shadowColor"]) {
-			[self.titleLabel setShadowColor:[UIColor colorWithHexString:[current valueForKey:@"shadowColor"] alpha:1.0]];
-		} else {
-			[self.titleLabel setShadowColor:nil];
-		}
+        if ([current valueForKey:@"shadowColor"]) {
+            [self.titleLabel setShadowColor:[UIColor colorWithHexString:[current valueForKey:@"shadowColor"] alpha:1.0]];
+        } else {
+            [self.titleLabel setShadowColor:nil];
+        }
         [self.titleLabel setShadowOffset:CGSizeMake([[current valueForKey:@"shadowOffsetX"] floatValue],
                                                     [[current valueForKey:@"shadowOffsetY"] floatValue])];
         self.titleLabel.numberOfLines = 0;
