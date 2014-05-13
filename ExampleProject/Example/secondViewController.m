@@ -29,19 +29,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [TSMessage showNotificationInViewController:self
-                                          title:NSLocalizedString(@"Long222222", nil)
-                                       subtitle:NSLocalizedString(@"22222222222222This message is displayed 10 seconds instead of the calculated value", nil)
-                                          image:nil
-                                           type:TSMessageNotificationTypeWarning
-                                       duration:10.0
-                                       callback:nil
-                                    buttonTitle:nil
-                                 buttonCallback:nil
-                                     atPosition:TSMessageNotificationPositionTop
-                           canBeDismissedByUser:YES
-                                 simultaneously:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,5 +47,34 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)normalDidTap:(id)sender {
+    [TSMessage showNotificationInViewController:self
+                                          title:NSLocalizedString(@"Normal message in Second Tab", nil)
+                                       subtitle:NSLocalizedString(@"This message is displayed 100 seconds for test simultaneous", nil)
+                                          image:nil
+                                           type:TSMessageNotificationTypeWarning
+                                       duration:10.0
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:nil
+                                     atPosition:TSMessageNotificationPositionTop
+                           canBeDismissedByUser:YES
+                                 simultaneously:NO];
+}
+
+- (IBAction)simultaneoulyDidTap:(id)sender {
+    [TSMessage showNotificationInViewController:self
+                                          title:NSLocalizedString(@"Simultaneously message in Second Tab", nil)
+                                       subtitle:NSLocalizedString(@"This message is displayed 100 seconds for test simultaneous", nil)
+                                          image:nil
+                                           type:TSMessageNotificationTypeWarning
+                                       duration:10.0
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:nil
+                                     atPosition:TSMessageNotificationPositionTop
+                           canBeDismissedByUser:YES
+                                 simultaneously:NO];
+}
 
 @end

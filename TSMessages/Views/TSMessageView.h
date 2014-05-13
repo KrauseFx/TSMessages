@@ -42,6 +42,9 @@
 /** Is the message currenlty fully displayed? Is set as soon as the message is really fully visible */
 @property (nonatomic, assign) BOOL messageIsFullyDisplayed;
 
+/** Is the message can be display simultaneously */
+@property (nonatomic, assign) BOOL canSimultaneously;
+
 /** By setting this delegate it's possible to set a custom offset for the notification view */
 @property(nonatomic, assign) id <TSMessageViewProtocol>delegate;
 
@@ -68,7 +71,8 @@
         buttonTitle:(NSString *)buttonTitle
      buttonCallback:(void (^)())buttonCallback
          atPosition:(TSMessageNotificationPosition)position
-canBeDismissedByUser:(BOOL)dismissingEnabled;
+canBeDismissedByUser:(BOOL)dismissingEnabled
+     simultaneously:(BOOL)canSimultaneously;
 
 /** Fades out this notification view */
 - (void)fadeMeOut;
