@@ -272,7 +272,6 @@ __strong static AVAudioPlayer *_successSound;
         currentView.messageIsFullyDisplayed = YES;
     };
     
-//TODO: REMOVE THIS TODO LINE YOU'RE USING AS A PLACEHOLDER
     if (![TSMessage iOS7StyleEnabled]) {
         switch (currentView.messageType) {
             case TSMessageNotificationTypeMessage:
