@@ -109,6 +109,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         _messagePosition = position;
         self.callback = callback;
         self.buttonCallback = buttonCallback;
+        _messageType = notificationType;
         
         CGFloat screenWidth = self.viewController.view.bounds.size.width;
         NSDictionary *current;

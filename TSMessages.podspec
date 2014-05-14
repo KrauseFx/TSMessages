@@ -24,5 +24,6 @@ There are 4 different types already set up for you: Success, Error, Warning, Mes
 
   
   s.requires_arc = true
+  s.framework    = 'AVFoundation'
   s.dependency 'HexColors'
 end
