@@ -160,6 +160,12 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 /** Use this method to use custom designs in your messages. */
 + (void)addCustomDesignFromFileWithName:(NSString *)fileName;
 
+/** Use this method to set a default sound for all notifications, or a fallback for notifications that do not have an associated sound */
++ (void)setDefaultNotificationSoundWithName:(NSString*)name andExtension:(NSString*)extension;
+
+/** Use this method to set default sound to be used with a particular TSMessageNotificationType */
++ (void)setSoundWithName:(NSString*)name extension:(NSString*)extension forNotificationType:(TSMessageNotificationType)notificationType;
+
 /** Indicates whether a notification is currently active. */
 + (BOOL)isNotificationActive;
 

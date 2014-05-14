@@ -18,6 +18,9 @@
     [super viewDidLoad];
     
     [TSMessage setDefaultViewController:self];
+    [TSMessage setDefaultNotificationSoundWithName:@"message" andExtension:@"mp3"];
+    [TSMessage setSoundWithName:@"error" extension:@"mp3" forNotificationType:TSMessageNotificationTypeError];
+    [TSMessage setSoundWithName:@"warning" extension:@"mp3" forNotificationType:TSMessageNotificationTypeWarning];
     self.wantsFullScreenLayout = YES;
     [self.navigationController.navigationBar setTranslucent:YES];
 }

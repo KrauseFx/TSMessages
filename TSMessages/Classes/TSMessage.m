@@ -8,6 +8,7 @@
 
 #import "TSMessage.h"
 #import "TSMessageView.h"
+#import <AVFoundation/AVFoundation.h>
 
 #define kTSMessageDisplayTime 1.5
 #define kTSMessageExtraDisplayTimePerPixel 0.04
@@ -31,6 +32,11 @@ static BOOL _useiOS7Style;
 
 
 __weak static UIViewController *_defaultViewController;
+__strong static AVAudioPlayer *_defaultSound;
+__strong static AVAudioPlayer *_messageSound;
+__strong static AVAudioPlayer *_warningSound;
+__strong static AVAudioPlayer *_errorSound;
+__strong static AVAudioPlayer *_successSound;
 
 + (TSMessage *)sharedMessage
 {
@@ -267,12 +273,61 @@ __weak static UIViewController *_defaultViewController;
     };
     
     if (![TSMessage iOS7StyleEnabled]) {
+        switch (currentView.messageType) {
+            case TSMessageNotificationTypeMessage:
+                if (_messageSound) { [_messageSound play]; } else if (_defaultSound) { [_defaultSound play]; } else
+                break;
+            case TSMessageNotificationTypeWarning:
+                if (_warningSound) { [_warningSound play]; } else if (_defaultSound) { [_defaultSound play]; } else
+                break;
+            case TSMessageNotificationTypeError:
+                if (_errorSound) { [_errorSound play]; } else if (_defaultSound) { [_defaultSound play]; } else
+                break;
+            case TSMessageNotificationTypeSuccess:
+                if (_successSound) { [_successSound play]; } else if (_defaultSound) { [_defaultSound play]; } else
+                break;
+            default:
+                break;
+        }
         [UIView animateWithDuration:kTSMessageAnimationDuration
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
                          animations:animationBlock
                          completion:completionBlock];
     } else {
+        switch (currentView.messageType) {
+            case TSMessageNotificationTypeMessage:
+                if (_messageSound) {
+                    [_messageSound play];
+                } else if (_defaultSound) {
+                    [_defaultSound play];
+                }
+                break;
+            case TSMessageNotificationTypeWarning:
+                if (_warningSound) {
+                    [_warningSound play];
+                }
+                else if (_defaultSound) {
+                    [_defaultSound play];
+                }
+                break;
+            case TSMessageNotificationTypeError:
+                if (_errorSound) {
+                    [_errorSound play];
+                } else if (_defaultSound) {
+                    [_defaultSound play];
+                }
+                break;
+            case TSMessageNotificationTypeSuccess:
+                if (_successSound) {
+                    [_successSound play];
+                } else if (_defaultSound) {
+                    [_defaultSound play];
+                }
+                break;
+            default:
+                break;
+        }
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
         [UIView animateWithDuration:kTSMessageAnimationDuration + 0.1
                               delay:0
@@ -393,6 +448,49 @@ __weak static UIViewController *_defaultViewController;
 + (void)addCustomDesignFromFileWithName:(NSString *)fileName
 {
     [TSMessageView addNotificationDesignFromFile:fileName];
+}
+
++ (void)setDefaultNotificationSoundWithName:(NSString *)name andExtension:(NSString *)extension
+{
+    _defaultSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
+}
+
++ (void)setSoundWithName:(NSString*)name extension:(NSString*)extension forNotificationType:(TSMessageNotificationType)notificationType {
+    switch (notificationType) {
+        case TSMessageNotificationTypeMessage:
+            _messageSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
+            break;
+        case TSMessageNotificationTypeWarning:
+            _warningSound =[[TSMessage sharedMessage] loadSound:name extension:extension];
+            break;
+        case TSMessageNotificationTypeError:
+            _errorSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
+            break;
+        case TSMessageNotificationTypeSuccess:
+            _successSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
+            break;
+        default:
+            break;
+    }
+}
+
+- (AVAudioPlayer *)loadSound:(NSString *)filename extension:(NSString *)extension
+{
+    NSURL * url = [[NSBundle mainBundle] URLForResource:filename withExtension:extension];
+    NSError * error;
+    AVAudioPlayer * player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    if (!player) {
+        NSLog(@"Error loading %@: %@", url, error.localizedDescription);
+    } else
+    {
+        //#if !(TARGET_IPHONE_SIMULATOR)
+        {
+            [player prepareToPlay];
+        }
+        //#endif
+        
+    }
+    return player;
 }
 
 
