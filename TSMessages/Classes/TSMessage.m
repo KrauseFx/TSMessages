@@ -23,8 +23,8 @@
 @implementation TSMessage
 
 __weak static UIViewController *_defaultViewController;
+__strong static AVAudioPlayer *_notificationSound;
 __strong static AVAudioPlayer *_defaultSound;
-__strong static AVAudioPlayer *_messageSound;
 __strong static AVAudioPlayer *_warningSound;
 __strong static AVAudioPlayer *_errorSound;
 __strong static AVAudioPlayer *_successSound;
@@ -167,15 +167,15 @@ __strong static AVAudioPlayer *_successSound;
 
 #pragma mark - Setting sounds
 
-+ (void)setDefaultNotificationSoundWithName:(NSString *)name andExtension:(NSString *)extension
++ (void)setNotificationSoundWithName:(NSString *)name andExtension:(NSString *)extension
 {
-    _defaultSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
+    _notificationSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
 }
 
 + (void)setSoundWithName:(NSString*)name extension:(NSString*)extension forNotificationType:(TSMessageType)notificationType {
     switch (notificationType) {
         case TSMessageTypeDefault:
-            _messageSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
+            _defaultSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
             break;
         case TSMessageTypeWarning:
             _warningSound =[[TSMessage sharedMessage] loadSound:name extension:extension];
@@ -265,27 +265,28 @@ __strong static AVAudioPlayer *_successSound;
         case TSMessageTypeDefault:
             if (_defaultSound) {
                 [_defaultSound play];
-            }
+            } else if (_notificationSound)
+                [_notificationSound play];
             break;
         case TSMessageTypeWarning:
             if (_warningSound) {
                 [_warningSound play];
-            } else if (_defaultSound) {
-                [_defaultSound play];
+            } else if (_notificationSound) {
+                [_notificationSound play];
             }
             break;
         case TSMessageTypeError:
             if (_errorSound) {
                 [_errorSound play];
-            } else if (_defaultSound) {
-                [_defaultSound play];
+            } else if (_notificationSound) {
+                [_notificationSound play];
             }
             break;
         case TSMessageTypeSuccess:
             if (_successSound) {
                 [_successSound play];
-            } else if (_defaultSound) {
-                [_defaultSound play];
+            } else if (_notificationSound) {
+                [_notificationSound play];
             }
             break;
         default:

@@ -30,7 +30,7 @@
     
     [TSMessage setDefaultViewController:self];
     [TSMessage setDefaultViewController:self];
-    [TSMessage setDefaultNotificationSoundWithName:@"message" andExtension:@"mp3"];
+    [TSMessage setNotificationSoundWithName:@"message" andExtension:@"mp3"];
     [TSMessage setSoundWithName:@"error" extension:@"mp3" forNotificationType:TSMessageTypeError];
     [TSMessage setSoundWithName:@"warning" extension:@"mp3" forNotificationType:TSMessageTypeWarning];
     [self.navigationController.navigationBar setTranslucent:YES];
