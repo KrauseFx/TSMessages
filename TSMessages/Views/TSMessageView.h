@@ -27,6 +27,9 @@
 /** The position of the message (top or bottom) */
 @property (nonatomic, assign) TSMessagePosition position;
 
+/** The message type */
+@property (nonatomic, assign) TSMessageType type;
+
 /** By setting this delegate it's possible to set a custom offset for the message view */
 @property (nonatomic, assign) id <TSMessageViewProtocol> delegate;
 

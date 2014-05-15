@@ -9,6 +9,7 @@
 #import "TSMessage.h"
 #import "TSMessageView.h"
 #import "TSMessageView+Private.h"
+#import <AVFoundation/AVFoundation.h>
 
 #define kTSMessageDisplayTime 1.5
 #define kTSMessageAnimationDuration 0.3
@@ -22,6 +23,11 @@
 @implementation TSMessage
 
 __weak static UIViewController *_defaultViewController;
+__strong static AVAudioPlayer *_defaultSound;
+__strong static AVAudioPlayer *_messageSound;
+__strong static AVAudioPlayer *_warningSound;
+__strong static AVAudioPlayer *_errorSound;
+__strong static AVAudioPlayer *_successSound;
 
 + (TSMessage *)sharedMessage
 {
@@ -159,6 +165,48 @@ __weak static UIViewController *_defaultViewController;
     return design;
 }
 
+#pragma mark - Setting sounds
+
++ (void)setDefaultNotificationSoundWithName:(NSString *)name andExtension:(NSString *)extension
+{
+    _defaultSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
+}
+
++ (void)setSoundWithName:(NSString*)name extension:(NSString*)extension forNotificationType:(TSMessageType)notificationType {
+    switch (notificationType) {
+        case TSMessageTypeDefault:
+            _messageSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
+            break;
+        case TSMessageTypeWarning:
+            _warningSound =[[TSMessage sharedMessage] loadSound:name extension:extension];
+            break;
+        case TSMessageTypeError:
+            _errorSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
+            break;
+        case TSMessageTypeSuccess:
+            _successSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
+            break;
+        default:
+            break;
+    }
+}
+
+- (AVAudioPlayer *)loadSound:(NSString *)filename extension:(NSString *)extension
+{
+    NSURL * url = [[NSBundle mainBundle] URLForResource:filename withExtension:extension];
+    NSError * error;
+    AVAudioPlayer * player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    if (!player) {
+        NSLog(@"Error loading %@: %@", url, error.localizedDescription);
+    } else
+    {
+        {
+            [player prepareToPlay];
+        }        
+    }
+    return player;
+}
+
 #pragma mark - Default view controller
 
 + (UIViewController *)defaultViewController
@@ -212,6 +260,38 @@ __weak static UIViewController *_defaultViewController;
         [navigationController.view insertSubview:messageView belowSubview:navigationController.navigationBar];
     }
 
+    // play sound
+    switch (messageView.type) {
+        case TSMessageTypeDefault:
+            if (_defaultSound) {
+                [_defaultSound play];
+            }
+            break;
+        case TSMessageTypeWarning:
+            if (_warningSound) {
+                [_warningSound play];
+            } else if (_defaultSound) {
+                [_defaultSound play];
+            }
+            break;
+        case TSMessageTypeError:
+            if (_errorSound) {
+                [_errorSound play];
+            } else if (_defaultSound) {
+                [_defaultSound play];
+            }
+            break;
+        case TSMessageTypeSuccess:
+            if (_successSound) {
+                [_successSound play];
+            } else if (_defaultSound) {
+                [_defaultSound play];
+            }
+            break;
+        default:
+            break;
+    }
+    
     // animate
     [UIView animateWithDuration:kTSMessageAnimationDuration + 0.1
                           delay:0

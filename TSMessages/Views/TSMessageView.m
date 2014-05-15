@@ -37,6 +37,7 @@
         self.userDismissEnabled = YES;
         self.duration = TSMessageDurationAutomatic;
         self.position = TSMessagePositionTop;
+        self.type = type;
         
         [self setupConfigForType:type];
         [self setupBackgroundView];
