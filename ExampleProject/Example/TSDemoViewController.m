@@ -10,6 +10,7 @@
 #import "TSDemoViewController.h"
 #import "TSMessage.h"
 #import "TSMessageView.h"
+#import "TSMessage+Sounds.h"
 
 @interface TSDemoViewController ()
 
@@ -28,7 +29,6 @@
 {
     [super viewDidLoad];
     
-    [TSMessage setDefaultViewController:self];
     [TSMessage setDefaultViewController:self];
     [TSMessage setNotificationSoundWithName:@"message" andExtension:@"mp3"];
     [TSMessage setSoundWithName:@"error" extension:@"mp3" forNotificationType:TSMessageTypeError];

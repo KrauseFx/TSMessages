@@ -98,12 +98,6 @@ typedef void (^TSMessageCallback)(TSMessageView *messageView);
 /** Use this method to use custom designs for your messages. */
 + (void)addCustomDesignFromFileWithName:(NSString *)fileName;
 
-/** Use this method to set a sound that will be played with all messages, or a fallback for messages that do not have an associated sound */
-+ (void)setNotificationSoundWithName:(NSString*)name andExtension:(NSString*)extension;
-
-/** Use this method to set default sound to be used with a particular TSMessageType */
-+ (void)setSoundWithName:(NSString*)name extension:(NSString*)extension forNotificationType:(TSMessageType)notificationType;
-
 /** Dismisses the current message. If another message is in the queue,
  it will be displayed automatically after the current one is dismissed.
 

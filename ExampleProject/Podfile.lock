@@ -1,10 +1,12 @@
 PODS:
   - HexColors (2.2.1)
-  - TSMessages (0.9.4):
+  - TSMessages/Sounds (0.9.4):
+    - TSMessages/TSMessages
+  - TSMessages/TSMessages (0.9.4):
     - HexColors
 
 DEPENDENCIES:
-  - TSMessages (from `..`)
+  - TSMessages/Sounds (from `..`)
 
 EXTERNAL SOURCES:
   TSMessages:
@@ -12,6 +14,6 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   HexColors: 99211502e17904af7891fc8f687d0e4958a6d66e
-  TSMessages: bada556817e8ff2cf135bb21126d15ee48dec3f1
+  TSMessages: 353bd5e5e91a5407eb9ff7662a0337527dfbbc18
 
 COCOAPODS: 0.32.1

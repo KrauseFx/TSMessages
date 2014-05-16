@@ -9,7 +9,15 @@
 #import "TSMessage.h"
 #import "TSMessageView.h"
 #import "TSMessageView+Private.h"
-#import <AVFoundation/AVFoundation.h>
+
+//#if defined(__has_include)
+//#if __has_include("TSMessage+Sounds.h")
+//#include "TSMessage+Sounds.h"
+//#define kCanPlaySounds YES
+//#else
+//#define kCanPlaySounds NO
+//#endif
+//#endif
 
 #define kTSMessageDisplayTime 1.5
 #define kTSMessageAnimationDuration 0.3
@@ -23,11 +31,6 @@
 @implementation TSMessage
 
 __weak static UIViewController *_defaultViewController;
-__strong static AVAudioPlayer *_notificationSound;
-__strong static AVAudioPlayer *_defaultSound;
-__strong static AVAudioPlayer *_warningSound;
-__strong static AVAudioPlayer *_errorSound;
-__strong static AVAudioPlayer *_successSound;
 
 + (TSMessage *)sharedMessage
 {
@@ -47,7 +50,6 @@ __strong static AVAudioPlayer *_successSound;
     {
         _messages = [[NSMutableArray alloc] init];
     }
-    
     return self;
 }
 
@@ -165,48 +167,6 @@ __strong static AVAudioPlayer *_successSound;
     return design;
 }
 
-#pragma mark - Setting sounds
-
-+ (void)setNotificationSoundWithName:(NSString *)name andExtension:(NSString *)extension
-{
-    _notificationSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
-}
-
-+ (void)setSoundWithName:(NSString*)name extension:(NSString*)extension forNotificationType:(TSMessageType)notificationType {
-    switch (notificationType) {
-        case TSMessageTypeDefault:
-            _defaultSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
-            break;
-        case TSMessageTypeWarning:
-            _warningSound =[[TSMessage sharedMessage] loadSound:name extension:extension];
-            break;
-        case TSMessageTypeError:
-            _errorSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
-            break;
-        case TSMessageTypeSuccess:
-            _successSound = [[TSMessage sharedMessage] loadSound:name extension:extension];
-            break;
-        default:
-            break;
-    }
-}
-
-- (AVAudioPlayer *)loadSound:(NSString *)filename extension:(NSString *)extension
-{
-    NSURL * url = [[NSBundle mainBundle] URLForResource:filename withExtension:extension];
-    NSError * error;
-    AVAudioPlayer * player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    if (!player) {
-        NSLog(@"Error loading %@: %@", url, error.localizedDescription);
-    } else
-    {
-        {
-            [player prepareToPlay];
-        }        
-    }
-    return player;
-}
-
 #pragma mark - Default view controller
 
 + (UIViewController *)defaultViewController
@@ -259,40 +219,11 @@ __strong static AVAudioPlayer *_successSound;
     {
         [navigationController.view insertSubview:messageView belowSubview:navigationController.navigationBar];
     }
-
-    // play sound
-    switch (messageView.type) {
-        case TSMessageTypeDefault:
-            if (_defaultSound) {
-                [_defaultSound play];
-            } else if (_notificationSound)
-                [_notificationSound play];
-            break;
-        case TSMessageTypeWarning:
-            if (_warningSound) {
-                [_warningSound play];
-            } else if (_notificationSound) {
-                [_notificationSound play];
-            }
-            break;
-        case TSMessageTypeError:
-            if (_errorSound) {
-                [_errorSound play];
-            } else if (_notificationSound) {
-                [_notificationSound play];
-            }
-            break;
-        case TSMessageTypeSuccess:
-            if (_successSound) {
-                [_successSound play];
-            } else if (_notificationSound) {
-                [_notificationSound play];
-            }
-            break;
-        default:
-            break;
-    }
     
+    if (kCanPlaySounds) {
+        [[NSNotificationCenter defaultCenter]postNotificationName:kTSMessagePlaySound object:messageView];
+    }
+
     // animate
     [UIView animateWithDuration:kTSMessageAnimationDuration + 0.1
                           delay:0
