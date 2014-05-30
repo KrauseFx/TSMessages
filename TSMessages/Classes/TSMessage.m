@@ -200,6 +200,10 @@ __weak static UIViewController *_defaultViewController;
 {
     if (!self.currentMessage) return;
 
+    if (self.delegate && [self.delegate respondsToSelector:@selector(willDisplayNotification:)]) {
+        [self.delegate willDisplayNotification:self.currentMessage];
+    }
+    
     [self displayMessage:self.currentMessage];
 }
 
@@ -221,7 +225,13 @@ __weak static UIViewController *_defaultViewController;
     }
     
     if (kCanPlaySounds) {
-        [[NSNotificationCenter defaultCenter]postNotificationName:kTSMessagePlaySound object:messageView];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(soundForNotificationType:)]) {
+            NSString *name = [(id)self.delegate soundForNotificationType:messageView.type];
+            if (name) {
+                TSMessageSoundPlayer *player = [[TSMessageSoundPlayer alloc]init];
+                [player playSoundWithName:name];
+            }
+        }
     }
 
     // animate
@@ -235,6 +245,9 @@ __weak static UIViewController *_defaultViewController;
                      }
                      completion:^(BOOL finished) {
                          messageView.messageFullyDisplayed = YES;
+                         if (self.delegate && [self.delegate respondsToSelector:@selector(didDisplayNotification:)]) {
+                             [self.delegate didDisplayNotification:messageView];
+                         }
                      }];
 
     // duration

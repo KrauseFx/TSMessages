@@ -29,7 +29,17 @@ typedef NS_ENUM(NSInteger, TSMessageDuration) {
 
 typedef void (^TSMessageCallback)(TSMessageView *messageView);
 
+@class TSMessage;
+@protocol TSMessageDelegate <NSObject>
+@optional
+- (void)willDisplayNotification:(TSMessageView *)notification;
+- (void)didDisplayNotification:(TSMessageView *)notification;
+
+@end
+
 @interface TSMessage : NSObject
+
+@property (strong, nonatomic) id <TSMessageDelegate> delegate;
 
 + (instancetype)sharedMessage;
 
