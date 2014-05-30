@@ -300,6 +300,9 @@ __weak static UIViewController *_defaultViewController;
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismissCurrentMessage) object:nil];
 
     [self dismissMessage:self.currentMessage completion:^{
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didDismissNotification:)]) {
+            [self.delegate didDismissNotification:self.currentMessage];
+        }
         if (self.messages.count)
         {
             [self.messages removeObjectAtIndex:0];

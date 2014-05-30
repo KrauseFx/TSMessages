@@ -223,9 +223,13 @@
 #pragma mark - TSMessageDelegate Methods
 
 - (void)willDisplayNotification:(TSMessageView *)notification {
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor yellowColor];
 }
 - (void)didDisplayNotification:(TSMessageView *)notification {
+    self.view.backgroundColor = [UIColor greenColor];
+}
+
+- (void)didDismissNotification:(TSMessageView *)notification {
     self.view.backgroundColor = [UIColor whiteColor];
 }
 

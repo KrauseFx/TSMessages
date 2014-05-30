@@ -34,6 +34,7 @@ typedef void (^TSMessageCallback)(TSMessageView *messageView);
 @optional
 - (void)willDisplayNotification:(TSMessageView *)notification;
 - (void)didDisplayNotification:(TSMessageView *)notification;
+- (void)didDismissNotification:(TSMessageView *)notification;
 
 @end
 
