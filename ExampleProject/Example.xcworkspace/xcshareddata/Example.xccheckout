@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>F6FF7C22-1562-4A01-9CD1-A3C34B7E21C3</string>
+	<string>BA5F8DCA-2C83-42BE-8A1A-64B2BF9699DF</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Example</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>56C72571-8325-46B6-BC46-920E7DE5B629</key>
-		<string>https://github.com/toursprung/TSMessages.git</string>
+		<key>50C345C5-A300-4D8C-97B1-FD0F61D5EDD3</key>
+		<string>https://github.com/onato/TSMessages.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ExampleProject/Example.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>56C72571-8325-46B6-BC46-920E7DE5B629</key>
+		<key>50C345C5-A300-4D8C-97B1-FD0F61D5EDD3</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/toursprung/TSMessages.git</string>
+	<string>https://github.com/onato/TSMessages.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>56C72571-8325-46B6-BC46-920E7DE5B629</string>
+	<string>50C345C5-A300-4D8C-97B1-FD0F61D5EDD3</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>56C72571-8325-46B6-BC46-920E7DE5B629</string>
+			<string>50C345C5-A300-4D8C-97B1-FD0F61D5EDD3</string>
 			<key>IDESourceControlWCCName</key>
-			<string>TSMessages</string>
+			<string>TSMessages-onato</string>
 		</dict>
 	</array>
 </dict>
