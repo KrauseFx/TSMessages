@@ -30,10 +30,16 @@ typedef NS_ENUM(NSInteger, TSMessageDuration) {
 typedef void (^TSMessageCallback)(TSMessageView *messageView);
 
 @class TSMessage;
+/** The TSMessageDelegate protocol defines optional methods for performing actions before a message is displayed, and after a message is fully displayed. It also
+    allows for actions after a message is dismissed, either by the user or after its defined duration.
+*/
 @protocol TSMessageDelegate <NSObject>
 @optional
+/** Allows additional actions to be performed prior to displaying a notification. */
 - (void)willDisplayNotification:(TSMessageView *)notification;
+/** Allows additional actions to be performed after a notification is fully displayed. */
 - (void)didDisplayNotification:(TSMessageView *)notification;
+/** Allows additional actions to be performed after a notification is dismissed. */
 - (void)didDismissNotification:(TSMessageView *)notification;
 
 @end
