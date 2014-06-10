@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0C9D527520AF4EAA93E80BC5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A64AE23935D5499BAF0AC8C1 /* libPods.a */; };
+		69EED4261924737600C1510F /* error.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 69EED4221924737600C1510F /* error.mp3 */; };
+		69EED4271924737600C1510F /* message.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 69EED4231924737600C1510F /* message.mp3 */; };
+		69EED4281924737600C1510F /* success.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 69EED4241924737600C1510F /* success.mp3 */; };
+		69EED4291924737600C1510F /* warning.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 69EED4251924737600C1510F /* warning.mp3 */; };
 		CA0B97051719CD6800E06F84 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0B97041719CD6800E06F84 /* UIKit.framework */; };
 		CA0B97071719CD6800E06F84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0B97061719CD6800E06F84 /* Foundation.framework */; };
 		CA0B97091719CD6800E06F84 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0B97081719CD6800E06F84 /* CoreGraphics.framework */; };
@@ -23,6 +27,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		69EED4221924737600C1510F /* error.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = error.mp3; sourceTree = "<group>"; };
+		69EED4231924737600C1510F /* message.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = message.mp3; sourceTree = "<group>"; };
+		69EED4241924737600C1510F /* success.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = success.mp3; sourceTree = "<group>"; };
+		69EED4251924737600C1510F /* warning.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = warning.mp3; sourceTree = "<group>"; };
 		8B33F75B47A447C8B36A0061 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		A64AE23935D5499BAF0AC8C1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0B97011719CD6800E06F84 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +113,10 @@
 		CA0B970B1719CD6800E06F84 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				69EED4221924737600C1510F /* error.mp3 */,
+				69EED4231924737600C1510F /* message.mp3 */,
+				69EED4241924737600C1510F /* success.mp3 */,
+				69EED4251924737600C1510F /* warning.mp3 */,
 				CA0B970C1719CD6800E06F84 /* Example-Info.plist */,
 				CA0B970D1719CD6800E06F84 /* InfoPlist.strings */,
 				CA0B97101719CD6800E06F84 /* main.m */,
@@ -170,10 +182,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA0B970F1719CD6800E06F84 /* InfoPlist.strings in Resources */,
+				69EED4281924737600C1510F /* success.mp3 in Resources */,
 				CA0B97171719CD6800E06F84 /* Default.png in Resources */,
 				CA0B97191719CD6800E06F84 /* Default@2x.png in Resources */,
 				CA0B971B1719CD6800E06F84 /* Default-568h@2x.png in Resources */,
+				69EED4291924737600C1510F /* warning.mp3 in Resources */,
 				CA0B971E1719CD6800E06F84 /* MainStoryboard.storyboard in Resources */,
+				69EED4261924737600C1510F /* error.mp3 in Resources */,
+				69EED4271924737600C1510F /* message.mp3 in Resources */,
 				CAA3C9E817C3CD180085E06E /* AlternativeDesign.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

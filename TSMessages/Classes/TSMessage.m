@@ -10,6 +10,15 @@
 #import "TSMessageView.h"
 #import "TSMessageView+Private.h"
 
+//#if defined(__has_include)
+//#if __has_include("TSMessage+Sounds.h")
+//#include "TSMessage+Sounds.h"
+//#define kCanPlaySounds YES
+//#else
+//#define kCanPlaySounds NO
+//#endif
+//#endif
+
 #define kTSMessageDisplayTime 1.5
 #define kTSMessageAnimationDuration 0.3
 #define kTSMessageExtraDisplayTimePerPixel 0.04
@@ -41,7 +50,6 @@ __weak static UIViewController *_defaultViewController;
     {
         _messages = [[NSMutableArray alloc] init];
     }
-    
     return self;
 }
 
@@ -192,6 +200,10 @@ __weak static UIViewController *_defaultViewController;
 {
     if (!self.currentMessage) return;
 
+    if (self.delegate && [self.delegate respondsToSelector:@selector(willDisplayNotification:)]) {
+        [self.delegate willDisplayNotification:self.currentMessage];
+    }
+    
     [self displayMessage:self.currentMessage];
 }
 
@@ -211,6 +223,16 @@ __weak static UIViewController *_defaultViewController;
     {
         [navigationController.view insertSubview:messageView belowSubview:navigationController.navigationBar];
     }
+    
+    if (kCanPlaySounds) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(soundForNotificationType:)]) {
+            NSString *name = [(id)self.delegate soundForNotificationType:messageView.type];
+            if (name) {
+                TSMessageSoundPlayer *player = [[TSMessageSoundPlayer alloc]init];
+                [player playSoundWithName:name];
+            }
+        }
+    }
 
     // animate
     [UIView animateWithDuration:kTSMessageAnimationDuration + 0.1
@@ -223,6 +245,9 @@ __weak static UIViewController *_defaultViewController;
                      }
                      completion:^(BOOL finished) {
                          messageView.messageFullyDisplayed = YES;
+                         if (self.delegate && [self.delegate respondsToSelector:@selector(didDisplayNotification:)]) {
+                             [self.delegate didDisplayNotification:messageView];
+                         }
                      }];
 
     // duration
@@ -275,6 +300,9 @@ __weak static UIViewController *_defaultViewController;
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismissCurrentMessage) object:nil];
 
     [self dismissMessage:self.currentMessage completion:^{
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didDismissNotification:)]) {
+            [self.delegate didDismissNotification:self.currentMessage];
+        }
         if (self.messages.count)
         {
             [self.messages removeObjectAtIndex:0];

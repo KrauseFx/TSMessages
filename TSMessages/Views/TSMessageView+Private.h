@@ -9,6 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "TSMessageView.h"
 
+#if defined(__has_include)
+#if __has_include("TSMessage+Sounds.h")
+#include "TSMessage+Sounds.h"
+#define kCanPlaySounds YES
+#else
+#define kCanPlaySounds NO
+#endif
+#endif
+
+#define kTSMessagePlaySound @"TSMessagePlaySound"
+
 @interface TSMessageView (Private)
 @property (nonatomic, readonly) NSString *title;
 @property (nonatomic, readonly) NSString *subtitle;

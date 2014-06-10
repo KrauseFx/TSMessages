@@ -10,6 +10,7 @@
 #import "TSDemoViewController.h"
 #import "TSMessage.h"
 #import "TSMessageView.h"
+#import "TSMessage+Sounds.h"
 
 @interface TSDemoViewController ()
 
@@ -29,7 +30,7 @@
     [super viewDidLoad];
     
     [TSMessage setDefaultViewController:self];
-    
+    [TSMessage sharedMessage].delegate = self;
     [self.navigationController.navigationBar setTranslucent:YES];
 }
 
@@ -217,6 +218,43 @@
     [TSMessage displayMessageWithTitle:NSLocalizedString(@"Updated to custom design file", nil)
                               subtitle:NSLocalizedString(@"From now on, all the titles of success messages are larger", nil)
                                   type:TSMessageTypeSuccess];
+}
+
+#pragma mark - TSMessageDelegate Methods
+
+- (void)willDisplayNotification:(TSMessageView *)notification {
+    self.view.backgroundColor = [UIColor yellowColor];
+}
+- (void)didDisplayNotification:(TSMessageView *)notification {
+    self.view.backgroundColor = [UIColor greenColor];
+}
+
+- (void)didDismissNotification:(TSMessageView *)notification {
+    self.view.backgroundColor = [UIColor whiteColor];
+}
+
+#pragma mark - TSMessageSoundDelegate Methods
+- (NSString *)soundForNotificationType:(TSMessageType)type {
+    NSString *sound;
+    switch (type) {
+        case TSMessageTypeDefault:
+            sound = [NSString stringWithFormat:@"message.mp3"];
+            break;
+        case TSMessageTypeError:
+            sound = [NSString stringWithFormat:@"error.mp3"];
+            break;
+        case TSMessageTypeSuccess:
+            sound = [NSString stringWithFormat:@"success.mp3"];
+            break;
+        case TSMessageTypeWarning:
+            sound = [NSString stringWithFormat:@"warning.mp3"];
+            break;
+        default:
+            sound = nil;
+            break;
+    }
+    
+    return sound;
 }
 
 @end

@@ -12,18 +12,25 @@ There are 4 different types already set up for you: Success, Error, Warning, Mes
 
   s.license      = 'MIT'
 
-
   s.author       = { "Felix Krause" => "krausefx@gmail.com" }
 
-  s.source       = { :git => "https://github.com/toursprung/TSMessages.git", :tag => "0.9.4"}
+  s.source       = { :git => "https://github.com/toursprung/TSMessages.git", :tag => "#{s.version}"}
 
   s.platform     = :ios, '5.0'
 
-  s.source_files = 'TSMessages/Classes/**/*.{h,m}', 'TSMessages/Views/**/*.{h,m}'
+  s.default_subspec = 'TSMessages'
+  
+  s.subspec 'TSMessages' do |core|
+    core.source_files = 'TSMessages/Classes/**/*.{h,m}', 'TSMessages/Views/**/*.{h,m}'
+    core.resources = "TSMessages/Resources/**/*.{png,json}"
+    core.requires_arc = true
+    core.dependency 'HexColors'
+  end
+  
+  s.subspec 'Sounds' do |sounds|
+    sounds.source_files = 'TSMessages/Sounds/**/*.{h,m}'
+    sounds.dependency 'TSMessages/TSMessages'
+    sounds.framework    = 'AVFoundation'
+  end
 
-  s.resources = "TSMessages/Resources/**/*.{png,json}"
-
-
-  s.requires_arc = true
-  s.dependency 'HexColors'
 end
