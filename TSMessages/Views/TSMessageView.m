@@ -424,8 +424,8 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             if (!navigationController && [self.viewController isKindOfClass:[UINavigationController class]]) {
                 navigationController = (UINavigationController *)self.viewController;
             }
-            BOOL isNavBarIsHidden = !navigationController || [TSMessage isNavigationBarInNavigationControllerHidden:self.viewController.navigationController];
-            BOOL isNavBarIsOpaque = !self.viewController.navigationController.navigationBar.isTranslucent && self.viewController.navigationController.navigationBar.alpha == 1;
+            BOOL isNavBarIsHidden = !navigationController || [TSMessage isNavigationBarInNavigationControllerHidden:navigationController];
+            BOOL isNavBarIsOpaque = !navigationController.navigationBar.isTranslucent && navigationController.navigationBar.alpha == 1;
             
             if (isNavBarIsHidden || isNavBarIsOpaque) {
                 topOffset = -30.f;
