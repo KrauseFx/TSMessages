@@ -362,25 +362,48 @@ __weak static UIViewController *_defaultViewController;
      }];
 }
 
++ (BOOL)hasFullyDisplayedNotification {
+    if ([[TSMessage sharedMessage].messages count] > 0) {
+        TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
+        if (currentMessage.messageIsFullyDisplayed)
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 + (BOOL)dismissActiveNotification
 {
     return [self dismissActiveNotificationWithCompletion:nil];
 }
 
-+ (BOOL)dismissActiveNotificationWithCompletion:(void (^)())completion
++ (BOOL)dismissActiveNotificationWithCompletion:(void (^)(BOOL didDismissNotification))completion
 {
-    if ([[TSMessage sharedMessage].messages count] == 0) return NO;
-    
     dispatch_async(dispatch_get_main_queue(), ^
                    {
-                       if ([[TSMessage sharedMessage].messages count] == 0) return;
-                       TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
-                       if (currentMessage.messageIsFullyDisplayed)
+                       if ([[TSMessage sharedMessage].messages count] > 0)
                        {
-                           [[TSMessage sharedMessage] fadeOutNotification:currentMessage animationFinishedBlock:completion];
+                           TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
+                           if (currentMessage.messageIsFullyDisplayed)
+                           {
+                               [[TSMessage sharedMessage] fadeOutNotification:currentMessage animationFinishedBlock:^{
+                                   if (completion) {
+                                       completion(YES);
+                                   }
+                               }];
+                           }else {
+                               if (completion) {
+                                   completion(NO);
+                               }
+                           }
+                       }else {
+                           if (completion) {
+                               completion(NO);
+                           }
                        }
                    });
-    return YES;
+    return [self hasFullyDisplayedNotification];
 }
 
 #pragma mark Customizing TSMessages
