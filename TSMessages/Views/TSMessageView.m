@@ -96,6 +96,7 @@ static NSMutableDictionary *_notificationDesign;
      buttonCallback:(void (^)())buttonCallback
          atPosition:(TSMessageNotificationPosition)position
 canBeDismissedByUser:(BOOL)dismissingEnabled
+     simultaneously:(BOOL)canSimultaneously
 {
     NSDictionary *notificationDesign = [TSMessageView notificationDesign];
     
@@ -109,6 +110,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         _messagePosition = position;
         self.callback = callback;
         self.buttonCallback = buttonCallback;
+        self.canSimultaneously = canSimultaneously;
         
         CGFloat screenWidth = self.viewController.view.bounds.size.width;
         NSDictionary *current;

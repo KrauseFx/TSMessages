@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>F6FF7C22-1562-4A01-9CD1-A3C34B7E21C3</string>
+	<string>3379FE2B-13BB-43D7-A6E1-7B7A4F8B4942</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Example</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>56C72571-8325-46B6-BC46-920E7DE5B629</key>
-		<string>https://github.com/toursprung/TSMessages.git</string>
+		<key>8403C1EC-6EA0-4DAB-B624-129408DCF536</key>
+		<string>https://github.com/vilyever/TSMessages.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ExampleProject/Example.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>56C72571-8325-46B6-BC46-920E7DE5B629</key>
+		<key>8403C1EC-6EA0-4DAB-B624-129408DCF536</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/toursprung/TSMessages.git</string>
+	<string>https://github.com/vilyever/TSMessages.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>56C72571-8325-46B6-BC46-920E7DE5B629</string>
+	<string>8403C1EC-6EA0-4DAB-B624-129408DCF536</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>56C72571-8325-46B6-BC46-920E7DE5B629</string>
+			<string>8403C1EC-6EA0-4DAB-B624-129408DCF536</string>
 			<key>IDESourceControlWCCName</key>
 			<string>TSMessages</string>
 		</dict>
