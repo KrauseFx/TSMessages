@@ -171,7 +171,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                                                    alpha:1.0];
         
         
-        self.textSpaceLeft = 2 * TSMessageViewPadding;
+        self.textSpaceLeft = TSMessageViewPadding;
         if (image) self.textSpaceLeft += image.size.width + 2 * TSMessageViewPadding;
         
         // Set up title label
