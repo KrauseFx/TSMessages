@@ -140,6 +140,10 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
                               atPosition:(TSMessageNotificationPosition)messagePosition
                     canBeDismissedByUser:(BOOL)dismissingEnabled;
 
+/** Return YES if there is a notification, and that notification is fully display (check by messageIsFullyDisplayed method)
+ */
++ (BOOL)hasFullyDisplayedNotification;
+
 /** Fades out the currently displayed notification. If another notification is in the queue,
  the next one will be displayed automatically
  @return YES if the currently displayed notification was successfully dismissed. NO if no notification
@@ -148,11 +152,11 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 + (BOOL)dismissActiveNotification;
 
 /** Fades out the currently displayed notification with a completion block after the animation has finished. If another notification is in the queue,
- the next one will be displayed automatically
+ the next one will be displayed automatically. The completion block will be call even when there is nothing to dismiss (didDismissNotification will be NO in this case)
  @return YES if the currently displayed notification was successfully dismissed. NO if no notification
- was currently displayed.
+ was currently fully displayed.
  */
-+ (BOOL)dismissActiveNotificationWithCompletion:(void (^)())completion;
++ (BOOL)dismissActiveNotificationWithCompletion:(void (^)(BOOL didDismissNotification))completion;
 
 /** Use this method to set a default view controller to display the messages in */
 + (void)setDefaultViewController:(UIViewController *)defaultViewController;
