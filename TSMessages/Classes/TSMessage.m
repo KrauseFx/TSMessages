@@ -236,6 +236,14 @@ __weak static UIViewController *_defaultViewController;
         }
     }
     
+    if(currentView.viewController.presentingViewController)
+    {
+        //If we show the Message on an modally presented VC we need to adjust for possible y offsets (UIModalPresentationPageSheet etc.)
+        CGFloat yOrigin = [currentView.viewController.presentingViewController.view convertRect:currentView.viewController.view.bounds fromView:currentView.viewController.view].origin.y;
+        
+        verticalOffset -= yOrigin;
+    }
+    
     CGPoint toPoint;
     if (currentView.messagePosition == TSMessageNotificationPositionTop)
     {
