@@ -326,12 +326,6 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                                                                                      action:@selector(fadeMeOut)];
             [self addGestureRecognizer:tapRec];
         }
-        
-        if (self.callback) {
-            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-            tapGesture.delegate = self;
-            [self addGestureRecognizer:tapGesture];
-        }
     }
     return self;
 }
@@ -455,6 +449,13 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutNotification:) withObject:self waitUntilDone:NO];
 }
 
+- (void)executeCallback
+{
+    if (self.callback) {
+        self.callback();
+    }
+}
+
 - (void)didMoveToWindow {
     [super didMoveToWindow];
     if (self.duration == TSMessageNotificationDurationEndless && self.superview && !self.window ) {
@@ -472,17 +473,6 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     }
     
     [self fadeMeOut];
-}
-
-- (void)handleTap:(UITapGestureRecognizer *)tapGesture
-{
-    if (tapGesture.state == UIGestureRecognizerStateRecognized)
-    {
-        if (self.callback)
-        {
-            self.callback();
-        }
-    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate
