@@ -207,23 +207,26 @@ __weak static UIViewController *_defaultViewController;
         else
             currentNavigationController = (UINavigationController *)currentView.viewController.parentViewController;
         
+        BOOL isCurrentNavigationAtTop = currentNavigationController.view.frame.origin.y > 0;
+        
         BOOL isViewIsUnderStatusBar = [[[currentNavigationController childViewControllers] firstObject] wantsFullScreenLayout];
         if (!isViewIsUnderStatusBar && currentNavigationController.parentViewController == nil) {
             isViewIsUnderStatusBar = ![TSMessage isNavigationBarInNavigationControllerHidden:currentNavigationController]; // strange but true
         }
+        
         if (![TSMessage isNavigationBarInNavigationControllerHidden:currentNavigationController])
         {
             [currentNavigationController.view insertSubview:currentView
                                                belowSubview:[currentNavigationController navigationBar]];
             verticalOffset = [currentNavigationController navigationBar].bounds.size.height;
-            if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
+            if (([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) && !isCurrentNavigationAtTop) {
                 addStatusBarHeightToVerticalOffset();
             }
         }
         else
         {
             [currentView.viewController.view addSubview:currentView];
-            if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
+            if (([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) && !isCurrentNavigationAtTop) {
                 addStatusBarHeightToVerticalOffset();
             }
         }
@@ -231,7 +234,8 @@ __weak static UIViewController *_defaultViewController;
     else
     {
         [currentView.viewController.view addSubview:currentView];
-        if ([TSMessage iOS7StyleEnabled]) {
+        BOOL isCurrentViewAtTop = [currentView.viewController.view convertPoint:currentView.frame.origin toView:[UIApplication sharedApplication].keyWindow].y == 0;
+        if ([TSMessage iOS7StyleEnabled] && !isCurrentViewAtTop) {
             addStatusBarHeightToVerticalOffset();
         }
     }
