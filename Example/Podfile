@@ -1,0 +1,12 @@
+target 'TSMessages', :exclusive => true do
+  pod "TSMessages", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "TSMessages", :path => "../"
+
+  pod 'Specta', '~> 0.2.1'
+  pod 'Expecta'
+  pod 'FBSnapshotTestCase'
+  pod 'Expecta+Snapshots'
+end

@@ -1,0 +1,15 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every test case source file.
+//
+
+#ifdef __OBJC__
+
+  #define EXP_SHORTHAND
+  #import <Specta/Specta.h>
+  #import <Expecta/Expecta.h>
+  #import <FBSnapshotTestCase/FBSnapshotTestCase.h>
+  #import <Expecta+Snapshots/EXPMatchers+FBSnapshotTest.h>
+
+#endif
