@@ -41,23 +41,7 @@ install_resource()
       ;;
   esac
 }
-install_resource "../../Pod/Assets/NotificationBackgroundError.png"
-install_resource "../../Pod/Assets/NotificationBackgroundError@2x.png"
-install_resource "../../Pod/Assets/NotificationBackgroundErrorIcon.png"
-install_resource "../../Pod/Assets/NotificationBackgroundErrorIcon@2x.png"
-install_resource "../../Pod/Assets/NotificationBackgroundMessage.png"
-install_resource "../../Pod/Assets/NotificationBackgroundMessage@2x.png"
-install_resource "../../Pod/Assets/NotificationBackgroundSuccess.png"
-install_resource "../../Pod/Assets/NotificationBackgroundSuccess@2x.png"
-install_resource "../../Pod/Assets/NotificationBackgroundSuccessIcon.png"
-install_resource "../../Pod/Assets/NotificationBackgroundSuccessIcon@2x.png"
-install_resource "../../Pod/Assets/NotificationBackgroundWarning.png"
-install_resource "../../Pod/Assets/NotificationBackgroundWarning@2x.png"
-install_resource "../../Pod/Assets/NotificationBackgroundWarningIcon.png"
-install_resource "../../Pod/Assets/NotificationBackgroundWarningIcon@2x.png"
-install_resource "../../Pod/Assets/NotificationButtonBackground.png"
-install_resource "../../Pod/Assets/NotificationButtonBackground@2x.png"
-install_resource "../../Pod/Assets/TSMessagesDefaultDesign.json"
+install_resource "${BUILT_PRODUCTS_DIR}/TSMessages.bundle"
 
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 if [[ "${ACTION}" == "install" ]]; then

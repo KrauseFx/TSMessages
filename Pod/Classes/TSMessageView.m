@@ -15,9 +15,11 @@
 #define TSMessageViewPadding 15.0
 
 #define TSDesignFileName @"TSMessagesDefaultDesign.json"
+#define TSMessageBundleName @"TSMessages"
 
 
 static NSMutableDictionary *_notificationDesign;
+static NSBundle *podBundle;
 
 @interface TSMessage (TSMessageView)
 - (void)fadeOutNotification:(TSMessageView *)currentView; // private method of TSMessage, but called by TSMessageView in -[fadeMeOut]
@@ -65,7 +67,13 @@ static NSMutableDictionary *_notificationDesign;
 {
     if (!_notificationDesign)
     {
-        NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:TSDesignFileName];
+        if (!podBundle)
+        {
+            podBundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:TSMessageBundleName
+                                                                                 ofType:@"bundle"]];
+        }
+        
+        NSString *path = [[podBundle resourcePath] stringByAppendingPathComponent:TSDesignFileName];
         _notificationDesign = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
                                                                                                             options:kNilOptions
                                                                                                               error:nil]];
@@ -145,7 +153,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         
         if (!image && [[current valueForKey:@"imageName"] length])
         {
-            image = [UIImage imageNamed:[current valueForKey:@"imageName"]];
+            image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.bundle/%@", TSMessageBundleName, [current valueForKey:@"imageName"]]];
         }
         
         if (![TSMessage iOS7StyleEnabled])
@@ -153,7 +161,9 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             self.alpha = 0.0;
             
             // add background image here
-            UIImage *backgroundImage = [[UIImage imageNamed:[current valueForKey:@"backgroundImageName"]] stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0];
+            UIImage *backgroundImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@.bundle/%@", TSMessageBundleName, [current valueForKey:@"backgroundImageName"]]];
+            backgroundImage = [backgroundImage stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0];
+            
             _backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
             self.backgroundImageView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
             [self addSubview:self.backgroundImageView];
@@ -236,11 +246,15 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         {
             _button = [UIButton buttonWithType:UIButtonTypeCustom];
             
-            UIImage *buttonBackgroundImage = [[UIImage imageNamed:[current valueForKey:@"buttonBackgroundImageName"]] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
+            
+            UIImage *buttonBackgroundImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@.bundle/%@", TSMessageBundleName, [current valueForKey:@"buttonBackgroundImageName"]]];
+            
+            buttonBackgroundImage = [buttonBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
             
             if (!buttonBackgroundImage)
             {
-                buttonBackgroundImage = [[UIImage imageNamed:[current valueForKey:@"NotificationButtonBackground"]] resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
+                buttonBackgroundImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@.bundle/%@", TSMessageBundleName, [current valueForKey:@"NotificationButtonBackground"]]];
+                buttonBackgroundImage = [buttonBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
             }
             
             [self.button setBackgroundImage:buttonBackgroundImage forState:UIControlStateNormal];

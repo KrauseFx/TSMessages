@@ -26,6 +26,6 @@ SPEC CHECKSUMS:
   FBSnapshotTestCase: 9053afee1d66b4c7c313fcb0ae582a5e47bea9d0
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
   Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a
-  TSMessages: 26a59c8a43cc80e1f918d9e7cbab527f4097d4d1
+  TSMessages: 0cc47af029e012ae840eba88aa7ede0e868d8773
 
 COCOAPODS: 0.33.1

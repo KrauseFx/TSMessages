@@ -17,17 +17,17 @@ The notification moves from the top of the screen underneath the navigation bar 
 There are 4 different types already set up for you: Success, Error, Warning, Message.
                    DESC
   s.homepage     = "https://github.com/toursprung/TSMessages/"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  
   s.license          = 'MIT'
   s.author           = { "Felix Krause" => "krausefx@gmail.com" }
   s.source           = { :git => "https://github.com/toursprung/TSMessages.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.social_media_url = 'https://twitter.com/KrauseFx'
 
   s.platform     = :ios, '5.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes'
-  s.resources = ['Pod/Assets/*.png', 'Pod/Assets/*.json']
+  s.resource_bundles = { 'TSMessages' => ['Pod/Assets/*.png', 'Pod/Assets/*.json'] }
 
   s.public_header_files = 'Pod/Classes/**/*.h'
   s.dependency 'HexColors'
