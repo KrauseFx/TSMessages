@@ -1,0 +1,1 @@
+../../Specta/src/XCTestLog+Specta.h
