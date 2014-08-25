@@ -404,6 +404,11 @@ __weak static UIViewController *_defaultViewController;
     return notificationActive;
 }
 
++ (NSArray *)queuedMessages
+{
+    return [TSMessage sharedMessage].messages;
+}
+
 + (UIViewController *)defaultViewController
 {
     __strong UIViewController *defaultViewController = _defaultViewController;

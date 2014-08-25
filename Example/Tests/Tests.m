@@ -6,37 +6,22 @@
 //  Copyright (c) 2014 Felix Krause. All rights reserved.
 //
 
+#import "TSMessage.h"
+#import "TSMessageView.h"
+
 SpecBegin(InitialSpecs)
 
-describe(@"these will fail", ^{
-
-    it(@"can do maths", ^{
-        expect(1).to.equal(2);
-    });
-
-    it(@"can read", ^{
-        expect(@"number").to.equal(@"string");
+describe(@"Show a new TSMessage notification", ^{
+    before(^{
+        [UIView setAnimationsEnabled:NO];
+        [TSMessage dismissActiveNotification];
     });
     
-    it(@"will wait and fail", ^AsyncBlock {
+    it(@"matches view (error message)", ^{
+        [TSMessage showNotificationWithTitle:@"Error" type:TSMessageNotificationTypeError];
+        TSMessageView *view = [[TSMessage queuedMessages] lastObject];
         
-    });
-});
-
-describe(@"these will pass", ^{
-    
-    it(@"can do maths", ^{
-        expect(1).beLessThan(23);
-    });
-    
-    it(@"can read", ^{
-        expect(@"team").toNot.contain(@"I");
-    });
-    
-    it(@"will wait and succeed", ^AsyncBlock {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            done();
-        });
+        expect(view).to.haveValidSnapshotNamed(@"TSMessageViewErrorDefault");
     });
 });
 

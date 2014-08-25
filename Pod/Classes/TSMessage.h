@@ -163,6 +163,9 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 /** Indicates whether a notification is currently active. */
 + (BOOL)isNotificationActive;
 
+/** Returns the currently queued array of TSMessageView */
++ (NSArray *)queuedMessages;
+
 /** Prepares the notification view to be displayed in the future. It is queued and then
  displayed in fadeInCurrentNotification.
  You don't have to use this method. */
