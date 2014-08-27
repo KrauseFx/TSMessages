@@ -24,6 +24,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		CACA6CED19AB263400824626 /* TSDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CACA6CEC19AB263400824626 /* TSDemoViewController.m */; };
+		CAFB4A5D19ADC8CA004B4A82 /* AlternativeDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = CAFB4A5C19ADC8CA004B4A82 /* AlternativeDesign.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		60FDB524217248DC8C80BCC7 /* TSMessages.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TSMessages.podspec; path = ../TSMessages.podspec; sourceTree = "<group>"; };
 		CACA6CEB19AB263400824626 /* TSDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSDemoViewController.h; sourceTree = "<group>"; };
 		CACA6CEC19AB263400824626 /* TSDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSDemoViewController.m; sourceTree = "<group>"; };
+		CAFB4A5C19ADC8CA004B4A82 /* AlternativeDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AlternativeDesign.json; sourceTree = "<group>"; };
 		D24C674F90784EC4AFFD8541 /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FECCD72F1B4F493A82447BE0 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 		6003F593195388D20070C39A /* TSMessages */ = {
 			isa = PBXGroup;
 			children = (
+				CAFB4A5C19ADC8CA004B4A82 /* AlternativeDesign.json */,
 				CACA6CEB19AB263400824626 /* TSDemoViewController.h */,
 				CACA6CEC19AB263400824626 /* TSDemoViewController.m */,
 				6003F59C195388D20070C39A /* TSAppDelegate.h */,
@@ -269,6 +272,7 @@
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F5A1195388D20070C39A /* Main_iPhone.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				CAFB4A5D19ADC8CA004B4A82 /* AlternativeDesign.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

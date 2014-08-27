@@ -86,11 +86,18 @@ static NSBundle *podBundle;
 + (void)addNotificationDesignFromFile:(NSString *)filename
 {
     NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:filename];
-    NSDictionary *design = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
-                                                           options:kNilOptions
-                                                             error:nil];
-    
-    [[TSMessageView notificationDesign] addEntriesFromDictionary:design];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path])
+    {
+        NSDictionary *design = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
+                                                               options:kNilOptions
+                                                                 error:nil];
+        
+        [[TSMessageView notificationDesign] addEntriesFromDictionary:design];
+    }
+    else
+    {
+        NSAssert(NO, @"Error loading design file with name %@", filename);
+    }
 }
 
 - (id)initWithTitle:(NSString *)title
