@@ -11,6 +11,7 @@
 #import "TSBlurView.h"
 #import "TSMessage.h"
 
+#define TSMessageViewMinimumPadding 15.0
 
 #define TSDesignFileName @"TSMessagesDefaultDesign.json"
 #define TSMessageBundleName @"TSMessages"
@@ -100,7 +101,8 @@ static NSBundle *podBundle;
 
 - (CGFloat)padding
 {
-    return self.messagePosition == TSMessageNotificationPositionNavBarOverlay ? 25.0f : 15.0f;
+    // Adds 10 padding to to cover navigation bar
+    return self.messagePosition == TSMessageNotificationPositionNavBarOverlay ? TSMessageViewMinimumPadding + 10.0f : TSMessageViewMinimumPadding;
 }
 
 - (id)initWithTitle:(NSString *)title
