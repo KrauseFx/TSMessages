@@ -164,6 +164,10 @@
 
 - (IBAction)didTapNavBarOverlay:(id)sender
 {
+    if (self.navigationController.navigationBarHidden){
+        [self.navigationController setNavigationBarHidden:NO];
+    }
+    
     [TSMessage showNotificationInViewController:self.navigationController
                                           title:NSLocalizedString(@"Whoa!", nil)
                                        subtitle:NSLocalizedString(@"Over the Navigation Bar!", nil)
