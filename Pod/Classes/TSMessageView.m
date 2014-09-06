@@ -11,8 +11,7 @@
 #import "TSBlurView.h"
 #import "TSMessage.h"
 
-
-#define TSMessageViewPadding 15.0
+#define TSMessageViewMinimumPadding 15.0
 
 #define TSDesignFileName @"TSMessagesDefaultDesign.json"
 #define TSMessageBundleName @"TSMessages"
@@ -100,6 +99,12 @@ static NSBundle *podBundle;
     }
 }
 
+- (CGFloat)padding
+{
+    // Adds 10 padding to to cover navigation bar
+    return self.messagePosition == TSMessageNotificationPositionNavBarOverlay ? TSMessageViewMinimumPadding + 10.0f : TSMessageViewMinimumPadding;
+}
+
 - (id)initWithTitle:(NSString *)title
            subtitle:(NSString *)subtitle
               image:(UIImage *)image
@@ -126,6 +131,8 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         self.buttonCallback = buttonCallback;
         
         CGFloat screenWidth = self.viewController.view.bounds.size.width;
+        CGFloat padding = [self padding];
+        
         NSDictionary *current;
         NSString *currentString;
         switch (notificationType)
@@ -188,8 +195,8 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                                                    alpha:1.0];
         
         
-        self.textSpaceLeft = 2 * TSMessageViewPadding;
-        if (image) self.textSpaceLeft += image.size.width + 2 * TSMessageViewPadding;
+        self.textSpaceLeft = 2 * padding;
+        if (image) self.textSpaceLeft += image.size.width + 2 * padding;
         
         // Set up title label
         _titleLabel = [[UILabel alloc] init];
@@ -241,8 +248,8 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         if (image)
         {
             _iconImageView = [[UIImageView alloc] initWithImage:image];
-            self.iconImageView.frame = CGRectMake(TSMessageViewPadding * 2,
-                                                  TSMessageViewPadding,
+            self.iconImageView.frame = CGRectMake(padding * 2,
+                                                  padding,
                                                   image.size.width,
                                                   image.size.height);
             [self addSubview:self.iconImageView];
@@ -291,14 +298,14 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             
             self.button.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0);
             [self.button sizeToFit];
-            self.button.frame = CGRectMake(screenWidth - TSMessageViewPadding - self.button.frame.size.width,
+            self.button.frame = CGRectMake(screenWidth - padding - self.button.frame.size.width,
                                            0.0,
                                            self.button.frame.size.width,
                                            31.0);
             
             [self addSubview:self.button];
             
-            self.textSpaceRight = self.button.frame.size.width + TSMessageViewPadding;
+            self.textSpaceRight = self.button.frame.size.width + padding;
         }
         
         // Add a border on the bottom (or on the top, depending on the view's postion)
@@ -362,11 +369,11 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 {
     CGFloat currentHeight;
     CGFloat screenWidth = self.viewController.view.bounds.size.width;
-    
+    CGFloat padding = [self padding];
     
     self.titleLabel.frame = CGRectMake(self.textSpaceLeft,
-                                       TSMessageViewPadding,
-                                       screenWidth - TSMessageViewPadding - self.textSpaceLeft - self.textSpaceRight,
+                                       padding,
+                                       screenWidth - padding - self.textSpaceLeft - self.textSpaceRight,
                                        0.0);
     [self.titleLabel sizeToFit];
     
@@ -374,7 +381,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     {
         self.contentLabel.frame = CGRectMake(self.textSpaceLeft,
                                              self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 5.0,
-                                             screenWidth - TSMessageViewPadding - self.textSpaceLeft - self.textSpaceRight,
+                                             screenWidth - padding - self.textSpaceLeft - self.textSpaceRight,
                                              0.0);
         [self.contentLabel sizeToFit];
         
@@ -386,14 +393,14 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         currentHeight = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height;
     }
     
-    currentHeight += TSMessageViewPadding;
+    currentHeight += padding;
     
     if (self.iconImageView)
     {
         // Check if that makes the popup larger (height)
-        if (self.iconImageView.frame.origin.y + self.iconImageView.frame.size.height + TSMessageViewPadding > currentHeight)
+        if (self.iconImageView.frame.origin.y + self.iconImageView.frame.size.height + padding > currentHeight)
         {
-            currentHeight = self.iconImageView.frame.origin.y + self.iconImageView.frame.size.height + TSMessageViewPadding;
+            currentHeight = self.iconImageView.frame.origin.y + self.iconImageView.frame.size.height + padding;
         }
         else
         {
