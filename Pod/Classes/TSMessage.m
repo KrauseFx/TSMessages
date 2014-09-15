@@ -199,14 +199,13 @@ __weak static UIViewController *_defaultViewController;
         
         CGSize statusBarSize = [UIApplication sharedApplication].statusBarFrame.size;
         
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-        verticalOffset += statusBarSize.height;
-        return;
-#endif
-        
-        BOOL isPortrait = UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]);
-        CGFloat offset = isPortrait ? statusBarSize.height : statusBarSize.width;
-        verticalOffset += offset;
+        if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
+            verticalOffset += statusBarSize.height;
+        } else {
+            BOOL isPortrait = UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]);
+            CGFloat offset = isPortrait ? statusBarSize.height : statusBarSize.width;
+            verticalOffset += offset;
+        }
     };
     
     if ([currentView.viewController isKindOfClass:[UINavigationController class]] || [currentView.viewController.parentViewController isKindOfClass:[UINavigationController class]])
