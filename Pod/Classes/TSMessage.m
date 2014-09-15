@@ -197,8 +197,14 @@ __weak static UIViewController *_defaultViewController;
             return;
         }
         
-        BOOL isPortrait = UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]);
         CGSize statusBarSize = [UIApplication sharedApplication].statusBarFrame.size;
+        
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+        verticalOffset += statusBarSize.height;
+        return;
+#endif
+        
+        BOOL isPortrait = UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]);
         CGFloat offset = isPortrait ? statusBarSize.height : statusBarSize.width;
         verticalOffset += offset;
     };
