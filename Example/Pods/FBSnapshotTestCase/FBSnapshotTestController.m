@@ -109,6 +109,9 @@ typedef struct RGBAPixel {
         return NO;
       }
       didWrite = [pngData writeToFile:filePath options:NSDataWritingAtomic error:errorPtr];
+      if (didWrite) {
+        NSLog(@"Reference image save at: %@", filePath);
+      }
     } else {
       if (nil != errorPtr) {
         *errorPtr = [NSError errorWithDomain:FBSnapshotTestControllerErrorDomain
@@ -236,8 +239,8 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   if (0 < identifier.length) {
     fileName = [fileName stringByAppendingFormat:@"_%@", identifier];
   }
-  if ([[UIScreen mainScreen] scale] >= 2.0) {
-    fileName = [fileName stringByAppendingString:@"@2x"];
+  if ([[UIScreen mainScreen] scale] > 1.0) {
+    fileName = [fileName stringByAppendingFormat:@"@%.fx", [[UIScreen mainScreen] scale]];
   }
   fileName = [fileName stringByAppendingPathExtension:@"png"];
   return fileName;
@@ -341,25 +344,27 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   CALayer *layer = nil;
   
   if ([viewOrLayer isKindOfClass:[UIView class]]) {
-    UIView *view = (UIView *)viewOrLayer;
-    [view layoutIfNeeded];
-    layer = view.layer;
+    return [self _renderView:viewOrLayer];
   } else if ([viewOrLayer isKindOfClass:[CALayer class]]) {
     layer = (CALayer *)viewOrLayer;
     [layer layoutIfNeeded];
+    return [self _renderLayer:layer];
   } else {
     [NSException raise:@"Only UIView and CALayer classes can be snapshotted" format:@"%@", viewOrLayer];
   }
-  
-  return [self _renderLayer:layer];
+  return nil;
 }
 
 - (UIImage *)_renderLayer:(CALayer *)layer
 {
   CGRect bounds = layer.bounds;
-  
+
+  NSAssert1(CGRectGetWidth(bounds), @"Zero width for layer %@", layer);
+  NSAssert1(CGRectGetHeight(bounds), @"Zero height for layer %@", layer);
+
   UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
   CGContextRef context = UIGraphicsGetCurrentContext();
+  NSAssert1(context, @"Could not generate context for layer %@", layer);
   
   CGContextSaveGState(context);
   {
@@ -371,6 +376,21 @@ typedef NS_ENUM(NSUInteger, FBTestSnapshotFileNameType) {
   UIGraphicsEndImageContext();
   
   return snapshot;
+}
+        
+- (UIImage *)_renderView:(UIView *)view
+{
+#ifdef __IPHONE_7_0
+  if ([view respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+    UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+  }
+#endif
+  [view layoutIfNeeded];
+  return [self _renderLayer:view.layer];
 }
 
 @end

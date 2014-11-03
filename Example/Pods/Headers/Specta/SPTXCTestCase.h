@@ -1,1 +1,0 @@
-../../Specta/src/SPTXCTestCase.h

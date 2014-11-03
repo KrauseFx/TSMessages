@@ -1,1 +1,0 @@
-../../Specta/src/SPTXCTestReporter.h

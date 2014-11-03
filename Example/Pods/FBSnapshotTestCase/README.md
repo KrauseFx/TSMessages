@@ -1,7 +1,7 @@
 FBSnapshotTestCase
 ======================
 
-[![Build Status](https://travis-ci.org/facebook/ios-snapshot-test-case.png)](https://travis-ci.org/facebook/ios-snapshot-test-case)
+[![Build Status](https://travis-ci.org/facebook/ios-snapshot-test-case.svg)](https://travis-ci.org/facebook/ios-snapshot-test-case)
 
 What it does
 ------------
@@ -29,26 +29,33 @@ it will look to users.
 
 We developed `FBSnapshotTestCase` to make snapshot tests easy.
 
-Creating a snapshot test
-------------------------
+Installation with CocoaPods
+---------------------------
 
-1. Drop the `FBSnapshotTestCase` and `FBSnapshotTestController` source files
-   into your project. In the Add Files dialog, be sure to check the **tests**
-   target, not the main target.
+1. Add the following lines to your Podfile:
 
-     <img src="http://facebook.github.io/ios-snapshot-test-case/AddFiles.png" alt="Add Files Dialog" width="364">
+     ```
+     target "Tests" do
+       pod 'FBSnapshotTestCase'
+     end
+     ```
 
-2. Define `FB_REFERENCE_IMAGE_DIR` in `GCC_PREPROCESSOR_DEFINITIONS`. This
-   should point to the directory where you want reference images to be stored.
-   At Facebook, we normally use this:
+   Replace "Tests" with the name of your test project.
+
+2. Define `FB_REFERENCE_IMAGE_DIR` in `GCC_PREPROCESSOR_DEFINITIONS`. This should
+   point to the directory where you want reference images to be stored. At Facebook,
+   we normally use this:
 
      `GCC_PREPROCESSOR_DEFINITIONS = $(inherited) FB_REFERENCE_IMAGE_DIR="\"$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages\""`
 
-3. Subclass `FBSnapshotTestCase` instead of `XCTestCase`.
-4. From within your test, use `FBSnapshotVerifyView`.
-5. Run the test once with `self.recordMode = YES;` in the test's `-setUp`
+Creating a snapshot test
+------------------------
+
+1. Subclass `FBSnapshotTestCase` instead of `XCTestCase`.
+2. From within your test, use `FBSnapshotVerifyView`.
+3. Run the test once with `self.recordMode = YES;` in the test's `-setUp`
    method. (This creates the reference images on disk.)
-6. Remove the line enabling record mode and run the test.
+4. Remove the line enabling record mode and run the test.
 
 Features
 --------

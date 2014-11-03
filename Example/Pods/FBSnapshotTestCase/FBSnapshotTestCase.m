@@ -74,7 +74,7 @@
 {
   _snapshotController.referenceImagesDirectory = referenceImagesDirectory;
   return [_snapshotController compareSnapshotOfViewOrLayer:viewOrLayer
-                                                  selector:self.selector
+                                                  selector:self.invocation.selector
                                                 identifier:identifier
                                                      error:errorPtr];
 }
