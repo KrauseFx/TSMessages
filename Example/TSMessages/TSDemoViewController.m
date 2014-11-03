@@ -194,6 +194,11 @@
 //    return 44.0; // any calculation here
 //}
 
+//- (void)customizeMessageView:(TSMessageView *)messageView
+//{
+//    messageView.alpha = 0.5;
+//}
+
 - (IBAction)didTapNavbarHidden:(id)sender
 {
     self.navigationController.navigationBarHidden = !self.navigationController.navigationBarHidden;
