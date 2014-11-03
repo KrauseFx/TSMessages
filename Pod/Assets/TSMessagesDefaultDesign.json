@@ -16,8 +16,7 @@
         "shadowOffsetY": -1,
         "textColor": "#FFFFFF",
         "titleFontSize": 14,
-        "backgroundColor": "#76CF67",
-        "backgroundAlpha": 0.8
+        "backgroundColor": "#76CF67"
     },
     "message": {
         "backgroundImageName": "NotificationBackgroundMessage.png",
