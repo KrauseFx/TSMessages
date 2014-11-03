@@ -477,9 +477,11 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutNotification:) withObject:self waitUntilDone:NO];
 }
 
-- (void)didMoveToWindow {
+- (void)didMoveToWindow
+{
     [super didMoveToWindow];
-    if (self.duration == TSMessageNotificationDurationEndless && self.superview && !self.window ) {
+    if (self.duration == TSMessageNotificationDurationEndless && self.superview && !self.window )
+    {
         // view controller was dismissed, let's fade out
         [self fadeMeOut];
     }

@@ -69,14 +69,19 @@
                            canBeDismissedByUser:YES];
 }
 
-- (IBAction)didTapToggleNavigationBar:(id)sender {
+- (IBAction)didTapToggleNavigationBar:(id)sender
+{
     [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
 }
-- (IBAction)didTapToggleNavigationBarAlpha:(id)sender {
+
+- (IBAction)didTapToggleNavigationBarAlpha:(id)sender
+{
     CGFloat alpha = self.navigationController.navigationBar.alpha;
     self.navigationController.navigationBar.alpha = (alpha==1.f)?0.5:1;
 }
-- (IBAction)didTapToggleWantsFullscreen:(id)sender {
+
+- (IBAction)didTapToggleWantsFullscreen:(id)sender
+{
     self.wantsFullScreenLayout = !self.wantsFullScreenLayout;
     [self.navigationController.navigationBar setTranslucent:!self.navigationController.navigationBar.isTranslucent];
 }
@@ -189,7 +194,8 @@
 //    return 44.0; // any calculation here
 //}
 
-- (IBAction)didTapNavbarHidden:(id)sender {
+- (IBAction)didTapNavbarHidden:(id)sender
+{
     self.navigationController.navigationBarHidden = !self.navigationController.navigationBarHidden;
 }
 @end
