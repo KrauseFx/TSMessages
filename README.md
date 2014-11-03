@@ -59,7 +59,12 @@ To show notifications use the following code:
     [TSMessage addCustomDesignFromFileWithName:@"AlternativeDesign.json"];
 ```
 
-The following properties can be set:
+You can define a default view controller in which the notifications should be displayed:
+```objective-c
+   [TSMessage setDefaultViewController:myNavController];
+```
+
+The following properties can be set when creating a new notification:
 
 * **viewController**: The view controller to show the notification in. This might be the navigation controller.
 * **title**: The title of the notification view
