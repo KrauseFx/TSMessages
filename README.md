@@ -64,6 +64,18 @@ You can define a default view controller in which the notifications should be di
    [TSMessage setDefaultViewController:myNavController];
 ```
 
+You can define a default view controller in which the notifications should be displayed:
+```objective-c
+   [TSMessage setDelegate:self];
+   
+   ...
+   
+   - (CGFloat)messageLocationOfMessageView:(TSMessageView *)messageView
+   {
+    return messageView.viewController...; // any calculation here
+   }
+```
+
 The following properties can be set when creating a new notification:
 
 * **viewController**: The view controller to show the notification in. This might be the navigation controller.
