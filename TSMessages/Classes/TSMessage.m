@@ -348,21 +348,36 @@ __weak static UIViewController *_defaultViewController;
      }];
 }
 
-+ (BOOL)dismissActiveNotification
-{
++ (BOOL)dismissActiveNotification {
     if ([[TSMessage sharedMessage].messages count] == 0) return NO;
     
-    dispatch_async(dispatch_get_main_queue(), ^
-                   {
-                       if ([[TSMessage sharedMessage].messages count] == 0) return;
-                       TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
-                       if (currentMessage.item.messageIsFullyDisplayed)
-                       {
-                           [[TSMessage sharedMessage] fadeOutNotification:currentMessage];
-                       }
-                   });
+    dispatch_async(dispatch_get_main_queue(), ^{
+       if ([[TSMessage sharedMessage].messages count] == 0) return;
+       TSMessageView *currentMessage = ([TSMessage sharedMessage].messages)[0];
+       if (currentMessage.item.messageIsFullyDisplayed) {
+           [[TSMessage sharedMessage] fadeOutNotification:currentMessage];
+       }
+    });
     return YES;
 }
+
++ (BOOL)dismissAllNotifications {
+    if (![TSMessage sharedMessage].messages.count) return NO;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // remove all messages except first
+        if ([TSMessage sharedMessage].messages.count > 1) {
+            [[TSMessage sharedMessage].messages removeObjectsInRange:NSMakeRange(1, [TSMessage sharedMessage].messages.count - 1)];
+        }
+        TSMessageView *currentMessage = [TSMessage sharedMessage].messages[0];
+        if (currentMessage.item.messageIsFullyDisplayed) {
+            [[TSMessage sharedMessage] fadeOutNotification:currentMessage];
+        }
+    });
+
+    return NO;
+}
+
 
 #pragma mark Customizing TSMessages
 

@@ -136,6 +136,8 @@
  */
 + (BOOL)dismissActiveNotification;
 
++ (BOOL)dismissAllNotifications;
+
 /** Use this method to set a default view controller to display the messages in */
 + (void)setDefaultViewController:(UIViewController *)defaultViewController;
 
