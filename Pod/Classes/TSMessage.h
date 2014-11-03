@@ -38,6 +38,9 @@
 /** Implement this method to pass a custom position for a specific message */
 - (CGFloat)messageLocationOfMessageView:(TSMessageView *)messageView;
 
+/** You can custimze the given TSMessageView, like setting its alpha or adding a subview */
+- (void)customizeMessageView:(TSMessageView *)messageView;
+
 @end
 
 

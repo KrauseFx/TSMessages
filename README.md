@@ -76,6 +76,19 @@ You can define a default view controller in which the notifications should be di
    }
 ```
 
+You can customize a message view, right before it's displayed, like setting an alpha value, or adding a custom subview
+```objective-c
+   [TSMessage setDelegate:self];
+   
+   ...
+   
+   - (void)customizeMessageView:(TSMessageView *)messageView
+   {
+      messageView.alpha = 0.4;
+      [messageView addSubview:...];
+   }
+```
+
 The following properties can be set when creating a new notification:
 
 * **viewController**: The view controller to show the notification in. This might be the navigation controller.

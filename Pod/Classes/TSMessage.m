@@ -269,6 +269,13 @@ __weak static UIViewController *_defaultViewController;
         toPoint = CGPointMake(currentView.center.x, y);
     }
     
+    if (self.delegate && [self.delegate respondsToSelector:@selector(customizeMessageView:)])
+    {
+        [self.delegate customizeMessageView:currentView];
+    }
+    
+    
+    
     dispatch_block_t animationBlock = ^{
         currentView.center = toPoint;
         if (![TSMessage iOS7StyleEnabled]) {
