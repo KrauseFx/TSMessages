@@ -13,12 +13,9 @@
 
 #define TSMessageViewMinimumPadding 15.0
 
-#define TSDesignFileName @"TSMessagesDefaultDesign.json"
-#define TSMessageBundleName @"TSMessages"
-
+#define TSDesignFileName @"TSMessagesDefaultDesign"
 
 static NSMutableDictionary *_notificationDesign;
-static NSBundle *podBundle;
 
 @interface TSMessage (TSMessageView)
 - (void)fadeOutNotification:(TSMessageView *)currentView; // private method of TSMessage, but called by TSMessageView in -[fadeMeOut]
@@ -66,14 +63,11 @@ static NSBundle *podBundle;
 {
     if (!_notificationDesign)
     {
-        if (!podBundle)
-        {
-            podBundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:TSMessageBundleName
-                                                                                 ofType:@"bundle"]];
-        }
+        NSString *path = [[NSBundle mainBundle] pathForResource:TSDesignFileName ofType:@"json"];
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        NSAssert(data != nil, @"Could not read TSMessages config file from main bundle with name %@.json", TSDesignFileName);
         
-        NSString *path = [[podBundle resourcePath] stringByAppendingPathComponent:TSDesignFileName];
-        _notificationDesign = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
+        _notificationDesign = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:data
                                                                                                             options:kNilOptions
                                                                                                               error:nil]];
     }
@@ -167,7 +161,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         
         if (!image && [[current valueForKey:@"imageName"] length])
         {
-            image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.bundle/%@", TSMessageBundleName, [current valueForKey:@"imageName"]]];
+            image = [UIImage imageNamed:[current valueForKey:@"imageName"]];
         }
         
         if (![TSMessage iOS7StyleEnabled])
@@ -175,7 +169,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             self.alpha = 0.0;
             
             // add background image here
-            UIImage *backgroundImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@.bundle/%@", TSMessageBundleName, [current valueForKey:@"backgroundImageName"]]];
+            UIImage *backgroundImage = [UIImage imageNamed:[current valueForKey:@"backgroundImageName"]];
             backgroundImage = [backgroundImage stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0];
             
             _backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
@@ -261,13 +255,13 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             _button = [UIButton buttonWithType:UIButtonTypeCustom];
             
             
-            UIImage *buttonBackgroundImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@.bundle/%@", TSMessageBundleName, [current valueForKey:@"buttonBackgroundImageName"]]];
+            UIImage *buttonBackgroundImage = [UIImage imageNamed:[current valueForKey:@"buttonBackgroundImageName"]];
             
             buttonBackgroundImage = [buttonBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
             
             if (!buttonBackgroundImage)
             {
-                buttonBackgroundImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@.bundle/%@", TSMessageBundleName, [current valueForKey:@"NotificationButtonBackground"]]];
+                buttonBackgroundImage = [UIImage imageNamed:[current valueForKey:@"NotificationButtonBackground"]];
                 buttonBackgroundImage = [buttonBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
             }
             
