@@ -18,6 +18,7 @@
     [super viewDidLoad];
     
     [TSMessage setDefaultViewController:self];
+    [TSMessage setDelegate:self];
     self.wantsFullScreenLayout = YES;
     [self.navigationController.navigationBar setTranslucent:YES];
 }
@@ -183,10 +184,10 @@
 
 
 
-- (CGFloat)navigationbarBottomOfViewController:(UIViewController *)viewController
-{
-    return 55;
-}
+//- (CGFloat)messageLocationOfMessageView:(TSMessageView *)messageView
+//{
+//    return 44.0; // any calculation here
+//}
 
 - (IBAction)didTapNavbarHidden:(id)sender {
     self.navigationController.navigationBarHidden = !self.navigationController.navigationBarHidden;

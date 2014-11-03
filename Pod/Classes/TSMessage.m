@@ -247,12 +247,14 @@ __weak static UIViewController *_defaultViewController;
     }
     
     CGPoint toPoint;
-    if (currentView.messagePosition != TSMessageNotificationPositionBottom)
+    if (currentView.messagePosition == TSMessageNotificationPositionTop)
     {
         CGFloat navigationbarBottomOfViewController = 0;
         
-        if (currentView.delegate && [currentView.delegate respondsToSelector:@selector(navigationbarBottomOfViewController:)])
-            navigationbarBottomOfViewController = [currentView.delegate navigationbarBottomOfViewController:currentView.viewController];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(messageLocationOfMessageView:)])
+        {
+            navigationbarBottomOfViewController = [self.delegate messageLocationOfMessageView:currentView];
+        }
         
         toPoint = CGPointMake(currentView.center.x,
                               navigationbarBottomOfViewController + verticalOffset + CGRectGetHeight(currentView.frame) / 2.0);
@@ -398,6 +400,11 @@ __weak static UIViewController *_defaultViewController;
 + (void)setDefaultViewController:(UIViewController *)defaultViewController
 {
     _defaultViewController = defaultViewController;
+}
+
++ (void)setDelegate:(id<TSMessageViewProtocol>)delegate
+{
+    [TSMessage sharedMessage].delegate = delegate;
 }
 
 + (void)addCustomDesignFromFileWithName:(NSString *)fileName
