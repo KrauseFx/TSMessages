@@ -247,7 +247,7 @@ __weak static UIViewController *_defaultViewController;
     }
     
     CGPoint toPoint;
-    if (currentView.messagePosition == TSMessageNotificationPositionTop)
+    if (currentView.messagePosition != TSMessageNotificationPositionBottom)
     {
         CGFloat navigationbarBottomOfViewController = 0;
         
