@@ -6,7 +6,7 @@ PODS:
   - FBSnapshotTestCase (1.3)
   - HexColors (2.2.1)
   - Specta (0.2.1)
-  - TSMessages (0.9.10):
+  - TSMessages (0.9.11):
     - HexColors
 
 DEPENDENCIES:
@@ -26,6 +26,6 @@ SPEC CHECKSUMS:
   FBSnapshotTestCase: 4fc617f1cb970fe987b98b3525b3aac106baaabf
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
   Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a
-  TSMessages: 29871d9eec996f22bb0f46ccc5581231567028a6
+  TSMessages: 0bee508b719383c4bad0841b291558d6daf66ba3
 
 COCOAPODS: 0.34.4
