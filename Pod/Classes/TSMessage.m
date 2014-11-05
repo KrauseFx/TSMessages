@@ -198,14 +198,7 @@ __weak static UIViewController *_defaultViewController;
         }
         
         CGSize statusBarSize = [UIApplication sharedApplication].statusBarFrame.size;
-        
-        if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
-            verticalOffset += statusBarSize.height;
-        } else {
-            BOOL isPortrait = UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]);
-            CGFloat offset = isPortrait ? statusBarSize.height : statusBarSize.width;
-            verticalOffset += offset;
-        }
+        verticalOffset += MIN(statusBarSize.width, statusBarSize.height);
     };
     
     if ([currentView.viewController isKindOfClass:[UINavigationController class]] || [currentView.viewController.parentViewController isKindOfClass:[UINavigationController class]])
