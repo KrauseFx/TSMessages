@@ -182,7 +182,7 @@ __weak static UIViewController *_defaultViewController;
         {
             [currentNavigationController.view insertSubview:currentView
                                                belowSubview:[currentNavigationController navigationBar]];
-            verticalOffset = [currentNavigationController navigationBar].bounds.size.height;
+            verticalOffset = MAX([currentNavigationController navigationBar].bounds.size.height, CGRectGetHeight(currentView.viewController.navigationItem.titleView.bounds));
             if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
                 addStatusBarHeightToVerticalOffset();
             }
