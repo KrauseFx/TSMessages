@@ -166,6 +166,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             _backgroundBlurView = [[TSBlurView alloc] init];
             self.backgroundBlurView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
             self.backgroundBlurView.blurTintColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
+            self.backgroundBlurView.alpha = current[@"backgroundAlpha"] ? [current[@"backgroundAlpha"] floatValue] : 1.0;
             [self addSubview:self.backgroundBlurView];
         }
         
