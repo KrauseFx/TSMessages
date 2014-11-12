@@ -177,8 +177,21 @@ __weak static UIViewController *_defaultViewController;
     if ((self = [super init]))
     {
         _messages = [[NSMutableArray alloc] init];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didRotate:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+}
+
+- (void)didRotate:(NSNotification*)notification {
+    [self fadeInCurrentNotification];
 }
 
 - (void)fadeInCurrentNotification
@@ -331,6 +344,8 @@ __weak static UIViewController *_defaultViewController;
 
 - (void)fadeOutNotification:(TSMessageView *)currentView animationFinishedBlock:(void (^)())animationFinished
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:currentView name:UIDeviceOrientationDidChangeNotification object:nil];
+    
     currentView.messageIsFullyDisplayed = NO;
     [NSObject cancelPreviousPerformRequestsWithTarget:self
                                              selector:@selector(fadeOutNotification:)
