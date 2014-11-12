@@ -22,6 +22,7 @@
         "borderColor": "#727C83",
         "borderHeight": 1,
         "buttonBackgroundImageName": "NotificationButtonBackground.png",
+        "buttonHeight": 17,
         "buttonTitleTextColor": "#727C83",
         "buttonTitleShadowColor": "#EBEEF1",
         "buttonTitleShadowOffsetX": 0,

@@ -292,10 +292,14 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             
             self.button.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0);
             [self.button sizeToFit];
+            CGFloat buttonHeight = 31.0f;
+            if([current valueForKey:@"buttonHeight"]){
+                buttonHeight = [[current valueForKey:@"buttonHeight"] floatValue];
+            }
             self.button.frame = CGRectMake(screenWidth - padding - self.button.frame.size.width,
                                            0.0,
                                            self.button.frame.size.width,
-                                           31.0);
+                                           buttonHeight);
             
             [self addSubview:self.button];
             
