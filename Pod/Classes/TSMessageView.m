@@ -189,7 +189,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                                                    alpha:1.0];
         
         
-        self.textSpaceLeft = 2 * padding;
+        self.textSpaceLeft = 17;
         if (image) self.textSpaceLeft += image.size.width + 2 * padding;
         
         // Set up title label
@@ -359,6 +359,12 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             [self addGestureRecognizer:tapGesture];
         }
     }
+    
+    self.layer.masksToBounds = NO;
+    self.layer.shadowOffset = CGSizeMake(0, 1);
+    self.layer.shadowRadius = 2;
+    self.layer.shadowOpacity = 0.2;
+    
     return self;
 }
 
