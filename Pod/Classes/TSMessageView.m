@@ -63,7 +63,7 @@ static NSMutableDictionary *_notificationDesign;
 {
     if (!_notificationDesign)
     {
-        NSString *path = [[NSBundle mainBundle] pathForResource:TSDesignFileName ofType:@"json"];
+        NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:TSDesignFileName ofType:@"json"];
         NSData *data = [NSData dataWithContentsOfFile:path];
         NSAssert(data != nil, @"Could not read TSMessages config file from main bundle with name %@.json", TSDesignFileName);
         
@@ -78,7 +78,7 @@ static NSMutableDictionary *_notificationDesign;
 
 + (void)addNotificationDesignFromFile:(NSString *)filename
 {
-    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:filename];
+    NSString *path = [[[NSBundle bundleForClass:[self class]] resourcePath] stringByAppendingPathComponent:filename];
     if ([[NSFileManager defaultManager] fileExistsAtPath:path])
     {
         NSDictionary *design = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
