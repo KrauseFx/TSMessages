@@ -343,10 +343,12 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                                       UISwipeGestureRecognizerDirectionUp :
                                       UISwipeGestureRecognizerDirectionDown)];
             [self addGestureRecognizer:gestureRec];
-            
-            UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                     action:@selector(fadeMeOut)];
-            [self addGestureRecognizer:tapRec];
+          
+            if (! self.callback) {
+                UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                         action:@selector(fadeMeOut)];
+                [self addGestureRecognizer:tapRec];
+            }
         }
         
         if (self.callback) {
@@ -507,6 +509,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             self.callback();
         }
     }
+    [self fadeMeOut];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
