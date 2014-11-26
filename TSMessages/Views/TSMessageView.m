@@ -8,7 +8,6 @@
 
 #import "TSMessageView.h"
 #import "HexColor.h"
-#import "TSBlurView.h"
 #import "TSMessage.h"
 
 
@@ -45,7 +44,7 @@ static NSMutableDictionary *_notificationDesign;
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UIView *borderView;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
-@property (nonatomic, strong) TSBlurView *backgroundBlurView; // Only used in iOS 7
+@property (nonatomic, strong) UIView *backgroundView; // Only used in iOS 7
 
 @property (nonatomic, assign) CGFloat textSpaceLeft;
 @property (nonatomic, assign) CGFloat textSpaceRight;
@@ -162,12 +161,10 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         }
         else
         {
-            // On iOS 7 and above use a blur layer instead (not yet finished)
-            _backgroundBlurView = [[TSBlurView alloc] init];
-            self.backgroundBlurView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
-            self.backgroundBlurView.blurTintColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
-            self.backgroundBlurView.alpha = current[@"backgroundAlpha"] ? [current[@"backgroundAlpha"] floatValue] : 1.0;
-            [self addSubview:self.backgroundBlurView];
+            _backgroundView = [[UIView alloc] init];
+            self.backgroundView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+            self.backgroundView.backgroundColor = [UIColor colorWithHexString:current[@"backgroundColor"] alpha:current[@"backgroundAlpha"] ? [current[@"backgroundAlpha"] floatValue] : 1.0];
+            [self addSubview:self.backgroundView];
         }
         
         UIColor *fontColor = [UIColor colorWithHexString:[current valueForKey:@"textColor"]
@@ -462,7 +459,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     }
 
     self.backgroundImageView.frame = backgroundFrame;
-    self.backgroundBlurView.frame = backgroundFrame;
+    self.backgroundView.frame = backgroundFrame;
     
     return currentHeight;
 }
