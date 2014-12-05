@@ -89,6 +89,31 @@ You can customize a message view, right before it's displayed, like setting an a
    }
 ```
 
+You can customize message view elements using UIAppearance
+```objective-c
+#import <TSMessages/TSMessageView.h>
+@implementation TSAppDelegate
+....
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+//If you want you can overidde some properties using UIAppearance
+[[TSMessageView appearance] setTitleFont:[UIFont boldSystemFontOfSize:6]];
+[[TSMessageView appearance] setTitleTextColor:[UIColor redColor]];
+[[TSMessageView appearance] setContentFont:[UIFont boldSystemFontOfSize:10]];
+[[TSMessageView appearance]setContentTextColor:[UIColor greenColor]];
+[[TSMessageView appearance]setErrorIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+[[TSMessageView appearance]setSuccessIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+[[TSMessageView appearance]setMessageIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+[[TSMessageView appearance]setWarningIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+//End of override
+
+return YES;
+}
+```
+
+
+
 The following properties can be set when creating a new notification:
 
 * **viewController**: The view controller to show the notification in. This might be the navigation controller.
