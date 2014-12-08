@@ -136,7 +136,6 @@ static NSMutableDictionary *_notificationDesign;
                                           self.padding,
                                           image.size.width,
                                           image.size.height);
-    
 }
 
 
