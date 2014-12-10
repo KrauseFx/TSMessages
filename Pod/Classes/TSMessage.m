@@ -153,7 +153,7 @@ __weak static UIViewController *_defaultViewController;
 									   tag:tag
 									 image:nil
 									  type:type
-								  duration:TSMessageNotificationDurationAutomatic
+								  duration:TSMessageNotificationDurationEndless
 								  callback:nil
 							   buttonTitle:nil
 							buttonCallback:nil
