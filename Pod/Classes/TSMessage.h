@@ -98,7 +98,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 								 subtitle:(NSString *)subtitle
 									 type:(TSMessageNotificationType)type;
 
-+ (TSMessageView*)showEndlessNotificationWithTag:(NSString *)title
++ (void)showEndlessNotificationWithTag:(NSString *)title
 										subtitle:(NSString *)subtitle
 											type:(TSMessageNotificationType)type
 											 tag:(NSInteger)tag;

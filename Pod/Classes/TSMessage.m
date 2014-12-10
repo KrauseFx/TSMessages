@@ -72,13 +72,12 @@ __weak static UIViewController *_defaultViewController;
 													 tag:-1
 													type:type];
 }
-
-+ (TSMessageView*)showEndlessNotificationWithTag:(NSString *)title
++ (void)showEndlessNotificationWithTag:(NSString *)title
 						 subtitle:(NSString *)subtitle
 							 type:(TSMessageNotificationType)type
 							  tag:(NSInteger)tag
 {
-	return [self showEndlessNotificationInViewController:[self defaultViewController]
+	[self showEndlessNotificationInViewController:[self defaultViewController]
 									 title:title
 								  subtitle:subtitle
 									   tag:tag
