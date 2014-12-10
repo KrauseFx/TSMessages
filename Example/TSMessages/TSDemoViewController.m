@@ -44,6 +44,17 @@
                                     type:TSMessageNotificationTypeMessage];
 }
 
+
+- (IBAction)didTapEndlessMessage:(id)sender
+{
+	[TSMessage showEndlessNotificationWithTag:NSLocalizedString(@"Tell the user something", nil)
+								subtitle:NSLocalizedString(@"This is some neutral notification it wont disappear unless you tell it to!", nil)
+									type:TSMessageNotificationTypeMessage
+									tag:10];
+	
+}
+
+
 - (IBAction)didTapSuccess:(id)sender
 {
     [TSMessage showNotificationWithTitle:NSLocalizedString(@"Success", nil)

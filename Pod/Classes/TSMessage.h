@@ -89,6 +89,20 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
                          subtitle:(NSString *)subtitle
                              type:(TSMessageNotificationType)type;
 
+/** Shows an endless notification message
+ @param title The title of the notification view
+ @param subtitle The text that is displayed underneath the title
+ @param type The notification type (Message, Warning, Error, Success)
+ */
++ (TSMessageView*)showEndlessNotification:(NSString *)title
+								 subtitle:(NSString *)subtitle
+									 type:(TSMessageNotificationType)type;
+
++ (TSMessageView*)showEndlessNotificationWithTag:(NSString *)title
+										subtitle:(NSString *)subtitle
+											type:(TSMessageNotificationType)type
+											 tag:(NSInteger)tag;
+
 /** Shows a notification message in a specific view controller
  @param viewController The view controller to show the notification in.
  You can use +setDefaultViewController: to set the the default one instead
@@ -100,6 +114,18 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
                                    title:(NSString *)title
                                 subtitle:(NSString *)subtitle
                                     type:(TSMessageNotificationType)type;
+
+/** Shows an endless notification message in a specific view controller
+ @param viewController The view controller to show the notification in.
+ You can use +setDefaultViewController: to set the the default one instead
+ @param title The title of the notification view
+ @param subtitle The text that is displayed underneath the title
+ @param type The notification type (Message, Warning, Error, Success)
+ */
++ (TSMessageView*)showEndlessNotificationInViewController:(UIViewController *)viewController
+										  title:(NSString *)title
+									   subtitle:(NSString *)subtitle
+										   type:(TSMessageNotificationType)type;
 
 /** Shows a notification message in a specific view controller with a specific duration
  @param viewController The view controller to show the notification in.
@@ -114,6 +140,7 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
                                 subtitle:(NSString *)subtitle
                                     type:(TSMessageNotificationType)type
                                 duration:(NSTimeInterval)duration;
+
 
 /** Shows a notification message in a specific view controller with a specific duration
  @param viewController The view controller to show the notification in.
@@ -157,6 +184,33 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
                           buttonCallback:(void (^)())buttonCallback
                               atPosition:(TSMessageNotificationPosition)messagePosition
                     canBeDismissedByUser:(BOOL)dismissingEnabled;
+
+/** Shows a notification message with a tag in a specific view controller
+ @param viewController The view controller to show the notification in.
+ @param title The title of the notification view
+ @param subtitle The message that is displayed underneath the title (optional)
+ @param tag The message that is displayed underneath the title (optional)
+ @param image A custom icon image (optional)
+ @param type The notification type (Message, Warning, Error, Success)
+ @param duration The duration of the notification being displayed
+ @param callback The block that should be executed, when the user tapped on the message
+ @param buttonTitle The title for button (optional)
+ @param buttonCallback The block that should be executed, when the user tapped on the button
+ @param messagePosition The position of the message on the screen
+ @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
+ */
++ (TSMessageView*)showNotificationWithTagInViewController:(UIViewController *)viewController
+													title:(NSString *)title
+												 subtitle:(NSString *)subtitle
+													  tag:(NSInteger)tag
+													image:(UIImage *)image
+													 type:(TSMessageNotificationType)type
+												 duration:(NSTimeInterval)duration
+												 callback:(void (^)())callback
+											  buttonTitle:(NSString *)buttonTitle
+										   buttonCallback:(void (^)())buttonCallback
+											   atPosition:(TSMessageNotificationPosition)messagePosition
+									 canBeDismissedByUser:(BOOL)dismissingEnabled;
 
 /** Fades out the currently displayed notification. If another notification is in the queue,
  the next one will be displayed automatically

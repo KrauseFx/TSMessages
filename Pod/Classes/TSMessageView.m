@@ -100,7 +100,23 @@ static NSMutableDictionary *_notificationDesign;
 }
 
 - (id)initWithTitle:(NSString *)title
+		   subtitle:(NSString *)subtitle
+			  image:(UIImage *)image
+			   type:(TSMessageNotificationType)notificationType
+		   duration:(CGFloat)duration
+   inViewController:(UIViewController *)viewController
+		   callback:(void (^)())callback
+		buttonTitle:(NSString *)buttonTitle
+	 buttonCallback:(void (^)())buttonCallback
+		 atPosition:(TSMessageNotificationPosition)position
+canBeDismissedByUser:(BOOL)dismissingEnabled
+{
+	return [self initWithTag:title subtitle:subtitle tag:-1 image:image type:notificationType duration:duration inViewController:viewController callback:callback buttonTitle:buttonTitle buttonCallback:buttonCallback atPosition:position canBeDismissedByUser:dismissingEnabled];
+}
+
+- (id)initWithTag:(NSString *)title
            subtitle:(NSString *)subtitle
+		   tag:(NSInteger)tag
               image:(UIImage *)image
                type:(TSMessageNotificationType)notificationType
            duration:(CGFloat)duration
@@ -117,6 +133,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     {
         _title = title;
         _subtitle = subtitle;
+		[self setTag:tag];
         _buttonTitle = buttonTitle;
         _duration = duration;
         _viewController = viewController;
