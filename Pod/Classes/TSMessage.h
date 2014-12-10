@@ -219,6 +219,8 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
  */
 + (BOOL)dismissActiveNotification;
 
++ (void)dismissNotificationsWithTag:(NSInteger)tag;
+
 /** Fades out the currently displayed notification with a completion block after the animation has finished. If another notification is in the queue,
  the next one will be displayed automatically
  @return YES if the currently displayed notification was successfully dismissed. NO if no notification
