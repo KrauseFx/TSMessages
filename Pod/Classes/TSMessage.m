@@ -52,7 +52,7 @@ __weak static UIViewController *_defaultViewController;
                                type:type];
 }
 
-+ (void)showEndlessNotification:(NSString *)title
++ (void)showEndlessNotificationWithTitle:(NSString *)title
 									 type:(TSMessageNotificationType)type
 {
 	[self showEndlessNotificationInViewController:[self defaultViewController]
