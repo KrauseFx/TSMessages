@@ -52,6 +52,16 @@ __weak static UIViewController *_defaultViewController;
                                type:type];
 }
 
++ (void)showEndlessNotification:(NSString *)title
+									 type:(TSMessageNotificationType)type
+{
+	[self showEndlessNotificationInViewController:[self defaultViewController]
+												   title:title
+												subtitle:nil
+													 tag:-1
+													type:type];
+}
+
 + (void)showNotificationWithTitle:(NSString *)title
                          subtitle:(NSString *)subtitle
                              type:(TSMessageNotificationType)type
@@ -62,16 +72,17 @@ __weak static UIViewController *_defaultViewController;
                                       type:type];
 }
 
-+ (TSMessageView*)showEndlessNotification:(NSString *)title
++(void)showEndlessNotification:(NSString *)title
 										subtitle:(NSString *)subtitle
 											type:(TSMessageNotificationType)type
 {
-	return [self showEndlessNotificationInViewController:[self defaultViewController]
+	[self showEndlessNotificationInViewController:[self defaultViewController]
 												   title:title
 												subtitle:subtitle
 													 tag:-1
 													type:type];
 }
+
 + (void)showEndlessNotificationWithTag:(NSString *)title
 						 subtitle:(NSString *)subtitle
 							 type:(TSMessageNotificationType)type
@@ -140,6 +151,16 @@ __weak static UIViewController *_defaultViewController;
                                 atPosition:TSMessageNotificationPositionTop
                       canBeDismissedByUser:YES];
 }
+
+
++ (TSMessageView*)showEndlessNotificationInViewController:(UIViewController *)viewController
+													title:(NSString *)title
+												 subtitle:(NSString *)subtitle
+													 type:(TSMessageNotificationType)type
+{
+	return [TSMessage showEndlessNotificationInViewController:viewController title:title subtitle:subtitle tag:-1 type:type];
+}
+
 
 + (TSMessageView*)showEndlessNotificationInViewController:(UIViewController *)viewController
 								   title:(NSString *)title

@@ -77,8 +77,9 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
  @param message The title of the notification view
  @param type The notification type (Message, Warning, Error, Success)
  */
-+ (void)showNotificationWithTitle:(NSString *)message
-                             type:(TSMessageNotificationType)type;
++ (void)showNotificationWithTitle:(NSString *)message type:(TSMessageNotificationType)type;
+
++(void)showEndlessNotificationWithTitle:(NSString *)message type:(TSMessageNotificationType)type;
 
 /** Shows a notification message
  @param title The title of the notification view
@@ -89,12 +90,16 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
                          subtitle:(NSString *)subtitle
                              type:(TSMessageNotificationType)type;
 
++(void)showEndlessNotification:(NSString *)title
+					  subtitle:(NSString *)subtitle
+						  type:(TSMessageNotificationType)type;
+
 /** Shows an endless notification message
  @param title The title of the notification view
  @param subtitle The text that is displayed underneath the title
  @param type The notification type (Message, Warning, Error, Success)
  */
-+ (TSMessageView*)showEndlessNotification:(NSString *)title
++(void)showEndlessNotification:(NSString *)title
 								 subtitle:(NSString *)subtitle
 									 type:(TSMessageNotificationType)type;
 
