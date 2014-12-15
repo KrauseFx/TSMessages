@@ -191,8 +191,8 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 		NSNumber *shadowAlpha = [current valueForKey:@"shadowOpacity"] ?: @(1.0f);
         
         
-        self.textSpaceLeft = 2 * padding;
-        if (image) self.textSpaceLeft += image.size.width + 2 * padding;
+        self.textSpaceLeft = padding;
+        if (image) self.textSpaceLeft += image.size.width + padding;
         
         // Set up title label
         _titleLabel = [[UILabel alloc] init];
@@ -245,7 +245,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         if (image)
         {
             _iconImageView = [[UIImageView alloc] initWithImage:image];
-            self.iconImageView.frame = CGRectMake(padding * 2,
+            self.iconImageView.frame = CGRectMake(padding,
                                                   padding,
                                                   image.size.width,
                                                   image.size.height);
