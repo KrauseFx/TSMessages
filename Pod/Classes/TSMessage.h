@@ -172,6 +172,10 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
  */
 + (BOOL)dismissActiveNotificationWithCompletion:(void (^)())completion;
 
+/** foce to hide the currently displayed notification
+ */
++ (void)hideNotification
+
 /** Use this method to set a default view controller to display the messages in */
 + (void)setDefaultViewController:(UIViewController *)defaultViewController;
 
