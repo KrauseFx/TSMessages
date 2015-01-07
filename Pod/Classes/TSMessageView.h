@@ -35,9 +35,9 @@
 @property (nonatomic, assign) BOOL messageIsFullyDisplayed;
 
 /** UI elements **/
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *contentLabel;
-@property (nonatomic, strong) UIButton *button;
+@property (nonatomic, strong, readonly) UILabel *titleLabel;
+@property (nonatomic, strong, readonly) UILabel *contentLabel;
+@property (nonatomic, strong, readonly) UIButton *button;
 
 /** Inits the notification view. Do not call this from outside this library.
  @param title The title of the notification view
