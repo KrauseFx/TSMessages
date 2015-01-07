@@ -19,7 +19,15 @@
     
     [TSMessage setDefaultViewController:self];
     [TSMessage setDelegate:self];
-    self.wantsFullScreenLayout = YES;
+    
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeAll;
+    else
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        self.wantsFullScreenLayout = YES;
+    #pragma clang diagnostic pop
+    
     [self.navigationController.navigationBar setTranslucent:YES];
 }
 
@@ -82,7 +90,14 @@
 
 - (IBAction)didTapToggleWantsFullscreen:(id)sender
 {
-    self.wantsFullScreenLayout = !self.wantsFullScreenLayout;
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeAll;
+    else
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        self.wantsFullScreenLayout = YES;
+    #pragma clang diagnostic pop
+    
     [self.navigationController.navigationBar setTranslucent:!self.navigationController.navigationBar.isTranslucent];
 }
 
