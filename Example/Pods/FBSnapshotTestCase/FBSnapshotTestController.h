@@ -41,6 +41,11 @@ extern NSString *const FBReferenceImageFilePathKey;
 @property(readwrite, nonatomic, assign) BOOL recordMode;
 
 /**
+ Render as layer (NO) or with drawViewHierarchyInRect on iOS 7+ (YES)
+ **/
+@property(readwrite, nonatomic, assign) BOOL renderAsLayer;
+
+/**
  Designated initializer.
  Before this methods returns the controller enumerates over the test methods in `testClass` and loads the images
  for those tests.
