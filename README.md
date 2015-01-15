@@ -16,7 +16,7 @@ It is very easy to add new notification types with a different design. Add the n
 
 **Take a look at the Example project to see how to use this library.** You have to open the workspace, not the project file, since the Example project uses cocoapods.
 
-Follow the developer on Twitter: [KrauseFx](http://twitter.com/KrauseFx) (Felix Krause)
+Get in contact with the developer on Twitter: [KrauseFx](http://twitter.com/KrauseFx) (Felix Krause)
 
 # Installation
 
