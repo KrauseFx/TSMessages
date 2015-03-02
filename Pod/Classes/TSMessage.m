@@ -226,9 +226,15 @@ __weak static UIViewController *_defaultViewController;
         {
             navigationbarBottomOfViewController = [self.delegate messageLocationOfMessageView:currentView];
         }
-        CGFloat topLayoutGuideLength = [[currentView.viewController topLayoutGuide] length];
+
+        CGFloat verticalOffset = [[currentView.viewController topLayoutGuide] length];
+      
+        if ([currentView.viewController isKindOfClass:[UINavigationController class]]) {
+          verticalOffset += ((UINavigationController *)currentView.viewController).toolbar.frame.size.height;
+        }
+
         toPoint = CGPointMake(currentView.center.x,
-                              navigationbarBottomOfViewController + topLayoutGuideLength + CGRectGetHeight(currentView.frame) / 2.0);
+                              navigationbarBottomOfViewController + verticalOffset + CGRectGetHeight(currentView.frame) / 2.0);
     }
     else
     {
