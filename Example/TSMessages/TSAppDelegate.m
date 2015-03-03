@@ -14,6 +14,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    /**
     //If you want you can overidde some properties using UIAppearance
     [[TSMessageView appearance] setTitleFont:[UIFont boldSystemFontOfSize:6]];
     [[TSMessageView appearance] setTitleTextColor:[UIColor redColor]];
@@ -24,7 +25,7 @@
     [[TSMessageView appearance]setMessageIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
     [[TSMessageView appearance]setWarningIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
     //End of override
-    
+     */
     return YES;
 }
 
