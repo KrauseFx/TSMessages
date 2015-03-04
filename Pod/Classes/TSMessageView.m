@@ -38,6 +38,7 @@ static NSMutableDictionary *_notificationDesign;
 
 /** Internal properties needed to resize the view on device rotation properly */
 @property (nonatomic, strong) UILabel *titleLabel;
+
 @property (nonatomic, strong) UILabel *contentLabel;
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UIButton *button;
@@ -57,7 +58,88 @@ static NSMutableDictionary *_notificationDesign;
 @end
 
 
-@implementation TSMessageView
+@implementation TSMessageView{
+    TSMessageNotificationType notificationType;
+}
+-(void) setContentFont:(UIFont *)contentFont{
+    _contentFont = contentFont;
+    [self.contentLabel setFont:contentFont];
+}
+
+-(void) setContentTextColor:(UIColor *)contentTextColor{
+    _contentTextColor = contentTextColor;
+    [self.contentLabel setTextColor:_contentTextColor];
+}
+
+-(void) setTitleFont:(UIFont *)aTitleFont{
+    _titleFont = aTitleFont;
+    [self.titleLabel setFont:_titleFont];
+}
+
+-(void)setTitleTextColor:(UIColor *)aTextColor{
+    _titleTextColor = aTextColor;
+    [self.titleLabel setTextColor:_titleTextColor];
+}
+
+-(void) setMessageIcon:(UIImage *)messageIcon{
+    _messageIcon = messageIcon;
+    [self updateCurrentIcon];
+}
+
+-(void) setErrorIcon:(UIImage *)errorIcon{
+    _errorIcon = errorIcon;
+    [self updateCurrentIcon];
+}
+
+-(void) setSuccessIcon:(UIImage *)successIcon{
+    _successIcon = successIcon;
+    [self updateCurrentIcon];
+}
+
+-(void) setWarningIcon:(UIImage *)warningIcon{
+    _warningIcon = warningIcon;
+    [self updateCurrentIcon];
+}
+
+-(void) updateCurrentIcon{
+    UIImage *image = nil;
+    switch (notificationType)
+    {
+        case TSMessageNotificationTypeMessage:
+        {
+            image = _messageIcon;
+            self.iconImageView.image = _messageIcon;
+            break;
+        }
+        case TSMessageNotificationTypeError:
+        {
+            image = _errorIcon;
+            self.iconImageView.image = _errorIcon;
+            break;
+        }
+        case TSMessageNotificationTypeSuccess:
+        {
+            image = _successIcon;
+            self.iconImageView.image = _successIcon;
+            break;
+        }
+        case TSMessageNotificationTypeWarning:
+        {
+            image = _warningIcon;
+            self.iconImageView.image = _warningIcon;
+            break;
+        }
+        default:
+            break;
+    }
+    self.iconImageView.frame = CGRectMake(self.padding * 2,
+                                          self.padding,
+                                          image.size.width,
+                                          image.size.height);
+}
+
+
+
 
 + (NSMutableDictionary *)notificationDesign
 {
@@ -102,7 +184,7 @@ static NSMutableDictionary *_notificationDesign;
 - (id)initWithTitle:(NSString *)title
            subtitle:(NSString *)subtitle
               image:(UIImage *)image
-               type:(TSMessageNotificationType)notificationType
+               type:(TSMessageNotificationType)aNotificationType
            duration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
            callback:(void (^)())callback
@@ -129,6 +211,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         
         NSDictionary *current;
         NSString *currentString;
+        notificationType = aNotificationType;
         switch (notificationType)
         {
             case TSMessageNotificationTypeMessage:
@@ -207,6 +290,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         [self.titleLabel setShadowColor:[UIColor colorWithHexString:[current valueForKey:@"shadowColor"] alpha:1.0]];
         [self.titleLabel setShadowOffset:CGSizeMake([[current valueForKey:@"shadowOffsetX"] floatValue],
                                                     [[current valueForKey:@"shadowOffsetY"] floatValue])];
+        
         self.titleLabel.numberOfLines = 0;
         self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self addSubview:self.titleLabel];
