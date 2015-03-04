@@ -49,7 +49,7 @@ To show notifications use the following code:
                                        callback:nil
                                     buttonTitle:@"Update"
                                  buttonCallback:^{
-                                     NSlog(@"User tapped the button");
+                                     NSLog(@"User tapped the button");
                                  }
                                      atPosition:TSMessageNotificationPositionTop
                            canBeDismissedByUser:YES];
