@@ -480,7 +480,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 - (void)executeCallback
 {
   dispatch_async(dispatch_get_main_queue(), ^{
-    self.callback();
+    if (self.callback) { self.callback(); }
   });
 }
 
