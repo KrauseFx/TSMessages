@@ -327,6 +327,9 @@ __weak static UIViewController *_defaultViewController;
 - (void)fadeOutNotification:(TSMessageView *)currentView
 {
     [self fadeOutNotification:currentView animationFinishedBlock:nil];
+    if (self.executeCallbackOnTimeout) {
+      [currentView executeCallback];
+    }
 }
 
 - (void)fadeOutNotification:(TSMessageView *)currentView animationFinishedBlock:(void (^)())animationFinished
