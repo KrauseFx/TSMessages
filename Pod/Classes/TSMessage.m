@@ -23,7 +23,6 @@
 @end
 
 @implementation TSMessage
-
 static TSMessage *sharedMessage;
 static BOOL notificationActive;
 

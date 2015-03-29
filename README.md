@@ -16,7 +16,7 @@ It is very easy to add new notification types with a different design. Add the n
 
 **Take a look at the Example project to see how to use this library.** You have to open the workspace, not the project file, since the Example project uses cocoapods.
 
-Follow the developer on Twitter: [KrauseFx](http://twitter.com/KrauseFx) (Felix Krause)
+Get in contact with the developer on Twitter: [KrauseFx](http://twitter.com/KrauseFx) (Felix Krause)
 
 # Installation
 
@@ -49,7 +49,7 @@ To show notifications use the following code:
                                        callback:nil
                                     buttonTitle:@"Update"
                                  buttonCallback:^{
-                                     NSlog(@"User tapped the button");
+                                     NSLog(@"User tapped the button");
                                  }
                                      atPosition:TSMessageNotificationPositionTop
                            canBeDismissedByUser:YES];
@@ -88,6 +88,31 @@ You can customize a message view, right before it's displayed, like setting an a
       [messageView addSubview:...];
    }
 ```
+
+You can customize message view elements using UIAppearance
+```objective-c
+#import <TSMessages/TSMessageView.h>
+@implementation TSAppDelegate
+....
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+//If you want you can overidde some properties using UIAppearance
+[[TSMessageView appearance] setTitleFont:[UIFont boldSystemFontOfSize:6]];
+[[TSMessageView appearance] setTitleTextColor:[UIColor redColor]];
+[[TSMessageView appearance] setContentFont:[UIFont boldSystemFontOfSize:10]];
+[[TSMessageView appearance]setContentTextColor:[UIColor greenColor]];
+[[TSMessageView appearance]setErrorIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+[[TSMessageView appearance]setSuccessIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+[[TSMessageView appearance]setMessageIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+[[TSMessageView appearance]setWarningIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+//End of override
+
+return YES;
+}
+```
+
+
 
 The following properties can be set when creating a new notification:
 
