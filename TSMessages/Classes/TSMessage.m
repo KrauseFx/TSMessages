@@ -186,7 +186,7 @@ __weak static UIViewController *_defaultViewController;
             NSArray *titleViewsBounds = [currentView.viewController.navigationController.viewControllers valueForKeyPath:@"navigationItem.titleView.bounds"];
             __block CGFloat maxTitleViewHeight = 0.0;
             [titleViewsBounds enumerateObjectsUsingBlock:^(NSValue *boundsValue, NSUInteger idx, BOOL *stop) {
-                CGRect rect = boundsValue.CGRectValue;
+                CGRect rect = [boundsValue isEqual:NSNull.null] ? CGRectZero : boundsValue.CGRectValue;
                 maxTitleViewHeight = CGRectGetHeight(rect) > maxTitleViewHeight ? CGRectGetHeight(rect) : maxTitleViewHeight;
             }];
             verticalOffset = MAX([currentNavigationController navigationBar].bounds.size.height, maxTitleViewHeight);
