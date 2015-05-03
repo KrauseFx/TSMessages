@@ -244,7 +244,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         
         if (!image && [[current valueForKey:@"imageName"] length])
         {
-            image = [UIImage imageNamed:[current valueForKey:@"imageName"]];
+            image = [self bundledImageNamed:[current valueForKey:@"imageName"]];
         }
         
         if (![TSMessage iOS7StyleEnabled])
@@ -252,7 +252,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             self.alpha = 0.0;
             
             // add background image here
-            UIImage *backgroundImage = [UIImage imageNamed:[current valueForKey:@"backgroundImageName"]];
+            UIImage *backgroundImage = [self bundledImageNamed:[current valueForKey:@"backgroundImageName"]];
             backgroundImage = [backgroundImage stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0];
             
             _backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
@@ -339,13 +339,13 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             _button = [UIButton buttonWithType:UIButtonTypeCustom];
             
             
-            UIImage *buttonBackgroundImage = [UIImage imageNamed:[current valueForKey:@"buttonBackgroundImageName"]];
+            UIImage *buttonBackgroundImage = [self bundledImageNamed:[current valueForKey:@"buttonBackgroundImageName"]];
             
             buttonBackgroundImage = [buttonBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
             
             if (!buttonBackgroundImage)
             {
-                buttonBackgroundImage = [UIImage imageNamed:[current valueForKey:@"NotificationButtonBackground"]];
+                buttonBackgroundImage = [self bundledImageNamed:[current valueForKey:@"NotificationButtonBackground"]];
                 buttonBackgroundImage = [buttonBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
             }
             
@@ -598,6 +598,13 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     return ! ([touch.view isKindOfClass:[UIControl class]]);
+}
+
+#pragma mark - Grab Image From Pod Bundle
+- (UIImage *)bundledImageNamed:(NSString*)name{
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSString *imagePath = [bundle pathForResource:name ofType:nil];
+    return [[UIImage alloc] initWithContentsOfFile:imagePath];
 }
 
 @end
