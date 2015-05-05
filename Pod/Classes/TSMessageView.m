@@ -272,7 +272,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                                                    alpha:1.0];
         
         
-        self.textSpaceLeft = 2 * padding;
+        self.textSpaceLeft = 17;
         if (image) self.textSpaceLeft += image.size.width + 2 * padding;
         
         // Set up title label
@@ -376,10 +376,14 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             
             self.button.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0);
             [self.button sizeToFit];
+            CGFloat buttonHeight = 31.0f;
+            if([current valueForKey:@"buttonHeight"]){
+                buttonHeight = [[current valueForKey:@"buttonHeight"] floatValue];
+            }
             self.button.frame = CGRectMake(screenWidth - padding - self.button.frame.size.width,
                                            0.0,
                                            self.button.frame.size.width,
-                                           31.0);
+                                           buttonHeight);
             
             [self addSubview:self.button];
             
@@ -439,6 +443,12 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             [self addGestureRecognizer:tapGesture];
         }
     }
+    
+    self.layer.masksToBounds = NO;
+    self.layer.shadowOffset = CGSizeMake(0, 1);
+    self.layer.shadowRadius = 2;
+    self.layer.shadowOpacity = 0.2;
+    
     return self;
 }
 
