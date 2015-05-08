@@ -428,8 +428,22 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     }
 
 
+    NSArray *titleViewsBounds = [self.viewController.navigationController.viewControllers valueForKeyPath:@"navigationItem.titleView.bounds"];
+    __block CGFloat maxTitleViewHeight = 0.0;
+    CGFloat differenceHeight = 0.0;
+    [titleViewsBounds enumerateObjectsUsingBlock:^(NSValue *boundsValue, NSUInteger idx, BOOL *stop) {
+        CGRect rect = [boundsValue isEqual:NSNull.null] ? CGRectZero : boundsValue.CGRectValue;
+        maxTitleViewHeight = CGRectGetHeight(rect) > maxTitleViewHeight ? CGRectGetHeight(rect) : maxTitleViewHeight;
+    }];
+    
+    if (maxTitleViewHeight > currentHeight)
+    {
+        differenceHeight = maxTitleViewHeight - currentHeight;
+        currentHeight += differenceHeight;
+    }
+
     CGRect backgroundFrame = CGRectMake(self.backgroundImageView.frame.origin.x,
-                                        self.backgroundImageView.frame.origin.y,
+                                        MIN(self.backgroundImageView.frame.origin.y, -differenceHeight),
                                         screenWidth,
                                         currentHeight);
 
