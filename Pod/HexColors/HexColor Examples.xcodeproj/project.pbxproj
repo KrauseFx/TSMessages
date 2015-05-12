@@ -1,0 +1,314 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8E2D283B174BEDA500B30576 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2D283A174BEDA500B30576 /* UIKit.framework */; };
+		8E2D283D174BEDA500B30576 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2D283C174BEDA500B30576 /* Foundation.framework */; };
+		8E2D283F174BEDA500B30576 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2D283E174BEDA500B30576 /* CoreGraphics.framework */; };
+		8E2D2845174BEDA500B30576 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E2D2843174BEDA500B30576 /* InfoPlist.strings */; };
+		8E2D2847174BEDA500B30576 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2D2846174BEDA500B30576 /* main.m */; };
+		8E2D284B174BEDA500B30576 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2D284A174BEDA500B30576 /* AppDelegate.m */; };
+		8E2D284D174BEDA500B30576 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E2D284C174BEDA500B30576 /* Default.png */; };
+		8E2D284F174BEDA500B30576 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E2D284E174BEDA500B30576 /* Default@2x.png */; };
+		8E2D2851174BEDA500B30576 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E2D2850174BEDA500B30576 /* Default-568h@2x.png */; };
+		8E2D285A174BEDEC00B30576 /* HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2D2859174BEDEC00B30576 /* HexColor.m */; };
+		8E2D285E174BEE1900B30576 /* HexColorExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2D285C174BEE1900B30576 /* HexColorExampleViewController.m */; };
+		8E2D285F174BEE1900B30576 /* HexColorExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E2D285D174BEE1900B30576 /* HexColorExampleViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8E2D2837174BEDA500B30576 /* HexColor Examples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HexColor Examples.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E2D283A174BEDA500B30576 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8E2D283C174BEDA500B30576 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8E2D283E174BEDA500B30576 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8E2D2842174BEDA500B30576 /* HexColor Examples-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HexColor Examples-Info.plist"; sourceTree = "<group>"; };
+		8E2D2844174BEDA500B30576 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8E2D2846174BEDA500B30576 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8E2D2848174BEDA500B30576 /* HexColor Examples-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HexColor Examples-Prefix.pch"; sourceTree = "<group>"; };
+		8E2D2849174BEDA500B30576 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8E2D284A174BEDA500B30576 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8E2D284C174BEDA500B30576 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		8E2D284E174BEDA500B30576 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		8E2D2850174BEDA500B30576 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		8E2D2858174BEDEC00B30576 /* HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexColor.h; sourceTree = "<group>"; };
+		8E2D2859174BEDEC00B30576 /* HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexColor.m; sourceTree = "<group>"; };
+		8E2D285B174BEE1900B30576 /* HexColorExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexColorExampleViewController.h; sourceTree = "<group>"; };
+		8E2D285C174BEE1900B30576 /* HexColorExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexColorExampleViewController.m; sourceTree = "<group>"; };
+		8E2D285D174BEE1900B30576 /* HexColorExampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HexColorExampleViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8E2D2834174BEDA500B30576 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E2D283B174BEDA500B30576 /* UIKit.framework in Frameworks */,
+				8E2D283D174BEDA500B30576 /* Foundation.framework in Frameworks */,
+				8E2D283F174BEDA500B30576 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8E2D282E174BEDA500B30576 = {
+			isa = PBXGroup;
+			children = (
+				8E2D2857174BEDEC00B30576 /* Classes */,
+				8E2D2840174BEDA500B30576 /* HexColor Examples */,
+				8E2D2839174BEDA500B30576 /* Frameworks */,
+				8E2D2838174BEDA500B30576 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8E2D2838174BEDA500B30576 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E2D2837174BEDA500B30576 /* HexColor Examples.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8E2D2839174BEDA500B30576 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E2D283A174BEDA500B30576 /* UIKit.framework */,
+				8E2D283C174BEDA500B30576 /* Foundation.framework */,
+				8E2D283E174BEDA500B30576 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8E2D2840174BEDA500B30576 /* HexColor Examples */ = {
+			isa = PBXGroup;
+			children = (
+				8E2D2849174BEDA500B30576 /* AppDelegate.h */,
+				8E2D284A174BEDA500B30576 /* AppDelegate.m */,
+				8E2D2841174BEDA500B30576 /* Supporting Files */,
+				8E2D285B174BEE1900B30576 /* HexColorExampleViewController.h */,
+				8E2D285C174BEE1900B30576 /* HexColorExampleViewController.m */,
+				8E2D285D174BEE1900B30576 /* HexColorExampleViewController.xib */,
+			);
+			path = "HexColor Examples";
+			sourceTree = "<group>";
+		};
+		8E2D2841174BEDA500B30576 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8E2D2842174BEDA500B30576 /* HexColor Examples-Info.plist */,
+				8E2D2843174BEDA500B30576 /* InfoPlist.strings */,
+				8E2D2846174BEDA500B30576 /* main.m */,
+				8E2D2848174BEDA500B30576 /* HexColor Examples-Prefix.pch */,
+				8E2D284C174BEDA500B30576 /* Default.png */,
+				8E2D284E174BEDA500B30576 /* Default@2x.png */,
+				8E2D2850174BEDA500B30576 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8E2D2857174BEDEC00B30576 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8E2D2858174BEDEC00B30576 /* HexColor.h */,
+				8E2D2859174BEDEC00B30576 /* HexColor.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8E2D2836174BEDA500B30576 /* HexColor Examples */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E2D2854174BEDA500B30576 /* Build configuration list for PBXNativeTarget "HexColor Examples" */;
+			buildPhases = (
+				8E2D2833174BEDA500B30576 /* Sources */,
+				8E2D2834174BEDA500B30576 /* Frameworks */,
+				8E2D2835174BEDA500B30576 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HexColor Examples";
+			productName = "HexColor Examples";
+			productReference = 8E2D2837174BEDA500B30576 /* HexColor Examples.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8E2D282F174BEDA500B30576 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Marius Landwehr";
+			};
+			buildConfigurationList = 8E2D2832174BEDA500B30576 /* Build configuration list for PBXProject "HexColor Examples" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8E2D282E174BEDA500B30576;
+			productRefGroup = 8E2D2838174BEDA500B30576 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8E2D2836174BEDA500B30576 /* HexColor Examples */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8E2D2835174BEDA500B30576 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E2D2845174BEDA500B30576 /* InfoPlist.strings in Resources */,
+				8E2D284D174BEDA500B30576 /* Default.png in Resources */,
+				8E2D284F174BEDA500B30576 /* Default@2x.png in Resources */,
+				8E2D2851174BEDA500B30576 /* Default-568h@2x.png in Resources */,
+				8E2D285F174BEE1900B30576 /* HexColorExampleViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8E2D2833174BEDA500B30576 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E2D2847174BEDA500B30576 /* main.m in Sources */,
+				8E2D284B174BEDA500B30576 /* AppDelegate.m in Sources */,
+				8E2D285A174BEDEC00B30576 /* HexColor.m in Sources */,
+				8E2D285E174BEE1900B30576 /* HexColorExampleViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8E2D2843174BEDA500B30576 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E2D2844174BEDA500B30576 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8E2D2852174BEDA500B30576 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8E2D2853174BEDA500B30576 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8E2D2855174BEDA500B30576 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HexColor Examples/HexColor Examples-Prefix.pch";
+				INFOPLIST_FILE = "HexColor Examples/HexColor Examples-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8E2D2856174BEDA500B30576 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HexColor Examples/HexColor Examples-Prefix.pch";
+				INFOPLIST_FILE = "HexColor Examples/HexColor Examples-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8E2D2832174BEDA500B30576 /* Build configuration list for PBXProject "HexColor Examples" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E2D2852174BEDA500B30576 /* Debug */,
+				8E2D2853174BEDA500B30576 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E2D2854174BEDA500B30576 /* Build configuration list for PBXNativeTarget "HexColor Examples" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E2D2855174BEDA500B30576 /* Debug */,
+				8E2D2856174BEDA500B30576 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8E2D282F174BEDA500B30576 /* Project object */;
+}
