@@ -34,6 +34,8 @@
 /** Is the message currenlty fully displayed? Is set as soon as the message is really fully visible */
 @property (nonatomic, assign) BOOL messageIsFullyDisplayed;
 
+@property (nonatomic, assign) BOOL centerIconImage;
+
 /** Customize title font using Apperance */
 @property (nonatomic,strong) UIFont *titleFont UI_APPEARANCE_SELECTOR;
 @property (nonatomic,strong) UIColor *titleTextColor UI_APPEARANCE_SELECTOR;

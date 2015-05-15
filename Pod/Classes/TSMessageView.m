@@ -288,10 +288,17 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         UIColor *fontColor = [UIColor colorWithHexString:[current valueForKey:@"textColor"]
                                                    alpha:1.0];
         
-        
-        self.textSpaceLeft = 2 * padding;
-        if (image) self.textSpaceLeft += image.size.width + 2 * padding;
-        
+		if(self.centerIconImage)
+		{
+			self.textSpaceLeft = 2 * padding;
+			if (image) self.textSpaceLeft += image.size.width + 2 * padding;
+		}
+		else
+		{
+			self.textSpaceLeft = padding;
+			if (image) self.textSpaceLeft += image.size.width + padding;
+		}
+		
         // Set up title label
         _titleLabel = [[UILabel alloc] init];
         [self.titleLabel setText:title];
@@ -343,13 +350,24 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         if (image)
         {
             _iconImageView = [[UIImageView alloc] initWithImage:image];
-            self.iconImageView.frame = CGRectMake(padding * 2,
-                                                  padding,
+			if(self.centerIconImage)
+			{
+				self.iconImageView.frame = CGRectMake(padding * 2,
+												  padding,
                                                   image.size.width,
                                                   image.size.height);
+			}
+			else
+			{
+				self.iconImageView.frame = CGRectMake(20,
+													  18,
+													  image.size.width,
+													  image.size.height);
+			}
+			
             [self addSubview:self.iconImageView];
         }
-        
+		
         // Set up button (if set)
         if ([buttonTitle length])
         {
@@ -500,11 +518,18 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         else
         {
             // z-align
-            self.iconImageView.center = CGPointMake([self.iconImageView center].x,
+			if(self.centerIconImage)
+			{
+				self.iconImageView.center = CGPointMake([self.iconImageView center].x,
                                                     round(currentHeight / 2.0));
+			}
+			else
+			{
+				self.iconImageView.frame = CGRectMake(20, 18, self.frame.size.width, self.frame.size.height);
+			}	
         }
     }
-    
+	
     // z-align button
     self.button.center = CGPointMake([self.button center].x,
                                      round(currentHeight / 2.0));
