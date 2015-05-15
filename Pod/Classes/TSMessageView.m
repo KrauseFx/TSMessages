@@ -525,7 +525,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 			}
 			else
 			{
-				self.iconImageView.frame = CGRectMake(20, 18, self.frame.size.width, self.frame.size.height);
+				self.iconImageView.frame = CGRectMake(20, 18, self.iconImageView.frame.size.width, self.iconImageView.frame.size.height);
 			}	
         }
     }
