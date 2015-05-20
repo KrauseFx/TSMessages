@@ -43,8 +43,8 @@ static NSMutableDictionary *_notificationDesign;
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UIView *borderView;
-@property (nonatomic, strong) UIImageView *backgroundImageView;
-@property (nonatomic, strong) TSBlurView *backgroundBlurView; // Only used in iOS 7
+@property (nonatomic, strong) UIView *backgroundImageView;
+@property (nonatomic, strong) UIView *backgroundBlurView; // Only used in iOS 7
 
 @property (nonatomic, assign) CGFloat textSpaceLeft;
 @property (nonatomic, assign) CGFloat textSpaceRight;
@@ -262,9 +262,25 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         else
         {
             // On iOS 7 and above use a blur layer instead (not yet finished)
-            _backgroundBlurView = [[TSBlurView alloc] init];
+            if ([UIVisualEffectView class]) {
+
+                // iOS 8+
+                UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+                UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blur];
+
+                UIView *bgView = [[UIView alloc] init];
+                bgView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+                bgView.backgroundColor = [[UIColor colorWithHexString:current[@"backgroundColor"]] colorWithAlphaComponent:.5];
+                [blurView.contentView addSubview:bgView];
+
+                _backgroundBlurView = blurView;
+            } else {
+                // iOS 7
+                TSBlurView *customBlur = [[TSBlurView alloc] init];
+                customBlur.blurTintColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
+                _backgroundBlurView = customBlur;
+            }
             self.backgroundBlurView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
-            self.backgroundBlurView.blurTintColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
             [self addSubview:self.backgroundBlurView];
         }
         
