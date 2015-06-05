@@ -1,7 +1,7 @@
 TSMessages
 ==========
 
-This library provides an easy to use class to show little notification views on the top of the screen. (à la Tweetbot).
+This library provides an easy way to use class to show little notification views on the top of the screen. (like Tweetbot).
 
 [![Twitter: @KauseFx](https://img.shields.io/badge/contact-@KrauseFx-blue.svg?style=flat)](https://twitter.com/KrauseFx)
 [![Version](https://img.shields.io/cocoapods/v/TSMessages.svg?style=flat)](http://cocoadocs.org/docsets/TSMessages)
