@@ -52,7 +52,7 @@
 		3CB69A166844F97FFCF30BAC /* EXPMatchers+beCloseTo.h in Headers */ = {isa = PBXBuildFile; fileRef = B46741AFF5FC90C7D49CFF2D /* EXPMatchers+beCloseTo.h */; };
 		4327DF34A0912FB296700E83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EA839EC130F0B23BE011F2 /* Foundation.framework */; };
 		43F8FB1C53B0B92C859B94F7 /* EXPMatchers+beSubclassOf.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C6E0CBB3E4FF9382E9682CE /* EXPMatchers+beSubclassOf.h */; };
-		484E076DED6C8BEA05BA5A69 /* HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D78C39AA5A5FB800608CC0B /* HexColor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		484E076DED6C8BEA05BA5A69 /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D78C39AA5A5FB800608CC0B /* HexColors.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		48EC6D460D13275F1A9F715D /* EXPMatchers+notify.h in Headers */ = {isa = PBXBuildFile; fileRef = E2B636CB92A9D2E9B5D88CED /* EXPMatchers+notify.h */; };
 		4958EBC60C390283333FF45D /* Specta.h in Headers */ = {isa = PBXBuildFile; fileRef = F0D11F6ADCF93C2E6CD5EB55 /* Specta.h */; };
 		4C19885032A40B195C34B4AE /* UIImage+Compare.m in Sources */ = {isa = PBXBuildFile; fileRef = 04431932B32C8904D1236FCF /* UIImage+Compare.m */; };
@@ -73,7 +73,7 @@
 		65C94607103776E0CD512212 /* SpectaSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = AF7745851C131AF9F45CFBEA /* SpectaSupport.h */; };
 		67B0BED9E5CCF38556310864 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EA839EC130F0B23BE011F2 /* Foundation.framework */; };
 		6C8DE5E9C060801306398238 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = AF28AAE1057A4884CC1FE5AB /* UIImage+Diff.h */; };
-		6DB1434D686A855A20199895 /* HexColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B05D2A5E4AABA965A87687E /* HexColor.h */; };
+		6DB1434D686A855A20199895 /* HexColors.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B05D2A5E4AABA965A87687E /* HexColors.h */; };
 		7318342F60C9E41824293C63 /* EXPMatchers+beFalsy.h in Headers */ = {isa = PBXBuildFile; fileRef = 769F0F1DF43024295D00C314 /* EXPMatchers+beFalsy.h */; };
 		75C06A9D22CF8A57E78F88ED /* EXPMatchers+FBSnapshotTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D06664AF4B49452EDD451F2 /* EXPMatchers+FBSnapshotTest.h */; };
 		75D2961E6CA297C2354CCA53 /* TSMessageView.h in Headers */ = {isa = PBXBuildFile; fileRef = A2FCABAB97755E5E0837BC7E /* TSMessageView.h */; };
@@ -119,7 +119,7 @@
 		B8F70A0EE2996A81421A6712 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EA839EC130F0B23BE011F2 /* Foundation.framework */; };
 		B9EF70B71EBBF9EE55345C93 /* EXPMatchers+conformTo.h in Headers */ = {isa = PBXBuildFile; fileRef = 88C1D3D6F81CBCA2E087E20A /* EXPMatchers+conformTo.h */; };
 		BACB347359C5982AF0628596 /* EXPBlockDefinedMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 02446B0B812DDBABA5C1001E /* EXPBlockDefinedMatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		BC42860CAE73F2740EA3FDDF /* HexColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B05D2A5E4AABA965A87687E /* HexColor.h */; };
+		BC42860CAE73F2740EA3FDDF /* HexColors.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B05D2A5E4AABA965A87687E /* HexColors.h */; };
 		BD4923E5797BB417B254884A /* EXPUnsupportedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C60CFF5501D7865A31DBEB /* EXPUnsupportedObject.h */; };
 		BF72C6389C75AA977043052C /* EXPMatchers+raiseWithReason.h in Headers */ = {isa = PBXBuildFile; fileRef = C01A2C0BFF99E3A7D98AEE30 /* EXPMatchers+raiseWithReason.h */; };
 		C2B726A135275EFB92958E97 /* Pods-Tests-HexColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E1FCB3A9D70975F7D8EC7585 /* Pods-Tests-HexColors-dummy.m */; };
@@ -152,7 +152,7 @@
 		F0857D43ADC3B4065B16AD6A /* Pods-TSMessages-TSMessages-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C21925ECB8E396B6E66C4894 /* Pods-TSMessages-TSMessages-dummy.m */; };
 		F15F3F4CAC17D319E69CAB7D /* Pods-Tests-FBSnapshotTestCase-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB0569C802B81C5EAFBC30B /* Pods-Tests-FBSnapshotTestCase-dummy.m */; };
 		F6EECDE6CC8337D655717CCC /* SPTSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = F96C91052677F3FC6D4E5B55 /* SPTSpec.h */; };
-		F892FEC54EA99C48B3CC3F67 /* HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D78C39AA5A5FB800608CC0B /* HexColor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F892FEC54EA99C48B3CC3F67 /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D78C39AA5A5FB800608CC0B /* HexColors.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F96724ABD3DB2101B041CA6E /* EXPMatchers+endWith.h in Headers */ = {isa = PBXBuildFile; fileRef = B6D8D131783FF71F17FE8D3F /* EXPMatchers+endWith.h */; };
 		FB99D9766FA2CBC58F433BA2 /* SPTReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = BC145F933EDBF961BBE0D8B4 /* SPTReporter.h */; };
 		FE8A5E2EFECF4B5343A9C71B /* TSBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = A96C3891F8A5166605629D82 /* TSBlurView.h */; };
@@ -307,7 +307,7 @@
 		45A636523E6F08453E9BF8BB /* SPTExampleGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SPTExampleGroup.m; path = src/SPTExampleGroup.m; sourceTree = "<group>"; };
 		47D32297B67CCEA5D3ABB589 /* EXPMatchers+conformTo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+conformTo.m"; path = "src/matchers/EXPMatchers+conformTo.m"; sourceTree = "<group>"; };
 		4AB9ED101CC5E3D3D21CBE1C /* EXPMatchers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPMatchers.h; path = src/matchers/EXPMatchers.h; sourceTree = "<group>"; };
-		4B05D2A5E4AABA965A87687E /* HexColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColor.h; path = Classes/HexColor.h; sourceTree = "<group>"; };
+		4B05D2A5E4AABA965A87687E /* HexColors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColors.h; path = Classes/HexColors.h; sourceTree = "<group>"; };
 		4D461E9931C4E5AE22C198C9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		4DB08579B40779E3E85D788F /* EXPMatchers+beCloseTo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beCloseTo.m"; path = "src/matchers/EXPMatchers+beCloseTo.m"; sourceTree = "<group>"; };
 		505502B6E4DFE7D58A49BD61 /* EXPMatchers+endWith.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+endWith.m"; path = "src/matchers/EXPMatchers+endWith.m"; sourceTree = "<group>"; };
@@ -340,7 +340,7 @@
 		797A42D12BC5F4BAE08B05FD /* Pods-TSMessages-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TSMessages-environment.h"; sourceTree = "<group>"; };
 		7A9DEF7F757077111FDB19DF /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
 		7B659C0F3A26AA2235161EFE /* Pods-TSMessages-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TSMessages-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7D78C39AA5A5FB800608CC0B /* HexColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColor.m; path = Classes/HexColor.m; sourceTree = "<group>"; };
+		7D78C39AA5A5FB800608CC0B /* HexColors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColors.m; path = Classes/HexColors.m; sourceTree = "<group>"; };
 		7EB94C5A3D314D555511937E /* EXPDoubleTuple.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EXPDoubleTuple.m; path = src/EXPDoubleTuple.m; sourceTree = "<group>"; };
 		7EE10DD48934CA09E4E9446D /* EXPDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPDefines.h; path = src/EXPDefines.h; sourceTree = "<group>"; };
 		7F2E9CD019186A09AF337471 /* libPods-Tests-FBSnapshotTestCase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests-FBSnapshotTestCase.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -605,8 +605,8 @@
 		6285BE67C1F20E08586083E2 /* HexColors */ = {
 			isa = PBXGroup;
 			children = (
-				4B05D2A5E4AABA965A87687E /* HexColor.h */,
-				7D78C39AA5A5FB800608CC0B /* HexColor.m */,
+				4B05D2A5E4AABA965A87687E /* HexColors.h */,
+				7D78C39AA5A5FB800608CC0B /* HexColors.m */,
 				3BDBA4DE0385FFA8458E9880 /* Support Files */,
 			);
 			path = HexColors;
@@ -1012,7 +1012,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DB1434D686A855A20199895 /* HexColor.h in Headers */,
+				6DB1434D686A855A20199895 /* HexColors.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,7 +1059,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC42860CAE73F2740EA3FDDF /* HexColor.h in Headers */,
+				BC42860CAE73F2740EA3FDDF /* HexColors.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1354,7 +1354,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				484E076DED6C8BEA05BA5A69 /* HexColor.m in Sources */,
+				484E076DED6C8BEA05BA5A69 /* HexColors.m in Sources */,
 				C2B726A135275EFB92958E97 /* Pods-Tests-HexColors-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1405,7 +1405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F892FEC54EA99C48B3CC3F67 /* HexColor.m in Sources */,
+				F892FEC54EA99C48B3CC3F67 /* HexColors.m in Sources */,
 				5C7949E1EFCFD061B2534CAC /* Pods-TSMessages-HexColors-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
