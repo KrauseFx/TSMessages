@@ -182,7 +182,14 @@ __weak static UIViewController *_defaultViewController;
         {
             [currentNavigationController.view insertSubview:currentView
                                                belowSubview:[currentNavigationController navigationBar]];
-            verticalOffset = [currentNavigationController navigationBar].bounds.size.height;
+                                               
+            NSArray *titleViewsBounds = [currentView.viewController.navigationController.viewControllers valueForKeyPath:@"navigationItem.titleView.bounds"];
+            __block CGFloat maxTitleViewHeight = 0.0;
+            [titleViewsBounds enumerateObjectsUsingBlock:^(NSValue *boundsValue, NSUInteger idx, BOOL *stop) {
+                CGRect rect = [boundsValue isEqual:NSNull.null] ? CGRectZero : boundsValue.CGRectValue;
+                maxTitleViewHeight = CGRectGetHeight(rect) > maxTitleViewHeight ? CGRectGetHeight(rect) : maxTitleViewHeight;
+            }];
+            verticalOffset = MAX([currentNavigationController navigationBar].bounds.size.height, maxTitleViewHeight);
             if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
                 addStatusBarHeightToVerticalOffset();
             }
