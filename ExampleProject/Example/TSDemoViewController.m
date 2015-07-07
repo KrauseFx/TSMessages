@@ -65,7 +65,8 @@
                                                                      type:TSMessageNotificationTypeSuccess];
                                  }
                                      atPosition:TSMessageNotificationPositionTop
-                           canBeDismissedByUser:YES];
+                           canBeDismissedByUser:YES
+                                      textAlign:NSTextAlignmentCenter];
 }
 
 - (IBAction)didTapToggleNavigationBar:(id)sender {
@@ -92,7 +93,8 @@
                                     buttonTitle:nil
                                  buttonCallback:nil
                                      atPosition:TSMessageNotificationPositionTop
-                           canBeDismissedByUser:YES];
+                           canBeDismissedByUser:YES
+                                      textAlign:NSTextAlignmentCenter];
 }
 
 - (IBAction)didTapDismissCurrentMessage:(id)sender
@@ -112,7 +114,8 @@
                                     buttonTitle:nil
                                  buttonCallback:nil
                                      atPosition:TSMessageNotificationPositionTop
-                            canBeDismissedByUser:NO];
+                            canBeDismissedByUser:NO
+                                      textAlign:NSTextAlignmentCenter];
 }
 
 - (IBAction)didTapLong:(id)sender
@@ -127,7 +130,8 @@
                                     buttonTitle:nil
                                  buttonCallback:nil
                                      atPosition:TSMessageNotificationPositionTop
-                           canBeDismissedByUser:YES];
+                           canBeDismissedByUser:YES
+                                      textAlign:NSTextAlignmentCenter];
 }
 
 - (IBAction)didTapBottom:(id)sender
@@ -142,7 +146,8 @@
                                     buttonTitle:nil
                                  buttonCallback:nil
                                      atPosition:TSMessageNotificationPositionBottom
-                            canBeDismissedByUser:YES];
+                            canBeDismissedByUser:YES
+                                      textAlign:NSTextAlignmentCenter];
 }
 
 - (IBAction)didTapText:(id)sender
