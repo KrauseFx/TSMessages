@@ -212,7 +212,7 @@ __weak static UIViewController *_defaultViewController;
         
         BOOL isViewIsUnderStatusBar;
         if ([[[currentNavigationController childViewControllers] firstObject] respondsToSelector:@selector(edgesForExtendedLayout)]) {
-            isViewIsUnderStatusBar = [[currentNavigationController childViewControllers] firstObject].edgesForExtendedLayout == UIRectEdgeAll;
+            isViewIsUnderStatusBar = ((UIViewController*)[[currentNavigationController childViewControllers] firstObject]).edgesForExtendedLayout == UIRectEdgeAll;
         }
         
         if (!isViewIsUnderStatusBar && currentNavigationController.parentViewController == nil) {
