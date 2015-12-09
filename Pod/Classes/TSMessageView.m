@@ -246,10 +246,6 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         {
             image = [self bundledImageNamed:[current valueForKey:@"imageName"]];
         }
-        if (!image && [[current valueForKey:@"imageName"] length])
-        {
-            image = [UIImage imageNamed:[current valueForKey:@"imageName"]];
-        }
 
         if (![TSMessage iOS7StyleEnabled])
         {
@@ -329,6 +325,11 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         if (image)
         {
             _iconImageView = [[UIImageView alloc] initWithImage:image];
+            
+            UIColor* imageTintColor = [UIColor colorWithHexString:[current valueForKey:@"imageTintColor"]];
+            if(imageTintColor){
+                self.iconImageView.tintColor = imageTintColor;
+            }
             self.iconImageView.frame = CGRectMake(padding * 2,
                                                   padding,
                                                   image.size.width,
@@ -340,6 +341,11 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         if (buttonCallback)
         {
             _button = [UIButton buttonWithType:UIButtonTypeCustom];
+
+            UIColor* buttonTintColor = [UIColor colorWithHexString:[current valueForKey:@"buttonTintColor"]];
+            if(buttonTintColor){
+                self.button.tintColor = buttonTintColor;
+            }
 
             UIImage *buttonBackgroundImage = [self bundledImageNamed:[current valueForKey:@"buttonBackgroundImageName"]];
 
