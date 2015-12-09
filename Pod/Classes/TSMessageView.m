@@ -337,10 +337,9 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         }
 
         // Set up button (if set)
-        if ([buttonTitle length])
+        if (buttonCallback)
         {
             _button = [UIButton buttonWithType:UIButtonTypeCustom];
-
 
             UIImage *buttonBackgroundImage = [self bundledImageNamed:[current valueForKey:@"buttonBackgroundImageName"]];
 
@@ -353,6 +352,10 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             }
 
             [self.button setBackgroundImage:buttonBackgroundImage forState:UIControlStateNormal];
+            
+            UIImage *buttonImage = [self bundledImageNamed:[current valueForKey:@"buttonImageName"]];
+            [self.button setImage:buttonImage forState:UIControlStateNormal];
+
             [self.button setTitle:self.buttonTitle forState:UIControlStateNormal];
 
             UIColor *buttonTitleShadowColor = [UIColor colorWithHexString:[current valueForKey:@"buttonTitleShadowColor"]];
