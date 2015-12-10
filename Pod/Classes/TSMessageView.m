@@ -497,6 +497,13 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             self.iconImageView.center = CGPointMake([self.iconImageView center].x,
                                                     round(currentHeight / 2.0));
         }
+        
+        if (![self.subtitle length]){
+            self.titleLabel.center = CGPointMake([self.titleLabel center].x,
+                                                 round(currentHeight / 2.0));
+
+        }
+
     }
 
     // z-align button
