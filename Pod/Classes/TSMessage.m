@@ -397,6 +397,10 @@ __weak static UIViewController *_defaultViewController;
                        {
                            [[TSMessage sharedMessage] fadeOutNotification:currentMessage animationFinishedBlock:completion];
                        }
+                       else if(completion)
+                       {
+                           completion();
+                       }
                    });
     return YES;
 }
@@ -421,6 +425,10 @@ __weak static UIViewController *_defaultViewController;
                        if (currentMessage.messageIsFullyDisplayed)
                        {
                            [[TSMessage sharedMessage] fadeOutNotification:currentMessage animationFinishedBlock:completion];
+                       }
+                       else if(completion)
+                       {
+                           completion();
                        }
                    });
     return YES;
