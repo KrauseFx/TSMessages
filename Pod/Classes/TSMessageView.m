@@ -253,9 +253,24 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             image = [self bundledImageNamed:[current valueForKey:@"imageName"]];
         }
 
-        if (![TSMessage iOS7StyleEnabled])
+        
+        NSNumber* blurValue = [current valueForKey:@"blurBackground"];
+        BOOL useBlur;
+        if(blurValue){
+            useBlur = blurValue.boolValue && [TSMessage iOS7StyleEnabled];
+        }else{
+            useBlur = [TSMessage iOS7StyleEnabled];
+        }
+
+        UIColor* bgColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
+        
+        if (!useBlur)
         {
-            self.alpha = 0.0;
+            if(bgColor){
+                self.backgroundColor = bgColor;
+            }else{
+                self.backgroundColor = [UIColor clearColor];
+            }
 
             // add background image here
             UIImage *backgroundImage = [self bundledImageNamed:[current valueForKey:@"backgroundImageName"]];
@@ -270,7 +285,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             // On iOS 7 and above use a blur layer instead (not yet finished)
             _backgroundBlurView = [[TSBlurView alloc] init];
             self.backgroundBlurView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
-            self.backgroundBlurView.blurTintColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
+            self.backgroundBlurView.blurTintColor = bgColor;
             [self addSubview:self.backgroundBlurView];
         }
 
