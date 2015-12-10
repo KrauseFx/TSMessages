@@ -399,14 +399,7 @@ __weak static UIViewController *_defaultViewController;
                    {
                        if ([[TSMessage sharedMessage].messages count] == 0) return;
                        TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
-                       if (currentMessage.messageIsFullyDisplayed)
-                       {
-                           [[TSMessage sharedMessage] fadeOutNotification:currentMessage animationFinishedBlock:completion];
-                       }
-                       else if(completion)
-                       {
-                           completion();
-                       }
+                       [[TSMessage sharedMessage] fadeOutNotification:currentMessage animationFinishedBlock:completion];
                    });
     return YES;
 }
@@ -433,15 +426,7 @@ __weak static UIViewController *_defaultViewController;
                        TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
                        [[TSMessage sharedMessage].messages removeAllObjects];
                        [[TSMessage sharedMessage].messages addObject:currentMessage];
-                       
-                       if (currentMessage.messageIsFullyDisplayed)
-                       {
-                           [[TSMessage sharedMessage] fadeOutNotification:currentMessage animationFinishedBlock:completion];
-                       }
-                       else if(completion)
-                       {
-                           completion();
-                       }
+                       [[TSMessage sharedMessage] fadeOutNotification:currentMessage animationFinishedBlock:completion];
                    });
     return YES;
    
