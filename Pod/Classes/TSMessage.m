@@ -230,9 +230,15 @@ __weak static UIViewController *_defaultViewController;
             }
         }
     }
+    if(currentView.viewController){
+        [currentView.viewController.view addSubview:currentView];
+        if ([TSMessage iOS7StyleEnabled]) {
+            addStatusBarHeightToVerticalOffset();
+        }
+    }
     else
     {
-        [currentView.viewController.view addSubview:currentView];
+        [[[self class] appWindow] addSubview:currentView];
         if ([TSMessage iOS7StyleEnabled]) {
             addStatusBarHeightToVerticalOffset();
         }
@@ -434,6 +440,11 @@ __weak static UIViewController *_defaultViewController;
         defaultViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     }
     return defaultViewController;
+}
+
++ (UIWindow *)appWindow
+{
+    return [UIApplication sharedApplication].keyWindow;
 }
 
 + (BOOL)iOS7StyleEnabled

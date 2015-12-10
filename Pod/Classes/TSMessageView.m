@@ -186,6 +186,14 @@ static NSMutableDictionary *_notificationDesign;
     return TSMessageViewMinimumPadding;
 }
 
+- (UIView*)containingView{
+    if(self.viewController){
+        return self.viewController.view;
+    }else{
+        return [UIApplication sharedApplication].keyWindow;
+    }
+}
+
 - (id)initWithTitle:(NSString *)title
            subtitle:(NSString *)subtitle
               image:(UIImage *)image
@@ -211,7 +219,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         self.callback = callback;
         self.buttonCallback = buttonCallback;
 
-        CGFloat screenWidth = self.viewController.view.bounds.size.width;
+        CGFloat screenWidth = [self containingView].bounds.size.width;
         CGFloat verticalPadding = [self verticalPadding];
         CGFloat horizontalPadding = [self horizonalPadding];
 
@@ -438,7 +446,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 
         if (self.messagePosition == TSMessageNotificationPositionBottom)
         {
-            topPosition = self.viewController.view.bounds.size.height;
+            topPosition = [self containingView].bounds.size.height;
         }
 
         self.frame = CGRectMake(0.0, topPosition, screenWidth, actualHeight);
@@ -479,7 +487,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 - (CGFloat)updateHeightOfMessageView
 {
     CGFloat currentHeight;
-    CGFloat screenWidth = self.viewController.view.bounds.size.width;
+    CGFloat screenWidth = [self containingView].bounds.size.width;
     CGFloat verticalPadding = [self verticalPadding];
     CGFloat horizontalPadding = [self horizonalPadding];
 
