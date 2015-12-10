@@ -171,6 +171,10 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
  */
 + (BOOL)dismissActiveNotificationWithCompletion:(void (^)())completion;
 
++ (BOOL)dismissAllNotifications;
+
++ (BOOL)dismissAllNotificationsWithCompletion:(void (^)())completion;
+
 /** Use this method to set a default view controller to display the messages in */
 + (void)setDefaultViewController:(UIViewController *)defaultViewController;
 

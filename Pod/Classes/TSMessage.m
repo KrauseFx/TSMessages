@@ -401,6 +401,33 @@ __weak static UIViewController *_defaultViewController;
     return YES;
 }
 
++ (BOOL)dismissAllNotifications{
+    
+    return [self dismissAllNotificationsWithCompletion:NULL];
+}
+
++ (BOOL)dismissAllNotificationsWithCompletion:(void (^)())completion{
+    
+    if ([[TSMessage sharedMessage].messages count] == 0) return NO;
+
+    dispatch_async(dispatch_get_main_queue(), ^
+                   {
+                       if ([[TSMessage sharedMessage].messages count] == 0) return;
+                       
+                       TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
+                       [[TSMessage sharedMessage].messages removeAllObjects];
+                       [[TSMessage sharedMessage].messages addObject:currentMessage];
+                       
+                       if (currentMessage.messageIsFullyDisplayed)
+                       {
+                           [[TSMessage sharedMessage] fadeOutNotification:currentMessage animationFinishedBlock:completion];
+                       }
+                   });
+    return YES;
+   
+}
+
+
 #pragma mark Customizing TSMessages
 
 + (void)setDefaultViewController:(UIViewController *)defaultViewController

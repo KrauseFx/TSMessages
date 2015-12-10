@@ -47,7 +47,7 @@
 - (IBAction)didTapSuccess:(id)sender
 {
     [TSMessage showNotificationWithTitle:NSLocalizedString(@"Success", nil)
-                                subtitle:NSLocalizedString(@"Some task was successfully completed!", nil)
+                                subtitle:nil
                                     type:TSMessageNotificationTypeSuccess];
 }
 
@@ -108,7 +108,7 @@
 
 - (IBAction)didTapEndless:(id)sender
 {
-    [TSMessage showNotificationInViewController:self
+    [TSMessage showNotificationInViewController:nil
                                           title:NSLocalizedString(@"Endless", nil)
                                        subtitle:NSLocalizedString(@"This message can not be dismissed and will not be hidden automatically. Tap the 'Dismiss' button to dismiss the currently shown message", nil)
                                           image:nil
