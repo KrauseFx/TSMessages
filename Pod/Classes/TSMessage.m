@@ -387,7 +387,13 @@ __weak static UIViewController *_defaultViewController;
 
 + (BOOL)dismissActiveNotificationWithCompletion:(void (^)())completion
 {
-    if ([[TSMessage sharedMessage].messages count] == 0) return NO;
+    if ([[TSMessage sharedMessage].messages count] == 0){
+        if(completion)
+        {
+            completion();
+        }
+        return NO;
+    };
     
     dispatch_async(dispatch_get_main_queue(), ^
                    {
@@ -412,7 +418,13 @@ __weak static UIViewController *_defaultViewController;
 
 + (BOOL)dismissAllNotificationsWithCompletion:(void (^)())completion{
     
-    if ([[TSMessage sharedMessage].messages count] == 0) return NO;
+    if ([[TSMessage sharedMessage].messages count] == 0){
+        if(completion)
+        {
+            completion();
+        }
+        return NO;
+    };
 
     dispatch_async(dispatch_get_main_queue(), ^
                    {
