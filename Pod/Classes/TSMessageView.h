@@ -93,7 +93,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled;
 @property (nonatomic, strong, readonly) UIButton *button;
 @property (nonatomic, strong, readonly) UIView *borderView;
 @property (nonatomic, strong, readonly) UIImageView *backgroundImageView;
-@property (nonatomic, strong, readonly) TSBlurView *backgroundBlurView; // Only used in iOS 7
+@property (nonatomic, strong, readonly) UIView *backgroundBlurView; // Only used in iOS 7
 
 @end
 

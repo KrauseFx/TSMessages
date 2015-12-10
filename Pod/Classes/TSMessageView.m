@@ -44,7 +44,7 @@ static NSMutableDictionary *_notificationDesign;
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UIView *borderView;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
-@property (nonatomic, strong) TSBlurView *backgroundBlurView; // Only used in iOS 7
+@property (nonatomic, strong) UIView *backgroundView; // Only used in iOS 7
 
 @property (nonatomic, assign) CGFloat textSpaceLeft;
 @property (nonatomic, assign) CGFloat textSpaceRight;
@@ -253,24 +253,9 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             image = [self bundledImageNamed:[current valueForKey:@"imageName"]];
         }
 
-        
-        NSNumber* blurValue = [current valueForKey:@"blurBackground"];
-        BOOL useBlur;
-        if(blurValue){
-            useBlur = blurValue.boolValue && [TSMessage iOS7StyleEnabled];
-        }else{
-            useBlur = [TSMessage iOS7StyleEnabled];
-        }
-
-        UIColor* bgColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
-        
-        if (!useBlur)
+        if (![TSMessage iOS7StyleEnabled])
         {
-            if(bgColor){
-                self.backgroundColor = bgColor;
-            }else{
-                self.backgroundColor = [UIColor clearColor];
-            }
+            self.alpha = 0.0;
 
             // add background image here
             UIImage *backgroundImage = [self bundledImageNamed:[current valueForKey:@"backgroundImageName"]];
@@ -282,11 +267,27 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         }
         else
         {
-            // On iOS 7 and above use a blur layer instead (not yet finished)
-            _backgroundBlurView = [[TSBlurView alloc] init];
-            self.backgroundBlurView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
-            self.backgroundBlurView.blurTintColor = bgColor;
-            [self addSubview:self.backgroundBlurView];
+            NSNumber* blurValue = [current valueForKey:@"blurBackground"];
+            BOOL useBlur = YES;
+            if(blurValue){
+                useBlur = blurValue.boolValue;
+            }
+            
+            UIColor* bgColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
+
+            if(useBlur){
+                TSBlurView* blur = [[TSBlurView alloc] init];
+                blur.blurTintColor = bgColor;
+                _backgroundView = blur;
+
+            }else{
+                _backgroundView = [[UIView alloc] init];
+                _backgroundView.backgroundColor = bgColor;
+
+            }
+            
+            self.backgroundView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+            [self addSubview:self.backgroundView];
         }
 
         UIColor *fontColor = [UIColor colorWithHexString:[current valueForKey:@"textColor"]];
@@ -585,7 +586,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     }
 
     self.backgroundImageView.frame = backgroundFrame;
-    self.backgroundBlurView.frame = backgroundFrame;
+    self.backgroundView.frame = backgroundFrame;
 
     return currentHeight;
 }
