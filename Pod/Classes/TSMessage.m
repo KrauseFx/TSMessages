@@ -351,6 +351,8 @@ __weak static UIViewController *_defaultViewController;
         fadeOutToPoint = CGPointMake(currentView.center.x,
                                      currentView.viewController.view.bounds.size.height + CGRectGetHeight(currentView.frame)/2.f);
     }
+
+    [self.messages removeObject:currentView];
     
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
      {
@@ -361,11 +363,6 @@ __weak static UIViewController *_defaultViewController;
      } completion:^(BOOL finished)
      {
          [currentView removeFromSuperview];
-         
-         if ([self.messages count] > 0)
-         {
-             [self.messages removeObjectAtIndex:0];
-         }
          
          notificationActive = NO;
          
