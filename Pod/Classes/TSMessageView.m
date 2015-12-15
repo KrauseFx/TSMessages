@@ -459,12 +459,14 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                   forControlEvents:UIControlEventTouchUpInside];
 
             self.button.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0);
-
             [self addSubview:self.button];
+            
+            [self.button sizeToFit];
             [self.button mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.leading.equalTo(self.titleLabel.mas_trailing).offset(horizontalPadding);
                 make.trailing.equalTo(self.mas_trailing).offset(-horizontalPadding);
                 make.centerY.equalTo(self);
+                make.width.equalTo(@(self.button.frame.size.width));
             }];
         }
 
