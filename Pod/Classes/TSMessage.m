@@ -8,6 +8,7 @@
 
 #import "TSMessage.h"
 #import "TSMessageView.h"
+#import <Masonry/Masonry.h>
 
 #define kTSMessageDisplayTime 1.5
 #define kTSMessageExtraDisplayTimePerPixel 0.04
@@ -200,6 +201,8 @@ __weak static UIViewController *_defaultViewController;
         verticalOffset += MIN(statusBarSize.width, statusBarSize.height);
     };
     
+    BOOL isViewIsUnderStatusBar = NO;
+
     if ([currentView.viewController isKindOfClass:[UINavigationController class]] || [currentView.viewController.parentViewController isKindOfClass:[UINavigationController class]])
     {
         UINavigationController *currentNavigationController;
@@ -209,7 +212,7 @@ __weak static UIViewController *_defaultViewController;
         else
             currentNavigationController = (UINavigationController *)currentView.viewController.parentViewController;
         
-        BOOL isViewIsUnderStatusBar = [[[currentNavigationController childViewControllers] firstObject] wantsFullScreenLayout];
+        isViewIsUnderStatusBar = [[[currentNavigationController childViewControllers] firstObject] wantsFullScreenLayout];
         if (!isViewIsUnderStatusBar && currentNavigationController.parentViewController == nil) {
             isViewIsUnderStatusBar = ![TSMessage isNavigationBarInNavigationControllerHidden:currentNavigationController]; // strange but true
         }
@@ -218,64 +221,54 @@ __weak static UIViewController *_defaultViewController;
             [currentNavigationController.view insertSubview:currentView
                                                belowSubview:[currentNavigationController navigationBar]];
             verticalOffset = [currentNavigationController navigationBar].bounds.size.height;
-            if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
-                addStatusBarHeightToVerticalOffset();
-            }
         }
         else
         {
             [currentView.viewController.view addSubview:currentView];
-            if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
-                addStatusBarHeightToVerticalOffset();
-            }
         }
     }
-    if(currentView.viewController){
+    if(currentView.superview == nil && currentView.viewController){
         [currentView.viewController.view addSubview:currentView];
-        if ([TSMessage iOS7StyleEnabled]) {
-            addStatusBarHeightToVerticalOffset();
-        }
     }
-    else
-    {
+    
+    if(currentView.superview == nil){
         [[[self class] appWindow] addSubview:currentView];
-        if ([TSMessage iOS7StyleEnabled]) {
-            addStatusBarHeightToVerticalOffset();
-        }
     }
-    
-    CGPoint toPoint;
-    if (currentView.messagePosition != TSMessageNotificationPositionBottom)
-    {
-        CGFloat navigationbarBottomOfViewController = 0;
-        
-        if (self.delegate && [self.delegate respondsToSelector:@selector(messageLocationOfMessageView:)])
-        {
-            navigationbarBottomOfViewController = [self.delegate messageLocationOfMessageView:currentView];
+
+    [currentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.leading.and.trailing.equalTo(currentView.superview);
+        if (currentView.messagePosition == TSMessageNotificationPositionBottom){
+            make.top.equalTo(currentView.superview.mas_bottom);
+        }else{
+            make.bottom.equalTo(currentView.superview.mas_top);
         }
-        
-        toPoint = CGPointMake(currentView.center.x,
-                              navigationbarBottomOfViewController + verticalOffset + CGRectGetHeight(currentView.frame) / 2.0);
+    }];
+    [currentView layoutIfNeeded];
+
+    if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
+        addStatusBarHeightToVerticalOffset();
     }
-    else
-    {
-        CGFloat y = currentView.viewController.view.bounds.size.height - CGRectGetHeight(currentView.frame) / 2.0;
-        if (!currentView.viewController.navigationController.isToolbarHidden)
-        {
-            y -= CGRectGetHeight(currentView.viewController.navigationController.toolbar.bounds);
-        }
-        toPoint = CGPointMake(currentView.center.x, y);
-    }
-    
+
     if (self.delegate && [self.delegate respondsToSelector:@selector(customizeMessageView:)])
     {
         [self.delegate customizeMessageView:currentView];
     }
     
-    
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(messageLocationOfMessageView:)])
+    {
+        verticalOffset += [self.delegate messageLocationOfMessageView:currentView];
+    }
+
     dispatch_block_t animationBlock = ^{
-        currentView.center = toPoint;
+        [currentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.and.trailing.equalTo(currentView.superview);
+            if (currentView.messagePosition == TSMessageNotificationPositionBottom){
+                make.bottom.equalTo(currentView.superview.mas_bottom);
+            }else{
+                make.top.equalTo(currentView.superview.mas_top).with.offset(verticalOffset);
+            }
+        }];
+        [currentView layoutIfNeeded];
         if (![TSMessage iOS7StyleEnabled]) {
             currentView.alpha = TSMessageViewAlpha;
         }
@@ -341,22 +334,20 @@ __weak static UIViewController *_defaultViewController;
                                              selector:@selector(fadeOutNotification:)
                                                object:currentView];
     
-    CGPoint fadeOutToPoint;
-    if (currentView.messagePosition != TSMessageNotificationPositionBottom)
-    {
-        fadeOutToPoint = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame)/2.f);
-    }
-    else
-    {
-        fadeOutToPoint = CGPointMake(currentView.center.x,
-                                     currentView.viewController.view.bounds.size.height + CGRectGetHeight(currentView.frame)/2.f);
-    }
-
     [self.messages removeObject:currentView];
     
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
      {
-         currentView.center = fadeOutToPoint;
+         [currentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+             make.leading.and.trailing.equalTo(currentView.superview);
+             if (currentView.messagePosition == TSMessageNotificationPositionBottom){
+                 make.top.equalTo(currentView.superview.mas_bottom);
+             }else{
+                 make.bottom.equalTo(currentView.superview.mas_top);
+             }
+         }];
+         [currentView layoutIfNeeded];
+         
          if (![TSMessage iOS7StyleEnabled]) {
              currentView.alpha = 0.f;
          }

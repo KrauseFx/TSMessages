@@ -10,6 +10,7 @@
 #import "HexColors.h"
 #import "TSBlurView.h"
 #import "TSMessage.h"
+#import <Masonry/Masonry.h>
 
 #define TSMessageViewMinimumPadding 15.0
 
@@ -46,14 +47,8 @@ static NSMutableDictionary *_notificationDesign;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 @property (nonatomic, strong) UIView *backgroundView; // Only used in iOS 7
 
-@property (nonatomic, assign) CGFloat textSpaceLeft;
-@property (nonatomic, assign) CGFloat textSpaceRight;
-
 @property (copy) void (^callback)();
 @property (copy) void (^buttonCallback)();
-
-- (CGFloat)updateHeightOfMessageView;
-- (void)layoutSubviews;
 
 @end
 
@@ -218,8 +213,8 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         _messagePosition = position;
         self.callback = callback;
         self.buttonCallback = buttonCallback;
+        self.translatesAutoresizingMaskIntoConstraints = NO;
 
-        CGFloat screenWidth = [self containingView].bounds.size.width;
         CGFloat verticalPadding = [self verticalPadding];
         CGFloat horizontalPadding = [self horizonalPadding];
 
@@ -270,8 +265,19 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             backgroundImage = [backgroundImage stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0];
 
             _backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
-            self.backgroundImageView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+            self.backgroundImageView.translatesAutoresizingMaskIntoConstraints = NO;
             [self addSubview:self.backgroundImageView];
+            [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+                if(self.messagePosition == TSMessageNotificationPositionBottom){
+                    make.leading.and.trailing.equalTo(self);
+                    make.top.equalTo(self.mas_top);
+                    make.bottom.equalTo(self).offset([self bottomOverlap]);
+                }else{
+                    make.leading.and.trailing.equalTo(self);
+                    make.top.equalTo(self).offset([self topOverlap]);
+                    make.bottom.equalTo(self.mas_bottom);
+                }
+            }];
         }
         else
         {
@@ -294,18 +300,46 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 
             }
             
-            self.backgroundView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+            self.backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
             [self addSubview:self.backgroundView];
+            [self.backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+                if(self.messagePosition == TSMessageNotificationPositionBottom){
+                    make.leading.and.trailing.equalTo(self);
+                    make.top.equalTo(self.mas_top);
+                    make.bottom.equalTo(self).offset([self bottomOverlap]);
+                }else{
+                    make.leading.and.trailing.equalTo(self);
+                    make.top.equalTo(self).offset([self topOverlap]);
+                    make.bottom.equalTo(self.mas_bottom);
+                }
+            }];
         }
 
         UIColor *fontColor = [UIColor colorWithHexString:[current valueForKey:@"textColor"]];
 
+        // Setup Image
+        if (image)
+        {
+            _iconImageView = [[UIImageView alloc] initWithImage:image];
+            self.iconImageView.translatesAutoresizingMaskIntoConstraints = NO;
+            
+            UIColor* imageTintColor = [UIColor colorWithHexString:[current valueForKey:@"imageTintColor"]];
+            if(imageTintColor){
+                self.iconImageView.tintColor = imageTintColor;
+            }
+            [self addSubview:self.iconImageView];
+            [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.leading.equalTo(self).offset(horizontalPadding);
+                make.centerY.equalTo(self);
+                make.width.equalTo(@(image.size.width));
+                make.height.equalTo(@(image.size.height));
+            }];
+        }
 
-        self.textSpaceLeft = horizontalPadding;
-        if (image) self.textSpaceLeft += image.size.width + horizontalPadding;
-
+        
         // Set up title label
         _titleLabel = [[UILabel alloc] init];
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self.titleLabel setText:title];
         [self.titleLabel setTextColor:fontColor];
         [self.titleLabel setBackgroundColor:[UIColor clearColor]];
@@ -323,12 +357,29 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         self.titleLabel.numberOfLines = 0;
         self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self addSubview:self.titleLabel];
+        [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            if(self.iconImageView){
+                make.leading.equalTo(self.iconImageView.mas_trailing).offset(horizontalPadding);
+            }else{
+                make.leading.equalTo(self).offset(horizontalPadding);
+            }
+            make.top.equalTo(self.mas_top).offset(verticalPadding);
+
+            if(!buttonCallback){
+                make.trailing.equalTo(self.mas_trailing).offset(-horizontalPadding);
+            }
+
+            if(![subtitle length]){
+                make.bottom.equalTo(self).offset(-verticalPadding);
+            }
+        }];
 
         // Set up content label (if set)
         if ([subtitle length])
         {
             _contentLabel = [[UILabel alloc] init];
             [self.contentLabel setText:subtitle];
+            self.contentLabel.translatesAutoresizingMaskIntoConstraints = NO;
 
             UIColor *contentTextColor = [UIColor colorWithHexString:[current valueForKey:@"contentTextColor"]];
             if (!contentTextColor)
@@ -350,27 +401,18 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             self.contentLabel.numberOfLines = 0;
 
             [self addSubview:self.contentLabel];
-        }
-
-        if (image)
-        {
-            _iconImageView = [[UIImageView alloc] initWithImage:image];
-            
-            UIColor* imageTintColor = [UIColor colorWithHexString:[current valueForKey:@"imageTintColor"]];
-            if(imageTintColor){
-                self.iconImageView.tintColor = imageTintColor;
-            }
-            self.iconImageView.frame = CGRectMake(horizontalPadding,
-                                                  verticalPadding,
-                                                  image.size.width,
-                                                  image.size.height);
-            [self addSubview:self.iconImageView];
+            [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.leading.and.trailing.equalTo(self.titleLabel);
+                make.top.equalTo(self.titleLabel.mas_bottom).offset(5);
+                make.bottom.equalTo(self).offset(-verticalPadding);
+            }];
         }
 
         // Set up button (if set)
         if (buttonCallback)
         {
             _button = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.button.translatesAutoresizingMaskIntoConstraints = NO;
 
             UIColor* buttonTintColor = [UIColor colorWithHexString:[current valueForKey:@"buttonTintColor"]];
             if(buttonTintColor){
@@ -417,47 +459,32 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
                   forControlEvents:UIControlEventTouchUpInside];
 
             self.button.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0);
-            [self.button sizeToFit];
-            self.button.frame = CGRectMake(screenWidth - horizontalPadding - self.button.frame.size.width,
-                                           0.0,
-                                           self.button.frame.size.width,
-                                           31.0);
 
             [self addSubview:self.button];
-
-            self.textSpaceRight = self.button.frame.size.width + verticalPadding;
+            [self.button mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.leading.equalTo(self.titleLabel.mas_trailing).offset(horizontalPadding);
+                make.trailing.equalTo(self.mas_trailing).offset(-horizontalPadding);
+                make.centerY.equalTo(self);
+            }];
         }
 
         // Add a border on the bottom (or on the top, depending on the view's postion)
         if (![TSMessage iOS7StyleEnabled])
         {
-            _borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0,
-                                                                   0.0, // will be set later
-                                                                   screenWidth,
-                                                                   [[current valueForKey:@"borderHeight"] floatValue])];
+            _borderView = [[UIView alloc] initWithFrame:CGRectZero];
             self.borderView.backgroundColor = [UIColor colorWithHexString:[current valueForKey:@"borderColor"]];
-            self.borderView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+            self.borderView.translatesAutoresizingMaskIntoConstraints = NO;
             [self addSubview:self.borderView];
-        }
+            [self.borderView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.leading.and.trailing.equalTo(self);
+                make.height.equalTo([current valueForKey:@"borderHeight"] ? : @1);
+                if(self.messagePosition == TSMessageNotificationPositionBottom){
+                    make.top.equalTo(self);
+                }else{
+                    make.bottom.equalTo(self);
+                }
+            }];
 
-
-        CGFloat actualHeight = [self updateHeightOfMessageView]; // this call also takes care of positioning the labels
-        CGFloat topPosition = -actualHeight;
-
-        if (self.messagePosition == TSMessageNotificationPositionBottom)
-        {
-            topPosition = [self containingView].bounds.size.height;
-        }
-
-        self.frame = CGRectMake(0.0, topPosition, screenWidth, actualHeight);
-
-        if (self.messagePosition == TSMessageNotificationPositionTop)
-        {
-            self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        }
-        else
-        {
-            self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
         }
 
         if (dismissingEnabled)
@@ -483,127 +510,13 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     return self;
 }
 
-
-- (CGFloat)updateHeightOfMessageView
-{
-    CGFloat currentHeight;
-    CGFloat screenWidth = [self containingView].bounds.size.width;
-    CGFloat verticalPadding = [self verticalPadding];
-    CGFloat horizontalPadding = [self horizonalPadding];
-
-    self.titleLabel.frame = CGRectMake(self.textSpaceLeft,
-                                       verticalPadding,
-                                       screenWidth - horizontalPadding - self.textSpaceLeft - self.textSpaceRight,
-                                       0.0);
-    [self.titleLabel sizeToFit];
-
-    if ([self.subtitle length])
-    {
-        self.contentLabel.frame = CGRectMake(self.textSpaceLeft,
-                                             self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height + 5.0,
-                                             screenWidth - horizontalPadding - self.textSpaceLeft - self.textSpaceRight,
-                                             0.0);
-        [self.contentLabel sizeToFit];
-
-        currentHeight = self.contentLabel.frame.origin.y + self.contentLabel.frame.size.height;
-    }
-    else
-    {
-        // only the title was set
-        currentHeight = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height;
-    }
-
-    currentHeight += verticalPadding;
-
-    if (self.iconImageView)
-    {
-        // Check if that makes the popup larger (height)
-        if (self.iconImageView.frame.origin.y + self.iconImageView.frame.size.height + verticalPadding > currentHeight)
-        {
-            currentHeight = self.iconImageView.frame.origin.y + self.iconImageView.frame.size.height + verticalPadding;
-        }
-        else
-        {
-            // z-align
-            self.iconImageView.center = CGPointMake([self.iconImageView center].x,
-                                                    round(currentHeight / 2.0));
-        }
-        
-        if (![self.subtitle length]){
-            self.titleLabel.center = CGPointMake([self.titleLabel center].x,
-                                                 round(currentHeight / 2.0));
-
-        }
-
-    }
-
-    // z-align button
-    self.button.center = CGPointMake([self.button center].x,
-                                     round(currentHeight / 2.0));
-
-    if (self.messagePosition == TSMessageNotificationPositionTop)
-    {
-        // Correct the border position
-        CGRect borderFrame = self.borderView.frame;
-        borderFrame.origin.y = currentHeight;
-        self.borderView.frame = borderFrame;
-    }
-
-    currentHeight += self.borderView.frame.size.height;
-
-    self.frame = CGRectMake(0.0, self.frame.origin.y, self.frame.size.width, currentHeight);
-
-
-    if (self.button)
-    {
-        self.button.frame = CGRectMake(self.frame.size.width - self.textSpaceRight,
-                                       round((self.frame.size.height / 2.0) - self.button.frame.size.height / 2.0),
-                                       self.button.frame.size.width,
-                                       self.button.frame.size.height);
-    }
-
-
-    CGRect backgroundFrame = CGRectMake(self.backgroundImageView.frame.origin.x,
-                                        self.backgroundImageView.frame.origin.y,
-                                        screenWidth,
-                                        currentHeight);
-
-    // increase frame of background view because of the spring animation
-    if ([TSMessage iOS7StyleEnabled])
-    {
-        if (self.messagePosition == TSMessageNotificationPositionTop)
-        {
-            float topOffset = 0.f;
-
-            UINavigationController *navigationController = self.viewController.navigationController;
-            if (!navigationController && [self.viewController isKindOfClass:[UINavigationController class]]) {
-                navigationController = (UINavigationController *)self.viewController;
-            }
-            BOOL isNavBarIsHidden = !navigationController || [TSMessage isNavigationBarInNavigationControllerHidden:navigationController];
-            BOOL isNavBarIsOpaque = !navigationController.navigationBar.isTranslucent && navigationController.navigationBar.alpha == 1;
-
-            if (isNavBarIsHidden || isNavBarIsOpaque) {
-                topOffset = -30.f;
-            }
-            backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(topOffset, 0.f, 0.f, 0.f));
-        }
-        else if (self.messagePosition == TSMessageNotificationPositionBottom)
-        {
-            backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(0.f, 0.f, -30.f, 0.f));
-        }
-    }
-
-    self.backgroundImageView.frame = backgroundFrame;
-    self.backgroundView.frame = backgroundFrame;
-
-    return currentHeight;
+- (CGFloat)topOverlap{
+    return -30.0;
+}
+- (CGFloat)bottomOverlap{
+    return 30.0;
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    [self updateHeightOfMessageView];
-}
 
 - (void)fadeMeOut
 {
