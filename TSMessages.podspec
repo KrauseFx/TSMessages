@@ -31,4 +31,5 @@ There are 4 different types already set up for you: Success, Error, Warning, Mes
 
   s.public_header_files = 'Pod/Classes/**/*.h'
   s.dependency 'HexColors', '~> 2.3.0'
+  s.dependency 'Masonry', '~> 0.6'
 end

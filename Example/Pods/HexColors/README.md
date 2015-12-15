@@ -7,7 +7,7 @@ HexColors
 HexColors is drop in category for HexColor Support for NSColor and UIColor. Support for HexColors with prefixed # and without.
 
 #RELEASE 2.3.0
-Attention the API has changed!
+Attention the API has changed! 
 
 #Example iOS
 ``` objective-c
