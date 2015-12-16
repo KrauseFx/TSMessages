@@ -340,6 +340,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         // Set up title label
         _titleLabel = [[UILabel alloc] init];
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        self.titleLabel.textAlignment = NSTextAlignmentNatural;
         [self.titleLabel setText:title];
         [self.titleLabel setTextColor:fontColor];
         [self.titleLabel setBackgroundColor:[UIColor clearColor]];
@@ -380,6 +381,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             _contentLabel = [[UILabel alloc] init];
             [self.contentLabel setText:subtitle];
             self.contentLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            self.contentLabel.textAlignment = NSTextAlignmentNatural;
 
             UIColor *contentTextColor = [UIColor colorWithHexString:[current valueForKey:@"contentTextColor"]];
             if (!contentTextColor)
