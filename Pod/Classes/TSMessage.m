@@ -338,6 +338,11 @@ __weak static UIViewController *_defaultViewController;
     
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
      {
+         // view was already removed from hierarchy, nothing to do (see notes in dismissAllNotifications)
+         // !!!: check must be made here, not before animation block
+         if (!currentView.superview) {
+             return;
+         }
          [currentView mas_remakeConstraints:^(MASConstraintMaker *make) {
              make.leading.and.trailing.equalTo(currentView.superview);
              if (currentView.messagePosition == TSMessageNotificationPositionBottom){
@@ -354,7 +359,8 @@ __weak static UIViewController *_defaultViewController;
      } completion:^(BOOL finished)
      {
          [currentView removeFromSuperview];
-         
+
+         // what happens if this is called after a (redundant) dismissal (see questions in dismissAllNotifications)
          notificationActive = NO;
          
          if ([self.messages count] > 0)
@@ -415,7 +421,10 @@ __weak static UIViewController *_defaultViewController;
                        
                        TSMessageView *currentMessage = [[TSMessage sharedMessage].messages objectAtIndex:0];
                        [[TSMessage sharedMessage].messages removeAllObjects];
+                       // why does this still need to be in the message queue?
+                       // removing it would prevent issues where we try to remove the same message twice
                        [[TSMessage sharedMessage].messages addObject:currentMessage];
+                       // why is this delay here?
                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kTSMessageAnimationDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                            [[TSMessage sharedMessage] fadeOutNotification:currentMessage animationFinishedBlock:completion];
                        });
