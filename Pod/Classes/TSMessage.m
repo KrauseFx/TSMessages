@@ -154,7 +154,7 @@ __weak static UIViewController *_defaultViewController;
     
     for (TSMessageView *n in [TSMessage sharedMessage].messages)
     {
-        if (([n.title isEqualToString:title] || (!n.title && !title)) && ([n.subtitle isEqualToString:subtitle] || (!n.subtitle && !subtitle)))
+        if ([n isEqual:messageView])
         {
             return; // avoid showing the same messages twice in a row
         }
