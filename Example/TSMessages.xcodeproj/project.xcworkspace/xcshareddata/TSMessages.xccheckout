@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>78862BC7-6303-467C-B9D6-C369B27995F9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TSMessages</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7F6719F1314E6B51016DB1EC166C64F051B42C2E</key>
+		<string>https://github.com/diogomaximo/TSMessages.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Example/TSMessages.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7F6719F1314E6B51016DB1EC166C64F051B42C2E</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/diogomaximo/TSMessages.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7F6719F1314E6B51016DB1EC166C64F051B42C2E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7F6719F1314E6B51016DB1EC166C64F051B42C2E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TSMessages</string>
+		</dict>
+	</array>
+</dict>
+</plist>

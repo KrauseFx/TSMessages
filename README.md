@@ -16,12 +16,12 @@ It is very easy to add new notification types with a different design. Add the n
 
 **Take a look at the Example project to see how to use this library.** You have to open the workspace, not the project file, since the Example project uses cocoapods.
 
-Follow the developer on Twitter: [KrauseFx](http://twitter.com/KrauseFx) (Felix Krause)
+Get in contact with the developer on Twitter: [KrauseFx](https://twitter.com/KrauseFx) (Felix Krause)
 
 # Installation
 
 ## From CocoaPods
-TSMessages is available through [CocoaPods](http://cocoapods.org). To install
+TSMessages is available through [CocoaPods](https://cocoapods.org/). To install
 it, simply add the following line to your Podfile:
 
     pod "TSMessages"
@@ -49,7 +49,7 @@ To show notifications use the following code:
                                        callback:nil
                                     buttonTitle:@"Update"
                                  buttonCallback:^{
-                                     NSlog(@"User tapped the button");
+                                     NSLog(@"User tapped the button");
                                  }
                                      atPosition:TSMessageNotificationPositionTop
                            canBeDismissedByUser:YES];
@@ -89,6 +89,31 @@ You can customize a message view, right before it's displayed, like setting an a
    }
 ```
 
+You can customize message view elements using UIAppearance
+```objective-c
+#import <TSMessages/TSMessageView.h>
+@implementation TSAppDelegate
+....
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+//If you want you can overidde some properties using UIAppearance
+[[TSMessageView appearance] setTitleFont:[UIFont boldSystemFontOfSize:6]];
+[[TSMessageView appearance] setTitleTextColor:[UIColor redColor]];
+[[TSMessageView appearance] setContentFont:[UIFont boldSystemFontOfSize:10]];
+[[TSMessageView appearance]setContentTextColor:[UIColor greenColor]];
+[[TSMessageView appearance]setErrorIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+[[TSMessageView appearance]setSuccessIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+[[TSMessageView appearance]setMessageIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+[[TSMessageView appearance]setWarningIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+//End of override
+
+return YES;
+}
+```
+
+
+
 The following properties can be set when creating a new notification:
 
 * **viewController**: The view controller to show the notification in. This might be the navigation controller.
@@ -126,4 +151,4 @@ If you don't want a detailed description (the text underneath the title) you don
 TSMessages is available under the MIT license. See the LICENSE file for more information.
 
 # Recent Changes
-Can be found in the [releases section](https://github.com/toursprung/TSMessages/releases) of this repo.
+Can be found in the [releases section](https://github.com/KrauseFx/TSMessages/releases) of this repo.
