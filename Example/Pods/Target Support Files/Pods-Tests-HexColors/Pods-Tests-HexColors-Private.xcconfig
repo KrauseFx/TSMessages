@@ -1,5 +1,5 @@
 #include "Pods-Tests-HexColors.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/HexColors" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Expecta" "${PODS_ROOT}/Headers/Public/Expecta+Snapshots" "${PODS_ROOT}/Headers/Public/FBSnapshotTestCase" "${PODS_ROOT}/Headers/Public/HexColors" "${PODS_ROOT}/Headers/Public/Specta" "${PODS_ROOT}/Headers/Public/TSMessages"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/HexColors" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Expecta" "${PODS_ROOT}/Headers/Public/Expecta+Snapshots" "${PODS_ROOT}/Headers/Public/FBSnapshotTestCase" "${PODS_ROOT}/Headers/Public/HexColors" "${PODS_ROOT}/Headers/Public/Specta" "${PODS_ROOT}/Headers/Public/TSMessages"
 OTHER_LDFLAGS = -ObjC
 PODS_ROOT = ${SRCROOT}

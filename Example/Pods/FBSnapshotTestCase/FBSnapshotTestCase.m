@@ -42,6 +42,16 @@
   self.snapshotController.recordMode = recordMode;
 }
 
+- (BOOL)renderAsLayer
+{
+    return self.snapshotController.renderAsLayer;
+}
+
+- (void)setRenderAsLayer:(BOOL)renderAsLayer
+{
+    self.snapshotController.renderAsLayer = renderAsLayer;
+}
+
 - (BOOL)compareSnapshotOfLayer:(CALayer *)layer
       referenceImagesDirectory:(NSString *)referenceImagesDirectory
                     identifier:(NSString *)identifier

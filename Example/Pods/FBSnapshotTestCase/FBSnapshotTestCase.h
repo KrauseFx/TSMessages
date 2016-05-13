@@ -61,6 +61,11 @@
 @property (readwrite, nonatomic, assign) BOOL recordMode;
 
 /**
+ When YES, the test will render a view as layer.
+ **/
+@property (readwrite, nonatomic, assign) BOOL renderAsLayer;
+
+/**
  Performs the comparisong or records a snapshot of the layer if recordMode is YES.
  @param layer The Layer to snapshot
  @param referenceImagesDirectory The directory in which reference images are stored.
