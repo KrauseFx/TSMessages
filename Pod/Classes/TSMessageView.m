@@ -48,6 +48,7 @@ static NSMutableDictionary *_notificationDesign;
 
 @property (nonatomic, assign) CGFloat textSpaceLeft;
 @property (nonatomic, assign) CGFloat textSpaceRight;
+@property (nonatomic, assign) CGFloat minimumPadding;
 
 @property (copy) void (^callback)();
 @property (copy) void (^buttonCallback)();
@@ -178,7 +179,8 @@ static NSMutableDictionary *_notificationDesign;
 - (CGFloat)padding
 {
     // Adds 10 padding to to cover navigation bar
-    return self.messagePosition == TSMessageNotificationPositionNavBarOverlay ? TSMessageViewMinimumPadding + 10.0f : TSMessageViewMinimumPadding;
+    return self.messagePosition == TSMessageNotificationPositionNavBarOverlay ? self.minimumPadding + 10.0f
+                                                                              : self.minimumPadding;
 }
 
 - (id)initWithTitle:(NSString *)title
@@ -207,7 +209,6 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         self.buttonCallback = buttonCallback;
 
         CGFloat screenWidth = self.viewController.view.bounds.size.width;
-        CGFloat padding = [self padding];
 
         NSDictionary *current;
         NSString *currentString;
@@ -241,6 +242,13 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 
         current = [notificationDesign valueForKey:currentString];
 
+        if (current[@"minimumPadding"] != nil) {
+            self.minimumPadding = [current[@"minimumPadding"] floatValue];
+        } else {
+            self.minimumPadding = TSMessageViewMinimumPadding;
+        }
+
+        CGFloat padding = [self padding];
 
         if (!image && [[current valueForKey:@"imageName"] length])
         {
