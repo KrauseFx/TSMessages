@@ -276,6 +276,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 
         // Set up title label
         _titleLabel = [[UILabel alloc] init];
+        [self.titleLabel setAccessibilityIdentifier:@"notificationTitle"];
         [self.titleLabel setText:title];
         [self.titleLabel setTextColor:fontColor];
         [self.titleLabel setBackgroundColor:[UIColor clearColor]];
@@ -298,6 +299,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         if ([subtitle length])
         {
             _contentLabel = [[UILabel alloc] init];
+            [self.contentLabel setAccessibilityIdentifier:@"notificationMessage"];
             [self.contentLabel setText:subtitle];
 
             UIColor *contentTextColor = [UIColor colorWithHexString:[current valueForKey:@"contentTextColor"]];
