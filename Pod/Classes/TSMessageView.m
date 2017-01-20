@@ -246,6 +246,10 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         {
             image = [self bundledImageNamed:[current valueForKey:@"imageName"]];
         }
+        if (!image && [[current valueForKey:@"imageName"] length])
+        {
+            image = [UIImage imageNamed:[current valueForKey:@"imageName"]];
+        }
 
         if (![TSMessage iOS7StyleEnabled])
         {

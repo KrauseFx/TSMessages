@@ -19,7 +19,7 @@ There are 4 different types already set up for you: Success, Error, Warning, Mes
   s.homepage     = "https://github.com/KrauseFx/TSMessages/"
 
   s.license          = 'MIT'
-  s.author           = { "Felix Krause" => "krausefx@gmail.com" }
+  s.author           = { "Felix Krause" => "tsmessages@krausefx.com" }
   s.source           = { :git => "https://github.com/KrauseFx/TSMessages.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/KrauseFx'
 
