@@ -16,7 +16,8 @@
         "shadowOffsetY": -1,
         "textColor": "#FFFFFF",
         "titleFontSize": 14,
-        "backgroundColor": "#76CF67"
+        "backgroundColor": "#76CF67",
+        "backgroundAlpha": 1.0
     },
     "message": {
         "backgroundImageName": "NotificationBackgroundMessage.png",
@@ -35,7 +36,8 @@
         "shadowOffsetY": 1,
         "textColor": "#727C83",
         "titleFontSize": 14,
-        "backgroundColor": "#D4DDDF"
+        "backgroundColor": "#D4DDDF",
+        "backgroundAlpha": 1.0
     },
     "warning": {
         "backgroundImageName": "NotificationBackgroundWarning.png",
@@ -54,7 +56,8 @@
         "shadowOffsetY": 1,
         "textColor": "#484638",
         "titleFontSize": 14,
-        "backgroundColor": "#DAC43C"
+        "backgroundColor": "#DAC43C",
+        "backgroundAlpha": 1.0
     },
     "error": {
         "backgroundImageName": "NotificationBackgroundError.png",
@@ -73,6 +76,7 @@
         "shadowOffsetY": -1,
         "textColor": "#FFFFFF",
         "titleFontSize": 14,
-        "backgroundColor": "#DD3B41"
+        "backgroundColor": "#DD3B41",
+        "backgroundAlpha": 1.0
     }
 }
