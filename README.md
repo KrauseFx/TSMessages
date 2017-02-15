@@ -1,3 +1,9 @@
+**Notice: TSMessages is no longer being maintained/updated. We recommend everyone migrate to [RMessage](https://github.com/donileo/RMessage).**
+
+**If you currently rely on the ability to embed a UIButton in TSMessages feel free to continue using TSMessages as you see fit until RMessage implements this feature.**
+
+**This repository will be kept as is for those who want to continue using TSMessages or are in the process of migrating. If an issue you submitted to TSMessages still applies to RMessage feel free to create a new issue in RMessage's repository.**
+
 TSMessages
 ==========
 
