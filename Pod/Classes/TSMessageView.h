@@ -12,8 +12,6 @@
 #define TSMessageViewAlpha 0.95
 
 
-
-
 @interface TSMessageView : UIView
 
 /** The displayed title of this message */
@@ -79,3 +77,23 @@ canBeDismissedByUser:(BOOL)dismissingEnabled;
 
 
 @end
+
+
+@class TSBlurView;
+
+/**
+ *  Access to the subviews for more complex configuration not provided by
+ *  the styling json file
+ */
+@interface TSMessageView (TSSubviewAccess)
+
+@property (nonatomic, strong, readonly) UILabel *titleLabel;
+@property (nonatomic, strong, readonly) UILabel *contentLabel;
+@property (nonatomic, strong, readonly) UIImageView *iconImageView;
+@property (nonatomic, strong, readonly) UIButton *button;
+@property (nonatomic, strong, readonly) UIView *borderView;
+@property (nonatomic, strong, readonly) UIImageView *backgroundImageView;
+@property (nonatomic, strong, readonly) UIView *backgroundBlurView; // Only used in iOS 7
+
+@end
+

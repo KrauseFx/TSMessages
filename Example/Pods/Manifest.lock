@@ -4,10 +4,12 @@ PODS:
     - Expecta
     - FBSnapshotTestCase
   - FBSnapshotTestCase (1.4)
-  - HexColors (2.2.1)
+  - HexColors (2.3.0)
+  - Masonry (0.6.3)
   - Specta (0.2.1)
-  - TSMessages (0.9.12):
-    - HexColors
+  - TSMessages (0.9.13):
+    - HexColors (~> 2.3.0)
+    - Masonry (~> 0.6)
 
 DEPENDENCIES:
   - Expecta
@@ -21,11 +23,12 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
-  Expecta+Snapshots: 4a56b9411c6ed156987072e52c39de67d864015a
-  FBSnapshotTestCase: f9f225b5ba11c8d8c09075590490df16314e4d62
-  HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
-  Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a
-  TSMessages: 3e67c231abe604e5ab732050ba6dc99df4650765
+  Expecta: a354d4633409dd9fe8c4f5ff5130426adbe31628
+  Expecta+Snapshots: 4a0b46d3ba755bd43dffa7d53e4585fc6cbfe8cd
+  FBSnapshotTestCase: 892508495a69e8703bab36c9da7674ff740d41db
+  HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
+  Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
+  Specta: 15a276a6343867b426d5ed135d5aa4d04123a573
+  TSMessages: 39ca10c7bfdaa42d574af0f7946a04699145051e
 
-COCOAPODS: 0.36.0.beta.1
+COCOAPODS: 0.39.0
