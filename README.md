@@ -4,6 +4,8 @@
 
 **This repository will be kept as is for those who want to continue using TSMessages or are in the process of migrating. If an issue you submitted to TSMessages still applies to RMessage feel free to create a new issue in RMessage's repository.**
 
+**If your project is Swift based, you might want to check out [SwiftMessages](https://github.com/SwiftKickMobile/SwiftMessages), which offers the same features, but is written completely in Swift**
+
 TSMessages
 ==========
 
