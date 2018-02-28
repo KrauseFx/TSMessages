@@ -151,7 +151,7 @@ __weak static UIViewController *_defaultViewController;
 {
     NSString *title = messageView.title;
     NSString *subtitle = messageView.subtitle;
-    
+
     for (TSMessageView *n in [TSMessage sharedMessage].messages)
     {
         if (([n.title isEqualToString:title] || (!n.title && !title)) && ([n.subtitle isEqualToString:subtitle] || (!n.subtitle && !subtitle)))
@@ -159,9 +159,9 @@ __weak static UIViewController *_defaultViewController;
             return; // avoid showing the same messages twice in a row
         }
     }
-    
+
     [[TSMessage sharedMessage].messages addObject:messageView];
-    
+
     if (!notificationActive)
     {
         [[TSMessage sharedMessage] fadeInCurrentNotification];
@@ -183,33 +183,42 @@ __weak static UIViewController *_defaultViewController;
 - (void)fadeInCurrentNotification
 {
     if ([self.messages count] == 0) return;
-    
+
     notificationActive = YES;
-    
+
     TSMessageView *currentView = [self.messages objectAtIndex:0];
-    
+
     __block CGFloat verticalOffset = 0.0f;
-    
+
     void (^addStatusBarHeightToVerticalOffset)() = ^void() {
-        
+
         if (currentView.messagePosition == TSMessageNotificationPositionNavBarOverlay){
             return;
         }
-        
+
         CGSize statusBarSize = [UIApplication sharedApplication].statusBarFrame.size;
         verticalOffset += MIN(statusBarSize.width, statusBarSize.height);
     };
-    
+
     if ([currentView.viewController isKindOfClass:[UINavigationController class]] || [currentView.viewController.parentViewController isKindOfClass:[UINavigationController class]])
     {
         UINavigationController *currentNavigationController;
-        
+
         if([currentView.viewController isKindOfClass:[UINavigationController class]])
             currentNavigationController = (UINavigationController *)currentView.viewController;
         else
             currentNavigationController = (UINavigationController *)currentView.viewController.parentViewController;
-        
-        BOOL isViewIsUnderStatusBar = [[[currentNavigationController childViewControllers] firstObject] wantsFullScreenLayout];
+
+        BOOL isViewIsUnderStatusBar;
+        if ([[[currentNavigationController childViewControllers] firstObject] respondsToSelector:@selector(edgesForExtendedLayout)]) {
+            isViewIsUnderStatusBar = [[currentNavigationController childViewControllers] firstObject].edgesForExtendedLayout == UIRectEdgeAll;
+        }
+        else {
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+            isViewIsUnderStatusBar = [[[currentNavigationController childViewControllers] firstObject] wantsFullScreenLayout];
+            #pragma clang diagnostic pop
+        }
         if (!isViewIsUnderStatusBar && currentNavigationController.parentViewController == nil) {
             isViewIsUnderStatusBar = ![TSMessage isNavigationBarInNavigationControllerHidden:currentNavigationController]; // strange but true
         }
@@ -237,17 +246,17 @@ __weak static UIViewController *_defaultViewController;
             addStatusBarHeightToVerticalOffset();
         }
     }
-    
+
     CGPoint toPoint;
     if (currentView.messagePosition != TSMessageNotificationPositionBottom)
     {
         CGFloat navigationbarBottomOfViewController = 0;
-        
+
         if (self.delegate && [self.delegate respondsToSelector:@selector(messageLocationOfMessageView:)])
         {
             navigationbarBottomOfViewController = [self.delegate messageLocationOfMessageView:currentView];
         }
-        
+
         toPoint = CGPointMake(currentView.center.x,
                               navigationbarBottomOfViewController + verticalOffset + CGRectGetHeight(currentView.frame) / 2.0);
     }
@@ -260,14 +269,14 @@ __weak static UIViewController *_defaultViewController;
         }
         toPoint = CGPointMake(currentView.center.x, y);
     }
-    
+
     if (self.delegate && [self.delegate respondsToSelector:@selector(customizeMessageView:)])
     {
         [self.delegate customizeMessageView:currentView];
     }
-    
-    
-    
+
+
+
     dispatch_block_t animationBlock = ^{
         currentView.center = toPoint;
         if (![TSMessage iOS7StyleEnabled]) {
@@ -277,7 +286,7 @@ __weak static UIViewController *_defaultViewController;
     void(^completionBlock)(BOOL) = ^(BOOL finished) {
         currentView.messageIsFullyDisplayed = YES;
     };
-    
+
     if (![TSMessage iOS7StyleEnabled]) {
         [UIView animateWithDuration:kTSMessageAnimationDuration
                               delay:0.0
@@ -295,12 +304,12 @@ __weak static UIViewController *_defaultViewController;
                          completion:completionBlock];
 #endif
     }
-    
+
     if (currentView.duration == TSMessageNotificationDurationAutomatic)
     {
         currentView.duration = kTSMessageAnimationDuration + kTSMessageDisplayTime + currentView.frame.size.height * kTSMessageExtraDisplayTimePerPixel;
     }
-    
+
     if (currentView.duration != TSMessageNotificationDurationEndless)
     {
         dispatch_async(dispatch_get_main_queue(), ^
@@ -334,7 +343,7 @@ __weak static UIViewController *_defaultViewController;
     [NSObject cancelPreviousPerformRequestsWithTarget:self
                                              selector:@selector(fadeOutNotification:)
                                                object:currentView];
-    
+
     CGPoint fadeOutToPoint;
     if (currentView.messagePosition != TSMessageNotificationPositionBottom)
     {
@@ -345,7 +354,7 @@ __weak static UIViewController *_defaultViewController;
         fadeOutToPoint = CGPointMake(currentView.center.x,
                                      currentView.viewController.view.bounds.size.height + CGRectGetHeight(currentView.frame)/2.f);
     }
-    
+
     [UIView animateWithDuration:kTSMessageAnimationDuration animations:^
      {
          currentView.center = fadeOutToPoint;
@@ -355,19 +364,19 @@ __weak static UIViewController *_defaultViewController;
      } completion:^(BOOL finished)
      {
          [currentView removeFromSuperview];
-         
+
          if ([self.messages count] > 0)
          {
              [self.messages removeObjectAtIndex:0];
          }
-         
+
          notificationActive = NO;
-         
+
          if ([self.messages count] > 0)
          {
              [self fadeInCurrentNotification];
          }
-         
+
          if(animationFinished) {
              animationFinished();
          }
@@ -382,7 +391,7 @@ __weak static UIViewController *_defaultViewController;
 + (BOOL)dismissActiveNotificationWithCompletion:(void (^)())completion
 {
     if ([[TSMessage sharedMessage].messages count] == 0) return NO;
-    
+
     dispatch_async(dispatch_get_main_queue(), ^
                    {
                        if ([[TSMessage sharedMessage].messages count] == 0) return;
@@ -429,7 +438,7 @@ __weak static UIViewController *_defaultViewController;
 + (UIViewController *)defaultViewController
 {
     __strong UIViewController *defaultViewController = _defaultViewController;
-    
+
     if (!defaultViewController) {
         defaultViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     }
@@ -445,7 +454,7 @@ __weak static UIViewController *_defaultViewController;
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
         iOS7SDK = YES;
 #endif
-        
+
         _useiOS7Style = ! (TS_SYSTEM_VERSION_LESS_THAN(@"7.0") || !iOS7SDK);
     });
     return _useiOS7Style;
