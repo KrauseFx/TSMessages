@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1687DD9DDD3F49028DE52098 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D24C674F90784EC4AFFD8541 /* libPods-Tests.a */; };
 		2673C7B7BE2142E78B40DEE7 /* libPods-TSMessages.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA65AE9564E43409150BC5E /* libPods-TSMessages.a */; };
+		4B3E8DC01B0CE6FD00B2189B /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3E8DBF1B0CE6FD00B2189B /* Launch Screen.xib */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -41,6 +42,7 @@
 		06A5FE5AC1E4219F023CBC21 /* Pods-TSMessages.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TSMessages.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TSMessages/Pods-TSMessages.debug.xcconfig"; sourceTree = "<group>"; };
 		26865537F27698DE43A2B821 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		3DA65AE9564E43409150BC5E /* libPods-TSMessages.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TSMessages.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B3E8DBF1B0CE6FD00B2189B /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		4C10E90825C54E85A5FD6274 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4DFA0B2B12013C4CF24E26C1 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* TSMessages.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TSMessages.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +157,7 @@
 				6003F5A5195388D20070C39A /* TSViewController.h */,
 				6003F5A6195388D20070C39A /* TSViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
+				4B3E8DBF1B0CE6FD00B2189B /* Launch Screen.xib */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
 			path = TSMessages;
@@ -285,6 +288,7 @@
 				6003F5A1195388D20070C39A /* Main_iPhone.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				CAFB4A5D19ADC8CA004B4A82 /* AlternativeDesign.json in Resources */,
+				4B3E8DC01B0CE6FD00B2189B /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
