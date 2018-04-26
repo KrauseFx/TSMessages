@@ -187,19 +187,7 @@ __weak static UIViewController *_defaultViewController;
     notificationActive = YES;
     
     TSMessageView *currentView = [self.messages objectAtIndex:0];
-    
-    __block CGFloat verticalOffset = 0.0f;
-    
-    void (^addStatusBarHeightToVerticalOffset)() = ^void() {
-        
-        if (currentView.messagePosition == TSMessageNotificationPositionNavBarOverlay){
-            return;
-        }
-        
-        CGSize statusBarSize = [UIApplication sharedApplication].statusBarFrame.size;
-        verticalOffset += MIN(statusBarSize.width, statusBarSize.height);
-    };
-    
+  
     if ([currentView.viewController isKindOfClass:[UINavigationController class]] || [currentView.viewController.parentViewController isKindOfClass:[UINavigationController class]])
     {
         UINavigationController *currentNavigationController;
@@ -217,25 +205,15 @@ __weak static UIViewController *_defaultViewController;
         {
             [currentNavigationController.view insertSubview:currentView
                                                belowSubview:[currentNavigationController navigationBar]];
-            verticalOffset = [currentNavigationController navigationBar].bounds.size.height;
-            if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
-                addStatusBarHeightToVerticalOffset();
-            }
         }
         else
         {
             [currentView.viewController.view addSubview:currentView];
-            if ([TSMessage iOS7StyleEnabled] || isViewIsUnderStatusBar) {
-                addStatusBarHeightToVerticalOffset();
-            }
         }
     }
     else
     {
         [currentView.viewController.view addSubview:currentView];
-        if ([TSMessage iOS7StyleEnabled]) {
-            addStatusBarHeightToVerticalOffset();
-        }
     }
     
     CGPoint toPoint;
@@ -247,7 +225,13 @@ __weak static UIViewController *_defaultViewController;
         {
             navigationbarBottomOfViewController = [self.delegate messageLocationOfMessageView:currentView];
         }
-        
+
+        CGFloat verticalOffset = [[currentView.viewController topLayoutGuide] length];
+      
+        if ([currentView.viewController isKindOfClass:[UINavigationController class]]) {
+          verticalOffset += ((UINavigationController *)currentView.viewController).toolbar.frame.size.height;
+        }
+
         toPoint = CGPointMake(currentView.center.x,
                               navigationbarBottomOfViewController + verticalOffset + CGRectGetHeight(currentView.frame) / 2.0);
     }
