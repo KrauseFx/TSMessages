@@ -208,8 +208,13 @@ __weak static UIViewController *_defaultViewController;
             currentNavigationController = (UINavigationController *)currentView.viewController;
         else
             currentNavigationController = (UINavigationController *)currentView.viewController.parentViewController;
-        
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+        UIViewController *deteVC = [[currentNavigationController childViewControllers] firstObject];
+        BOOL isViewIsUnderStatusBar = [deteVC edgesForExtendedLayout] == UIRectEdgeAll || [deteVC extendedLayoutIncludesOpaqueBars] == YES;
+#else
         BOOL isViewIsUnderStatusBar = [[[currentNavigationController childViewControllers] firstObject] wantsFullScreenLayout];
+#endif
         if (!isViewIsUnderStatusBar && currentNavigationController.parentViewController == nil) {
             isViewIsUnderStatusBar = ![TSMessage isNavigationBarInNavigationControllerHidden:currentNavigationController]; // strange but true
         }
