@@ -572,6 +572,11 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         [self fadeMeOut];
     }
 }
+
+- (BOOL)isEqual:(TSMessageView *)object {
+    return [object.title isEqualToString:self.title] && [object.subtitle isEqualToString:self.subtitle];
+}
+
 #pragma mark - Target/Action
 
 - (void)buttonTapped:(id) sender
