@@ -261,12 +261,14 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 
             _backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
             self.backgroundImageView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
+            self.backgroundImageView.alpha = [current[@"backgroundAlpha"] doubleValue];
             [self addSubview:self.backgroundImageView];
         }
         else
         {
             // On iOS 7 and above use a blur layer instead (not yet finished)
             _backgroundBlurView = [[TSBlurView alloc] init];
+            _backgroundBlurView.alpha = [current[@"backgroundAlpha"] doubleValue];
             self.backgroundBlurView.autoresizingMask = (UIViewAutoresizingFlexibleWidth);
             self.backgroundBlurView.blurTintColor = [UIColor colorWithHexString:current[@"backgroundColor"]];
             [self addSubview:self.backgroundBlurView];
@@ -280,6 +282,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 
         // Set up title label
         _titleLabel = [[UILabel alloc] init];
+        [self.titleLabel setAccessibilityIdentifier:@"notificationTitle"];
         [self.titleLabel setText:title];
         [self.titleLabel setTextColor:fontColor];
         [self.titleLabel setBackgroundColor:[UIColor clearColor]];
@@ -302,6 +305,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         if ([subtitle length])
         {
             _contentLabel = [[UILabel alloc] init];
+            [self.contentLabel setAccessibilityIdentifier:@"notificationMessage"];
             [self.contentLabel setText:subtitle];
 
             UIColor *contentTextColor = [UIColor colorWithHexString:[current valueForKey:@"contentTextColor"]];
