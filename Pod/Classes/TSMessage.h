@@ -68,6 +68,9 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
 /** By setting this delegate it's possible to set a custom offset for the notification view */
 @property (nonatomic, assign) id <TSMessageViewProtocol>delegate;
 
+/** Whether or not a specified callback function should be executed on timeout instead of just on button tap **/
+@property (nonatomic) BOOL executeCallbackOnTimeout;
+
 + (instancetype)sharedMessage;
 
 + (UIViewController *)defaultViewController;

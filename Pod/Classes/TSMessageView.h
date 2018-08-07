@@ -74,6 +74,9 @@ canBeDismissedByUser:(BOOL)dismissingEnabled;
 /** Fades out this notification view */
 - (void)fadeMeOut;
 
+/** Executes the callback (called by TSMessage on fadeout) **/
+- (void)executeCallback;
+
 /** Use this method to load a custom design file */
 + (void)addNotificationDesignFromFile:(NSString *)file;
 

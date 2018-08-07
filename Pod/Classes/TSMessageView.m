@@ -563,6 +563,13 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     [[TSMessage sharedMessage] performSelectorOnMainThread:@selector(fadeOutNotification:) withObject:self waitUntilDone:NO];
 }
 
+- (void)executeCallback
+{
+  dispatch_async(dispatch_get_main_queue(), ^{
+    if (self.callback) { self.callback(); }
+  });
+}
+
 - (void)didMoveToWindow
 {
     [super didMoveToWindow];
