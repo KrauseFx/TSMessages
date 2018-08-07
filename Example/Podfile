@@ -1,11 +1,11 @@
 source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
 
-
-target 'TSMessages', :exclusive => true do
+target 'TSMessages' do
   pod "TSMessages", :path => "../"
 end
 
-target 'Tests', :exclusive => true do
+target 'Tests' do
   pod "TSMessages", :path => "../"
 
   pod 'Specta', '~> 0.2.1'
