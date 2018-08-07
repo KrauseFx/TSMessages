@@ -7,7 +7,7 @@
 //
 
 #import "TSMessageView.h"
-#import "HexColors.h"
+#import <HexColors/HexColor.h>
 #import "TSBlurView.h"
 #import "TSMessage.h"
 
