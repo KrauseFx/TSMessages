@@ -24,6 +24,14 @@ It is very easy to add new notification types with a different design. Add the n
 
 Get in contact with the developer on Twitter: [KrauseFx](https://twitter.com/KrauseFx) (Felix Krause)
 
+# Screenshots
+
+<table>
+    <tr><td><img src="screenshots/TSMessages0.png" /></td><td><img src="screenshots/TSMessages1.png" /></td></tr>
+    <tr><td><img src="screenshots/TSMessages2.png" /></td><td><img src="screenshots/TSMessages3.png" /></td></tr>
+    <tr><td><img src="screenshots/TSMessages4.png" /></td></tr>
+</table>
+
 # Installation
 
 ## From CocoaPods
@@ -133,25 +141,6 @@ The following properties can be set when creating a new notification:
 Except the title and the notification type, all of the listed values are optional
 
 If you don't want a detailed description (the text underneath the title) you don't need to set one. The notification will automatically resize itself properly. 
-
-## Screenshots
-
-**iOS 7 Design**
-
-![iOS 7 Error](http://www.toursprung.com/wp-content/uploads/2013/09/error_ios7.png)
-
-![iOS 7 Message](http://www.toursprung.com/wp-content/uploads/2013/09/warning_ios7.png)
-
-**iOS 6 Design**
-
-![Warning](http://www.toursprung.com/wp-content/uploads/2013/04/iNotificationWarning.png)
-
-![Success](http://www.toursprung.com/wp-content/uploads/2013/04/iNotificationSuccess.png)
-
-![Error](http://www.toursprung.com/wp-content/uploads/2013/04/iNotificationError.png)
-
-![Message](http://www.toursprung.com/wp-content/uploads/2013/04/iNotificationMessage.png)
-
 
 # License
 TSMessages is available under the MIT license. See the LICENSE file for more information.
