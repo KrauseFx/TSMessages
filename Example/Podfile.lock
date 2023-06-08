@@ -1,13 +1,17 @@
 PODS:
-  - Expecta (0.3.1)
-  - Expecta+Snapshots (1.3.1):
-    - Expecta
-    - FBSnapshotTestCase
-  - FBSnapshotTestCase (1.4)
-  - HexColors (2.2.1)
+  - Expecta (1.0.5)
+  - Expecta+Snapshots (2.0.0):
+    - Expecta (~> 1.0)
+    - FBSnapshotTestCase/Core (~> 2.0.3)
+  - FBSnapshotTestCase (2.0.7):
+    - FBSnapshotTestCase/SwiftSupport (= 2.0.7)
+  - FBSnapshotTestCase/Core (2.0.7)
+  - FBSnapshotTestCase/SwiftSupport (2.0.7):
+    - FBSnapshotTestCase/Core
+  - HexColors (2.3.0)
   - Specta (0.2.1)
-  - TSMessages (0.9.12):
-    - HexColors
+  - TSMessages (0.9.13):
+    - HexColors (~> 2.3.0)
 
 DEPENDENCIES:
   - Expecta
@@ -18,14 +22,16 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   TSMessages:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
-  Expecta+Snapshots: 4a56b9411c6ed156987072e52c39de67d864015a
-  FBSnapshotTestCase: f9f225b5ba11c8d8c09075590490df16314e4d62
-  HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
-  Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a
-  TSMessages: 3e67c231abe604e5ab732050ba6dc99df4650765
+  Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
+  Expecta+Snapshots: 29b38dd695bc72a0ed2bea833937d78df41943ba
+  FBSnapshotTestCase: 7e85180d0d141a0cf472352edda7e80d7eaeb547
+  HexColors: 6ad3947c3447a055a3aa8efa859def096351fe5f
+  Specta: 15a276a6343867b426d5ed135d5aa4d04123a573
+  TSMessages: 6e403b790139636c15ab4f51946537095e03e79c
 
-COCOAPODS: 0.36.0.beta.1
+PODFILE CHECKSUM: e422591e234bc8b8a346aa30412c43e1b3f70d83
+
+COCOAPODS: 1.0.1
