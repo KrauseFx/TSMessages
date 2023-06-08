@@ -169,6 +169,13 @@ static NSMutableDictionary *_notificationDesign;
 
         [[TSMessageView notificationDesign] addEntriesFromDictionary:design];
     }
+    else if ([[NSFileManager defaultManager] fileExistsAtPath:[[[NSBundle bundleForClass:[self class]] resourcePath] stringByAppendingPathComponent:filename]]) {
+        NSDictionary *design = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
+                                                               options:kNilOptions
+                                                                 error:nil];
+        
+        [[TSMessageView notificationDesign] addEntriesFromDictionary:design];
+    }
     else
     {
         NSAssert(NO, @"Error loading design file with name %@", filename);
@@ -249,6 +256,10 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         if (!image && [[current valueForKey:@"imageName"] length])
         {
             image = [UIImage imageNamed:[current valueForKey:@"imageName"]];
+        }
+        if (!image && [[current valueForKey:@"imageName"] length])
+        {
+            image = [UIImage imageNamed:[current valueForKey:@"imageName"] inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
         }
 
         if (![TSMessage iOS7StyleEnabled])
@@ -592,6 +603,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         {
             self.callback();
         }
+        [self fadeMeOut];
     }
 }
 
