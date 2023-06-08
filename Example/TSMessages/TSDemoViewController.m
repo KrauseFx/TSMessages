@@ -19,8 +19,38 @@
     
     [TSMessage setDefaultViewController:self];
     [TSMessage setDelegate:self];
-    self.wantsFullScreenLayout = YES;
+    [self setFullscreenLayout:YES];
+    
     [self.navigationController.navigationBar setTranslucent:YES];
+}
+
+- (void)setFullscreenLayout:(bool)wantsFullscreen {
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
+        if (wantsFullscreen) {
+            self.edgesForExtendedLayout = UIRectEdgeAll;
+        }
+        else {
+            self.edgesForExtendedLayout = UIRectEdgeNone;
+        }
+    }
+    else {
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        self.wantsFullScreenLayout = wantsFullscreen;
+        #pragma clang diagnostic pop
+    }
+}
+
+- (bool)isFullscreen {
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)] && self.edgesForExtendedLayout == UIRectEdgeAll) {
+        return YES;
+    }
+    else {
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        return self.wantsFullScreenLayout;
+        #pragma clang diagnostic pop
+    }
 }
 
 - (IBAction)didTapError:(id)sender
@@ -82,7 +112,7 @@
 
 - (IBAction)didTapToggleWantsFullscreen:(id)sender
 {
-    self.wantsFullScreenLayout = !self.wantsFullScreenLayout;
+    [self setFullscreenLayout:![self isFullscreen]];
     [self.navigationController.navigationBar setTranslucent:!self.navigationController.navigationBar.isTranslucent];
 }
 
